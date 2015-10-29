@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom">
+        <ImageButton
+            android:id="@id/nav_home_btn"
+            style="@style/nav_btn_style"
+            android:src="@drawable/nav_home_btn_click" />
+
+        <ImageButton
+            android:id="@id/nav_category_btn"
+            style="@style/nav_btn_style"
+            android:src="@drawable/nav_category_btn_click" />
+
+        <!--<ImageButton-->
+        <!--android:id="@id/nav_faxian_btn"-->
+        <!--style="@style/nav_btn_style"-->
+        <!--android:src="@drawable/nav_faxian_btn_click" />-->
+
+        <ImageButton
+            android:id="@id/nav_cart_btn"
+            style="@style/nav_btn_style"
+            android:src="@drawable/nav_cart_btn_click" />
+
+        <ImageButton
+            android:id="@id/nav_personal_btn"
+            style="@style/nav_btn_style"
+            android:src="@drawable/nav_personal_btn_click" />
+    </TableRow>
+</LinearLayout>

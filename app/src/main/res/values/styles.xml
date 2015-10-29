@@ -1,0 +1,111 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <!--navigation button style-->
+    <style name="nav_btn_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/nav_background</item>
+        <item name="android:paddingTop">@dimen/nav_paddingTop</item>
+        <item name="android:layout_weight">@string/nav_btn_style_weight_value</item>
+    </style>
+    <!--personal settings button style-->
+    <style name="personal_title_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@color/personal_title_background</item>
+    </style>
+
+    <!--personal concern goods shop browsing list-->
+    <style name="personal_concern_list_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:visibility">visible</item>
+        <item name="android:text">0</item>
+        <item name="android:textColor">@color/personal_concern_textcolor</item>
+    </style>
+
+    <!--personal concern layout-->
+    <style name="concern_layout_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+        <!--<item name="android:background">#88323232</item>-->
+        <item name="android:background">#50717171</item>
+    </style>
+
+    <style name="concern_list_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/personal_concern_textcolor</item>
+    </style>
+
+    <style name="wait_layout_weight_style">
+        <item name="android:layout_width">0.0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1.0</item>
+
+        <item name="android:paddingBottom">3dp</item>
+    </style>
+
+    <style name="personal_notify_value_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">-7dp</item>
+        <item name="android:layout_marginTop">-5dp</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/personal_icon_order_notify_bg</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="personal_wait_text_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">2.0dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_centerHorizontal">true</item>
+
+    </style>
+
+    <style name="personal_wait_image_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_marginTop">10.0dp</item>
+    </style>
+
+    <style name="personal_wallet_value_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+</resources>

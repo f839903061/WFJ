@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="hy.cz.wfj.CategoryActivity">
+
+    <!--category common title-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </RelativeLayout>
+    <!--category list-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!--left category list-->
+        <ListView
+            android:id="@id/left_list"
+            android:layout_width="92dp"
+            android:layout_height="match_parent"
+            android:background="#fff3f4f6"
+            android:cacheColorHint="#00000000"
+            android:scrollbars="none">
+
+        </ListView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--right category list-->
+            <ListView
+                android:id="@id/right_List"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:cacheColorHint="#00000000"
+                android:focusable="false"
+                android:listSelector="#00000000"
+                android:paddingLeft="11.0dip"
+                android:paddingRight="11.0dip"
+                android:paddingTop="10.0dip"
+                android:scrollbars="none">
+            </ListView>
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@id/catagory_list_to_top"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="10.0dip"
+                    android:layout_marginRight="10.0dip"
+                    fresco:placeholderImage="@drawable/c_up_button"
+                    android:visibility="gone" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

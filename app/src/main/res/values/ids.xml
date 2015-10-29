@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--navigation button-->
+    <item name="nav_home_btn" type="id" />
+    <item name="nav_category_btn" type="id" />
+    <item name="nav_faxian_btn" type="id" />
+    <item name="nav_cart_btn" type="id" />
+    <item name="nav_personal_btn" type="id" />
+
+    <!--personal title-->
+    <item name="personal_setting" type="id" />
+    <item name="personal_common_message" type="id" />
+    <item name="personal_title" type="id" />
+    <item name="personal_title_layout" type="id" />
+
+    <!--personal avatar-->
+    <item name="personal_unlogin_avatar" type="id" />
+    <item name="personal_goods_list_title" type="id"/>
+    <item name="personal_goods_list" type="id"/>
+    <item name="personal_shop_list_title" type="id"/>
+    <item name="personal_shop_list" type="id"/>
+    <item name="personal_browsing_list_title" type="id"/>
+    <item name="personal_browsing_list" type="id"/>
+
+    <!--person order wallet service feedback id-->
+    <item name="order_icon" type="id"/>
+    <item name="order_text" type="id"/>
+    <item name="order_hint" type="id"/>
+    <item name="order_arrow" type="id"/>
+
+    <item name="wallet_icon" type="id"/>
+    <item name="wallet_text" type="id"/>
+    <item name="wallet_hint" type="id"/>
+    <item name="wallet_arrow" type="id"/>
+
+    <item name="service_icon" type="id"/>
+    <item name="service_text" type="id"/>
+    <item name="service_hint" type="id"/>
+    <item name="service_arrow" type="id"/>
+
+    <!--person wait id-->
+    <item name="wait_for_payment_image" type="id"/>
+    <item name="wait_for_payment_text" type="id"/>
+    <item name="wait_for_payment_text_notify" type="id"/>
+
+    <item name="wait_sign_in_image" type="id"/>
+    <item name="wait_sign_in_text" type="id"/>
+    <item name="wait_sign_in_text_notify" type="id"/>
+
+    <item name="wait_comment_image" type="id"/>
+    <item name="wait_comment_text" type="id"/>
+    <item name="wait_comment_text_notify" type="id"/>
+
+    <item name="wait_order_after_sale_image" type="id"/>
+    <item name="wait_order_after_sale_text" type="id"/>
+    <item name="wait_order_after_sale_text_notify" type="id"/>
+
+    <!--personal wallet id-->
+    <item name="wallet_balance_v" type="id"/>
+    <item name="wallet_balance_t" type="id"/>
+    <item name="wallet_youhuiquan_v" type="id"/>
+    <item name="wallet_youhuiquan_t" type="id"/>
+    <item name="wallet_dou_v" type="id"/>
+    <item name="wallet_dou_t" type="id"/>
+    <item name="wallet_card_v" type="id"/>
+    <item name="wallet_card_t" type="id"/>
+
+    <!--category layout id-->
+    <item name="common_title" type="id"/>
+    <item name="mainlayout" type="id"/>
+    <item name="left_list" type="id"/>
+    <item name="right_List" type="id"/>
+    <item name="catagory_list_to_top" type="id"/>
+    <item name="category_sub_empty" type="id"/>
+    <item name="sublist_loading_error_tips" type="id"/>
+    <item name="category_left_list_text" type="id"/>
+
+    <item name="category_right_list_item_title" type="id"/>
+    <item name="right_item_title" type="id" />
+    <item name="ll_right_item_goto_ranking_list" type="id" />
+    <item name="category_item_have_picture_ll_1" type="id" />
+    <item name="category_item_have_picture_text_3" type="id" />
+    <item name="category_item_have_picture_image_1" type="id"/>
+    <item name="category_item_have_picture_text_1" type="id"/>
+    <item name="category_item_have_picture_ll_2" type="id"/>
+    <item name="category_item_have_picture_image_2" type="id"/>
+    <item name="category_item_have_picture_text_2" type="id"/>
+    <item name="category_item_have_picture_ll_3" type="id"/>
+    <item name="category_item_have_picture_image_3" type="id"/>
+</resources>

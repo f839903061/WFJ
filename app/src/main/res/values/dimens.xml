@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_navigation_bottom_height">50.0dp</dimen>
+    <dimen name="nav_paddingTop">8.0dp</dimen>
+    <dimen name="personal_title_padding">14.0dp</dimen>
+    <dimen name="personal_concern_layout_dimen">13dp</dimen>
+    <dimen name="personal_avatar_layout_dimen">15dp</dimen>
+    <dimen name="personal_message_layout_dimen">150dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="category_new_level2_text">12.0dip</dimen>
+    <dimen name="category_new_level3_text">12.0dip</dimen>
+    <dimen name="categoty_new_level1_text">15.0dip</dimen>
+    <dimen name="category_new_1dp">1.0dip</dimen>
+    <dimen name="fill_order_layout_7dp">7.0dip</dimen>
+    <dimen name="fill_order_layout_10dp">10.0dip</dimen>
+</resources>

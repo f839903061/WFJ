@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">WFJ</string>
+    <string name="personal_title">我的王府井</string>
+
+    <string name="test2">测试</string>
+    <string name="test3">测试三</string>
+    <string name="test4">测试四字</string>
+
+    <string name="concern_goods_title">关注的商品</string>
+    <string name="concern_shop_title">关注的商铺</string>
+    <string name="concern_browsing_title">浏览记录</string>
+    <string name="nav_btn_style_weight_value">1</string>
+
+    <string name="personal_my_order_txt">我的订单</string>
+    <string name="personal_my_wallet_txt">我的钱包</string>
+    <string name="personal_my_service_txt">服务与反馈</string>
+
+    <string name="personal_my_order_hint_txt">查看全部订单</string>
+    <string name="personal_my_wallet_hint_txt">小金库、白条等</string>
+    <string name="personal_my_service_feedback_hint_txt">意见反馈搬这儿了</string>
+
+    <string name="wait_pay">待付款</string>
+    <string name="wait_comment">待评价</string>
+    <string name="wait_sign_in">待收货</string>
+    <string name="wait_order_after_sale">返修/退换</string>
+
+    <string name="wallet_balance_t">我的余额</string>
+    <string name="wallet_coupon_t">优惠券</string>
+    <string name="wallet_dou_t">京豆</string>
+    <string name="wallet_card_t">京东卡/E卡</string>
+
+    <string name="divider_line_width">1.0dp</string>
+    <string name="divider_line_height">1.0dp</string>
+
+    <string name="category_left_list_item_text_hint">获取信息</string>
+    <string name="ranking_list">排行榜</string>
+    <string name="ranking_name">排行榜</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+</resources>
