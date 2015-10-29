@@ -5,6 +5,7 @@
     <string name="test2">测试</string>
     <string name="test3">测试三</string>
     <string name="test4">测试四字</string>
+    <string name="test5">       测试四字</string>
 
     <string name="concern_goods_title">关注的商品</string>
     <string name="concern_shop_title">关注的商铺</string>

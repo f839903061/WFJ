@@ -1,6 +1,7 @@
 package hy.cz.wfj;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+
+import hy.cz.wfj.activity.MyLoginActivity;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -81,6 +84,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
             //title incident
             case R.id.personal_unlogin_avatar:
                 myToast("login");
+                Intent loginIntent=new Intent(MainActivity.this, MyLoginActivity.class);
+                startActivity(loginIntent);
                 break;
             case R.id.personal_setting:
                 myToast("settings");
