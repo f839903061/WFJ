@@ -87,4 +87,6 @@
     <item name="category_item_have_picture_text_2" type="id"/>
     <item name="category_item_have_picture_ll_3" type="id"/>
     <item name="category_item_have_picture_image_3" type="id"/>
+    <item name="main_framelayout" type="id" />
+    <item name="main_radiogroup" type="id" />
 </resources>
