@@ -2,6 +2,9 @@
 <resources>
     <dimen name="main_navigation_bottom_height">50.0dp</dimen>
     <dimen name="nav_paddingTop">8.0dp</dimen>
+    <dimen name="nav_paddingLeft">25.0dp</dimen>
+    <dimen name="nav_paddingRight">25.0dp</dimen>
+
     <dimen name="personal_title_padding">14.0dp</dimen>
     <dimen name="personal_concern_layout_dimen">13dp</dimen>
     <dimen name="personal_avatar_layout_dimen">15dp</dimen>

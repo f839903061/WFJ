@@ -5,7 +5,7 @@
     android:background="@color/white">
 
     <include layout="@layout/personal_layout"/>
-    <include layout="@layout/navigation"
+    <include layout="@layout/navigation_radiogroup_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"/>
