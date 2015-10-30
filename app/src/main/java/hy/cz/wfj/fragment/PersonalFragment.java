@@ -7,6 +7,10 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import hy.cz.wfj.R;
 
@@ -16,11 +20,21 @@ import hy.cz.wfj.R;
  * {@link PersonalFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class PersonalFragment extends Fragment {
+public class PersonalFragment extends Fragment implements View.OnClickListener{
+
+    private View rootView;
+    private ImageButton avatarImage;
+    private ImageButton settingsImage;
+    private ImageButton messageImage;
+
+    private TextView concern_goods_tv;
+    private TextView concern_shop_tv;
+    private TextView concern_browser_tv;
 
     private OnFragmentInteractionListener mListener;
 
     private static PersonalFragment personalFragment;
+
     public static synchronized PersonalFragment getInstance(){
         if (personalFragment==null){
             personalFragment=new PersonalFragment();
@@ -36,7 +50,24 @@ public class PersonalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.personal_layout, container, false);
+        rootView=inflater.inflate(R.layout.personal_layout, container, false);
+        initializeComponent();
+        return rootView;
+    }
+
+    private void initializeComponent() {
+        avatarImage=(ImageButton)rootView.findViewById(R.id.personal_unlogin_avatar);
+
+
+
+        setListener();
+    }
+
+    /**
+     * set component listener
+     */
+    private void setListener() {
+        avatarImage.setOnClickListener(this);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -61,6 +92,19 @@ public class PersonalFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.personal_unlogin_avatar:
+                myToast("text");
+                break;
+        }
+    }
+
+    private void myToast(String text) {
+        Toast.makeText(getActivity().getApplicationContext(),"->"+text+"<-",Toast.LENGTH_SHORT).show();
     }
 
     /**
