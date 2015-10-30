@@ -47,7 +47,7 @@ public class Main2Activity extends Activity implements
     }
 
     /**
-     * 初始化组件以及监听事件
+     * initialize componet and transcation navigation tasks
      */
     private void initializeComponent() {
         mFrameLayout = (FrameLayout) findViewById(R.id.main_framelayout);
@@ -57,24 +57,33 @@ public class Main2Activity extends Activity implements
 //        mRadioButton_cart = (RadioButton) findViewById(R.id.nav_cart_btn);
 //        mRadioButton_personal = (RadioButton) findViewById(R.id.nav_personal_btn);
 
-        //获取fragment处理器
+        //get FragmentTransaction
         fragmentTransaction= getFragmentManager().beginTransaction();
         HomeFragment homeFragment = new HomeFragment();
+
+        //set home fragment when application is first set up
         fragmentTransaction.add(R.id.main_framelayout,homeFragment,"home_fragment");
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-        //监听导航按钮
+
+        //set listener for radiogroup
         setListener();
     }
 
     /**
-     * 设计导航栏四键的事件监听
+     * set radiogroup listener
      */
     private void setListener() {
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            /**
+             * @param group
+             *         you can use group.getCheckedRadioButtonId() to get current index e.g.(1,2,3,4...)
+             * @param checkedId
+             *          get current index e.g.(1,2,3,4....)
+             */
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-
+                //get fragmentTransaction again to deal with second commit result in IllegalStateException: commit already called
                 fragmentTransaction=getFragmentManager().beginTransaction();
 
                 switch (checkedId) {
@@ -92,16 +101,28 @@ public class Main2Activity extends Activity implements
                         break;
                 }
                 fragmentTransaction.addToBackStack(null);
+                //before you commit second , you must get ft instance again otherwise you will get illegalexception
                 fragmentTransaction.commit();
             }
         });
     }
 
+
+    /**
+     * myself Toast encapsulation
+     * @param text
+     *          toast text
+     */
     private void myToast(String text) {
         Toast.makeText(getApplicationContext(), "-->" + text + "<--", Toast.LENGTH_SHORT).show();
     }
 
 
+    /**
+     * interaction with fragment implement interface function
+     * @param uri
+     *          form fragment transfer date to here
+     */
     @Override
     public void onFragmentInteraction(Uri uri) {
 
