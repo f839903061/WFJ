@@ -1,6 +1,7 @@
 package hy.cz.wfj.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import hy.cz.wfj.R;
+import hy.cz.wfj.activity.MyLoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,7 +59,12 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
 
     private void initializeComponent() {
         avatarImage=(ImageButton)rootView.findViewById(R.id.personal_unlogin_avatar);
+        settingsImage=(ImageButton)rootView.findViewById(R.id.personal_setting);
+        messageImage=(ImageButton)rootView.findViewById(R.id.personal_common_message);
 
+        concern_goods_tv=(TextView)rootView.findViewById(R.id.personal_goods_list_title);
+        concern_shop_tv=(TextView)rootView.findViewById(R.id.personal_shop_list_title);
+        concern_browser_tv=(TextView)rootView.findViewById(R.id.personal_browsing_list_title);
 
 
         setListener();
@@ -68,6 +75,12 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
      */
     private void setListener() {
         avatarImage.setOnClickListener(this);
+        settingsImage.setOnClickListener(this);
+        messageImage.setOnClickListener(this);
+
+        concern_goods_tv.setOnClickListener(this);
+        concern_shop_tv.setOnClickListener(this);
+        concern_browser_tv.setOnClickListener(this);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -99,6 +112,25 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
         switch (v.getId()){
             case R.id.personal_unlogin_avatar:
                 myToast("text");
+                Intent intent=new Intent(getActivity(), MyLoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.personal_setting:
+                myToast("settings");
+                break;
+            case R.id.personal_common_message:
+                myToast("message");
+                break;
+            //concern incident
+            case R.id.personal_goods_list_title:
+                myToast("goods");
+                break;
+            case R.id.personal_shop_list_title:
+                myToast("shop");
+                break;
+            case R.id.personal_browsing_list_title:
+                myToast("browser");
+            default:
                 break;
         }
     }

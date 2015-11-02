@@ -28,12 +28,10 @@
         </activity>
         <activity
             android:name=".activity.MyLoginActivity"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".Main2Activity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity android:name=".MainActivity" >
+                android:value=".Main2Activity" />
         </activity>
     </application>
 
