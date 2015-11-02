@@ -20,12 +20,12 @@ public class CartFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private static CategoryFragment categoryFragment;
-    public static synchronized CategoryFragment getInstance(){
-        if (categoryFragment==null){
-            categoryFragment=new CategoryFragment();
+    private static CartFragment cartFragment;
+    public static synchronized CartFragment getInstance(){
+        if (cartFragment==null){
+            cartFragment=new CartFragment();
         }
-        return  categoryFragment;
+        return  cartFragment;
     }
     public CartFragment() {
         // Required empty public constructor

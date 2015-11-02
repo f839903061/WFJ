@@ -39,6 +39,12 @@ public class Main2Activity extends Activity implements
 //    private RadioButton mRadioButton_personal;
     private  FragmentTransaction fragmentTransaction;
 
+    //getInstance of Fragment
+    HomeFragment homeFragment = HomeFragment.getInstance();
+    CategoryFragment categoryFragment = CategoryFragment.getInstance();
+    CartFragment cartFragment = CartFragment.getInstance();
+    PersonalFragment personalFragment = PersonalFragment.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,18 +95,20 @@ public class Main2Activity extends Activity implements
                 //get fragmentTransaction again to deal with second commit result in IllegalStateException: commit already called
                 fragmentTransaction=getFragmentManager().beginTransaction();
 
+
+
                 switch (checkedId) {
                     case FRAGMENT_HOME:
-                        fragmentTransaction.replace(R.id.main_framelayout,HomeFragment.getInstance(), HOME_FRAGMENT_TAG);
+                        fragmentTransaction.replace(R.id.main_framelayout, homeFragment, HOME_FRAGMENT_TAG);
                         break;
                     case FRAGMENT_CATEGORY:
-                        fragmentTransaction.replace(R.id.main_framelayout, CategoryFragment.getInstance(), CATEGORY_FRAGMENT_TAG);
+                        fragmentTransaction.replace(R.id.main_framelayout, categoryFragment, CATEGORY_FRAGMENT_TAG);
                         break;
                     case FRAGMENT_CART:
-                        fragmentTransaction.replace(R.id.main_framelayout, CartFragment.getInstance(), CART_FRAGMENT_TAG);
+                        fragmentTransaction.replace(R.id.main_framelayout, cartFragment, CART_FRAGMENT_TAG);
                         break;
                     case FRAGMENT_PERSONAL:
-                        fragmentTransaction.replace(R.id.main_framelayout, PersonalFragment.getInstance(), PERSONAL_FRAGMENT_TAG);
+                        fragmentTransaction.replace(R.id.main_framelayout, personalFragment, PERSONAL_FRAGMENT_TAG);
                         break;
                 }
                 //when user pressed BACK key will go to previous fragment,but if you changed more times fragment,you must pressed more times BACK key
