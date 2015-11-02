@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
@@ -74,7 +73,7 @@ public class CategoryActivity extends AppCompatActivity {
      */
     private void initComponent() {
         mLeftListView = (ListView) this.findViewById(R.id.left_list);
-        mRightListView = (ListView) this.findViewById(R.id.right_List);
+        mRightListView = (ListView) this.findViewById(R.id.right_list);
         mCategoryObjectList = new ArrayList<>();
     }
 }

@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import hy.cz.wfj.R;
 
@@ -30,6 +33,7 @@ public class HomeFragment extends Fragment {
     private String mParam2;
 
     private View rootView;
+    private WebView mWebView;
     private OnFragmentInteractionListener mListener;
 
     public static synchronized HomeFragment getInstance(){
@@ -75,9 +79,45 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView=inflater.inflate(R.layout.fragment_home, container, false);
+        mWebView=(WebView)rootView.findViewById(R.id.home_webView);
 
+        initializeComponent();
         return rootView;
     }
+
+    private void initializeComponent() {
+
+//        mWebView.loadUrl("http://www.baidu.com");
+
+        mWebView.loadUrl("file:///android_asset/jd/index.html");
+        mWebView.getSettings().setJavaScriptEnabled(true);
+//        mWebView.getSettings().
+
+        mWebView.setWebViewClient(new WebViewClient(){
+            /**
+             * @param view
+             * @param url
+             * @return
+             *          if reture false will use application webview ,otherwise use android device browser
+             */
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                return super.shouldOverrideUrlLoading(view, url);
+                return false;
+            }
+        });
+    }
+
+
+    private View.OnKeyListener backListener=new View.OnKeyListener() {
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if (keyCode == KeyEvent.KEYCODE_BACK&&mWebView.canGoBack()) {
+                mWebView.goBack();
+            }
+            return false;
+        }
+    };
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

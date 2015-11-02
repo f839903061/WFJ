@@ -37,7 +37,7 @@
 
             <!--right category list-->
             <ListView
-                android:id="@id/right_List"
+                android:id="@id/right_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"

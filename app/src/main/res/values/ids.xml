@@ -69,7 +69,7 @@
     <item name="common_title" type="id"/>
     <item name="mainlayout" type="id"/>
     <item name="left_list" type="id"/>
-    <item name="right_List" type="id"/>
+    <item name="right_list" type="id"/>
     <item name="catagory_list_to_top" type="id"/>
     <item name="category_sub_empty" type="id"/>
     <item name="sublist_loading_error_tips" type="id"/>
@@ -89,4 +89,7 @@
     <item name="category_item_have_picture_image_3" type="id"/>
     <item name="main_framelayout" type="id" />
     <item name="main_radiogroup" type="id" />
+
+    <!--home layout id-->
+    <item name="home_webView" type="id"/>
 </resources>

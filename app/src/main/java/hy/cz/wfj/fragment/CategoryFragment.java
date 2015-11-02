@@ -1,16 +1,24 @@
 package hy.cz.wfj.fragment;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
+import java.util.ArrayList;
+
 import hy.cz.wfj.R;
+import hy.cz.wfj.adapter.LeftListAdapter;
+import hy.cz.wfj.adapter.RightListAdapter;
+import hy.cz.wfj.data.CategoryListObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +31,17 @@ public class CategoryFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private static CategoryFragment categoryFragment=null;
+
+    private View rootView;
+    private ListView mLeftListView;
+    private ListView mRightListView;
+
+    private LeftListAdapter mleftListAdapter;
+    private RightListAdapter mrightListAdapter;
+    //all category object
+    private ArrayList<CategoryListObject> mCategoryObjectList;
+
+    
     public static synchronized CategoryFragment getInstance(){
         if (categoryFragment==null){
             categoryFragment=new CategoryFragment();
@@ -39,7 +58,45 @@ public class CategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Fresco.initialize(getActivity().getApplicationContext());
-        return inflater.inflate(R.layout.activity_category, container, false);
+        rootView=inflater.inflate(R.layout.activity_category, container, false);
+        initializeCompoment();
+        loadData();
+        return rootView;
+    }
+
+    /**
+     * load data and set listview adapter
+     */
+    private void loadData() {
+
+        for (int i = 0; i < 40; i++) {
+            CategoryListObject categoryListObject=new CategoryListObject();
+            categoryListObject.setName("name"+i);
+            mCategoryObjectList.add(categoryListObject);
+        }
+
+        mLeftListView.setAdapter(mleftListAdapter);
+        mRightListView.setAdapter(mrightListAdapter);
+        mLeftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mLeftListView.smoothScrollToPositionFromTop(position,0);
+                //deal with module reuse template bug
+                mleftListAdapter.setSelect(position);
+                view.setBackgroundColor(Color.WHITE);
+            }
+        });
+    }
+
+    /**
+     * initialize component
+     */
+    private void initializeCompoment() {
+        mLeftListView=(ListView)rootView.findViewById(R.id.left_list);
+        mRightListView=(ListView)rootView.findViewById(R.id.right_list);
+        mCategoryObjectList=new ArrayList<>();
+        mleftListAdapter=new LeftListAdapter(getActivity().getApplication(),mCategoryObjectList);
+        mrightListAdapter=new RightListAdapter(getActivity().getApplication(),mCategoryObjectList);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
