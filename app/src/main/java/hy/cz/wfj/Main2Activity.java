@@ -5,7 +5,6 @@ import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.FrameLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -29,6 +28,7 @@ public class Main2Activity extends Activity implements
     public static final String CATEGORY_FRAGMENT_TAG = "category_fragment";
     public static final String CART_FRAGMENT_TAG = "cart_fragment";
     public static final String PERSONAL_FRAGMENT_TAG = "personal_fragment";
+    public static final String TAG = "fengluchun";
 
     private FrameLayout mFrameLayout;
     private RadioGroup mRadioGroup;
@@ -62,7 +62,7 @@ public class Main2Activity extends Activity implements
         HomeFragment homeFragment = new HomeFragment();
 
         //set home fragment when application is first set up
-        fragmentTransaction.add(R.id.main_framelayout,homeFragment,"home_fragment");
+        fragmentTransaction.add(R.id.main_framelayout, homeFragment, HOME_FRAGMENT_TAG);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
@@ -74,6 +74,9 @@ public class Main2Activity extends Activity implements
      * set radiogroup listener
      */
     private void setListener() {
+        //set default checked is 1-->home
+        mRadioGroup.check(mRadioGroup.getChildCount()-(mRadioGroup.getChildCount()-1));
+
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             /**
              * @param group
@@ -100,7 +103,8 @@ public class Main2Activity extends Activity implements
                         fragmentTransaction.replace(R.id.main_framelayout, PersonalFragment.getInstance(), PERSONAL_FRAGMENT_TAG);
                         break;
                 }
-                fragmentTransaction.addToBackStack(null);
+                //when user pressed BACK key will go to previous fragment,but if you changed more times fragment,you must pressed more times BACK key
+//                fragmentTransaction.addToBackStack(null);
                 //before you commit second , you must get ft instance again otherwise you will get illegalexception
                 fragmentTransaction.commit();
             }

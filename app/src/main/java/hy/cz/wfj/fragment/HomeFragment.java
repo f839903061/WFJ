@@ -29,6 +29,7 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private View rootView;
     private OnFragmentInteractionListener mListener;
 
     public static synchronized HomeFragment getInstance(){
@@ -73,7 +74,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        rootView=inflater.inflate(R.layout.fragment_home, container, false);
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
