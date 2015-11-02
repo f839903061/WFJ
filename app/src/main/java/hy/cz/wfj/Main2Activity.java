@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -33,23 +34,40 @@ public class Main2Activity extends Activity implements
     private FrameLayout mFrameLayout;
     private RadioGroup mRadioGroup;
 
-//    private RadioButton mRadioButton_home;
+    //    private RadioButton mRadioButton_home;
 //    private RadioButton mRadioButton_category;
 //    private RadioButton mRadioButton_cart;
 //    private RadioButton mRadioButton_personal;
-    private  FragmentTransaction fragmentTransaction;
+    private FragmentTransaction fragmentTransaction;
 
-    //getInstance of Fragment
-    HomeFragment homeFragment = HomeFragment.getInstance();
-    CategoryFragment categoryFragment = CategoryFragment.getInstance();
-    CartFragment cartFragment = CartFragment.getInstance();
-    PersonalFragment personalFragment = PersonalFragment.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        Log.e(TAG, "AAAAAA is create");
         initializeComponent();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setListener();
+        Log.e(TAG,"AAAAAA is resume");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e(TAG, "AAAAAA is start");
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e(TAG,"AAAAAA is stop");
     }
 
     /**
@@ -64,13 +82,13 @@ public class Main2Activity extends Activity implements
 //        mRadioButton_personal = (RadioButton) findViewById(R.id.nav_personal_btn);
 
         //get FragmentTransaction
-        fragmentTransaction= getFragmentManager().beginTransaction();
-        HomeFragment homeFragment = new HomeFragment();
-
-        //set home fragment when application is first set up
-        fragmentTransaction.add(R.id.main_framelayout, homeFragment, HOME_FRAGMENT_TAG);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+//        fragmentTransaction = getFragmentManager().beginTransaction();
+//        HomeFragment homeFragment = new HomeFragment();
+//
+//        //set home fragment when application is first set up
+//        fragmentTransaction.add(R.id.main_framelayout, homeFragment, HOME_FRAGMENT_TAG);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
 
         //set listener for radiogroup
         setListener();
@@ -81,7 +99,8 @@ public class Main2Activity extends Activity implements
      */
     private void setListener() {
         //set default checked is 1-->home
-        mRadioGroup.check(mRadioGroup.getChildCount()-(mRadioGroup.getChildCount()-1));
+        Log.e(TAG,"listener");
+        mRadioGroup.check(mRadioGroup.getChildCount() - (mRadioGroup.getChildCount() - 1));
 
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             /**
@@ -93,28 +112,35 @@ public class Main2Activity extends Activity implements
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 //get fragmentTransaction again to deal with second commit result in IllegalStateException: commit already called
-                fragmentTransaction=getFragmentManager().beginTransaction();
+                fragmentTransaction = getFragmentManager().beginTransaction();
 
-
+                //getInstance of Fragment
+//                HomeFragment homeFragment = HomeFragment.getInstance();
+//                CategoryFragment categoryFragment = CategoryFragment.getInstance();
+//                CartFragment cartFragment = CartFragment.getInstance();
+//                PersonalFragment personalFragment = PersonalFragment.getInstance();
 
                 switch (checkedId) {
                     case FRAGMENT_HOME:
-                        fragmentTransaction.replace(R.id.main_framelayout, homeFragment, HOME_FRAGMENT_TAG);
+                        fragmentTransaction.add(R.id.main_framelayout, HomeFragment.getInstance(), HOME_FRAGMENT_TAG);
+                        fragmentTransaction.commit();
                         break;
                     case FRAGMENT_CATEGORY:
-                        fragmentTransaction.replace(R.id.main_framelayout, categoryFragment, CATEGORY_FRAGMENT_TAG);
+                        fragmentTransaction.replace(R.id.main_framelayout, CategoryFragment.getInstance(), CATEGORY_FRAGMENT_TAG);
+                        fragmentTransaction.commit();
                         break;
                     case FRAGMENT_CART:
-                        fragmentTransaction.replace(R.id.main_framelayout, cartFragment, CART_FRAGMENT_TAG);
+                        fragmentTransaction.replace(R.id.main_framelayout, CartFragment.getInstance(), CART_FRAGMENT_TAG);
+                        fragmentTransaction.commit();
                         break;
                     case FRAGMENT_PERSONAL:
-                        fragmentTransaction.replace(R.id.main_framelayout, personalFragment, PERSONAL_FRAGMENT_TAG);
+                        fragmentTransaction.replace(R.id.main_framelayout, PersonalFragment.getInstance(), PERSONAL_FRAGMENT_TAG);
+                        fragmentTransaction.commit();
                         break;
                 }
                 //when user pressed BACK key will go to previous fragment,but if you changed more times fragment,you must pressed more times BACK key
 //                fragmentTransaction.addToBackStack(null);
                 //before you commit second , you must get ft instance again otherwise you will get illegalexception
-                fragmentTransaction.commit();
             }
         });
     }
@@ -122,8 +148,8 @@ public class Main2Activity extends Activity implements
 
     /**
      * myself Toast encapsulation
-     * @param text
-     *          toast text
+     *
+     * @param text toast text
      */
     private void myToast(String text) {
         Toast.makeText(getApplicationContext(), "-->" + text + "<--", Toast.LENGTH_SHORT).show();
@@ -132,11 +158,17 @@ public class Main2Activity extends Activity implements
 
     /**
      * interaction with fragment implement interface function
-     * @param uri
-     *          form fragment transfer date to here
+     *
+     * @param uri form fragment transfer date to here
      */
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e(TAG, "AAAAAA is destroy");
     }
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String TAG = "fengluchun";
 
     private static HomeFragment homeFragment=null;
     // TODO: Rename and change types of parameters
@@ -68,6 +70,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e(TAG,"FFFF is create");
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -80,16 +83,23 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView=inflater.inflate(R.layout.fragment_home, container, false);
         mWebView=(WebView)rootView.findViewById(R.id.home_webView);
-
-        initializeComponent();
+        Log.e(TAG,"FFFF is create view");
         return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.e(TAG,"FFFF is activitycreated");
+        initializeComponent();
     }
 
     private void initializeComponent() {
 
 //        mWebView.loadUrl("http://www.baidu.com");
 
-        mWebView.loadUrl("file:///android_asset/jd/index.html");
+//        mWebView.loadUrl("file:///android_asset/jd/index.html");
+        mWebView.loadUrl("http://192.168.10.7:8080/wfj_front/test.jsp");
         mWebView.getSettings().setJavaScriptEnabled(true);
 //        mWebView.getSettings().
 
@@ -109,15 +119,16 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private View.OnKeyListener backListener=new View.OnKeyListener() {
-        @Override
-        public boolean onKey(View v, int keyCode, KeyEvent event) {
-            if (keyCode == KeyEvent.KEYCODE_BACK&&mWebView.canGoBack()) {
-                mWebView.goBack();
-            }
-            return false;
-        }
-    };
+    //add BACK listener
+//    private View.OnKeyListener backListener=new View.OnKeyListener() {
+//        @Override
+//        public boolean onKey(View v, int keyCode, KeyEvent event) {
+//            if (keyCode == KeyEvent.KEYCODE_BACK&&mWebView.canGoBack()) {
+//                mWebView.goBack();
+//            }
+//            return false;
+//        }
+//    };
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -138,8 +149,14 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
+        Log.e(TAG,"FFFF is release");
         mListener = null;
     }
 

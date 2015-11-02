@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="main_navigation_bottom_height">50.0dp</dimen>
-    <dimen name="nav_paddingTop">8.0dp</dimen>
+    <dimen name="nav_paddingTop">2.0dp</dimen>
     <dimen name="nav_paddingLeft">25.0dp</dimen>
     <dimen name="nav_paddingRight">25.0dp</dimen>
 
