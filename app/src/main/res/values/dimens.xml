@@ -19,4 +19,24 @@
     <dimen name="category_new_1dp">1.0dip</dimen>
     <dimen name="fill_order_layout_7dp">7.0dip</dimen>
     <dimen name="fill_order_layout_10dp">10.0dip</dimen>
+    <dimen name="login_top_height">125.0dip</dimen>
+    <dimen name="login_top_user_icon_height">98.0dip</dimen>
+    <dimen name="login_top_padding">16.5dip</dimen>
+    <dimen name="login_editor_layout_margin_top">12.5dip</dimen>
+    <dimen name="login_editor_layout_edit_height">55.0dip</dimen>
+    <dimen name="login_editor_layout_edit_text_size">18.0sp</dimen>
+    <dimen name="login_selector_icon_delete">15.0dip</dimen>
+    <dimen name="login_password_delete_width">18.0dip</dimen>
+    <dimen name="login_name_delete_margin_right">30.0dip</dimen>
+    <dimen name="login_divider_line_margin_left">60.0dip</dimen>
+    <dimen name="login_input_verify_image_width">92.5dip</dimen>
+    <dimen name="login_input_verify_image_height">37.0dip</dimen>
+    <dimen name="login_switchBtn_width">67.0dip</dimen>
+    <dimen name="login_switchBtn_height">36.0dip</dimen>
+    <dimen name="login_comfirm_button_text_size">17.0sp</dimen>
+    <dimen name="login_comfirm_button_height">42.0dip</dimen>
+    <dimen name="login_comfirm_button_margin_top">13.0dip</dimen>
+    <dimen name="register_link_text_size">15.0sp</dimen>
+
+
 </resources>

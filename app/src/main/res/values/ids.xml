@@ -92,4 +92,29 @@
 
     <!--home layout id-->
     <item name="home_webView" type="id"/>
+    
+    <item name="common_title_back_btn" type="id"/>
+    <item name="login_user_icon" type="id" />
+    <item name="login_top_layout" type="id" />
+    <item name="login_editor_layout" type="id" />
+    <item name="login_page_input_name_layout" type="id" />
+    <item name="login_page_input_name" type="id" />
+    <item name="login_name_selector" type="id" />
+    <item name="login_name_delete" type="id" />
+    <item name="login_input_name" type="id" />
+    <item name="login_divider_line" type="id" />
+    <item name="login_page_input_password_layout" type="id" />
+    <item name="login_page_input_password" type="id" />
+    <item name="login_switchBtn" type="id" />
+    <item name="login_password_delete" type="id" />
+    <item name="login_input_password" type="id" />
+    <item name="login_divider_verification_line" type="id" />
+    <item name="login_input_verification_layout" type="id" />
+    <item name="login_input_verification_text" type="id" />
+    <item name="login_input_verify_image" type="id" />
+    <item name="login_input_verify_input" type="id" />
+    <item name="login_comfirm_button" type="id" />
+    <item name="login_page_find_and_uion" type="id" />
+    <item name="register_link" type="id" />
+    <item name="login_page_find_password" type="id" />
 </resources>

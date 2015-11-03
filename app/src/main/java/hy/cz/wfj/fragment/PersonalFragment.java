@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +23,7 @@ import hy.cz.wfj.activity.MyLoginActivity;
  */
 public class PersonalFragment extends Fragment implements View.OnClickListener{
 
+    public static final int LOGIN_REQUEST_CODE = 1;
     private View rootView;
     private ImageButton avatarImage;
     private ImageButton settingsImage;
@@ -118,7 +118,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
             case R.id.personal_unlogin_avatar:
                 myToast("text");
                 Intent intent=new Intent(getActivity(), MyLoginActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, LOGIN_REQUEST_CODE);
                 break;
             case R.id.personal_setting:
                 myToast("settings");
@@ -139,7 +139,6 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
                 break;
         }
     }
-
     private void myToast(String text) {
         Toast.makeText(getActivity().getApplicationContext(),"->"+text+"<-",Toast.LENGTH_SHORT).show();
     }

@@ -2,6 +2,7 @@ package hy.cz.wfj;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,7 +46,6 @@ public class Main2Activity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Log.e(TAG, "AAAAAA is create");
         initializeComponent();
     }
 
@@ -54,20 +54,17 @@ public class Main2Activity extends Activity implements
     protected void onResume() {
         super.onResume();
         setListener();
-        Log.e(TAG,"AAAAAA is resume");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.e(TAG, "AAAAAA is start");
 
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.e(TAG,"AAAAAA is stop");
     }
 
     /**
@@ -98,7 +95,6 @@ public class Main2Activity extends Activity implements
      */
     private void setListener() {
         //set default checked is 1-->home
-        Log.e(TAG, "listener");
         mRadioGroup.check(mRadioGroup.getChildCount() - (mRadioGroup.getChildCount() - 1));
 
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -122,23 +118,20 @@ public class Main2Activity extends Activity implements
                 switch (checkedId) {
                     case FRAGMENT_HOME:
                         fragmentTransaction.replace(R.id.main_framelayout, HomeFragment.newInstance(), HOME_FRAGMENT_TAG);
-                        fragmentTransaction.commit();
                         break;
                     case FRAGMENT_CATEGORY:
                         fragmentTransaction.replace(R.id.main_framelayout, CategoryFragment.getInstance(), CATEGORY_FRAGMENT_TAG);
-                        fragmentTransaction.commit();
                         break;
                     case FRAGMENT_CART:
                         fragmentTransaction.replace(R.id.main_framelayout, CartFragment.getInstance(), CART_FRAGMENT_TAG);
-                        fragmentTransaction.commit();
                         break;
                     case FRAGMENT_PERSONAL:
                         fragmentTransaction.replace(R.id.main_framelayout, PersonalFragment.getInstance(), PERSONAL_FRAGMENT_TAG);
-                        fragmentTransaction.commit();
                         break;
                 }
                 //when user pressed BACK key will go to previous fragment,but if you changed more times fragment,you must pressed more times BACK key
-//                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
                 //before you commit second , you must get ft instance again otherwise you will get illegalexception
             }
         });
@@ -166,10 +159,18 @@ public class Main2Activity extends Activity implements
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==PersonalFragment.LOGIN_REQUEST_CODE){
+//            mRadioGroup.check(mRadioGroup.getChildCount()-(mRadioGroup.getChildCount()-4));
+            Log.e(TAG,"result ");
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         //deal with every time set up can't change fragment
         System.exit(0);
-        Log.e(TAG, "AAAAAA is destroy");
     }
 }

@@ -14,4 +14,11 @@
     <color name="white">#FFFFFF</color>
     <color name="category_new_level2_font">#ff686868</color>
     <color name="category_new_level3_font">#ff252525</color>
+    <color name="login_name_text_color">#ff686868</color>
+    <color name="login_name_edit_color">#ff252525</color>
+    <color name="login_edit_hint_text_color">#ffcccaca</color>
+    <color name="transparent">#00000000</color>
+    <color name="login_devider_bg">#ffdedede</color>
+
+
 </resources>
