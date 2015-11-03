@@ -63,6 +63,11 @@ public class HomeFragment extends Fragment {
         return fragment;
     }
 
+    public static HomeFragment newInstance() {
+        HomeFragment fragment = new HomeFragment();
+        return fragment;
+    }
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -82,7 +87,6 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView=inflater.inflate(R.layout.fragment_home, container, false);
-        mWebView=(WebView)rootView.findViewById(R.id.home_webView);
         Log.e(TAG,"FFFF is create view");
         return rootView;
     }
@@ -90,12 +94,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.e(TAG,"FFFF is activitycreated");
+        Log.e(TAG, "FFFF is activitycreated");
         initializeComponent();
     }
 
     private void initializeComponent() {
 
+        mWebView=(WebView)rootView.findViewById(R.id.home_webView);
 //        mWebView.loadUrl("http://www.baidu.com");
 
 //        mWebView.loadUrl("file:///android_asset/jd/index.html");

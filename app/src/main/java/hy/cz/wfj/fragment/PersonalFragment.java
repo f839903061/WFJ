@@ -43,6 +43,11 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
         }
         return personalFragment;
     }
+
+    public static PersonalFragment newInstance() {
+        PersonalFragment fragment = new PersonalFragment();
+        return fragment;
+    }
     public PersonalFragment() {
         // Required empty public constructor
     }

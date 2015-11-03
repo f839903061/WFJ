@@ -82,13 +82,12 @@ public class Main2Activity extends Activity implements
 //        mRadioButton_personal = (RadioButton) findViewById(R.id.nav_personal_btn);
 
         //get FragmentTransaction
-//        fragmentTransaction = getFragmentManager().beginTransaction();
-//        HomeFragment homeFragment = new HomeFragment();
-//
-//        //set home fragment when application is first set up
-//        fragmentTransaction.add(R.id.main_framelayout, homeFragment, HOME_FRAGMENT_TAG);
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
+        fragmentTransaction = getFragmentManager().beginTransaction();
+
+        //set home fragment when application is first set up
+        fragmentTransaction.replace(R.id.main_framelayout, HomeFragment.newInstance(), HOME_FRAGMENT_TAG);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
 
         //set listener for radiogroup
         setListener();
@@ -99,7 +98,7 @@ public class Main2Activity extends Activity implements
      */
     private void setListener() {
         //set default checked is 1-->home
-        Log.e(TAG,"listener");
+        Log.e(TAG, "listener");
         mRadioGroup.check(mRadioGroup.getChildCount() - (mRadioGroup.getChildCount() - 1));
 
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -122,7 +121,7 @@ public class Main2Activity extends Activity implements
 
                 switch (checkedId) {
                     case FRAGMENT_HOME:
-                        fragmentTransaction.add(R.id.main_framelayout, HomeFragment.getInstance(), HOME_FRAGMENT_TAG);
+                        fragmentTransaction.replace(R.id.main_framelayout, HomeFragment.newInstance(), HOME_FRAGMENT_TAG);
                         fragmentTransaction.commit();
                         break;
                     case FRAGMENT_CATEGORY:
@@ -169,6 +168,8 @@ public class Main2Activity extends Activity implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //deal with every time set up can't change fragment
+        System.exit(0);
         Log.e(TAG, "AAAAAA is destroy");
     }
 }

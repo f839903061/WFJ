@@ -31,6 +31,11 @@ public class CartFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static CartFragment newInstance() {
+        CartFragment fragment = new CartFragment();
+        return fragment;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

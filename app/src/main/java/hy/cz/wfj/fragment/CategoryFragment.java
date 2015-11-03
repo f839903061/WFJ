@@ -52,6 +52,10 @@ public class CategoryFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static CategoryFragment newInstance() {
+        CategoryFragment fragment = new CategoryFragment();
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
