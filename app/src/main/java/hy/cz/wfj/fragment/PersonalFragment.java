@@ -31,7 +31,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
 
     private TextView concern_goods_tv;
     private TextView concern_shop_tv;
-    private TextView concern_browser_tv;
+//    private TextView concern_browser_tv;
 
     private OnFragmentInteractionListener mListener;
 
@@ -69,7 +69,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
 
         concern_goods_tv=(TextView)rootView.findViewById(R.id.personal_goods_list_title);
         concern_shop_tv=(TextView)rootView.findViewById(R.id.personal_shop_list_title);
-        concern_browser_tv=(TextView)rootView.findViewById(R.id.personal_browsing_list_title);
+//        concern_browser_tv=(TextView)rootView.findViewById(R.id.personal_browsing_list_title);
 
 
         setListener();
@@ -85,7 +85,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
 
         concern_goods_tv.setOnClickListener(this);
         concern_shop_tv.setOnClickListener(this);
-        concern_browser_tv.setOnClickListener(this);
+//        concern_browser_tv.setOnClickListener(this);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -133,8 +133,8 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
             case R.id.personal_shop_list_title:
                 myToast("shop");
                 break;
-            case R.id.personal_browsing_list_title:
-                myToast("browser");
+//            case R.id.personal_browsing_list_title:
+//                myToast("browser");
             default:
                 break;
         }

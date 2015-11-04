@@ -119,18 +119,18 @@
 
                 </LinearLayout>
 
-                <LinearLayout style="@style/concern_layout_style">
+                <!--<LinearLayout style="@style/concern_layout_style">-->
 
-                    <TextView
-                        android:id="@id/personal_browsing_list"
-                        style="@style/personal_concern_list_style" />
+                    <!--<TextView-->
+                        <!--android:id="@id/personal_browsing_list"-->
+                        <!--style="@style/personal_concern_list_style" />-->
 
-                    <TextView
-                        android:id="@id/personal_browsing_list_title"
-                        style="@style/concern_list_title"
-                        android:text="@string/concern_browsing_title" />
+                    <!--<TextView-->
+                        <!--android:id="@id/personal_browsing_list_title"-->
+                        <!--style="@style/concern_list_title"-->
+                        <!--android:text="@string/concern_browsing_title" />-->
 
-                </LinearLayout>
+                <!--</LinearLayout>-->
             </LinearLayout>
         </RelativeLayout>
         <!--personal order layout-->
