@@ -129,10 +129,11 @@ public class Main2Activity extends Activity implements
                         fragmentTransaction.replace(R.id.main_framelayout, PersonalFragment.getInstance(), PERSONAL_FRAGMENT_TAG);
                         break;
                 }
-                //when user pressed BACK key will go to previous fragment,but if you changed more times fragment,you must pressed more times BACK key
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                //when user pressed BACK  will go to previous fragment,but if you changed more times fragment,
+                // you must pressed more times BACK key,so you must consist whether to use
+//                fragmentTransaction.addToBackStack(null);
                 //before you commit second , you must get ft instance again otherwise you will get illegalexception
+                fragmentTransaction.commit();
             }
         });
     }

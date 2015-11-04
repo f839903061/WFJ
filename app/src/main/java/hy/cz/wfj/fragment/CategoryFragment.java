@@ -75,7 +75,7 @@ public class CategoryFragment extends Fragment {
 
         for (int i = 0; i < 40; i++) {
             CategoryListObject categoryListObject=new CategoryListObject();
-            categoryListObject.setName("name"+i);
+            categoryListObject.setName("大分类"+i);
             mCategoryObjectList.add(categoryListObject);
         }
 

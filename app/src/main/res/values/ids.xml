@@ -117,4 +117,5 @@
     <item name="login_page_find_and_uion" type="id" />
     <item name="register_link" type="id" />
     <item name="login_page_find_password" type="id" />
+    <item name="category_right_grid" type="id" />
 </resources>

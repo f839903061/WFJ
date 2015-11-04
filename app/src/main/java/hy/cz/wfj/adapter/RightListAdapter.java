@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import hy.cz.wfj.R;
+import hy.cz.wfj.customview.MyGridView;
 import hy.cz.wfj.data.CategoryListObject;
 
 /**
@@ -17,12 +18,14 @@ import hy.cz.wfj.data.CategoryListObject;
  * Created by feng on 2015/10/27.
  */
 public class RightListAdapter extends BaseAdapter {
-    private ArrayList<CategoryListObject> mList =null;
-    private LayoutInflater mInflater=null;
+    private ArrayList<CategoryListObject> mList = null;
+    private LayoutInflater mInflater = null;
+    private Context mContext;
 
     public RightListAdapter(Context pcontext, ArrayList<CategoryListObject> plist) {
-        mList =plist;
-        mInflater=LayoutInflater.from(pcontext);
+        mContext=pcontext;
+        mList = plist;
+        mInflater = LayoutInflater.from(pcontext);
     }
 
     @Override
@@ -42,20 +45,26 @@ public class RightListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder ;
-        if (convertView==null){
-            viewHolder=new ViewHolder();
-            convertView = mInflater.inflate(R.layout.category_left_list_item, null);
-            viewHolder.textView=(TextView)convertView.findViewById(R.id.category_left_list_text);
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            viewHolder = new ViewHolder();
+            convertView = mInflater.inflate(R.layout.category_right_list_item, null);
+            viewHolder.textView = (TextView) convertView.findViewById(R.id.right_item_title);
+            viewHolder.myGridView = (MyGridView) convertView.findViewById(R.id.category_right_grid);
+            RightGridAdapter rightGridAdapter=new RightGridAdapter(mContext);
+            viewHolder.myGridView.setAdapter(rightGridAdapter);
+
             convertView.setTag(viewHolder);
-        }else {
-            viewHolder=(ViewHolder)convertView.getTag();
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.textView.setText(mList.get(position).getName());
         return convertView;
     }
 
-    public final class ViewHolder{
-        public TextView textView;
+    public class ViewHolder{
+        TextView textView;
+        MyGridView myGridView;
     }
+
 }
