@@ -20,5 +20,7 @@
     <color name="transparent">#00000000</color>
     <color name="login_devider_bg">#ffdedede</color>
 
+    <color name="search_font_dark_grey">#ffb6b6b6</color>
+    <color name="search_title_hint_text_color">#ffb6b6b6</color>
 
 </resources>

@@ -118,4 +118,15 @@
     <item name="register_link" type="id" />
     <item name="login_page_find_password" type="id" />
     <item name="category_right_grid" type="id" />
+    <item name="header" type="id" />
+    <item name="home_search_button" type="id" />
+    <item name="home_title_search" type="id" />
+    <item name="to_message_btn" type="id" />
+    <item name="iv_search" type="id" />
+    <item name="homeActivity_autoComplete" type="id" />
+    <item name="homeActivity_voice" type="id" />
+    <item name="home_message_img" type="id" />
+    <item name="home_message_number" type="id" />
+    <item name="home_message_red_dot" type="id" />
+    <item name="home_webView_framelayout" type="id" />
 </resources>

@@ -62,7 +62,7 @@ public class RightGridAdapter extends BaseAdapter {
         }
 
         viewHolder.textView.setText(list.get(position));
-        viewHolder.simpleDraweeView.setBackground(mContext.getResources().getDrawable(R.drawable.personal_avatar_unlogin_normal));
+        viewHolder.simpleDraweeView.setBackground(mContext.getResources().getDrawable(R.drawable.computer));
 
         return convertView;
     }

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:id="@id/header"
+    android:layout_width="fill_parent"
+    android:layout_height="50.0dip"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:background="#88FF0000">
+
+    <LinearLayout
+        android:id="@id/home_search_button"
+        android:layout_width="54.0dip"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_width="20.0dip"
+            android:layout_height="20.0dip"
+            android:scaleType="centerInside"
+            fresco:placeholderImage="@drawable/topbar_search" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="扫啊扫"
+            android:textColor="#ffffffff"
+            android:textSize="10.0dip" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@id/home_title_search"
+        android:layout_width="fill_parent"
+        android:layout_height="31.0dip"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/to_message_btn"
+        android:layout_toRightOf="@id/home_search_button"
+        android:background="@drawable/topbar_edittext_background"
+        android:gravity="center_vertical"
+        android:paddingLeft="10.0dip">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@id/iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            fresco:placeholderImage="@drawable/icon_search" />
+
+        <AutoCompleteTextView
+            android:id="@id/homeActivity_autoComplete"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="2.0dip"
+            android:layout_toRightOf="@id/iv_search"
+            android:background="@color/transparent"
+            android:completionThreshold="1"
+            android:dropDownWidth="fill_parent"
+            android:focusable="false"
+            android:gravity="center_vertical"
+            android:hint="@string/homeActivity_autoComplete"
+            android:paddingBottom="2.0dip"
+            android:paddingRight="20.0dip"
+            android:paddingTop="2.0dip"
+            android:singleLine="true"
+            android:textColor="@color/search_font_dark_grey"
+            android:textColorHint="@color/search_title_hint_text_color"
+            android:textSize="14.0dip" />
+
+        <LinearLayout
+            android:id="@id/homeActivity_voice"
+            android:layout_width="32.0dip"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:paddingLeft="9.0dip"
+            android:paddingRight="9.0dip">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="12.0dip"
+                android:layout_height="20.0dip"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/app_icon_voice"
+                android:scaleType="centerInside" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@id/to_message_btn"
+        android:layout_width="54.0dip"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:clickable="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@id/home_message_img"
+                android:layout_width="20.0dip"
+                android:layout_height="20.0dip"
+                android:scaleType="centerInside"
+                fresco:placeholderImage="@drawable/topbar_message" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/home_message_img"
+                android:text="消息"
+                android:textColor="#ffffffff"
+                android:textSize="10.0dip" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@id/home_message_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8.0dip"
+            android:layout_marginTop="5.0dip"
+            android:background="@drawable/home_message_red_bg"
+            android:gravity="center"
+            android:paddingBottom="0.5dip"
+            android:paddingLeft="3.0dip"
+            android:paddingRight="3.0dip"
+            android:paddingTop="0.5dip"
+            android:text="99"
+            android:textColor="@color/white"
+            android:textSize="8.0dip"
+            android:visibility="gone" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@id/home_message_red_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="12.0dip"
+            android:layout_marginTop="6.0dip"
+            android:visibility="gone"
+            fresco:placeholderImage="@drawable/home_message_red_dot" />
+    </RelativeLayout>
+</RelativeLayout>

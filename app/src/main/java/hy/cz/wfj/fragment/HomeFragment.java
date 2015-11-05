@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import hy.cz.wfj.R;
 
 /**
@@ -89,6 +92,11 @@ public class HomeFragment extends Fragment {
         return rootView;
     }
 
+    public Uri converDrawableToUri(int resID){
+//        Uri uri = new Uri.Builder().scheme("res").path(String.valueOf(resID)).build();
+        Uri uri = new Uri.Builder().scheme("res").path(String.valueOf(R.drawable.topbar_search)).build();
+        return uri;
+    }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -141,6 +149,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onAttach(Activity activity) {
+//        Fresco.initialize(getActivity().getApplicationContext());
         super.onAttach(activity);
         try {
             mListener = (OnFragmentInteractionListener) activity;

@@ -55,6 +55,8 @@
     <string name="quick_register">手机快速注册</string>
     <string name="login_find_password">找回密码</string>
 
+    <string name="homeActivity_autoComplete">搜索商品/店铺</string>
+
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>

@@ -10,6 +10,8 @@ import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 import hy.cz.wfj.fragment.CartFragment;
 import hy.cz.wfj.fragment.CategoryFragment;
 import hy.cz.wfj.fragment.HomeFragment;
@@ -31,6 +33,7 @@ public class Main2Activity extends Activity implements
     public static final String CART_FRAGMENT_TAG = "cart_fragment";
     public static final String PERSONAL_FRAGMENT_TAG = "personal_fragment";
     public static final String TAG = "fengluchun";
+    public static int RADIOGROUP_INDEX = 1;
 
     private FrameLayout mFrameLayout;
     private RadioGroup mRadioGroup;
@@ -45,7 +48,12 @@ public class Main2Activity extends Activity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fresco.initialize(getApplicationContext());
         setContentView(R.layout.activity_main2);
+        if (savedInstanceState!=null){
+            RADIOGROUP_INDEX=savedInstanceState.getInt("index");
+            Log.e(TAG,"-------------------------->"+RADIOGROUP_INDEX+"<-----------------------------");
+        }
         initializeComponent();
     }
 
@@ -53,7 +61,7 @@ public class Main2Activity extends Activity implements
     @Override
     protected void onResume() {
         super.onResume();
-        setListener();
+        setListener(RADIOGROUP_INDEX);
     }
 
     @Override
@@ -65,7 +73,12 @@ public class Main2Activity extends Activity implements
     @Override
     protected void onStop() {
         super.onStop();
+        Bundle outState=new Bundle();
+        outState.putInt("index", RADIOGROUP_INDEX);
+        onSaveInstanceState(outState);
     }
+
+
 
     /**
      * initialize componet and transcation navigation tasks
@@ -87,15 +100,15 @@ public class Main2Activity extends Activity implements
         fragmentTransaction.commit();
 
         //set listener for radiogroup
-        setListener();
+        setListener(RADIOGROUP_INDEX);
     }
 
     /**
      * set radiogroup listener
      */
-    private void setListener() {
+    private void setListener(int pindex) {
         //set default checked is 1-->home
-        mRadioGroup.check(mRadioGroup.getChildCount() - (mRadioGroup.getChildCount() - 1));
+        mRadioGroup.check(mRadioGroup.getChildCount() - (mRadioGroup.getChildCount() - RADIOGROUP_INDEX));
 
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             /**

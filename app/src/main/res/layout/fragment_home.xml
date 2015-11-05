@@ -1,11 +1,22 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="hy.cz.wfj.fragment.HomeFragment">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
-    <WebView
-        android:id="@id/home_webView"
+    <FrameLayout
+        android:id="@id/home_webView_framelayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center" />
-</FrameLayout>
+        tools:context="hy.cz.wfj.fragment.HomeFragment">
+
+
+        <WebView
+            android:id="@id/home_webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <include layout="@layout/app_head_search" />
+</RelativeLayout>
