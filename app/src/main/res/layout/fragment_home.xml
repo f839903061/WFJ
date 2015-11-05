@@ -18,5 +18,5 @@
             android:layout_gravity="center" />
     </FrameLayout>
 
-    <include layout="@layout/app_head_search" />
+    <include layout="@layout/home_head_search" />
 </RelativeLayout>
