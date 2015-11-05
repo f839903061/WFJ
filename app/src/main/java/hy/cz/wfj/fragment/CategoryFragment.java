@@ -9,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 
@@ -79,7 +82,18 @@ public class CategoryFragment extends Fragment {
             mCategoryObjectList.add(categoryListObject);
         }
 
+        setAdapter();
+    }
+
+    /**
+     * set all listview adapter
+     */
+    private void setAdapter() {
         mLeftListView.setAdapter(mleftListAdapter);
+
+        //right list add headview
+        mRightListView.addHeaderView(LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.category_right_list_head_view, null));
+
         mRightListView.setAdapter(mrightListAdapter);
         mLeftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
