@@ -133,4 +133,14 @@
     <item name="title_back" type="id" />
     <item name="home_search_layout" type="id" />
     <item name="home_search_button_tip" type="id" />
+    <item name="shopping_cart_layout_main" type="id" />
+    <item name="layout_shopping_cart_header" type="id" />
+    <item name="shopping_cart_delete_right" type="id" />
+    <item name="shopping_cart_edit_devider" type="id" />
+    <item name="shopping_cart_text" type="id" />
+    <item name="cart_no_data_icon" type="id" />
+    <item name="cart_no_data_state" type="id" />
+    <item name="cart_go_next_page" type="id" />
+    <item name="cart_to_limit" type="id" />
+    <item name="cart_to_collect" type="id" />
 </resources>

@@ -61,6 +61,13 @@
         <item name="android:background">#50717171</item>
     </style>
 
+    <style name="common_layout_title">
+        <item name="android:textSize">17.0sp</item>
+        <item name="android:textColor">@color/common_title_text_color</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="concern_list_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

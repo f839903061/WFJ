@@ -12,6 +12,8 @@
     <color name="personal_scroll_background_color">#FFFFFF</color>
 
     <color name="white">#FFFFFF</color>
+    <color name="red">#ffff0000</color>
+
     <color name="category_new_level2_font">#ff686868</color>
     <color name="category_new_level3_font">#ff252525</color>
     <color name="login_name_text_color">#ff686868</color>
@@ -22,5 +24,10 @@
 
     <color name="search_font_dark_grey">#ffb6b6b6</color>
     <color name="search_title_hint_text_color">#ffb6b6b6</color>
+    <color name="common_title_text_color">#ff252525</color>
+    <color name="c_707275">#ff707275</color>
+    <color name="c_848689">#ff848689</color>
+    <color name="cart_login_empty_state">#ffbfbfbf</color>
+    <color name="cart_empty_text_color">#ff848689</color>
 
 </resources>

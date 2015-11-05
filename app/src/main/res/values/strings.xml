@@ -57,6 +57,12 @@
 
     <string name="homeActivity_autoComplete">搜索商品/店铺</string>
 
+    <string name="shopping_cart_header">购物车</string>
+    <string name="shopping_cart_product_edit">编辑</string>
+    <string name="cart_empty_tip">购物车肚子空空</string>
+    <string name="cart_look_limit">逛逛秒杀</string>
+    <string name="cart_look_collect">看看关注</string>
+
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
