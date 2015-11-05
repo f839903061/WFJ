@@ -57,7 +57,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView=inflater.inflate(R.layout.personal_layout, container, false);
+        rootView=inflater.inflate(R.layout.fragment_personal, container, false);
         initializeComponent();
         return rootView;
     }

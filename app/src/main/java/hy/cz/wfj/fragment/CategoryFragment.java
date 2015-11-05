@@ -62,7 +62,7 @@ public class CategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Fresco.initialize(getActivity().getApplicationContext());
-        rootView=inflater.inflate(R.layout.activity_category, container, false);
+        rootView=inflater.inflate(R.layout.fragment_category, container, false);
         initializeCompoment();
         loadData();
         return rootView;

@@ -7,11 +7,7 @@
     android:orientation="vertical">
 
     <!--category common title-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </RelativeLayout>
+    <include layout="@layout/category_head_search"/>
     <!--category list-->
     <LinearLayout
         android:layout_width="match_parent"
