@@ -1,6 +1,7 @@
 package hy.cz.wfj;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,6 +12,8 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+
+import java.util.ArrayList;
 
 import hy.cz.wfj.fragment.CartFragment;
 import hy.cz.wfj.fragment.CategoryFragment;
@@ -50,9 +53,9 @@ public class Main2Activity extends Activity implements
         super.onCreate(savedInstanceState);
         Fresco.initialize(getApplicationContext());
         setContentView(R.layout.activity_main2);
-        if (savedInstanceState!=null){
-            RADIOGROUP_INDEX=savedInstanceState.getInt("index");
-            Log.e(TAG,"-------------------------->"+RADIOGROUP_INDEX+"<-----------------------------");
+        if (savedInstanceState != null) {
+            RADIOGROUP_INDEX = savedInstanceState.getInt("index");
+            Log.e(TAG, "-------------------------->" + RADIOGROUP_INDEX + "<-----------------------------");
         }
         initializeComponent();
     }
@@ -73,11 +76,10 @@ public class Main2Activity extends Activity implements
     @Override
     protected void onStop() {
         super.onStop();
-        Bundle outState=new Bundle();
+        Bundle outState = new Bundle();
         outState.putInt("index", RADIOGROUP_INDEX);
         onSaveInstanceState(outState);
     }
-
 
 
     /**
@@ -94,6 +96,7 @@ public class Main2Activity extends Activity implements
         //get FragmentTransaction
         fragmentTransaction = getFragmentManager().beginTransaction();
 
+
         //set home fragment when application is first set up
         fragmentTransaction.replace(R.id.main_framelayout, HomeFragment.newInstance(), HOME_FRAGMENT_TAG);
         fragmentTransaction.addToBackStack(null);
@@ -102,6 +105,7 @@ public class Main2Activity extends Activity implements
         //set listener for radiogroup
         setListener(RADIOGROUP_INDEX);
     }
+
 
     /**
      * set radiogroup listener
@@ -175,9 +179,9 @@ public class Main2Activity extends Activity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==PersonalFragment.LOGIN_REQUEST_CODE){
+        if (requestCode == PersonalFragment.LOGIN_REQUEST_CODE) {
 //            mRadioGroup.check(mRadioGroup.getChildCount()-(mRadioGroup.getChildCount()-4));
-            Log.e(TAG,"result ");
+            Log.e(TAG, "result ");
         }
     }
 
