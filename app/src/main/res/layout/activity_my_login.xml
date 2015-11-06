@@ -81,7 +81,7 @@
                     android:src="@drawable/cart_recommend_arrow_close"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:visibility="gone"/>
+                    android:visibility="invisible"/>
                 <ImageView
                     android:id="@id/login_name_delete"
                     android:visibility="invisible"
@@ -97,7 +97,7 @@
                     android:textColorHint="@color/login_edit_hint_text_color"
                     android:id="@id/login_input_name"
                     android:background="@color/transparent"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5.0dip"
                     android:layout_marginRight="5.0dip"
@@ -138,7 +138,7 @@
                     android:button="@null"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:visibility="gone"/>
+                    android:visibility="invisible"/>
                 <ImageView
                     android:id="@id/login_password_delete"
                     android:visibility="invisible"
@@ -203,7 +203,7 @@
                     android:textColorHint="@color/login_edit_hint_text_color"
                     android:id="@id/login_input_verify_input"
                     android:background="@color/transparent"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10.0dip"
                     android:hint="@string/login_ver_hint"
