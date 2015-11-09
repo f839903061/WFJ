@@ -19,6 +19,8 @@ import hy.cz.wfj.fragment.CartFragment;
 import hy.cz.wfj.fragment.CategoryFragment;
 import hy.cz.wfj.fragment.HomeFragment;
 import hy.cz.wfj.fragment.PersonalFragment;
+import hy.cz.wfj.utility.MyLogToast;
+import hy.cz.wfj.utility.SharedPrefUtility;
 
 public class Main2Activity extends Activity implements
         HomeFragment.OnFragmentInteractionListener,
@@ -36,10 +38,9 @@ public class Main2Activity extends Activity implements
     public static final String CART_FRAGMENT_TAG = "cart_fragment";
     public static final String PERSONAL_FRAGMENT_TAG = "personal_fragment";
     public static final String TAG = "fengluchun";
-    public static int RADIOGROUP_INDEX = 1;
 
-    private FrameLayout mFrameLayout;
     private RadioGroup mRadioGroup;
+    private MyLogToast myLogToast;
 
     //    private RadioButton mRadioButton_home;
 //    private RadioButton mRadioButton_category;
@@ -53,32 +54,28 @@ public class Main2Activity extends Activity implements
         super.onCreate(savedInstanceState);
         Fresco.initialize(getApplicationContext());
         setContentView(R.layout.activity_main2);
-        if (savedInstanceState != null) {
-            RADIOGROUP_INDEX = savedInstanceState.getInt("index");
-            Log.e(TAG, "-------------------------->" + RADIOGROUP_INDEX + "<-----------------------------");
-        }
         initializeComponent();
     }
+
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        setListener(RADIOGROUP_INDEX);
+        setRadioGroupCheck();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        //when application setup ,set default display HomeFragment
+        setRadioGroupCheck();
 
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Bundle outState = new Bundle();
-        outState.putInt("index", RADIOGROUP_INDEX);
-        onSaveInstanceState(outState);
     }
 
 
@@ -86,33 +83,32 @@ public class Main2Activity extends Activity implements
      * initialize componet and transcation navigation tasks
      */
     private void initializeComponent() {
-        mFrameLayout = (FrameLayout) findViewById(R.id.main_framelayout);
+        myLogToast =new MyLogToast(Main2Activity.this);
         mRadioGroup = (RadioGroup) findViewById(R.id.main_radiogroup);
 //        mRadioButton_home = (RadioButton) findViewById(R.id.nav_home_btn);
 //        mRadioButton_category = (RadioButton) findViewById(R.id.nav_cart_btn);
 //        mRadioButton_cart = (RadioButton) findViewById(R.id.nav_cart_btn);
 //        mRadioButton_personal = (RadioButton) findViewById(R.id.nav_personal_btn);
 
-        //get FragmentTransaction
-        fragmentTransaction = getFragmentManager().beginTransaction();
-
-
-        //set home fragment when application is first set up
-        fragmentTransaction.replace(R.id.main_framelayout, HomeFragment.newInstance(), HOME_FRAGMENT_TAG);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
 
         //set listener for radiogroup
-        setListener(RADIOGROUP_INDEX);
+        setListener();
     }
 
+    /**
+     * set current radiobutton checkout id
+     */
+    private void setRadioGroupCheck(){
+        Object index = SharedPrefUtility.getParam(getApplicationContext(), "index", 1);
+        mRadioGroup.check(mRadioGroup.getChildCount() - (mRadioGroup.getChildCount() - (int)index));
+    }
 
     /**
      * set radiogroup listener
      */
-    private void setListener(int pindex) {
+    private void setListener() {
         //set default checked is 1-->home
-        mRadioGroup.check(mRadioGroup.getChildCount() - (mRadioGroup.getChildCount() - RADIOGROUP_INDEX));
+//        mRadioGroup.check(mRadioGroup.getChildCount() - (mRadioGroup.getChildCount() - RADIOGROUP_INDEX));
 
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             /**
@@ -135,15 +131,19 @@ public class Main2Activity extends Activity implements
                 switch (checkedId) {
                     case FRAGMENT_HOME:
                         fragmentTransaction.replace(R.id.main_framelayout, HomeFragment.newInstance(), HOME_FRAGMENT_TAG);
+                        SharedPrefUtility.setParam(getApplicationContext(),"index",FRAGMENT_HOME);
                         break;
                     case FRAGMENT_CATEGORY:
                         fragmentTransaction.replace(R.id.main_framelayout, CategoryFragment.getInstance(), CATEGORY_FRAGMENT_TAG);
+                        SharedPrefUtility.setParam(getApplicationContext(), "index", FRAGMENT_CATEGORY);
                         break;
                     case FRAGMENT_CART:
                         fragmentTransaction.replace(R.id.main_framelayout, CartFragment.getInstance(), CART_FRAGMENT_TAG);
+                        SharedPrefUtility.setParam(getApplicationContext(), "index", FRAGMENT_CART);
                         break;
                     case FRAGMENT_PERSONAL:
                         fragmentTransaction.replace(R.id.main_framelayout, PersonalFragment.getInstance(), PERSONAL_FRAGMENT_TAG);
+                        SharedPrefUtility.setParam(getApplicationContext(), "index", FRAGMENT_PERSONAL);
                         break;
                 }
                 //when user pressed BACK  will go to previous fragment,but if you changed more times fragment,
@@ -180,15 +180,16 @@ public class Main2Activity extends Activity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PersonalFragment.LOGIN_REQUEST_CODE) {
-//            mRadioGroup.check(mRadioGroup.getChildCount()-(mRadioGroup.getChildCount()-4));
             Log.e(TAG, "result ");
         }
     }
+
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         //deal with every time set up can't change fragment
+        SharedPrefUtility.setParam(getApplicationContext(),"index",FRAGMENT_HOME);
         System.exit(0);
     }
 }
