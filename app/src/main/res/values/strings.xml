@@ -40,6 +40,7 @@
 
     <!-- Strings related to login -->
     <string name="login_title_text">登录</string>
+    <string name="settings_title_text">更多</string>
     <string name="login">登 录</string>
     <string name="user_name">账号：</string>
     <string name="user_password">密码：</string>
@@ -62,6 +63,10 @@
     <string name="cart_empty_tip">购物车肚子空空</string>
     <string name="cart_look_limit">逛逛秒杀</string>
     <string name="cart_look_collect">看看关注</string>
+
+    <string name="more_local_cache_clear_image_title">清除本地缓存</string>
+    <string name="more_about">关于</string>
+    <string name="more_loginout">退出登录</string>
 
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>

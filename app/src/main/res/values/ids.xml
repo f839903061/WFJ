@@ -143,4 +143,11 @@
     <item name="cart_go_next_page" type="id" />
     <item name="cart_to_limit" type="id" />
     <item name="cart_to_collect" type="id" />
+    <item name="layout_clean_loc_cache_pic" type="id" />
+    <item name="layout_upgrade_client" type="id" />
+    <item name="tv_clean_loc_cache_pic" type="id" />
+    <item name="tv_loc_cache_pic_size" type="id" />
+    <item name="more_about" type="id" />
+    <item name="more_update_msg" type="id" />
+    <item name="more_arrow" type="id" />
 </resources>

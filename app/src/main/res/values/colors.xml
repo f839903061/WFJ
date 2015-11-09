@@ -30,4 +30,10 @@
     <color name="cart_login_empty_state">#ffbfbfbf</color>
     <color name="cart_empty_text_color">#ff848689</color>
 
+    <color name="personal_view_normal">#ffffffff</color>
+    <color name="personal_view_pressed">#fff1f1f1</color>
+    <color name="fill_order_delivery_dark">#ff252525</color>
+    <color name="fill_order_notice_color">#ff848689</color>
+
+
 </resources>

@@ -120,4 +120,34 @@
         <item name="android:layout_marginTop">10dp</item>
     </style>
 
+    <style name="more_native_setting_title_style">
+        <item name="android:textSize">14.0dip</item>
+        <item name="android:textColor">@color/fill_order_delivery_dark</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="more_native_setting_right_tv_style" parent="@style/more_native_setting_title_style">
+        <item name="android:textSize">13.0dip</item>
+        <item name="android:textColor">@color/fill_order_notice_color</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
+    <style name="more_native_setting_layout_style">
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/personal_view_pressed_selector</item>
+        <item name="android:padding">10.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">49.0dip</item>
+    </style>
+
+    <style name="more_native_setting_arrow_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">13.0dip</item>
+        <item name="android:background">@drawable/button_k</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:contentDescription">@string/none</item>
+    </style>
 </resources>

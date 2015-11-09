@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--login title-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_navigation_bottom_height"
+        android:background="@color/white">
+
+        <ImageButton
+            android:id="@+id/common_title_back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@color/white"
+            android:src="@drawable/common_title_back_click" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/common_title_back_btn"
+            android:gravity="center"
+            android:text="@string/settings_title_text" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@id/layout_clean_loc_cache_pic"
+            style="@style/more_native_setting_layout_style">
+
+            <TextView
+                android:id="@id/tv_clean_loc_cache_pic"
+                style="@style/more_native_setting_title_style"
+                android:text="@string/more_local_cache_clear_image_title" />
+
+            <TextView
+                android:id="@id/tv_loc_cache_pic_size"
+                style="@style/more_native_setting_right_tv_style"
+                android:text="2M" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@id/layout_upgrade_client"
+            style="@style/more_native_setting_layout_style">
+
+            <TextView
+                android:id="@id/more_about"
+                style="@style/more_native_setting_title_style"
+                android:text="@string/more_about" />
+
+            <TextView
+                android:id="@id/more_update_msg"
+                style="@style/more_native_setting_right_tv_style"
+                android:layout_marginRight="20.0dip" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@id/more_arrow"
+                style="@style/more_native_setting_arrow_style" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import hy.cz.wfj.R;
 import hy.cz.wfj.activity.MyLoginActivity;
+import hy.cz.wfj.activity.MySettingsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +25,7 @@ import hy.cz.wfj.activity.MyLoginActivity;
 public class PersonalFragment extends Fragment implements View.OnClickListener{
 
     public static final int LOGIN_REQUEST_CODE = 1;
+    public static final int SETTINGS_REQUEST_CODE = 2;
     private View rootView;
     private ImageButton avatarImage;
     private ImageButton settingsImage;
@@ -116,12 +118,12 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.personal_unlogin_avatar:
-                myToast("text");
-                Intent intent=new Intent(getActivity(), MyLoginActivity.class);
-                startActivityForResult(intent, LOGIN_REQUEST_CODE);
+                Intent intent_login=new Intent(getActivity(), MyLoginActivity.class);
+                startActivityForResult(intent_login, LOGIN_REQUEST_CODE);
                 break;
             case R.id.personal_setting:
-                myToast("settings");
+                Intent intent_settings=new Intent(getActivity(), MySettingsActivity.class);
+                startActivityForResult(intent_settings, SETTINGS_REQUEST_CODE);
                 break;
             case R.id.personal_common_message:
                 myToast("message");
