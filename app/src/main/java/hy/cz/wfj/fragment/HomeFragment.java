@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.provider.SyncStateContract;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +11,6 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import hy.cz.wfj.R;
 import hy.cz.wfj.utility.MyLogToast;
@@ -104,6 +99,12 @@ public class HomeFragment extends Fragment {
         initializeComponent();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mWebView.reload();
+    }
+
     private void initializeComponent() {
 
         myLogToast = new MyLogToast(getActivity());
@@ -111,7 +112,7 @@ public class HomeFragment extends Fragment {
 //        mWebView.loadUrl("http://www.baidu.com");
 //        mWebView.loadUrl("file:///android_asset/jd/index.html");
         //set webview cache
-        initWebView();
+        setWebViewCache();
 
         mWebView.loadUrl("http://192.168.10.7:8080/wfj_front/test.jsp");
         setWebViewListener();
@@ -149,7 +150,7 @@ public class HomeFragment extends Fragment {
      * set webview cache
      * 给webview设置缓存机制
      */
-    private void initWebView() {
+    private void setWebViewCache() {
         WebSettings webSettings = mWebView.getSettings();
         //support js
         webSettings.setJavaScriptEnabled(true);
@@ -167,6 +168,7 @@ public class HomeFragment extends Fragment {
         webSettings.setAppCachePath(cacheDirPath);
         webSettings.setAppCacheEnabled(true);
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
