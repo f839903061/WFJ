@@ -30,6 +30,8 @@
         </activity>
         <activity android:name=".activity.MySettingsActivity" >
         </activity>
+        <activity android:name=".activity.MyMessageActivity" >
+        </activity>
     </application>
 
 </manifest>

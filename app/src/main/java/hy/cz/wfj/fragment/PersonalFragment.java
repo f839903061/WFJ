@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import hy.cz.wfj.R;
 import hy.cz.wfj.activity.MyLoginActivity;
+import hy.cz.wfj.activity.MyMessageActivity;
 import hy.cz.wfj.activity.MySettingsActivity;
 
 /**
@@ -26,6 +27,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
 
     public static final int LOGIN_REQUEST_CODE = 1;
     public static final int SETTINGS_REQUEST_CODE = 2;
+    public static final int MESSAGE_REQUEST_CODE = 3;
     private View rootView;
     private ImageButton avatarImage;
     private ImageButton settingsImage;
@@ -126,7 +128,8 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
                 startActivityForResult(intent_settings, SETTINGS_REQUEST_CODE);
                 break;
             case R.id.personal_common_message:
-                myToast("message");
+                Intent intent_message=new Intent(getActivity(), MyMessageActivity.class);
+                startActivityForResult(intent_message, MESSAGE_REQUEST_CODE);
                 break;
             //concern incident
             case R.id.personal_goods_list_title:
