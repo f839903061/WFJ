@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.provider.SyncStateContract;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -16,6 +18,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import hy.cz.wfj.R;
+import hy.cz.wfj.utility.MyLogToast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,8 +34,11 @@ public class HomeFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public static final String TAG = "fengluchun";
+    private static final String APP_CACAHE_DIRNAME = "/webcache";
+    private static final String APP_DB_DIRNAME = "/webdb";
 
-    private static HomeFragment homeFragment=null;
+    private static HomeFragment homeFragment = null;
+    private MyLogToast myLogToast;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -41,9 +47,9 @@ public class HomeFragment extends Fragment {
     private WebView mWebView;
     private OnFragmentInteractionListener mListener;
 
-    public static synchronized HomeFragment getInstance(){
-        if (homeFragment==null){
-            homeFragment=new HomeFragment();
+    public static synchronized HomeFragment getInstance() {
+        if (homeFragment == null) {
+            homeFragment = new HomeFragment();
         }
         return homeFragment;
     }
@@ -88,37 +94,50 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView=inflater.inflate(R.layout.fragment_home, container, false);
+        rootView = inflater.inflate(R.layout.fragment_home, container, false);
         return rootView;
     }
 
-    public Uri converDrawableToUri(int resID){
+    /**
+     * 将资源图片/drawable里面的图片转换为uri
+     *
+     * @param resID
+     * @return
+     */
+    public Uri converDrawableToUri(int resID) {
 //        Uri uri = new Uri.Builder().scheme("res").path(String.valueOf(resID)).build();
         Uri uri = new Uri.Builder().scheme("res").path(String.valueOf(R.drawable.topbar_search)).build();
         return uri;
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initializeComponent();
     }
 
+
     private void initializeComponent() {
 
-        mWebView=(WebView)rootView.findViewById(R.id.home_webView);
+        myLogToast = new MyLogToast(getActivity());
+        mWebView = (WebView) rootView.findViewById(R.id.home_webView);
 //        mWebView.loadUrl("http://www.baidu.com");
-
 //        mWebView.loadUrl("file:///android_asset/jd/index.html");
-        mWebView.loadUrl("http://192.168.10.7:8080/wfj_front/test.jsp");
-        mWebView.getSettings().setJavaScriptEnabled(true);
-//        mWebView.getSettings().
+        //set webview cache
+        initWebView();
 
-        mWebView.setWebViewClient(new WebViewClient(){
+        mWebView.loadUrl("http://192.168.10.7:8080/wfj_front/test.jsp");
+        setWebViewListener();
+    }
+
+    /**
+     * webview上的操作监听，包含了跳转链接监听，返回键监听
+     */
+    private void setWebViewListener() {
+        mWebView.setWebViewClient(new WebViewClient() {
             /**
-             * @param view
-             * @param url
-             * @return
-             *          if reture false will use application webview ,otherwise use android device browser
+             * if reture false will use application webview ,otherwise use android device browser
+             * 如果返回false 将使用webview本身进行跳转，否则会跳转到系统的浏览器打开链接
              */
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -126,19 +145,41 @@ public class HomeFragment extends Fragment {
                 return false;
             }
         });
+        mWebView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //如果用户的操作是返回，同时webview又可以返回，那么就执行网页返回操作
+                if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
+                    mWebView.goBack();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
+    /**
+     * set webview cache
+     * 给webview设置缓存机制
+     */
+    private void initWebView() {
+        WebSettings webSettings = mWebView.getSettings();
+        //support js
+        webSettings.setJavaScriptEnabled(true);
+        //support webview cached
+        //有网络的情况下走网络，没网的情况下走缓存 参考：http://my.oschina.net/mycbb/blog/330422
+        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        //open DOM api
+        webSettings.setDomStorageEnabled(true);
+        //open database api
+        webSettings.setDatabaseEnabled(true);
+        String cacheDirPath = getActivity().getFilesDir().getAbsolutePath() + APP_CACAHE_DIRNAME;
+        String dbDirPath = getActivity().getCacheDir().getAbsolutePath() + APP_DB_DIRNAME;
 
-    //add BACK listener
-//    private View.OnKeyListener backListener=new View.OnKeyListener() {
-//        @Override
-//        public boolean onKey(View v, int keyCode, KeyEvent event) {
-//            if (keyCode == KeyEvent.KEYCODE_BACK&&mWebView.canGoBack()) {
-//                mWebView.goBack();
-//            }
-//            return false;
-//        }
-//    };
+        webSettings.setDatabasePath(dbDirPath);
+        webSettings.setAppCachePath(cacheDirPath);
+        webSettings.setAppCacheEnabled(true);
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -175,7 +216,7 @@ public class HomeFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p/>
+     * <p>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
