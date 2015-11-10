@@ -92,7 +92,8 @@ public class CategoryFragment extends Fragment {
         mLeftListView.setAdapter(mleftListAdapter);
 
         //right list add headview
-        mRightListView.addHeaderView(LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.category_right_list_head_view, null));
+        //给右边的listview添加头布局，就是一个广告位单张图片
+//        mRightListView.addHeaderView(LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.category_right_list_head_view, null));
 
         mRightListView.setAdapter(mrightListAdapter);
         mLeftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -100,6 +101,7 @@ public class CategoryFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mLeftListView.smoothScrollToPositionFromTop(position,0);
                 //deal with module reuse template bug
+                //解决模板复用显示bug
                 mleftListAdapter.setSelect(position);
                 view.setBackgroundColor(Color.WHITE);
             }
