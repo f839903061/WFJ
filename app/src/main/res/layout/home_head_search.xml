@@ -8,7 +8,7 @@
     android:clickable="true"
     android:focusable="true"
     android:gravity="center_vertical"
-    android:background="#88FF0000">
+    android:background="#88A7A7A7">
 
     <LinearLayout
         android:id="@id/home_search_button"

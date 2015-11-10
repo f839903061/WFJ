@@ -73,8 +73,8 @@ public class HomeFragment extends Fragment {
     }
 
     public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-        return fragment;
+        homeFragment = new HomeFragment();
+        return homeFragment;
     }
 
     public HomeFragment() {
@@ -98,24 +98,11 @@ public class HomeFragment extends Fragment {
         return rootView;
     }
 
-    /**
-     * 将资源图片/drawable里面的图片转换为uri
-     *
-     * @param resID
-     * @return
-     */
-    public Uri converDrawableToUri(int resID) {
-//        Uri uri = new Uri.Builder().scheme("res").path(String.valueOf(resID)).build();
-        Uri uri = new Uri.Builder().scheme("res").path(String.valueOf(R.drawable.topbar_search)).build();
-        return uri;
-    }
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initializeComponent();
     }
-
 
     private void initializeComponent() {
 
