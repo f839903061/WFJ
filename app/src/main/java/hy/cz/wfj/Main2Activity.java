@@ -39,7 +39,6 @@ public class Main2Activity extends Activity implements
     public static final String PERSONAL_FRAGMENT_TAG = "personal_fragment";
 
     private RadioGroup mRadioGroup;
-    private MyLogToast myLogToast;
 
     private FragmentTransaction fragmentTransaction;
 
@@ -84,7 +83,6 @@ public class Main2Activity extends Activity implements
      * 初始化组件，以及导航事务
      */
     private void initializeComponent() {
-        myLogToast =new MyLogToast(Main2Activity.this);
         mRadioGroup = (RadioGroup) findViewById(R.id.main_radiogroup);
     }
 
@@ -166,7 +164,7 @@ public class Main2Activity extends Activity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PersonalFragment.LOGIN_REQUEST_CODE) {
-            myLogToast.mLog(MyLogToast.LEVEL_INFO,"login success!");
+            MyLogToast.mLog(getApplicationContext(),MyLogToast.LEVEL_INFO,"login success!");
         }
     }
 

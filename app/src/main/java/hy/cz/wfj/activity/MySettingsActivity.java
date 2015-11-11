@@ -34,7 +34,6 @@ public class MySettingsActivity extends Activity implements View.OnClickListener
      * initialize component
      */
     private void initializeComponent() {
-        myLogToast=new MyLogToast(MySettingsActivity.this);
         common_title_back_btn=(ImageButton)findViewById(R.id.common_title_back_btn);
     }
 

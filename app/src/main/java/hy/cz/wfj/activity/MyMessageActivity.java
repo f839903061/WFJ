@@ -29,7 +29,6 @@ public class MyMessageActivity extends Activity implements View.OnClickListener 
     }
 
     private void initializeComponent() {
-        myLogToast=new MyLogToast(getApplicationContext());
         common_title_back_btn=(ImageButton)findViewById(R.id.common_title_back_btn);
         message_setting =(ImageButton)findViewById(R.id.personal_setting);
     }
@@ -39,13 +38,13 @@ public class MyMessageActivity extends Activity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.common_title_back_btn:
-                myLogToast.mToast("back");
+                MyLogToast.mToast(getApplicationContext(),"back");
                 Intent gobackintent=new Intent(MyMessageActivity.this, Main2Activity.class);
                 setResult(Activity.RESULT_OK,gobackintent);
                 finish();
                 break;
             case R.id.personal_setting:
-                myLogToast.mToast("message settings");
+                MyLogToast.mToast(getApplicationContext(),"message settings");
                 break;
             default:
                 break;

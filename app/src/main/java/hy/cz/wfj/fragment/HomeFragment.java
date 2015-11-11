@@ -35,7 +35,6 @@ public class HomeFragment extends Fragment {
     private static final String APP_DB_DIRNAME = "/webdb";
 
     private static HomeFragment homeFragment = null;
-    private MyLogToast myLogToast;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -109,7 +108,6 @@ public class HomeFragment extends Fragment {
 
     private void initializeComponent() {
 
-        myLogToast = new MyLogToast(getActivity());
         mWebView = (WebView) rootView.findViewById(R.id.home_webView);
 //        mWebView.loadUrl("http://www.baidu.com");
 //        mWebView.loadUrl("file:///android_asset/jd/index.html");
@@ -182,10 +180,10 @@ public class HomeFragment extends Fragment {
 
         //WebView 缓存文件
         File appCacheDir = new File(getActivity().getFilesDir().getAbsolutePath()+APP_CACAHE_DIRNAME);
-       myLogToast.mLog("appCacheDir path=" + appCacheDir.getAbsolutePath());
+       MyLogToast.mLog(getActivity(),"appCacheDir path=" + appCacheDir.getAbsolutePath());
 
         File webviewCacheDir = new File(getActivity().getCacheDir().getAbsolutePath()+"/webviewCache");
-       myLogToast.mLog("webviewCacheDir path="+webviewCacheDir.getAbsolutePath());
+       MyLogToast.mLog(getActivity(),"webviewCacheDir path="+webviewCacheDir.getAbsolutePath());
 
         //删除webview 缓存目录
         if(webviewCacheDir.exists()){
