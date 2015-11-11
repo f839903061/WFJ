@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ import hy.cz.wfj.data.CategoryListObject;
  */
 public class CategoryFragment extends Fragment {
 
+    public static final String TAG = "fengluchun";
     private OnFragmentInteractionListener mListener;
 
     private static CategoryFragment categoryFragment=null;
@@ -97,10 +99,12 @@ public class CategoryFragment extends Fragment {
         StringRequest stringRequest=new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.i(TAG,getClass().getName()+"    successed:"+response.substring(0,5));
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.e(TAG,getClass().getName()+"    failed");
             }
         });
         queue.add(stringRequest);
