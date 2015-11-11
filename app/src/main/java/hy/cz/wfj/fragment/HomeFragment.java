@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,6 @@ import android.webkit.WebViewClient;
 import java.io.File;
 
 import hy.cz.wfj.R;
-import hy.cz.wfj.utility.MyLogToast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -180,11 +180,9 @@ public class HomeFragment extends Fragment {
 
         //WebView 缓存文件
         File appCacheDir = new File(getActivity().getFilesDir().getAbsolutePath()+APP_CACAHE_DIRNAME);
-       MyLogToast.mLog(getActivity(),"appCacheDir path=" + appCacheDir.getAbsolutePath());
-
+        Log.i(TAG,"appCacheDir path=" + appCacheDir.getAbsolutePath());
         File webviewCacheDir = new File(getActivity().getCacheDir().getAbsolutePath()+"/webviewCache");
-       MyLogToast.mLog(getActivity(),"webviewCacheDir path="+webviewCacheDir.getAbsolutePath());
-
+        Log.i(TAG,"webviewCacheDir path=" + webviewCacheDir.getAbsolutePath());
         //删除webview 缓存目录
         if(webviewCacheDir.exists()){
             getActivity().deleteFile(webviewCacheDir.getName());

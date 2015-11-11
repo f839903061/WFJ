@@ -9,12 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 
@@ -75,7 +78,7 @@ public class CategoryFragment extends Fragment {
      * load data and set listview adapter
      */
     private void loadData() {
-
+        getDataFromUri();
         for (int i = 0; i < 40; i++) {
             CategoryListObject categoryListObject=new CategoryListObject();
             categoryListObject.setName("大分类"+i);
@@ -83,6 +86,24 @@ public class CategoryFragment extends Fragment {
         }
 
         setAdapter();
+    }
+
+    private void getDataFromUri() {
+        RequestQueue queue= Volley.newRequestQueue(getActivity());
+        String uri="http://192.168.10.181:8080/wfj_front/PhoneCategory?method=initType";
+//        String uri="https://192.168.10.181:8443/wfj_front/PhoneCategory?method=initType";
+//        String uri="http://www.baidu.com/";
+
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        queue.add(stringRequest);
     }
 
     /**

@@ -1,25 +1,18 @@
 package hy.cz.wfj;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.FrameLayout;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-
-import java.util.ArrayList;
 
 import hy.cz.wfj.fragment.CartFragment;
 import hy.cz.wfj.fragment.CategoryFragment;
 import hy.cz.wfj.fragment.HomeFragment;
 import hy.cz.wfj.fragment.PersonalFragment;
-import hy.cz.wfj.utility.MyLogToast;
 import hy.cz.wfj.utility.SharedPrefUtility;
 
 public class Main2Activity extends Activity implements
@@ -164,7 +157,6 @@ public class Main2Activity extends Activity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PersonalFragment.LOGIN_REQUEST_CODE) {
-            MyLogToast.mLog(getApplicationContext(),MyLogToast.LEVEL_INFO,"login success!");
         }
     }
 

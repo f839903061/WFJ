@@ -8,12 +8,10 @@ import android.widget.ImageButton;
 
 import hy.cz.wfj.Main2Activity;
 import hy.cz.wfj.R;
-import hy.cz.wfj.utility.MyLogToast;
 
 public class MySettingsActivity extends Activity implements View.OnClickListener{
 
     private ImageButton common_title_back_btn;
-    private MyLogToast myLogToast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
