@@ -12,6 +12,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.io.File;
+
 import hy.cz.wfj.R;
 import hy.cz.wfj.utility.MyLogToast;
 
@@ -168,7 +170,32 @@ public class HomeFragment extends Fragment {
         webSettings.setAppCachePath(cacheDirPath);
         webSettings.setAppCacheEnabled(true);
     }
+    public void clearWebViewCache(){
 
+        //清理Webview缓存数据库
+        try {
+           getActivity().deleteDatabase("webview.db");
+            getActivity().deleteDatabase("webviewCache.db");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //WebView 缓存文件
+        File appCacheDir = new File(getActivity().getFilesDir().getAbsolutePath()+APP_CACAHE_DIRNAME);
+       myLogToast.mLog("appCacheDir path=" + appCacheDir.getAbsolutePath());
+
+        File webviewCacheDir = new File(getActivity().getCacheDir().getAbsolutePath()+"/webviewCache");
+       myLogToast.mLog("webviewCacheDir path="+webviewCacheDir.getAbsolutePath());
+
+        //删除webview 缓存目录
+        if(webviewCacheDir.exists()){
+            getActivity().deleteFile(webviewCacheDir.getName());
+        }
+        //删除webview 缓存 缓存目录
+        if(appCacheDir.exists()){
+            getActivity().deleteFile(appCacheDir.getName());
+        }
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

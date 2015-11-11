@@ -6,6 +6,8 @@ import android.net.NetworkInfo;
 
 /**
  * Created by feng on 2015/11/11.
+ * @discription:这个工具类的功能就是检测网络状态
+ * @note:使用这个类的必须要在androidmanifest.xml文件中添加 ACCESS_NETWORK_STATE 权限
  */
 public class NetUtility {
     /* 网络状态 */
