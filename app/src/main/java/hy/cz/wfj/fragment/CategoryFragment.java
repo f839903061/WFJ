@@ -98,36 +98,24 @@ public class CategoryFragment extends Fragment {
      *
      */
     private void getDataFromUri() {
-        String uri="http://192.168.10.181:8080/wfj_front/PhoneCategory?method=initType";
-//        String uri="https://192.168.10.181:8443/wfj_front/PhoneCategory?method=initType";
+        String uri="http://192.168.10.210:8080/wfj_front/phone/phonecategory.action?method=initType";
+//        String uri="https://192.168.10.210:8443/wfj_front/phone/phonecategory.action?method=initType";
 //        String uri="http://www.baidu.com/";
 
-//        RequestQueue queue= Volley.newRequestQueue(getActivity());
-//        StringRequest stringRequest=new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Log.i(TAG,getClass().getName()+"    successed:"+response.substring(0,5));
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.e(TAG,getClass().getName()+"    failed");
-//            }
-//        });
-//        queue.add(stringRequest);
-        //jsonobject conver USE request sigleton
-        JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, uri, new Response.Listener<JSONObject>() {
+        RequestQueue queue= Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONObject response) {
-                Log.i(TAG,getClass().getName().toString()+" fetch successed");
+            public void onResponse(String response) {
+                Log.i(TAG,getClass().getName()+"    successed:"+response.substring(0,5));
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG,getClass().getName().toString()+"    fetch failed!");
+                Log.e(TAG,getClass().getName()+"    failed");
             }
         });
-        MySingleton.getInstance(getActivity().getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+        queue.add(stringRequest);
+
     }
 
     /**
