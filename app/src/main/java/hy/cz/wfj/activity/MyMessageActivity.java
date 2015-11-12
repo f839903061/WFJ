@@ -36,7 +36,7 @@ public class MyMessageActivity extends Activity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.common_title_back_btn:
-                Intent gobackintent=new Intent(MyMessageActivity.this, Main2Activity.class);
+                Intent gobackintent=getIntent();
                 setResult(Activity.RESULT_OK,gobackintent);
                 finish();
                 break;

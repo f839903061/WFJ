@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
 
     <!--personal titile layout-->
@@ -44,242 +43,244 @@
 
     </RelativeLayout>
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:scrollbars="none"
-    android:overScrollMode="never">
-
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@drawable/personal_larger_divider_line"
-        android:orientation="vertical"
-        android:showDividers="middle"
-        android:background="@color/personal_scroll_background_color">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/personal_message_layout_dimen"
-            android:layout_below="@id/personal_title_layout"
-            android:background="@drawable/personal_info_bg_unlogin_pm">
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
 
-            <RelativeLayout
-                android:id="@+id/personal_avatar_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/personal_avatar_layout_dimen">
-
-                <ImageButton
-                    android:id="@+id/personal_unlogin_avatar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/personal_unlogin_avatar" />
-
-            </RelativeLayout>
-
-            <!--personal concern goods shop browsing-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@id/personal_avatar_layout"
-                android:layout_marginTop="@dimen/personal_concern_layout_dimen"
-                android:divider="@drawable/personal_concern_divider"
-                android:orientation="horizontal"
-                android:showDividers="middle">
-
-                <LinearLayout style="@style/concern_layout_style">
-
-                    <TextView
-                        android:id="@id/personal_goods_list"
-                        style="@style/personal_concern_list_style" />
-
-                    <TextView
-                        android:id="@id/personal_goods_list_title"
-                        style="@style/concern_list_title"
-                        android:text="@string/concern_goods_title" />
-
-                </LinearLayout>
-
-                <LinearLayout style="@style/concern_layout_style">
-
-                    <TextView
-                        android:id="@id/personal_shop_list"
-                        style="@style/personal_concern_list_style" />
-
-                    <TextView
-                        android:id="@id/personal_shop_list_title"
-                        style="@style/concern_list_title"
-                        android:text="@string/concern_shop_title" />
-
-                </LinearLayout>
-
-                <!--<LinearLayout style="@style/concern_layout_style">-->
-
-                    <!--<TextView-->
-                        <!--android:id="@id/personal_browsing_list"-->
-                        <!--style="@style/personal_concern_list_style" />-->
-
-                    <!--<TextView-->
-                        <!--android:id="@id/personal_browsing_list_title"-->
-                        <!--style="@style/concern_list_title"-->
-                        <!--android:text="@string/concern_browsing_title" />-->
-
-                <!--</LinearLayout>-->
-            </LinearLayout>
-        </RelativeLayout>
-        <!--personal order layout-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:divider="@drawable/divider_line"
+            android:background="@color/personal_scroll_background_color"
+            android:divider="@drawable/personal_larger_divider_line"
             android:orientation="vertical"
-            android:showDividers="middle|beginning|end">
+            android:showDividers="middle">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp">
+                android:layout_height="@dimen/personal_message_layout_dimen"
+                android:layout_below="@id/personal_title_layout"
+                android:background="@drawable/personal_info_bg_unlogin_pm">
 
 
-                <ImageView
-                    android:id="@id/order_icon"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/personal_avatar_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/personal_icon_order" />
+                    android:layout_marginTop="@dimen/personal_avatar_layout_dimen">
 
-                <TextView
-                    android:id="@id/order_text"
-                    android:layout_width="wrap_content"
+                    <ImageButton
+                        android:id="@+id/personal_unlogin_avatar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/personal_unlogin_avatar" />
+
+                </RelativeLayout>
+
+                <!--personal concern goods shop browsing-->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_toRightOf="@id/order_icon"
-                    android:text="@string/personal_my_order_txt" />
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@id/personal_avatar_layout"
+                    android:layout_marginTop="@dimen/personal_concern_layout_dimen"
+                    android:divider="@drawable/personal_concern_divider"
+                    android:orientation="horizontal"
+                    android:showDividers="middle">
 
-                <TextView
-                    android:id="@id/order_hint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:layout_toLeftOf="@id/order_arrow"
-                    android:text="@string/personal_my_order_hint_txt" />
+                    <LinearLayout
+                        android:id="@id/personal_goods_list_title"
+                        style="@style/concern_layout_style">
 
-                <ImageView
-                    android:id="@id/order_arrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/personal_icon_arrow" />
+                        <TextView
+                            android:id="@id/personal_goods_list"
+                            style="@style/personal_concern_list_style" />
 
+                        <TextView
+                            style="@style/concern_list_title"
+                            android:text="@string/concern_goods_title" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@id/personal_shop_list_title"
+                        style="@style/concern_layout_style">
+
+                        <TextView
+                            android:id="@id/personal_shop_list"
+                            style="@style/personal_concern_list_style" />
+
+                        <TextView
+                            style="@style/concern_list_title"
+                            android:text="@string/concern_shop_title" />
+
+                    </LinearLayout>
+
+                    <!--<LinearLayout style="@style/concern_layout_style">-->
+
+                    <!--<TextView-->
+                    <!--android:id="@id/personal_browsing_list"-->
+                    <!--style="@style/personal_concern_list_style" />-->
+
+                    <!--<TextView-->
+                    <!--android:id="@id/personal_browsing_list_title"-->
+                    <!--style="@style/concern_list_title"-->
+                    <!--android:text="@string/concern_browsing_title" />-->
+
+                    <!--</LinearLayout>-->
+                </LinearLayout>
             </RelativeLayout>
-
+            <!--personal order layout-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:divider="@drawable/divider_line"
+                android:orientation="vertical"
+                android:showDividers="middle|beginning|end">
 
-                <!--four relativelayout -->
-                <RelativeLayout style="@style/wait_layout_weight_style">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp">
 
-                    <ImageView
-                        android:id="@id/wait_for_payment_image"
-                        style="@style/personal_wait_image_style"
-                        android:src="@drawable/personal_icon_wait_for_payment" />
-
-                    <TextView
-                        android:id="@id/wait_for_payment_text_notify"
-                        style="@style/personal_notify_value_style"
-                        android:layout_alignTop="@id/wait_for_payment_image"
-                        android:layout_toRightOf="@id/wait_for_payment_image"
-                        tools:text="0"
-                        tools:visibility="visible" />
-
-                    <TextView
-                        android:id="@id/wait_for_payment_text"
-                        style="@style/personal_wait_text_style"
-                        android:layout_below="@id/wait_for_payment_image"
-                        android:text="@string/wait_pay" />
-                </RelativeLayout>
-
-                <RelativeLayout style="@style/wait_layout_weight_style">
 
                     <ImageView
-                        android:id="@id/wait_sign_in_image"
-                        style="@style/personal_wait_image_style"
-                        android:src="@drawable/personal_icon_wait_sign_in" />
+                        android:id="@id/order_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/personal_icon_order" />
 
                     <TextView
-                        android:id="@id/wait_sign_in_text_notify"
-                        style="@style/personal_notify_value_style"
-                        android:layout_alignTop="@id/wait_sign_in_image"
-                        android:layout_toRightOf="@id/wait_sign_in_image"
-                        tools:text="0"
-                        tools:visibility="visible" />
+                        android:id="@id/order_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@id/order_icon"
+                        android:text="@string/personal_my_order_txt" />
 
                     <TextView
-                        android:id="@id/wait_sign_in_text"
-                        style="@style/personal_wait_text_style"
-                        android:layout_below="@id/wait_sign_in_image"
-                        android:text="@string/wait_sign_in" />
-                </RelativeLayout>
-
-                <RelativeLayout style="@style/wait_layout_weight_style">
+                        android:id="@id/order_hint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@id/order_arrow"
+                        android:text="@string/personal_my_order_hint_txt" />
 
                     <ImageView
-                        android:id="@id/wait_comment_image"
-                        style="@style/personal_wait_image_style"
-                        android:src="@drawable/personal_icon_waiting_comment" />
+                        android:id="@id/order_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="15dp"
+                        android:src="@drawable/personal_icon_arrow" />
 
-                    <TextView
-                        android:id="@id/wait_sign_in_text_notify"
-                        style="@style/personal_notify_value_style"
-                        android:layout_alignTop="@id/wait_comment_image"
-                        android:layout_toRightOf="@id/wait_comment_image"
-                        tools:text="0"
-                        tools:visibility="visible" />
-
-                    <TextView
-                        android:id="@id/wait_for_payment_text"
-                        style="@style/personal_wait_text_style"
-                        android:layout_below="@id/wait_comment_image"
-                        android:text="@string/wait_comment" />
                 </RelativeLayout>
 
-                <RelativeLayout style="@style/wait_layout_weight_style">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@id/wait_order_after_sale_image"
-                        style="@style/personal_wait_image_style"
-                        android:src="@drawable/personal_icon_order_after_sale" />
+                    <!--four relativelayout -->
+                    <RelativeLayout style="@style/wait_layout_weight_style">
 
-                    <TextView
-                        android:id="@id/wait_sign_in_text_notify"
-                        style="@style/personal_notify_value_style"
-                        android:layout_alignTop="@id/wait_order_after_sale_image"
-                        android:layout_toRightOf="@id/wait_order_after_sale_image"
-                        tools:text="0"
-                        tools:visibility="visible" />
+                        <ImageView
+                            android:id="@id/wait_for_payment_image"
+                            style="@style/personal_wait_image_style"
+                            android:src="@drawable/personal_icon_wait_for_payment" />
 
-                    <TextView
-                        android:id="@id/wait_for_payment_text"
-                        style="@style/personal_wait_text_style"
-                        android:layout_below="@id/wait_order_after_sale_image"
-                        android:text="@string/wait_order_after_sale" />
-                </RelativeLayout>
+                        <TextView
+                            android:id="@id/wait_for_payment_text_notify"
+                            style="@style/personal_notify_value_style"
+                            android:layout_alignTop="@id/wait_for_payment_image"
+                            android:layout_toRightOf="@id/wait_for_payment_image"
+                            tools:text="0"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@id/wait_for_payment_text"
+                            style="@style/personal_wait_text_style"
+                            android:layout_below="@id/wait_for_payment_image"
+                            android:text="@string/wait_pay" />
+                    </RelativeLayout>
+
+                    <RelativeLayout style="@style/wait_layout_weight_style">
+
+                        <ImageView
+                            android:id="@id/wait_sign_in_image"
+                            style="@style/personal_wait_image_style"
+                            android:src="@drawable/personal_icon_wait_sign_in" />
+
+                        <TextView
+                            android:id="@id/wait_sign_in_text_notify"
+                            style="@style/personal_notify_value_style"
+                            android:layout_alignTop="@id/wait_sign_in_image"
+                            android:layout_toRightOf="@id/wait_sign_in_image"
+                            tools:text="0"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@id/wait_sign_in_text"
+                            style="@style/personal_wait_text_style"
+                            android:layout_below="@id/wait_sign_in_image"
+                            android:text="@string/wait_sign_in" />
+                    </RelativeLayout>
+
+                    <RelativeLayout style="@style/wait_layout_weight_style">
+
+                        <ImageView
+                            android:id="@id/wait_comment_image"
+                            style="@style/personal_wait_image_style"
+                            android:src="@drawable/personal_icon_waiting_comment" />
+
+                        <TextView
+                            android:id="@id/wait_sign_in_text_notify"
+                            style="@style/personal_notify_value_style"
+                            android:layout_alignTop="@id/wait_comment_image"
+                            android:layout_toRightOf="@id/wait_comment_image"
+                            tools:text="0"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@id/wait_for_payment_text"
+                            style="@style/personal_wait_text_style"
+                            android:layout_below="@id/wait_comment_image"
+                            android:text="@string/wait_comment" />
+                    </RelativeLayout>
+
+                    <RelativeLayout style="@style/wait_layout_weight_style">
+
+                        <ImageView
+                            android:id="@id/wait_order_after_sale_image"
+                            style="@style/personal_wait_image_style"
+                            android:src="@drawable/personal_icon_order_after_sale" />
+
+                        <TextView
+                            android:id="@id/wait_sign_in_text_notify"
+                            style="@style/personal_notify_value_style"
+                            android:layout_alignTop="@id/wait_order_after_sale_image"
+                            android:layout_toRightOf="@id/wait_order_after_sale_image"
+                            tools:text="0"
+                            tools:visibility="visible" />
+
+                        <TextView
+                            android:id="@id/wait_for_payment_text"
+                            style="@style/personal_wait_text_style"
+                            android:layout_below="@id/wait_order_after_sale_image"
+                            android:text="@string/wait_order_after_sale" />
+                    </RelativeLayout>
+                </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
-
-        <!--personal wallet entire layout-->
-        <!--<LinearLayout-->
+            <!--personal wallet entire layout-->
+            <!--<LinearLayout-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content"-->
             <!--android:divider="@drawable/divider_line"-->
@@ -287,163 +288,163 @@
             <!--android:showDividers="middle|beginning|end">-->
 
             <!--<RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="15dp"-->
-                <!--android:layout_marginTop="15dp">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="15dp"-->
+            <!--android:layout_marginTop="15dp">-->
 
 
-                <!--<ImageView-->
-                    <!--android:id="@id/wallet_icon"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="15dp"-->
-                    <!--android:src="@drawable/personal_icon_pocket" />-->
+            <!--<ImageView-->
+            <!--android:id="@id/wallet_icon"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:src="@drawable/personal_icon_pocket" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/wallet_text"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="15dp"-->
-                    <!--android:layout_toRightOf="@id/wallet_icon"-->
-                    <!--android:text="@string/personal_my_wallet_txt" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/wallet_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_toRightOf="@id/wallet_icon"-->
+            <!--android:text="@string/personal_my_wallet_txt" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@id/wallet_hint"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginRight="8dp"-->
-                    <!--android:layout_toLeftOf="@id/wallet_arrow"-->
-                    <!--android:text="@string/personal_my_wallet_hint_txt" />-->
+            <!--<TextView-->
+            <!--android:id="@id/wallet_hint"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:layout_toLeftOf="@id/wallet_arrow"-->
+            <!--android:text="@string/personal_my_wallet_hint_txt" />-->
 
-                <!--<ImageView-->
-                    <!--android:id="@id/wallet_arrow"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_marginRight="15dp"-->
-                    <!--android:src="@drawable/personal_icon_arrow" />-->
+            <!--<ImageView-->
+            <!--android:id="@id/wallet_arrow"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:src="@drawable/personal_icon_arrow" />-->
 
             <!--</RelativeLayout>-->
 
             <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
 
-                <!--&lt;!&ndash;four relativelayout &ndash;&gt;-->
-                <!--<RelativeLayout style="@style/wait_layout_weight_style">-->
-
-
-                    <!--<TextView-->
-                        <!--android:id="@id/wallet_balance_v"-->
-                        <!--style="@style/personal_wallet_value_style"-->
-                        <!--android:text="0.00" />-->
-
-                    <!--<TextView-->
-                        <!--android:id="@id/wallet_balance_t"-->
-                        <!--style="@style/personal_wait_text_style"-->
-                        <!--android:layout_below="@id/wallet_balance_v"-->
-                        <!--android:text="@string/wallet_balance_t" />-->
-                <!--</RelativeLayout>-->
-
-                <!--<RelativeLayout style="@style/wait_layout_weight_style">-->
+            <!--&lt;!&ndash;four relativelayout &ndash;&gt;-->
+            <!--<RelativeLayout style="@style/wait_layout_weight_style">-->
 
 
-                    <!--<TextView-->
-                        <!--android:id="@id/wallet_youhuiquan_v"-->
-                        <!--style="@style/personal_wallet_value_style"-->
-                        <!--android:text="0" />-->
+            <!--<TextView-->
+            <!--android:id="@id/wallet_balance_v"-->
+            <!--style="@style/personal_wallet_value_style"-->
+            <!--android:text="0.00" />-->
 
-                    <!--<TextView-->
-                        <!--android:id="@id/wallet_youhuiquan_t"-->
-                        <!--style="@style/personal_wait_text_style"-->
-                        <!--android:layout_below="@id/wallet_youhuiquan_v"-->
-                        <!--android:text="@string/wallet_coupon_t" />-->
-                <!--</RelativeLayout>-->
+            <!--<TextView-->
+            <!--android:id="@id/wallet_balance_t"-->
+            <!--style="@style/personal_wait_text_style"-->
+            <!--android:layout_below="@id/wallet_balance_v"-->
+            <!--android:text="@string/wallet_balance_t" />-->
+            <!--</RelativeLayout>-->
 
-                <!--<RelativeLayout style="@style/wait_layout_weight_style">-->
-
-
-                    <!--<TextView-->
-                        <!--android:id="@id/wallet_dou_v"-->
-                        <!--style="@style/personal_wallet_value_style"-->
-                        <!--android:text="0" />-->
-
-                    <!--<TextView-->
-                        <!--android:id="@id/wallet_dou_t"-->
-                        <!--style="@style/personal_wait_text_style"-->
-                        <!--android:layout_below="@id/wallet_dou_v"-->
-                        <!--android:text="@string/wallet_dou_t" />-->
-                <!--</RelativeLayout>-->
-
-                <!--<RelativeLayout style="@style/wait_layout_weight_style">-->
+            <!--<RelativeLayout style="@style/wait_layout_weight_style">-->
 
 
-                    <!--<TextView-->
-                        <!--android:id="@id/wallet_card_v"-->
-                        <!--style="@style/personal_wallet_value_style"-->
-                        <!--android:text="0" />-->
+            <!--<TextView-->
+            <!--android:id="@id/wallet_youhuiquan_v"-->
+            <!--style="@style/personal_wallet_value_style"-->
+            <!--android:text="0" />-->
 
-                    <!--<TextView-->
-                        <!--android:id="@id/wallet_card_t"-->
-                        <!--style="@style/personal_wait_text_style"-->
-                        <!--android:layout_below="@id/wallet_card_v"-->
-                        <!--android:text="@string/wallet_card_t" />-->
-                <!--</RelativeLayout>-->
+            <!--<TextView-->
+            <!--android:id="@id/wallet_youhuiquan_t"-->
+            <!--style="@style/personal_wait_text_style"-->
+            <!--android:layout_below="@id/wallet_youhuiquan_v"-->
+            <!--android:text="@string/wallet_coupon_t" />-->
+            <!--</RelativeLayout>-->
+
+            <!--<RelativeLayout style="@style/wait_layout_weight_style">-->
+
+
+            <!--<TextView-->
+            <!--android:id="@id/wallet_dou_v"-->
+            <!--style="@style/personal_wallet_value_style"-->
+            <!--android:text="0" />-->
+
+            <!--<TextView-->
+            <!--android:id="@id/wallet_dou_t"-->
+            <!--style="@style/personal_wait_text_style"-->
+            <!--android:layout_below="@id/wallet_dou_v"-->
+            <!--android:text="@string/wallet_dou_t" />-->
+            <!--</RelativeLayout>-->
+
+            <!--<RelativeLayout style="@style/wait_layout_weight_style">-->
+
+
+            <!--<TextView-->
+            <!--android:id="@id/wallet_card_v"-->
+            <!--style="@style/personal_wallet_value_style"-->
+            <!--android:text="0" />-->
+
+            <!--<TextView-->
+            <!--android:id="@id/wallet_card_t"-->
+            <!--style="@style/personal_wait_text_style"-->
+            <!--android:layout_below="@id/wallet_card_v"-->
+            <!--android:text="@string/wallet_card_t" />-->
+            <!--</RelativeLayout>-->
             <!--</LinearLayout>-->
 
-        <!--</LinearLayout>-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@drawable/divider_line"
-            android:orientation="vertical"
-            android:showDividers="middle|beginning|end">
-
-            <RelativeLayout
+            <!--</LinearLayout>-->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp">
+                android:divider="@drawable/divider_line"
+                android:orientation="vertical"
+                android:showDividers="middle|beginning|end">
 
-
-                <ImageView
-                    android:id="@id/service_icon"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/personal_icon_service" />
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp">
 
-                <TextView
-                    android:id="@id/service_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_toRightOf="@id/service_icon"
-                    android:text="@string/personal_my_service_txt" />
 
-                <TextView
-                    android:id="@id/service_hint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:layout_toLeftOf="@id/service_arrow"
-                    android:text="@string/personal_my_service_feedback_hint_txt" />
+                    <ImageView
+                        android:id="@id/service_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/personal_icon_service" />
 
-                <ImageView
-                    android:id="@id/service_arrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/personal_icon_arrow" />
+                    <TextView
+                        android:id="@id/service_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@id/service_icon"
+                        android:text="@string/personal_my_service_txt" />
 
-            </RelativeLayout>
+                    <TextView
+                        android:id="@id/service_hint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@id/service_arrow"
+                        android:text="@string/personal_my_service_feedback_hint_txt" />
 
+                    <ImageView
+                        android:id="@id/service_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="15dp"
+                        android:src="@drawable/personal_icon_arrow" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
 </LinearLayout>

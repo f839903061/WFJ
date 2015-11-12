@@ -40,7 +40,7 @@ public class MySettingsActivity extends Activity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.common_title_back_btn:
-                Intent gobackIntent=new Intent(MySettingsActivity.this,Main2Activity.class);
+                Intent gobackIntent=getIntent();
                 setResult(Activity.RESULT_OK,gobackIntent);
                 finish();
                 break;

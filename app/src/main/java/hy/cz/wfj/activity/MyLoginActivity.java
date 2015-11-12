@@ -36,9 +36,12 @@ public class MyLoginActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.common_title_back_btn:
-                Intent intent=new Intent(MyLoginActivity.this, Main2Activity.class);
+                Intent intent=getIntent();
                 setResult(Activity.RESULT_OK,intent);
                 finish();
+                break;
+            default:
+                break;
         }
     }
 }

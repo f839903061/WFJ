@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.RadioGroup;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -30,6 +32,7 @@ public class Main2Activity extends Activity implements
     public static final String CATEGORY_FRAGMENT_TAG = "category_fragment";
     public static final String CART_FRAGMENT_TAG = "cart_fragment";
     public static final String PERSONAL_FRAGMENT_TAG = "personal_fragment";
+    public static final String TAG = "fengluchun";
 
     private RadioGroup mRadioGroup;
 
@@ -152,14 +155,6 @@ public class Main2Activity extends Activity implements
     public void onFragmentInteraction(Uri uri) {
 
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PersonalFragment.LOGIN_REQUEST_CODE) {
-        }
-    }
-
 
     @Override
     protected void onDestroy() {

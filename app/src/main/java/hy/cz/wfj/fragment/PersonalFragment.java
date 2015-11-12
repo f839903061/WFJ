@@ -3,19 +3,22 @@ package hy.cz.wfj.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import hy.cz.wfj.R;
 import hy.cz.wfj.activity.MyLoginActivity;
 import hy.cz.wfj.activity.MyMessageActivity;
 import hy.cz.wfj.activity.MySettingsActivity;
+import hy.cz.wfj.utility.SharedPrefUtility;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,27 +26,29 @@ import hy.cz.wfj.activity.MySettingsActivity;
  * {@link PersonalFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class PersonalFragment extends Fragment implements View.OnClickListener{
+public class PersonalFragment extends Fragment implements View.OnClickListener {
 
     public static final int LOGIN_REQUEST_CODE = 1;
     public static final int SETTINGS_REQUEST_CODE = 2;
     public static final int MESSAGE_REQUEST_CODE = 3;
+    public static final String TAG = "fengluchun";
     private View rootView;
     private ImageButton avatarImage;
     private ImageButton settingsImage;
     private ImageButton messageImage;
 
-    private TextView concern_goods_tv;
-    private TextView concern_shop_tv;
+    private LinearLayout concern_goods_layout;
+    private LinearLayout concern_shop_layout;
 //    private TextView concern_browser_tv;
 
     private OnFragmentInteractionListener mListener;
 
     private static PersonalFragment personalFragment;
+    public static Boolean isLogin = false;
 
-    public static synchronized PersonalFragment getInstance(){
-        if (personalFragment==null){
-            personalFragment=new PersonalFragment();
+    public static synchronized PersonalFragment getInstance() {
+        if (personalFragment == null) {
+            personalFragment = new PersonalFragment();
         }
         return personalFragment;
     }
@@ -52,6 +57,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
         PersonalFragment fragment = new PersonalFragment();
         return fragment;
     }
+
     public PersonalFragment() {
         // Required empty public constructor
     }
@@ -61,18 +67,20 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView=inflater.inflate(R.layout.fragment_personal, container, false);
+        rootView = inflater.inflate(R.layout.fragment_personal, container, false);
         initializeComponent();
         return rootView;
     }
 
     private void initializeComponent() {
-        avatarImage=(ImageButton)rootView.findViewById(R.id.personal_unlogin_avatar);
-        settingsImage=(ImageButton)rootView.findViewById(R.id.personal_setting);
-        messageImage=(ImageButton)rootView.findViewById(R.id.personal_common_message);
+        isLogin = (Boolean) SharedPrefUtility.getParam(getActivity(), "isLogin", false);
 
-        concern_goods_tv=(TextView)rootView.findViewById(R.id.personal_goods_list_title);
-        concern_shop_tv=(TextView)rootView.findViewById(R.id.personal_shop_list_title);
+        avatarImage = (ImageButton) rootView.findViewById(R.id.personal_unlogin_avatar);
+        settingsImage = (ImageButton) rootView.findViewById(R.id.personal_setting);
+        messageImage = (ImageButton) rootView.findViewById(R.id.personal_common_message);
+
+        concern_goods_layout = (LinearLayout) rootView.findViewById(R.id.personal_goods_list_title);
+        concern_shop_layout = (LinearLayout) rootView.findViewById(R.id.personal_shop_list_title);
 //        concern_browser_tv=(TextView)rootView.findViewById(R.id.personal_browsing_list_title);
 
 
@@ -87,8 +95,8 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
         settingsImage.setOnClickListener(this);
         messageImage.setOnClickListener(this);
 
-        concern_goods_tv.setOnClickListener(this);
-        concern_shop_tv.setOnClickListener(this);
+        concern_goods_layout.setOnClickListener(this);
+        concern_shop_layout.setOnClickListener(this);
 //        concern_browser_tv.setOnClickListener(this);
     }
 
@@ -117,36 +125,63 @@ public class PersonalFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.personal_unlogin_avatar:
-                Intent intent_login=new Intent(getActivity(), MyLoginActivity.class);
-                startActivityForResult(intent_login, LOGIN_REQUEST_CODE);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case SETTINGS_REQUEST_CODE:
+
                 break;
-            case R.id.personal_setting:
-                Intent intent_settings=new Intent(getActivity(), MySettingsActivity.class);
-                startActivityForResult(intent_settings, SETTINGS_REQUEST_CODE);
+            case LOGIN_REQUEST_CODE:
+                Log.d(TAG,getClass().getName()+"    login");
                 break;
-            case R.id.personal_common_message:
-                Intent intent_message=new Intent(getActivity(), MyMessageActivity.class);
-                startActivityForResult(intent_message, MESSAGE_REQUEST_CODE);
+            case MESSAGE_REQUEST_CODE:
+
                 break;
-            //concern incident
-            case R.id.personal_goods_list_title:
-                myToast("goods");
-                break;
-            case R.id.personal_shop_list_title:
-                myToast("shop");
-                break;
-//            case R.id.personal_browsing_list_title:
-//                myToast("browser");
             default:
                 break;
         }
     }
-    private void myToast(String text) {
-        Toast.makeText(getActivity().getApplicationContext(),"->"+text+"<-",Toast.LENGTH_SHORT).show();
+
+    @Override
+    public void onClick(View v) {
+
+        if (v.getId() == R.id.personal_setting) {
+            Intent intent_settings = new Intent(getActivity(), MySettingsActivity.class);
+            startActivityForResult(intent_settings, SETTINGS_REQUEST_CODE);
+        } else {
+            if (!isLogin) {
+                Intent goLoginIntent = new Intent(getActivity(), MyLoginActivity.class);
+                startActivityForResult(goLoginIntent, LOGIN_REQUEST_CODE);
+            } else {
+                switch (v.getId()) {
+                    case R.id.personal_unlogin_avatar:
+                        myToast("avatar");
+                        break;
+
+                    case R.id.personal_common_message:
+                        Intent intent_message = new Intent(getActivity(), MyMessageActivity.class);
+                        startActivityForResult(intent_message, MESSAGE_REQUEST_CODE);
+                        break;
+                    //concern incident
+                    case R.id.personal_goods_list_title:
+                        myToast("goods");
+                        break;
+                    case R.id.personal_shop_list_title:
+                        myToast("shop");
+                        break;
+//            case R.id.personal_browsing_list_title:
+//                myToast("browser");
+
+                }
+            }
+        }
+
     }
+
+    private void myToast(String text) {
+        Toast.makeText(getActivity().getApplicationContext(), "->" + text + "<-", Toast.LENGTH_SHORT).show();
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
