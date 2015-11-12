@@ -38,5 +38,6 @@
     <dimen name="login_comfirm_button_margin_top">13.0dip</dimen>
     <dimen name="register_link_text_size">15.0sp</dimen>
     <dimen name="common_title_right_text_size">15.0sp</dimen>
+    <dimen name="btn_corner_radius">5.0dp</dimen>
 
 </resources>
