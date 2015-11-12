@@ -16,9 +16,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.drawee.backends.pipeline.Fresco;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -26,6 +29,7 @@ import hy.cz.wfj.R;
 import hy.cz.wfj.adapter.LeftListAdapter;
 import hy.cz.wfj.adapter.RightListAdapter;
 import hy.cz.wfj.data.CategoryListObject;
+import hy.cz.wfj.utility.MySingleton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -90,24 +94,40 @@ public class CategoryFragment extends Fragment {
         setAdapter();
     }
 
+    /**
+     *
+     */
     private void getDataFromUri() {
-        RequestQueue queue= Volley.newRequestQueue(getActivity());
         String uri="http://192.168.10.181:8080/wfj_front/PhoneCategory?method=initType";
 //        String uri="https://192.168.10.181:8443/wfj_front/PhoneCategory?method=initType";
 //        String uri="http://www.baidu.com/";
 
-        StringRequest stringRequest=new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+//        RequestQueue queue= Volley.newRequestQueue(getActivity());
+//        StringRequest stringRequest=new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                Log.i(TAG,getClass().getName()+"    successed:"+response.substring(0,5));
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.e(TAG,getClass().getName()+"    failed");
+//            }
+//        });
+//        queue.add(stringRequest);
+        //jsonobject conver USE request sigleton
+        JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, uri, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
-                Log.i(TAG,getClass().getName()+"    successed:"+response.substring(0,5));
+            public void onResponse(JSONObject response) {
+                Log.i(TAG,getClass().getName().toString()+" fetch successed");
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG,getClass().getName()+"    failed");
+                Log.e(TAG,getClass().getName().toString()+"    fetch failed!");
             }
         });
-        queue.add(stringRequest);
+        MySingleton.getInstance(getActivity().getApplicationContext()).addToRequestQueue(jsonObjectRequest);
     }
 
     /**
