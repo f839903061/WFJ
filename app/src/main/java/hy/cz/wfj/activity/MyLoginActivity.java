@@ -23,21 +23,23 @@ public class MyLoginActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_my_login);
 
         initializeComponent();
-
+        setListener();
     }
 
     private void initializeComponent() {
         mBackBtn=(ImageButton)this.findViewById(R.id.common_title_back_btn);
 
-        mBackBtn.setOnClickListener(this);
     }
+    private void setListener() {
+        mBackBtn.setOnClickListener(this);
 
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.common_title_back_btn:
                 Intent intent=getIntent();
-                setResult(Activity.RESULT_OK,intent);
+                setResult(Activity.RESULT_OK, intent);
                 finish();
                 break;
             default:

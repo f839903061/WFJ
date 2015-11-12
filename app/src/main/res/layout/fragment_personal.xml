@@ -143,6 +143,7 @@
                 android:showDividers="middle|beginning|end">
 
                 <RelativeLayout
+                    android:id="@id/order_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
@@ -188,7 +189,9 @@
                     android:orientation="horizontal">
 
                     <!--four relativelayout -->
-                    <RelativeLayout style="@style/wait_layout_weight_style">
+                    <RelativeLayout
+                        android:id="@id/wait_for_payment_layout"
+                        style="@style/wait_layout_weight_style">
 
                         <ImageView
                             android:id="@id/wait_for_payment_image"
@@ -210,7 +213,9 @@
                             android:text="@string/wait_pay" />
                     </RelativeLayout>
 
-                    <RelativeLayout style="@style/wait_layout_weight_style">
+                    <RelativeLayout
+                        android:id="@id/wait_sign_in_layout"
+                        style="@style/wait_layout_weight_style">
 
                         <ImageView
                             android:id="@id/wait_sign_in_image"
@@ -232,7 +237,9 @@
                             android:text="@string/wait_sign_in" />
                     </RelativeLayout>
 
-                    <RelativeLayout style="@style/wait_layout_weight_style">
+                    <RelativeLayout
+                        android:id="@id/wait_comment_layout"
+                        style="@style/wait_layout_weight_style">
 
                         <ImageView
                             android:id="@id/wait_comment_image"
@@ -254,7 +261,9 @@
                             android:text="@string/wait_comment" />
                     </RelativeLayout>
 
-                    <RelativeLayout style="@style/wait_layout_weight_style">
+                    <RelativeLayout
+                        android:id="@id/wait_order_after_sale_layout"
+                        style="@style/wait_layout_weight_style">
 
                         <ImageView
                             android:id="@id/wait_order_after_sale_image"
@@ -396,6 +405,7 @@
 
             <!--</LinearLayout>-->
             <LinearLayout
+                android:id="@id/service_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@drawable/divider_line"

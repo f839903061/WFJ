@@ -37,22 +37,27 @@
     <item name="service_text" type="id"/>
     <item name="service_hint" type="id"/>
     <item name="service_arrow" type="id"/>
+    <item name="service_layout" type="id"/>
 
     <!--person wait id-->
     <item name="wait_for_payment_image" type="id"/>
     <item name="wait_for_payment_text" type="id"/>
+    <item name="wait_for_payment_layout" type="id"/>
     <item name="wait_for_payment_text_notify" type="id"/>
 
     <item name="wait_sign_in_image" type="id"/>
     <item name="wait_sign_in_text" type="id"/>
+    <item name="wait_sign_in_layout" type="id"/>
     <item name="wait_sign_in_text_notify" type="id"/>
 
     <item name="wait_comment_image" type="id"/>
     <item name="wait_comment_text" type="id"/>
+    <item name="wait_comment_layout" type="id"/>
     <item name="wait_comment_text_notify" type="id"/>
 
     <item name="wait_order_after_sale_image" type="id"/>
     <item name="wait_order_after_sale_text" type="id"/>
+    <item name="wait_order_after_sale_layout" type="id"/>
     <item name="wait_order_after_sale_text_notify" type="id"/>
 
     <!--personal wallet id-->
@@ -151,4 +156,5 @@
     <item name="more_update_msg" type="id" />
     <item name="more_arrow" type="id" />
     <item name="message_box_list" type="id" />
+    <item name="order_layout" type="id" />
 </resources>
