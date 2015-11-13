@@ -35,6 +35,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
     public static final int SETTINGS_REQUEST_CODE = 2;
     public static final int MESSAGE_REQUEST_CODE = 3;
     public static final String TAG = "fengluchun";
+    public static final String IS_LOGIN = "isLogin";
     private View rootView;
     private ImageButton avatarImage;
     private ImageButton settingsImage;
@@ -87,7 +88,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
      * 初始化组件
      */
     private void initializeComponent() {
-        isLogin = (Boolean) SharedPrefUtility.getParam(getActivity(), "isLogin", false);
+        isLogin = (Boolean) SharedPrefUtility.getParam(getActivity(), IS_LOGIN, false);
         //初始化头像
         avatarImage = (ImageButton) rootView.findViewById(R.id.personal_unlogin_avatar);
         settingsImage = (ImageButton) rootView.findViewById(R.id.personal_setting);
@@ -218,6 +219,12 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        isLogin= (Boolean) SharedPrefUtility.getParam(getActivity(), IS_LOGIN, false);
     }
 
     @Override

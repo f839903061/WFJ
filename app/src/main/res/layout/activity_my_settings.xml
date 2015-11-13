@@ -64,5 +64,19 @@
                 android:id="@id/more_arrow"
                 style="@style/more_native_setting_arrow_style" />
         </RelativeLayout>
+        <Button
+            android:id="@id/logout_comfirm_button"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/login_comfirm_button_height"
+            android:layout_below="@id/login_editor_layout"
+            android:layout_marginLeft="@dimen/login_comfirm_button_margin_top"
+            android:layout_marginRight="@dimen/login_comfirm_button_margin_top"
+            android:layout_marginTop="@dimen/login_comfirm_button_margin_top"
+            android:background="@drawable/login_btn_background"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="@string/logout"
+            android:textColor="@color/white"
+            android:textSize="@dimen/login_comfirm_button_text_size" />
     </LinearLayout>
 </LinearLayout>

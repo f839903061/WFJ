@@ -16,12 +16,14 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 
 import hy.cz.wfj.Main2Activity;
 import hy.cz.wfj.R;
+import hy.cz.wfj.utility.SharedPrefUtility;
 
 public class MyLoginActivity extends Activity implements View.OnClickListener {
 
     public static final String TAG = "fengluchun";
     public static final String NAME_PASS_CANNOT_NULL = "用户名或者密码不能为空";
     public static final String ENTER_ERROR = "输入有问题";
+    public static final String IS_LOGIN = "isLogin";
 
     private ImageButton mBackBtn;
     private EditText login_input_name;
@@ -66,9 +68,14 @@ public class MyLoginActivity extends Activity implements View.OnClickListener {
                     Toast.makeText(getApplicationContext(), NAME_PASS_CANNOT_NULL,Toast.LENGTH_SHORT).show();
                 }else if (!name.equals("")&&!password.equals("")){
                     Toast.makeText(getApplicationContext(),"你输入的"+name+":"+password,Toast.LENGTH_SHORT).show();
+                    Intent intent1=getIntent();
+                    SharedPrefUtility.setParam(getApplicationContext(), IS_LOGIN,true);
+                    setResult(Activity.RESULT_OK,intent1);
+                    finish();
                 }else {
                     Toast.makeText(getApplicationContext(), ENTER_ERROR,Toast.LENGTH_SHORT).show();
                 }
+                break;
             default:
                 break;
         }

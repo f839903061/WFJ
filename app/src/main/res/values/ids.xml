@@ -157,4 +157,5 @@
     <item name="more_arrow" type="id" />
     <item name="message_box_list" type="id" />
     <item name="order_layout" type="id" />
+    <item name="logout_comfirm_button" type="id" />
 </resources>
