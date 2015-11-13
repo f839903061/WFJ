@@ -88,22 +88,8 @@ public class CategoryFragment extends Fragment {
         Fresco.initialize(getActivity().getApplicationContext());
         rootView = inflater.inflate(R.layout.fragment_category, container, false);
         initializeCompoment();
-        loadData();
-        return rootView;
-    }
-
-    /**
-     * load data and set listview adapter
-     */
-    private void loadData() {
         getDataFromUri();
-        for (int i = 0; i < 40; i++) {
-            CategoryListObject categoryListObject = new CategoryListObject();
-            categoryListObject.setName("大分类" + i);
-            mCategoryObjectList.add(categoryListObject);
-        }
-
-//        setAdapter();
+        return rootView;
     }
 
     /**
@@ -170,11 +156,10 @@ public class CategoryFragment extends Fragment {
                 mleftListAdapter.setSelect(position);
                 view.setBackgroundColor(Color.WHITE);
                 //刷新右侧的列表
-//                mRightList.clear();
-//                tempRightList=mLeftList.get(position).getChildProductType();
-//                Log.i(TAG, "-------------" + mRightList.size());
-//                mrightListAdapter.notifyDataSetChanged();
-//                Log.i(TAG,"右侧该变了");
+                mRightList.clear();
+                mLeftList.get(position).getChildProductType();
+                mRightList.addAll(mLeftList.get(position).getChildProductType());
+                mrightListAdapter.notifyDataSetChanged();
             }
         });
     }
