@@ -9,20 +9,23 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import hy.cz.wfj.R;
 import hy.cz.wfj.data.CategoryListObject;
+import hy.cz.wfj.data.CategroyJsonObject;
 
 /**
  * 适配分类界面的左边的listview
  * Created by feng on 2015/10/27.
  */
 public class LeftListAdapter extends BaseAdapter {
-    private ArrayList<CategoryListObject> mList =null;
+//    private ArrayList<CategoryListObject> mList =null;
+    private List<CategroyJsonObject.DataEntity> mList=null;
     private LayoutInflater mInflater=null;
     private int select=-1;
 
-    public LeftListAdapter(Context pcontext,ArrayList<CategoryListObject> plist) {
+    public LeftListAdapter(Context pcontext,List<CategroyJsonObject.DataEntity> plist) {
         mList =plist;
         mInflater=LayoutInflater.from(pcontext);
     }
@@ -61,7 +64,7 @@ public class LeftListAdapter extends BaseAdapter {
         }else {
             viewHolder=(ViewHolder)convertView.getTag();
         }
-        viewHolder.textView.setText(mList.get(position).getName());
+        viewHolder.textView.setText(mList.get(position).getCategoryDescription());
         if (select==position)
         {
             viewHolder.textView.setTextColor(Color.rgb(241, 87, 87));

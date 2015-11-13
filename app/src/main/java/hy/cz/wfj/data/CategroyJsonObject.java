@@ -1,11 +1,12 @@
 package hy.cz.wfj.data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by feng on 2015/11/10.
  */
-public class CategroyJsonObject {
+public class CategroyJsonObject implements Serializable{
 
 
     /**

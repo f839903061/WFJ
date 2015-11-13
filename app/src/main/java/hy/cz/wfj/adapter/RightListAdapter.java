@@ -8,22 +8,24 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import hy.cz.wfj.R;
 import hy.cz.wfj.customview.MyGridView;
 import hy.cz.wfj.data.CategoryListObject;
+import hy.cz.wfj.data.CategroyJsonObject;
 
 /**
  * 分类界面的右边的listview的适配器
  * Created by feng on 2015/10/27.
  */
 public class RightListAdapter extends BaseAdapter {
-    private ArrayList<CategoryListObject> mList = null;
+    private List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> mList = null;
     private LayoutInflater mInflater = null;
     private Context mContext;
 
-    public RightListAdapter(Context pcontext, ArrayList<CategoryListObject> plist) {
-        mContext=pcontext;
+    public RightListAdapter(Context pcontext, List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> plist) {
+        mContext = pcontext;
         mList = plist;
         mInflater = LayoutInflater.from(pcontext);
     }
@@ -51,18 +53,18 @@ public class RightListAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.category_right_list_item, null);
             viewHolder.textView = (TextView) convertView.findViewById(R.id.right_item_title);
             viewHolder.myGridView = (MyGridView) convertView.findViewById(R.id.category_right_grid);
-            RightGridAdapter rightGridAdapter=new RightGridAdapter(mContext);
+            RightGridAdapter rightGridAdapter = new RightGridAdapter(mContext);
             viewHolder.myGridView.setAdapter(rightGridAdapter);
 
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.textView.setText(mList.get(position).getName());
+        viewHolder.textView.setText(mList.get(position).getCategoryDescription());
         return convertView;
     }
 
-    public class ViewHolder{
+    public class ViewHolder {
         TextView textView;
         MyGridView myGridView;
     }

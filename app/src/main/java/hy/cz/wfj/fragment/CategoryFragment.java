@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.alibaba.fastjson.JSON;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,12 +24,17 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 
 import org.json.JSONObject;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 import hy.cz.wfj.R;
 import hy.cz.wfj.adapter.LeftListAdapter;
 import hy.cz.wfj.adapter.RightListAdapter;
 import hy.cz.wfj.data.CategoryListObject;
+import hy.cz.wfj.data.CategroyJsonObject;
 import hy.cz.wfj.utility.MySingleton;
 
 /**
@@ -40,9 +46,12 @@ import hy.cz.wfj.utility.MySingleton;
 public class CategoryFragment extends Fragment {
 
     public static final String TAG = "fengluchun";
+    public static final String RECEIVER_NULL_ERROR = " 网络联通，接收数据却为空";
+    public static final String HTTP_CONNECT_FAILED = " HTTP连接失败";
+    public static final String PARSE_ERROR = "解析出问题了";
     private OnFragmentInteractionListener mListener;
 
-    private static CategoryFragment categoryFragment=null;
+    private static CategoryFragment categoryFragment = null;
 
     private View rootView;
     private ListView mLeftListView;
@@ -52,14 +61,17 @@ public class CategoryFragment extends Fragment {
     private RightListAdapter mrightListAdapter;
     //all category object
     private ArrayList<CategoryListObject> mCategoryObjectList;
+    private List<CategroyJsonObject.DataEntity> mLeftList;
+    private List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> mRightList;
+    private List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> tempRightList;
 
-    
-    public static synchronized CategoryFragment getInstance(){
-        if (categoryFragment==null){
-            categoryFragment=new CategoryFragment();
+    public static synchronized CategoryFragment getInstance() {
+        if (categoryFragment == null) {
+            categoryFragment = new CategoryFragment();
         }
         return categoryFragment;
     }
+
     public CategoryFragment() {
         // Required empty public constructor
     }
@@ -74,7 +86,7 @@ public class CategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Fresco.initialize(getActivity().getApplicationContext());
-        rootView=inflater.inflate(R.layout.fragment_category, container, false);
+        rootView = inflater.inflate(R.layout.fragment_category, container, false);
         initializeCompoment();
         loadData();
         return rootView;
@@ -86,32 +98,49 @@ public class CategoryFragment extends Fragment {
     private void loadData() {
         getDataFromUri();
         for (int i = 0; i < 40; i++) {
-            CategoryListObject categoryListObject=new CategoryListObject();
-            categoryListObject.setName("大分类"+i);
+            CategoryListObject categoryListObject = new CategoryListObject();
+            categoryListObject.setName("大分类" + i);
             mCategoryObjectList.add(categoryListObject);
         }
 
-        setAdapter();
+//        setAdapter();
     }
 
     /**
      * 从服务器端获取分类列表数据
      */
     private void getDataFromUri() {
-        String uri="http://192.168.10.210:8080/wfj_front/phone/phonecategory.action?method=initType";
-//        String uri="https://192.168.10.210:8443/wfj_front/phone/phonecategory.action?method=initType";
+        //severlet version
+//        String uri="http://192.168.10.210:8080/wfj_front/phone/phonecategory?method=initType";
+        //action version
+        String uri = "http://192.168.10.210:8080/wfj_front/phone/phonecategory.action?method=initType";
 //        String uri="http://www.baidu.com/";
 
-        RequestQueue queue= Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest=new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i(TAG,getClass().getName()+"    successed:"+response.substring(0,5));
+                //通过Json工具类将接收到的response 数据从json反序列为实体对象
+                CategroyJsonObject jsonObject = JSON.parseObject(response, CategroyJsonObject.class);
+                if (jsonObject != null) {
+                    mLeftList = jsonObject.getData();
+                    if (mLeftList != null) {
+                        for (int i = 0; i < mLeftList.size(); i++) {
+                            Log.i(TAG, mLeftList.get(i).getCategoryDescription());
+                        }
+                        //将数据传给adapter
+                        setAdapter();
+                    } else {
+                        Log.e(TAG, PARSE_ERROR);
+                    }
+                } else {
+                    Log.e(TAG, RECEIVER_NULL_ERROR);
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG,getClass().getName()+"    failed");
+                Log.e(TAG, HTTP_CONNECT_FAILED);
             }
         });
         queue.add(stringRequest);
@@ -122,21 +151,30 @@ public class CategoryFragment extends Fragment {
      * set all listview adapter
      */
     private void setAdapter() {
-        mLeftListView.setAdapter(mleftListAdapter);
 
+        mleftListAdapter = new LeftListAdapter(getActivity().getApplication(), mLeftList);
+        mRightList=mLeftList.get(0).getChildProductType();
+        mrightListAdapter = new RightListAdapter(getActivity().getApplication(), mRightList);
         //right list add headview
         //给右边的listview添加头布局，就是一个广告位单张图片
 //        mRightListView.addHeaderView(LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.category_right_list_head_view, null));
-
+        mLeftListView.setAdapter(mleftListAdapter);
         mRightListView.setAdapter(mrightListAdapter);
+
         mLeftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mLeftListView.smoothScrollToPositionFromTop(position,0);
-                //deal with module reuse template bug
-                //解决模板复用显示bug
+                mLeftListView.smoothScrollToPositionFromTop(position, 0);
+                /*deal with module reuse template bug
+                解决模板复用显示bug*/
                 mleftListAdapter.setSelect(position);
                 view.setBackgroundColor(Color.WHITE);
+                //刷新右侧的列表
+//                mRightList.clear();
+//                tempRightList=mLeftList.get(position).getChildProductType();
+//                Log.i(TAG, "-------------" + mRightList.size());
+//                mrightListAdapter.notifyDataSetChanged();
+//                Log.i(TAG,"右侧该变了");
             }
         });
     }
@@ -145,11 +183,11 @@ public class CategoryFragment extends Fragment {
      * initialize component
      */
     private void initializeCompoment() {
-        mLeftListView=(ListView)rootView.findViewById(R.id.left_list);
-        mRightListView=(ListView)rootView.findViewById(R.id.right_list);
-        mCategoryObjectList=new ArrayList<>();
-        mleftListAdapter=new LeftListAdapter(getActivity().getApplication(),mCategoryObjectList);
-        mrightListAdapter=new RightListAdapter(getActivity().getApplication(),mCategoryObjectList);
+        mLeftListView = (ListView) rootView.findViewById(R.id.left_list);
+        mRightListView = (ListView) rootView.findViewById(R.id.right_list);
+        mCategoryObjectList = new ArrayList<>();
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
