@@ -95,7 +95,7 @@ public class CategoryFragment extends Fragment {
     }
 
     /**
-     *
+     * 从服务器端获取分类列表数据
      */
     private void getDataFromUri() {
         String uri="http://192.168.10.210:8080/wfj_front/phone/phonecategory.action?method=initType";
