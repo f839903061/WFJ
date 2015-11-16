@@ -1,4 +1,4 @@
-package hy.cz.wfj.activity;
+package hy.zc.wfj.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,8 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import hy.cz.wfj.Main2Activity;
-import hy.cz.wfj.R;
+import hy.zc.wfj.R;
 
 public class MyMessageActivity extends Activity implements View.OnClickListener {
 

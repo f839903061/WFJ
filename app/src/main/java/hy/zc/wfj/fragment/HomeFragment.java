@@ -1,4 +1,4 @@
-package hy.cz.wfj.fragment;
+package hy.zc.wfj.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,10 +18,10 @@ import android.widget.RelativeLayout;
 
 import java.io.File;
 
-import hy.cz.wfj.R;
-import hy.cz.wfj.activity.MyLoginActivity;
-import hy.cz.wfj.activity.MyMessageActivity;
-import hy.cz.wfj.utility.SharedPrefUtility;
+import hy.zc.wfj.R;
+import hy.zc.wfj.activity.MyLoginActivity;
+import hy.zc.wfj.activity.MyMessageActivity;
+import hy.zc.wfj.utility.SharedPrefUtility;
 
 /**
  * A simple {@link Fragment} subclass.

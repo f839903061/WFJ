@@ -1,4 +1,4 @@
-package hy.cz.wfj.adapter;
+package hy.zc.wfj.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,8 +11,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
-import hy.cz.wfj.R;
-import hy.cz.wfj.data.CategroyJsonObject;
+import hy.zc.wfj.R;
+import hy.zc.wfj.data.CategroyJsonObject;
 
 /**
  * Created by feng on 2015/11/4.

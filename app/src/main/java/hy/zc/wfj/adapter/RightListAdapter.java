@@ -1,4 +1,4 @@
-package hy.cz.wfj.adapter;
+package hy.zc.wfj.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,13 +7,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import hy.cz.wfj.R;
-import hy.cz.wfj.customview.MyGridView;
-import hy.cz.wfj.data.CategoryListObject;
-import hy.cz.wfj.data.CategroyJsonObject;
+import hy.zc.wfj.R;
+import hy.zc.wfj.customview.MyGridView;
+import hy.zc.wfj.data.CategroyJsonObject;
 
 /**
  * 分类界面的右边的listview的适配器

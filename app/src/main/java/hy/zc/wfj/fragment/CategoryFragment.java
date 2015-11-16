@@ -1,4 +1,4 @@
-package hy.cz.wfj.fragment;
+package hy.zc.wfj.fragment;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -17,25 +17,18 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
-import org.json.JSONObject;
-
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
-import hy.cz.wfj.R;
-import hy.cz.wfj.adapter.LeftListAdapter;
-import hy.cz.wfj.adapter.RightListAdapter;
-import hy.cz.wfj.data.CategoryListObject;
-import hy.cz.wfj.data.CategroyJsonObject;
-import hy.cz.wfj.utility.MySingleton;
+import hy.zc.wfj.R;
+import hy.zc.wfj.adapter.LeftListAdapter;
+import hy.zc.wfj.adapter.RightListAdapter;
+import hy.zc.wfj.data.CategoryListObject;
+import hy.zc.wfj.data.CategroyJsonObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -158,9 +151,9 @@ public class CategoryFragment extends Fragment {
                 mleftListAdapter.setSelect(position);
                 view.setBackgroundColor(Color.WHITE);
                 //刷新右侧的列表
-                    mRightList.clear();
-                    mRightList.addAll(mLeftList.get(position).getChildProductType());
-                    mrightListAdapter.notifyDataSetChanged();
+                mRightList.clear();
+                mRightList.addAll(mLeftList.get(position).getChildProductType());
+                mrightListAdapter.notifyDataSetChanged();
             }
         });
     }

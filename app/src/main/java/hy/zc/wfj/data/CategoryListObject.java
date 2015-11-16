@@ -1,4 +1,4 @@
-package hy.cz.wfj.data;
+package hy.zc.wfj.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;

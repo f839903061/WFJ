@@ -1,9 +1,8 @@
-package hy.cz.wfj.fragment;
+package hy.zc.wfj.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -15,13 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import java.io.FileDescriptor;
-
-import hy.cz.wfj.R;
-import hy.cz.wfj.activity.MyLoginActivity;
-import hy.cz.wfj.activity.MyMessageActivity;
-import hy.cz.wfj.activity.MySettingsActivity;
-import hy.cz.wfj.utility.SharedPrefUtility;
+import hy.zc.wfj.R;
+import hy.zc.wfj.activity.MyLoginActivity;
+import hy.zc.wfj.activity.MyMessageActivity;
+import hy.zc.wfj.activity.MySettingsActivity;
+import hy.zc.wfj.utility.SharedPrefUtility;
 
 /**
  * A simple {@link Fragment} subclass.

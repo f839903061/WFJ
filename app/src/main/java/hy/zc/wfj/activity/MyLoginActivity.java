@@ -1,11 +1,8 @@
-package hy.cz.wfj.activity;
+package hy.zc.wfj.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,9 +11,8 @@ import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
-import hy.cz.wfj.Main2Activity;
-import hy.cz.wfj.R;
-import hy.cz.wfj.utility.SharedPrefUtility;
+import hy.zc.wfj.R;
+import hy.zc.wfj.utility.SharedPrefUtility;
 
 public class MyLoginActivity extends Activity implements View.OnClickListener {
 
@@ -69,7 +65,7 @@ public class MyLoginActivity extends Activity implements View.OnClickListener {
                 }else if (!name.equals("")&&!password.equals("")){
                     Toast.makeText(getApplicationContext(),"你输入的"+name+":"+password,Toast.LENGTH_SHORT).show();
                     Intent intent1=getIntent();
-                    SharedPrefUtility.setParam(getApplicationContext(), IS_LOGIN,true);
+                    SharedPrefUtility.setParam(getApplicationContext(), IS_LOGIN, true);
                     setResult(Activity.RESULT_OK,intent1);
                     finish();
                 }else {

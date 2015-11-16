@@ -1,21 +1,18 @@
-package hy.cz.wfj;
+package hy.zc.wfj;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.RadioGroup;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
-import hy.cz.wfj.fragment.CartFragment;
-import hy.cz.wfj.fragment.CategoryFragment;
-import hy.cz.wfj.fragment.HomeFragment;
-import hy.cz.wfj.fragment.PersonalFragment;
-import hy.cz.wfj.utility.SharedPrefUtility;
+import hy.zc.wfj.fragment.CartFragment;
+import hy.zc.wfj.fragment.CategoryFragment;
+import hy.zc.wfj.fragment.HomeFragment;
+import hy.zc.wfj.fragment.PersonalFragment;
+import hy.zc.wfj.utility.SharedPrefUtility;
 
 public class Main2Activity extends Activity implements
         HomeFragment.OnFragmentInteractionListener,
@@ -43,7 +40,7 @@ public class Main2Activity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fresco.initialize(getApplicationContext());
-        setContentView(R.layout.activity_main2);
+        setContentView(hy.zc.wfj.R.layout.activity_main2);
         initializeComponent();
         //set listener for radiogroup
         setListener();
@@ -79,7 +76,7 @@ public class Main2Activity extends Activity implements
      * 初始化组件，以及导航事务
      */
     private void initializeComponent() {
-        mRadioGroup = (RadioGroup) findViewById(R.id.main_radiogroup);
+        mRadioGroup = (RadioGroup) findViewById(hy.zc.wfj.R.id.main_radiogroup);
     }
 
     /**
@@ -123,16 +120,16 @@ public class Main2Activity extends Activity implements
 
                 switch (checkedId) {
                     case FRAGMENT_HOME:
-                        fragmentTransaction.replace(R.id.main_framelayout, HomeFragment.newInstance(), HOME_FRAGMENT_TAG);
+                        fragmentTransaction.replace(hy.zc.wfj.R.id.main_framelayout, HomeFragment.newInstance(), HOME_FRAGMENT_TAG);
                         break;
                     case FRAGMENT_CATEGORY:
-                        fragmentTransaction.replace(R.id.main_framelayout, CategoryFragment.getInstance(), CATEGORY_FRAGMENT_TAG);
+                        fragmentTransaction.replace(hy.zc.wfj.R.id.main_framelayout, CategoryFragment.getInstance(), CATEGORY_FRAGMENT_TAG);
                         break;
                     case FRAGMENT_CART:
-                        fragmentTransaction.replace(R.id.main_framelayout, CartFragment.getInstance(), CART_FRAGMENT_TAG);
+                        fragmentTransaction.replace(hy.zc.wfj.R.id.main_framelayout, CartFragment.getInstance(), CART_FRAGMENT_TAG);
                         break;
                     case FRAGMENT_PERSONAL:
-                        fragmentTransaction.replace(R.id.main_framelayout, PersonalFragment.getInstance(), PERSONAL_FRAGMENT_TAG);
+                        fragmentTransaction.replace(hy.zc.wfj.R.id.main_framelayout, PersonalFragment.getInstance(), PERSONAL_FRAGMENT_TAG);
                         break;
                 }
                /* 每次点击radiobutton之后，就更新保存一下索引，

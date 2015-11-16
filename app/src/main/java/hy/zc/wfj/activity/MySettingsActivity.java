@@ -1,18 +1,16 @@
-package hy.cz.wfj.activity;
+package hy.zc.wfj.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import hy.cz.wfj.Main2Activity;
-import hy.cz.wfj.R;
-import hy.cz.wfj.utility.SharedPrefUtility;
+import hy.zc.wfj.R;
+import hy.zc.wfj.utility.SharedPrefUtility;
 
 public class MySettingsActivity extends Activity implements View.OnClickListener{
 
@@ -59,7 +57,7 @@ public class MySettingsActivity extends Activity implements View.OnClickListener
      *  如果未登录，隐藏退出按钮
      */
     private void logoutBtnVisiable(){
-        isLogin=(Boolean)SharedPrefUtility.getParam(getApplicationContext(), IS_LOGIN,false);
+        isLogin=(Boolean) SharedPrefUtility.getParam(getApplicationContext(), IS_LOGIN, false);
         if (isLogin) {
             logout_comfirm_button.setVisibility(View.VISIBLE);
         }else {

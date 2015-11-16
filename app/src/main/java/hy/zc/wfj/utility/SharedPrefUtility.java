@@ -1,4 +1,4 @@
-package hy.cz.wfj.utility;
+package hy.zc.wfj.utility;
 
 import android.content.Context;
 import android.content.SharedPreferences;

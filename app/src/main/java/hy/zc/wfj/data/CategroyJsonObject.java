@@ -1,4 +1,4 @@
-package hy.cz.wfj.data;
+package hy.zc.wfj.data;
 
 import java.io.Serializable;
 import java.util.List;
