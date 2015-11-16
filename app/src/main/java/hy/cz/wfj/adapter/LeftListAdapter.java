@@ -64,7 +64,7 @@ public class LeftListAdapter extends BaseAdapter {
         }else {
             viewHolder=(ViewHolder)convertView.getTag();
         }
-        viewHolder.textView.setText(mList.get(position).getCategoryDescription());
+        viewHolder.textView.setText(mList.get(position).getSortName());
         if (select==position)
         {
             viewHolder.textView.setTextColor(Color.rgb(241, 87, 87));

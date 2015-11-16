@@ -17,17 +17,20 @@
         <!--left category list-->
         <ListView
             android:id="@id/left_list"
-            android:layout_width="92dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="#fff3f4f6"
             android:cacheColorHint="#00000000"
-            android:scrollbars="none">
+            android:scrollbars="none"
+            android:layout_weight="1">
 
         </ListView>
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            >
 
             <!--right category list-->
             <ListView

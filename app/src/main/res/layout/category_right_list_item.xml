@@ -21,35 +21,35 @@
             android:textSize="@dimen/category_new_level2_text"
             tools:text="@string/test4" />
 
-        <LinearLayout
-            android:id="@id/ll_right_item_goto_ranking_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:orientation="horizontal"
-            android:paddingRight="@dimen/category_new_1dp"
-            android:visibility="visible">
+        <!--<LinearLayout-->
+            <!--android:id="@id/ll_right_item_goto_ranking_list"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:paddingRight="@dimen/category_new_1dp"-->
+            <!--android:visibility="visible">-->
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_rank_list" />
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@drawable/icon_rank_list" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/fill_order_layout_7dp"
-                android:text="@string/ranking_list"
-                android:textColor="@color/category_new_level2_font"
-                android:textSize="12.0sp" />
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/fill_order_layout_7dp"-->
+                <!--android:text="@string/ranking_list"-->
+                <!--android:textColor="@color/category_new_level2_font"-->
+                <!--android:textSize="12.0sp" />-->
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/fill_order_layout_10dp"
-                android:src="@drawable/button_k" />
-        </LinearLayout>
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/fill_order_layout_10dp"-->
+                <!--android:src="@drawable/button_k" />-->
+        <!--</LinearLayout>-->
     </RelativeLayout>
 
     <hy.cz.wfj.customview.MyGridView

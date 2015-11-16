@@ -146,6 +146,8 @@ public class CategoryFragment extends Fragment {
 //        mRightListView.addHeaderView(LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.category_right_list_head_view, null));
         mLeftListView.setAdapter(mleftListAdapter);
         mRightListView.setAdapter(mrightListAdapter);
+//        mLeftListView.setSelection(0);
+//        mLeftListView.getSelectedView().setSelected(true);
 
         mLeftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -156,10 +158,9 @@ public class CategoryFragment extends Fragment {
                 mleftListAdapter.setSelect(position);
                 view.setBackgroundColor(Color.WHITE);
                 //刷新右侧的列表
-                mRightList.clear();
-                mLeftList.get(position).getChildProductType();
-                mRightList.addAll(mLeftList.get(position).getChildProductType());
-                mrightListAdapter.notifyDataSetChanged();
+                    mRightList.clear();
+                    mRightList.addAll(mLeftList.get(position).getChildProductType());
+                    mrightListAdapter.notifyDataSetChanged();
             }
         });
     }

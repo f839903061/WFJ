@@ -53,14 +53,16 @@ public class RightListAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.category_right_list_item, null);
             viewHolder.textView = (TextView) convertView.findViewById(R.id.right_item_title);
             viewHolder.myGridView = (MyGridView) convertView.findViewById(R.id.category_right_grid);
-            RightGridAdapter rightGridAdapter = new RightGridAdapter(mContext);
-            viewHolder.myGridView.setAdapter(rightGridAdapter);
 
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.textView.setText(mList.get(position).getCategoryDescription());
+
+        viewHolder.textView.setText(mList.get(position).getSortName());
+        List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> rrList = mList.get(position).getChildProductType();
+        RightGridAdapter rightGridAdapter = new RightGridAdapter(mContext,rrList);
+        viewHolder.myGridView.setAdapter(rightGridAdapter);
         return convertView;
     }
 

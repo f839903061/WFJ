@@ -1,19 +1,18 @@
 package hy.cz.wfj.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import hy.cz.wfj.R;
+import hy.cz.wfj.data.CategroyJsonObject;
 
 /**
  * Created by feng on 2015/11/4.
@@ -22,25 +21,21 @@ public class RightGridAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mInflater;
-    ArrayList<String> list=new ArrayList<>();
-
-    public RightGridAdapter(Context pcontext) {
+    private List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> mList;
+    public RightGridAdapter(Context pcontext ,List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> plist) {
         mContext=pcontext;
         mInflater=LayoutInflater.from(pcontext);
-
-        for (int i = 0; i < 5; i++) {
-            list.add("小分类"+i);
-        }
+        mList=plist;
     }
 
     @Override
     public int getCount() {
-        return list.size();
+        return mList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return list.get(position);
+        return mList.get(position);
     }
 
     @Override
@@ -61,7 +56,7 @@ public class RightGridAdapter extends BaseAdapter {
             viewHolder=(ViewHolder)convertView.getTag();
         }
 
-        viewHolder.textView.setText(list.get(position));
+        viewHolder.textView.setText(mList.get(position).getSortName());
         viewHolder.simpleDraweeView.setBackground(mContext.getResources().getDrawable(R.drawable.computer));
 
         return convertView;
