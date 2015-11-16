@@ -1,6 +1,7 @@
 package hy.cz.wfj.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -12,10 +13,15 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import java.io.File;
 
 import hy.cz.wfj.R;
+import hy.cz.wfj.activity.MyLoginActivity;
+import hy.cz.wfj.activity.MyMessageActivity;
+import hy.cz.wfj.utility.SharedPrefUtility;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +31,7 @@ import hy.cz.wfj.R;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,6 +39,9 @@ public class HomeFragment extends Fragment {
     public static final String TAG = "fengluchun";
     private static final String APP_CACAHE_DIRNAME = "/webcache";
     private static final String APP_DB_DIRNAME = "/webdb";
+    public static final String IS_LOGIN = "isLogin";
+    public static final int LOGIN_REQUEST_CODE = 1;
+    public static final int MESSAGE_REQUEST_CODE = 3;
 
     private static HomeFragment homeFragment = null;
     // TODO: Rename and change types of parameters
@@ -41,6 +50,9 @@ public class HomeFragment extends Fragment {
 
     private View rootView;
     private WebView mWebView;
+    private RelativeLayout to_message_btn;
+    private LinearLayout home_search_button;
+    private Boolean islogin = false;
     private OnFragmentInteractionListener mListener;
 
     public static synchronized HomeFragment getInstance() {
@@ -107,6 +119,11 @@ public class HomeFragment extends Fragment {
     }
 
     private void initializeComponent() {
+        to_message_btn=(RelativeLayout)rootView.findViewById(R.id.to_message_btn);
+        home_search_button=(LinearLayout)rootView.findViewById(R.id.home_search_button);
+
+        to_message_btn.setOnClickListener(this);
+        home_search_button.setOnClickListener(this);
 
         mWebView = (WebView) rootView.findViewById(R.id.home_webView);
 //        mWebView.loadUrl("http://www.baidu.com");
@@ -168,27 +185,28 @@ public class HomeFragment extends Fragment {
         webSettings.setAppCachePath(cacheDirPath);
         webSettings.setAppCacheEnabled(true);
     }
-    public void clearWebViewCache(){
+
+    public void clearWebViewCache() {
 
         //清理Webview缓存数据库
         try {
-           getActivity().deleteDatabase("webview.db");
+            getActivity().deleteDatabase("webview.db");
             getActivity().deleteDatabase("webviewCache.db");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         //WebView 缓存文件
-        File appCacheDir = new File(getActivity().getFilesDir().getAbsolutePath()+APP_CACAHE_DIRNAME);
-        Log.i(TAG,"appCacheDir path=" + appCacheDir.getAbsolutePath());
-        File webviewCacheDir = new File(getActivity().getCacheDir().getAbsolutePath()+"/webviewCache");
-        Log.i(TAG,"webviewCacheDir path=" + webviewCacheDir.getAbsolutePath());
+        File appCacheDir = new File(getActivity().getFilesDir().getAbsolutePath() + APP_CACAHE_DIRNAME);
+        Log.i(TAG, "appCacheDir path=" + appCacheDir.getAbsolutePath());
+        File webviewCacheDir = new File(getActivity().getCacheDir().getAbsolutePath() + "/webviewCache");
+        Log.i(TAG, "webviewCacheDir path=" + webviewCacheDir.getAbsolutePath());
         //删除webview 缓存目录
-        if(webviewCacheDir.exists()){
+        if (webviewCacheDir.exists()) {
             getActivity().deleteFile(webviewCacheDir.getName());
         }
         //删除webview 缓存 缓存目录
-        if(appCacheDir.exists()){
+        if (appCacheDir.exists()) {
             getActivity().deleteFile(appCacheDir.getName());
         }
     }
@@ -221,6 +239,28 @@ public class HomeFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.to_message_btn://跳转到消息界面
+                islogin = (Boolean) SharedPrefUtility.getParam(getActivity(), IS_LOGIN, false);
+                if (!islogin) {
+                    Intent goLoginIntent = new Intent(getActivity(), MyLoginActivity.class);
+                    startActivityForResult(goLoginIntent, LOGIN_REQUEST_CODE);
+                } else {
+                    Intent goMsgIntent=new Intent(getActivity(), MyMessageActivity.class);
+                    startActivityForResult(goMsgIntent,MESSAGE_REQUEST_CODE);
+                }
+                break;
+            case R.id.home_search_button://跳转到二维码扫描界面
+
+                break;
+            default:
+                break;
+        }
+
     }
 
     /**
