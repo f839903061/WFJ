@@ -1,17 +1,27 @@
 package hy.zc.wfj.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
+import hy.zc.wfj.App;
 import hy.zc.wfj.R;
+import hy.zc.wfj.data.UserLoginErrorObject;
+import hy.zc.wfj.data.UserLoginObject;
 import hy.zc.wfj.utility.SharedPrefUtility;
 
 public class MyLoginActivity extends Activity implements View.OnClickListener {
@@ -20,12 +30,15 @@ public class MyLoginActivity extends Activity implements View.OnClickListener {
     public static final String NAME_PASS_CANNOT_NULL = "用户名或者密码不能为空";
     public static final String ENTER_ERROR = "输入有问题";
     public static final String IS_LOGIN = "isLogin";
+    public static final String OBJ_NULL_ERR = "获取登录对象为空";
+    public static final String STATE_ERR = "获取对象状态为false";
+    public static final String CONNECT_ERR = "http 连接失败";
 
     private ImageButton mBackBtn;
     private EditText login_input_name;
     private EditText login_input_password;
     private Button login_comfirm_button;
-
+    private ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +54,7 @@ public class MyLoginActivity extends Activity implements View.OnClickListener {
         mBackBtn = (ImageButton) this.findViewById(R.id.common_title_back_btn);
         login_input_name = (EditText) this.findViewById(R.id.login_input_name);
         login_input_password = (EditText) this.findViewById(R.id.login_input_password);
-        login_comfirm_button=(Button)this.findViewById(R.id.login_comfirm_button);
+        login_comfirm_button = (Button) this.findViewById(R.id.login_comfirm_button);
     }
 
     private void setListener() {
@@ -53,27 +66,73 @@ public class MyLoginActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.common_title_back_btn:
-                Intent intent = getIntent();
-                setResult(Activity.RESULT_OK, intent);
-                finish();
+                goBackActivity();
                 break;
             case R.id.login_comfirm_button:
                 String name = login_input_name.getText().toString().trim();
                 String password = login_input_password.getText().toString().trim();
-                if (name.equals("")&&password.equals("")){
-                    Toast.makeText(getApplicationContext(), NAME_PASS_CANNOT_NULL,Toast.LENGTH_SHORT).show();
-                }else if (!name.equals("")&&!password.equals("")){
-                    Toast.makeText(getApplicationContext(),"你输入的"+name+":"+password,Toast.LENGTH_SHORT).show();
-                    Intent intent1=getIntent();
-                    SharedPrefUtility.setParam(getApplicationContext(), IS_LOGIN, true);
-                    setResult(Activity.RESULT_OK,intent1);
-                    finish();
-                }else {
-                    Toast.makeText(getApplicationContext(), ENTER_ERROR,Toast.LENGTH_SHORT).show();
+                if (name.equals("") && password.equals("")) {
+                    Toast.makeText(getApplicationContext(), NAME_PASS_CANNOT_NULL, Toast.LENGTH_SHORT).show();
+                } else if (!name.equals("") && !password.equals("")) {
+                    pd = new ProgressDialog(MyLoginActivity.this);
+                    pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    pd.setMessage("请稍等。。。");
+                    pd.show();
+                    getDataFromUri(name, password);
+//                    goBackActivity();
+                } else {
+                    Toast.makeText(getApplicationContext(), ENTER_ERROR, Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:
                 break;
         }
+    }
+
+    private void goBackActivity() {
+        Intent intent = getIntent();
+        setResult(Activity.RESULT_OK, intent);
+        finish();
+    }
+
+    private void getDataFromUri(String pname, String ppassword) {
+        StringBuilder stringBuilder = new StringBuilder("http://192.168.10.7:8080/wfj_front/phone/login.action?loginName=");
+        stringBuilder.append(pname);
+        stringBuilder.append("&cpassword=");
+        stringBuilder.append(ppassword);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, stringBuilder.toString(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //如果用户名或者密码或者格式错误，返回数据是非常短的
+                if (response.length() <= 50) {
+                    UserLoginErrorObject errorObject = JSON.parseObject(response, UserLoginErrorObject.class);
+                    pd.dismiss();
+                    Toast.makeText(getApplicationContext(), errorObject.getData(), Toast.LENGTH_SHORT).show();
+                } else {//如果登录成功
+                    UserLoginObject userLoginObject = JSON.parseObject(response, UserLoginObject.class);
+                    //保存登录状态
+                    SharedPrefUtility.setParam(getApplicationContext(), IS_LOGIN, userLoginObject.isStatus());
+                    //关闭进度条显示
+                    pd.dismiss();
+                    //跳转到之前的界面
+                    goBackActivity();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, CONNECT_ERR);
+                pd.dismiss();
+                Toast.makeText(getApplicationContext(), "连接失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+        App.addRequest(stringRequest, IS_LOGIN);
+    }
+
+    @Override
+    protected void onStop() {
+        App.cancelAllRequests(IS_LOGIN);
+        super.onStop();
     }
 }

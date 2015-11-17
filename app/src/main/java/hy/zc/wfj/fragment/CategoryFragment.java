@@ -20,15 +20,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.squareup.okhttp.OkHttpClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import hy.zc.wfj.App;
 import hy.zc.wfj.R;
 import hy.zc.wfj.adapter.LeftListAdapter;
 import hy.zc.wfj.adapter.RightListAdapter;
 import hy.zc.wfj.data.CategoryListObject;
 import hy.zc.wfj.data.CategroyJsonObject;
+import hy.zc.wfj.utility.OkHttpStack;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +45,7 @@ public class CategoryFragment extends Fragment {
     public static final String RECEIVER_NULL_ERROR = " 网络联通，接收数据却为空";
     public static final String HTTP_CONNECT_FAILED = " HTTP连接失败";
     public static final String PARSE_ERROR = "解析出问题了";
+    public static final String IS_CATEGORY = "isCategory";
     private OnFragmentInteractionListener mListener;
 
     private static CategoryFragment categoryFragment = null;
@@ -93,9 +97,10 @@ public class CategoryFragment extends Fragment {
 //        String uri="http://192.168.10.210:8080/wfj_front/phone/phonecategory?method=initType";
         //action version
         String uri = "http://192.168.10.210:8080/wfj_front/phone/phonecategory.action?method=initType";
+//        String uri = "https://192.168.10.210:8443/wfj_front/phone/phonecategory.action?method=initType";
 //        String uri="http://www.baidu.com/";
 
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -122,7 +127,7 @@ public class CategoryFragment extends Fragment {
                 Log.e(TAG, HTTP_CONNECT_FAILED);
             }
         });
-        queue.add(stringRequest);
+        App.addRequest(stringRequest, IS_CATEGORY);
 
     }
 
@@ -185,6 +190,12 @@ public class CategoryFragment extends Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+    }
+
+    @Override
+    public void onStop() {
+        App.cancelAllRequests(IS_CATEGORY);
+        super.onStop();
     }
 
     @Override
