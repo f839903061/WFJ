@@ -17,9 +17,14 @@ package hy.zc.wfj.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipDescription;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -29,8 +34,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.zxing.Result;
 
@@ -39,10 +47,12 @@ import java.lang.reflect.Field;
 
 import hy.zc.wfj.R;
 import hy.zc.wfj.camera.CameraManager;
+import hy.zc.wfj.camera.open.OpenCameraInterface;
 import hy.zc.wfj.decode.DecodeThread;
 import hy.zc.wfj.utility.BeepManager;
 import hy.zc.wfj.utility.CaptureActivityHandler;
 import hy.zc.wfj.utility.InactivityTimer;
+import hy.zc.wfj.utility.SharedPrefUtility;
 
 /**
  * This activity opens the camera and does the actual scanning on a background
@@ -67,6 +77,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 	private RelativeLayout scanCropView;
 	private ImageView scanLine;
 
+	private CheckBox camera_light_open;
+	private Boolean isOpenLight=false;
 	private Rect mCropRect = null;
 
 	public Handler getHandler() {
@@ -101,6 +113,18 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 		animation.setRepeatCount(-1);
 		animation.setRepeatMode(Animation.RESTART);
 		scanLine.startAnimation(animation);
+
+		camera_light_open=(CheckBox)findViewById(R.id.camera_light_open);
+		camera_light_open.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked) {
+					cameraManager.openFlashLight();
+				} else {
+					cameraManager.closeFlashLight();
+				}
+			}
+		});
 	}
 
 	@Override
@@ -130,6 +154,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 		}
 
 		inactivityTimer.onResume();
+
 	}
 
 	@Override
@@ -188,11 +213,36 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 		inactivityTimer.onActivity();
 		beepManager.playBeepSoundAndVibrate();
 
-		bundle.putInt("width", mCropRect.width());
+//		跳转到一个新的activity中显示拍摄到的二维码和解析出来的数据
+		/*bundle.putInt("width", mCropRect.width());
 		bundle.putInt("height", mCropRect.height());
 		bundle.putString("result", rawResult.getText());
+		startActivity(new Intent(CaptureActivity.this, ResultActivity.class).putExtras(bundle));*/
+//		弹出对话框，显示扫描结果
+		popDialog(rawResult.getText());
+	}
 
-		startActivity(new Intent(CaptureActivity.this, ResultActivity.class).putExtras(bundle));
+	/**
+	 * 弹出对话框，显示扫描结果
+	 */
+	private void popDialog(final String ptext) {
+		AlertDialog.Builder builder=new AlertDialog.Builder(CaptureActivity.this);
+		builder.setTitle("扫描结果");
+		builder.setMessage(ptext);
+		builder.setPositiveButton("复制结果", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				ClipboardManager cmb = (ClipboardManager)CaptureActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
+				cmb.setText(ptext);
+			}
+		});
+		builder.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		builder.create().show();
 	}
 
 	private void initCamera(SurfaceHolder surfaceHolder) {

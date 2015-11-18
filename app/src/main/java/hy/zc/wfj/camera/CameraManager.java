@@ -163,6 +163,29 @@ public class CameraManager {
 	}
 
 	/**
+	 * 打开闪光灯
+	 */
+	public synchronized void openFlashLight(){
+		if (camera!=null) {
+			Log.w(TAG, "flash light is open");
+			Camera.Parameters parameters = camera.getParameters();
+			parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+			camera.setParameters(parameters);
+		}
+	}
+
+	/**
+	 * 关闭闪光灯
+	 */
+	public synchronized void closeFlashLight(){
+		if (camera!=null) {
+			Log.w(TAG, "flash light is close");
+			Camera.Parameters parameters = camera.getParameters();
+			parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+			camera.setParameters(parameters);
+		}
+	}
+	/**
 	 * A single preview frame will be returned to the handler supplied. The data
 	 * will arrive as byte[] in the message.obj field, with width and height
 	 * encoded as message.arg1 and message.arg2, respectively.

@@ -150,4 +150,9 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:contentDescription">@string/none</item>
     </style>
+
+    <style name="camera_light_checked" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/light_click</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
 </resources>
