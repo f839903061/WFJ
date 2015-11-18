@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import java.io.File;
 
 import hy.zc.wfj.R;
+import hy.zc.wfj.activity.CaptureActivity;
 import hy.zc.wfj.activity.MyLoginActivity;
 import hy.zc.wfj.activity.MyMessageActivity;
 import hy.zc.wfj.utility.SharedPrefUtility;
@@ -42,6 +43,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public static final String IS_LOGIN = "isLogin";
     public static final int LOGIN_REQUEST_CODE = 1;
     public static final int MESSAGE_REQUEST_CODE = 3;
+    public static final int SCAN_REQUEST_CODE = 4;
 
     private static HomeFragment homeFragment = null;
     // TODO: Rename and change types of parameters
@@ -255,7 +257,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.home_search_button://跳转到二维码扫描界面
-
+                Intent goScan=new Intent(getActivity(), CaptureActivity.class);
+                startActivityForResult(goScan, SCAN_REQUEST_CODE);
                 break;
             default:
                 break;
