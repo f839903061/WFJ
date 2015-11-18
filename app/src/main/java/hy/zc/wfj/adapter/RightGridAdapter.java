@@ -1,6 +1,7 @@
 package hy.zc.wfj.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,11 @@ public class RightGridAdapter extends BaseAdapter {
         }
 
         viewHolder.textView.setText(mList.get(position).getSortName());
-        viewHolder.simpleDraweeView.setBackground(mContext.getResources().getDrawable(R.drawable.computer));
+        //拼接好图片之后，使用fresco来加载显示
+        StringBuilder builder=new StringBuilder("http://192.168.10.210:8085/b2b2c/");
+        builder.append(mList.get(position).getCategoryImage());
+        Uri uri=Uri.parse(builder.toString());
+        viewHolder.simpleDraweeView.setImageURI(uri);
 
         return convertView;
     }
