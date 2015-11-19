@@ -34,6 +34,6 @@
     <color name="personal_view_pressed">#fff1f1f1</color>
     <color name="fill_order_delivery_dark">#ff252525</color>
     <color name="fill_order_notice_color">#ff848689</color>
-
+    <color name="personal_info_text">#fffffefe</color>
 
 </resources>

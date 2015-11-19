@@ -39,5 +39,11 @@
     <dimen name="register_link_text_size">15.0sp</dimen>
     <dimen name="common_title_right_text_size">15.0sp</dimen>
     <dimen name="btn_corner_radius">5.0dp</dimen>
+    <dimen name="personal_user_img_view_width">70.0dip</dimen>
+    <dimen name="personal_user_img_view_height">70.0dip</dimen>
+    <dimen name="personal_user_photo_marginleft">22.0dip</dimen>
+    <dimen name="personal_info_text_size_l">17.0sp</dimen>
+    <dimen name="personal_info_text_size_m">13.0sp</dimen>
+    <dimen name="personal_info_text_size_mm">12.0sp</dimen>
 
 </resources>

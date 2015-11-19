@@ -15,6 +15,7 @@
 
     <!--personal avatar-->
     <item name="personal_unlogin_avatar" type="id" />
+    <item name="personal_avatar_layout" type="id" />
     <item name="personal_goods_list_title" type="id"/>
     <item name="personal_goods_list" type="id"/>
     <item name="personal_shop_list_title" type="id"/>
@@ -167,4 +168,12 @@
     <item name="restart_preview" type="id"/>
     <item name="return_scan_result" type="id"/>
     <item name="camera_light_open" type="id"/>
+    <item name="personal_for_login_info" type="id" />
+    <item name="user_img_view" type="id" />
+    <item name="who_and_say_hello" type="id" />
+    <item name="user_level" type="id" />
+    <item name="personal_info_more_layout" type="id" />
+    <item name="personal_info_more" type="id" />
+    <item name="personal_info_more_new_icon" type="id" />
+    <item name="personal_for_logout_info" type="id" />
 </resources>
