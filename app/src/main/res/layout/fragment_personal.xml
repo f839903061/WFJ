@@ -72,8 +72,8 @@
                     android:layout_marginTop="@dimen/personal_avatar_layout_dimen">
 
                     <RelativeLayout
-                        android:id="@id/personal_for_logout_info"
-                        android:visibility="gone"
+                        android:id="@id/personal_for_logout_info_layout"
+                        android:visibility="visible"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -86,9 +86,10 @@
                             android:background="@drawable/personal_unlogin_avatar" />
                     </RelativeLayout>
                     <RelativeLayout
-                        android:id="@id/personal_for_login_info"
+                        android:id="@id/personal_for_login_info_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
                         <ImageButton
                             android:id="@id/user_img_view"
                             android:layout_width="@dimen/personal_user_img_view_width"

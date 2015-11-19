@@ -155,4 +155,12 @@
         <item name="android:button">@drawable/light_click</item>
         <item name="android:background">@color/transparent</item>
     </style>
+    <style name="line6">
+        <item name="android:background">#ffe1e2e4</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1.0px</item>
+    </style>
+    <style name="my_personal_list_height">
+        <item name="android:layout_height">49.0dip</item>
+    </style>
 </resources>

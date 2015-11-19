@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/my_personal_list_height"
+    android:layout_width="fill_parent"
+    android:background="@drawable/personal_view_pressed_selector">
+
+    <TextView
+        android:id="@id/personel_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="10.0dip"
+        android:textColor="#ff252525"
+        android:textSize="15.0sp" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@id/personel_item_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/none"
+        android:paddingRight="10.0dip"
+        android:layout_marginRight="12.0dp"
+        android:background="@drawable/personal_icon_arrow" />
+
+    <TextView
+        android:id="@id/personel_item_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="2.0dip"
+        android:layout_toLeftOf="@id/personel_item_arrow"
+        android:textColor="#ff9a9a9a"
+        android:textSize="13.0sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@id/personel_item_content2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10.0dip"
+        android:textColor="#ff9a9a9a"
+        android:textSize="13.0sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@id/personel_item_unread_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10.0dip"
+        android:layout_toLeftOf="@id/personel_item_arrow"
+        android:background="@drawable/personel_msg_number"
+        android:gravity="center"
+        android:textColor="#fff0b4b4"
+        android:textSize="13.0sp"
+        android:visibility="gone" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@id/personel_item_tip"
+        android:layout_width="20.0dip"
+        android:layout_height="20.0dip"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="7.0dip"
+        android:layout_marginTop="3.0dip"
+        android:layout_toLeftOf="@id/personel_item_arrow"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/none"
+        android:scaleType="fitCenter"
+        android:visibility="gone" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@id/personel_item_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="16.0dip"
+        android:layout_marginTop="16.0dip"
+        android:layout_toLeftOf="@id/personel_item_arrow"
+        android:contentDescription="@string/none"
+        android:visibility="gone" />
+</RelativeLayout>

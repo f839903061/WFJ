@@ -18,6 +18,7 @@ import hy.zc.wfj.R;
 import hy.zc.wfj.activity.MyLoginActivity;
 import hy.zc.wfj.activity.MyMessageActivity;
 import hy.zc.wfj.activity.MySettingsActivity;
+import hy.zc.wfj.activity.PersonalInfoActivity;
 import hy.zc.wfj.utility.SharedPrefUtility;
 
 /**
@@ -28,24 +29,31 @@ import hy.zc.wfj.utility.SharedPrefUtility;
  */
 public class PersonalFragment extends Fragment implements View.OnClickListener {
 
+    public static final String TAG = "fengluchun";
+    public static final String IS_LOGIN = "isLogin";
     public static final int LOGIN_REQUEST_CODE = 1;
     public static final int SETTINGS_REQUEST_CODE = 2;
     public static final int MESSAGE_REQUEST_CODE = 3;
-    public static final String TAG = "fengluchun";
-    public static final String IS_LOGIN = "isLogin";
+    public static final int PERSONAL_INFO_REQUEST_CODE = 4;
+
     private View rootView;
     private ImageButton avatarImage;
     private ImageButton settingsImage;
     private ImageButton messageImage;
+    private ImageButton user_img_view;
 
     private LinearLayout concern_goods_layout;
     private LinearLayout concern_shop_layout;
-    private RelativeLayout order_layout;
     private LinearLayout service_layout;
+    private RelativeLayout order_layout;
     private RelativeLayout wait_for_payment_layout;
     private RelativeLayout wait_sign_in_layout;
     private RelativeLayout wait_comment_layout;
     private RelativeLayout wait_order_after_sale_layout;
+    private RelativeLayout personal_for_logout_info_layout;//登出
+    private RelativeLayout personal_for_login_info_layout;//登录
+
+
 //    private TextView concern_browser_tv;
 
     private OnFragmentInteractionListener mListener;
@@ -76,6 +84,8 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_personal, container, false);
         initializeComponent();
+        //切换登录/登出布局文件
+        changeLoginLayout();
         setListener();
         return rootView;
     }
@@ -85,11 +95,14 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
      * 初始化组件
      */
     private void initializeComponent() {
-        isLogin = (Boolean) SharedPrefUtility.getParam(getActivity(), IS_LOGIN, false);
+        personal_for_logout_info_layout = (RelativeLayout) rootView.findViewById(R.id.personal_for_logout_info_layout);
+        personal_for_login_info_layout = (RelativeLayout) rootView.findViewById(R.id.personal_for_login_info_layout);
+
         //初始化头像
         avatarImage = (ImageButton) rootView.findViewById(R.id.personal_unlogin_avatar);
         settingsImage = (ImageButton) rootView.findViewById(R.id.personal_setting);
         messageImage = (ImageButton) rootView.findViewById(R.id.personal_common_message);
+        user_img_view=(ImageButton)rootView.findViewById(R.id.user_img_view);
         //初始化关注
         concern_goods_layout = (LinearLayout) rootView.findViewById(R.id.personal_goods_list_title);
         concern_shop_layout = (LinearLayout) rootView.findViewById(R.id.personal_shop_list_title);
@@ -104,7 +117,6 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
 
 //        concern_browser_tv=(TextView)rootView.findViewById(R.id.personal_browsing_list_title);
     }
-
     /**
      * set component listener
      * 给组件添加监听
@@ -124,8 +136,26 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
         wait_order_after_sale_layout.setOnClickListener(this);
 
         service_layout.setOnClickListener(this);
+
+        personal_for_login_info_layout.setOnClickListener(this);
+        user_img_view.setOnClickListener(this);
 //        concern_browser_tv.setOnClickListener(this);
     }
+    /**
+     * 根据登录情况，进行切换用户信息的布局
+     */
+    private void changeLoginLayout() {
+        isLogin = (Boolean) SharedPrefUtility.getParam(getActivity(), IS_LOGIN, false);
+        if (isLogin) {
+            personal_for_login_info_layout.setVisibility(View.VISIBLE);
+            personal_for_logout_info_layout.setVisibility(View.GONE);
+        } else {
+            personal_for_login_info_layout.setVisibility(View.GONE);
+            personal_for_logout_info_layout.setVisibility(View.VISIBLE);
+        }
+    }
+
+
 
     @Override
     public void onClick(View v) {
@@ -173,6 +203,12 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
                     case R.id.service_layout:
 
                         break;
+                    case R.id.personal_for_login_info_layout://点击头像所在的layout
+                        goPersonInfo();
+                        break;
+                    case R.id.user_img_view://点击头像
+                        goPersonInfo();
+                        break;
 //            case R.id.personal_browsing_list_title:
 //                myToast("browser");
                     default:
@@ -181,6 +217,14 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
             }
         }
 
+    }
+
+    /**
+     * 跳转到个人信息界面
+     */
+    private void goPersonInfo() {
+        Intent goPersonalInfo=new Intent(getActivity(), PersonalInfoActivity.class);
+        startActivityForResult(goPersonalInfo, PERSONAL_INFO_REQUEST_CODE);
     }
 
     @Override
@@ -221,7 +265,8 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        isLogin= (Boolean) SharedPrefUtility.getParam(getActivity(), IS_LOGIN, false);
+//       根据登录情况，判断显示哪个布局文件
+        changeLoginLayout();
     }
 
     @Override

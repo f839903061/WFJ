@@ -8,27 +8,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!--login title-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/main_navigation_bottom_height"
-            android:background="@color/white">
-
-            <ImageButton
-                android:id="@id/common_title_back_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:background="@color/white"
-                android:src="@drawable/common_title_back_click" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@id/common_title_back_btn"
-                android:gravity="center"
-                android:text="@string/login_title_text" />
-        </RelativeLayout>
+        <!--login title--><include android:id="@id/common_title" layout="@layout/common_title" />
 
         <RelativeLayout
             android:layout_width="match_parent"

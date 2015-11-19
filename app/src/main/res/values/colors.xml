@@ -35,5 +35,6 @@
     <color name="fill_order_delivery_dark">#ff252525</color>
     <color name="fill_order_notice_color">#ff848689</color>
     <color name="personal_info_text">#fffffefe</color>
+    <color name="my_personal_bg">#fff3f4f6</color>
 
 </resources>

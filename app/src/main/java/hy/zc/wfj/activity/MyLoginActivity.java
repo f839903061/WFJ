@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -39,7 +40,7 @@ public class MyLoginActivity extends Activity implements View.OnClickListener {
     private EditText login_input_password;
     private Button login_comfirm_button;
     private ProgressDialog pd;
-
+    private TextView common_title_txt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,8 @@ public class MyLoginActivity extends Activity implements View.OnClickListener {
         login_input_name = (EditText) this.findViewById(R.id.login_input_name);
         login_input_password = (EditText) this.findViewById(R.id.login_input_password);
         login_comfirm_button = (Button) this.findViewById(R.id.login_comfirm_button);
+        common_title_txt=(TextView)this.findViewById(R.id.common_title_txt);
+        common_title_txt.setText("登录");
     }
 
     private void setListener() {
