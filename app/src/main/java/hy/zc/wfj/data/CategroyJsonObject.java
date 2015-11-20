@@ -49,7 +49,7 @@ public class CategroyJsonObject implements Serializable{
         return Data;
     }
 
-    public static class DataEntity {
+    public static class DataEntity implements Serializable{
         private String categoryDescription;
         private String categoryImage;
         private int industrySpecific;
@@ -184,7 +184,7 @@ public class CategroyJsonObject implements Serializable{
             return childProductType;
         }
 
-        public static class ChildProductTypeEntity {
+        public static class ChildProductTypeEntity implements Serializable{
             private String categoryDescription;
             private String categoryImage;
             private int industrySpecific;
@@ -319,7 +319,7 @@ public class CategroyJsonObject implements Serializable{
                 return childProductType;
             }
 
-            public static class ChildProductTypeEntity2 {
+            public static class ChildProductTypeEntity2 implements Serializable{
                 private String categoryDescription;
                 private String categoryImage;
                 private int industrySpecific;

@@ -68,7 +68,7 @@ public class UserLoginObject implements Serializable{
         return shopCount;
     }
 
-    public static class DataEntity {
+    public static class DataEntity implements Serializable{
         private int customerId;
         private String email;
         private int isCanBuy;
@@ -209,7 +209,7 @@ public class UserLoginObject implements Serializable{
             return type;
         }
 
-        public static class RegisterDateEntity {
+        public static class RegisterDateEntity implements Serializable{
             private int date;
             private int day;
             private int hours;
