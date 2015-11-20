@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import hy.zc.wfj.App;
+import hy.zc.wfj.Main2Activity;
 import hy.zc.wfj.R;
 import hy.zc.wfj.data.UserLoginErrorObject;
 import hy.zc.wfj.data.UserLoginObject;
@@ -82,7 +83,6 @@ public class MyLoginActivity extends Activity implements View.OnClickListener {
                     pd.setMessage("请稍等。。。");
                     pd.show();
                     getDataFromUri(name, password);
-//                    goBackActivity();
                 } else {
                     Toast.makeText(getApplicationContext(), ENTER_ERROR, Toast.LENGTH_SHORT).show();
                 }
@@ -92,6 +92,12 @@ public class MyLoginActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    private void goBackActivity(Bundle pbundle) {
+        Intent intent = getIntent();
+        intent.putExtras(pbundle);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
+    }
     private void goBackActivity() {
         Intent intent = getIntent();
         setResult(Activity.RESULT_OK, intent);
@@ -119,7 +125,12 @@ public class MyLoginActivity extends Activity implements View.OnClickListener {
                     //关闭进度条显示
                     pd.dismiss();
                     //跳转到之前的界面
-                    goBackActivity();
+                    Bundle bundle=new Bundle();
+                    /*这个地方需要注意一下，血的教训啊，传输的对象不仅本身需要Serializable，
+                    内部同样需要这么做，
+                    否则回跳到之前的activity在onActivityResult中是接收不到Intent对象的，NND浪费老子大半天的时间*/
+                    bundle.putSerializable("receiveData",userLoginObject);
+                    goBackActivity(bundle);
                 }
             }
         }, new Response.ErrorListener() {
