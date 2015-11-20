@@ -2,8 +2,10 @@ package hy.zc.wfj;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.RadioGroup;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -111,12 +113,6 @@ public class Main2Activity extends Activity implements
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 //get fragmentTransaction again to deal with second commit result in IllegalStateException: commit already called
                 fragmentTransaction = getFragmentManager().beginTransaction();
-
-                //getInstance of Fragment
-//                HomeFragment homeFragment = HomeFragment.getInstance();
-//                CategoryFragment categoryFragment = CategoryFragment.getInstance();
-//                CartFragment cartFragment = CartFragment.getInstance();
-//                PersonalFragment personalFragment = PersonalFragment.getInstance();
 
                 switch (checkedId) {
                     case FRAGMENT_HOME:
