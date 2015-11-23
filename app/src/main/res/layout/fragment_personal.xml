@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -73,7 +74,7 @@
 
                     <RelativeLayout
                         android:id="@id/personal_for_logout_info_layout"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -89,15 +90,22 @@
                         android:id="@id/personal_for_login_info_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone">
-                        <ImageButton
+                        android:visibility="visible">
+                        <!--<hy.zc.wfj.customview.RoundImageView-->
+                            <!--android:id="@id/user_img_view"-->
+                            <!--android:layout_width="@dimen/personal_user_img_view_width"-->
+                            <!--android:layout_height="@dimen/personal_user_img_view_height"-->
+                            <!--android:layout_marginLeft="@dimen/personal_user_photo_marginleft"-->
+                            <!--android:src="@drawable/personal_icon_default_avatar"-->
+                            <!--android:scaleType="centerCrop"-->
+                            <!--android:layout_centerVertical="true" />-->
+                        <com.facebook.drawee.view.SimpleDraweeView
                             android:id="@id/user_img_view"
                             android:layout_width="@dimen/personal_user_img_view_width"
                             android:layout_height="@dimen/personal_user_img_view_height"
                             android:layout_marginLeft="@dimen/personal_user_photo_marginleft"
-                            android:background="@drawable/personal_icon_default_avatar"
-                            android:scaleType="centerCrop"
-                            android:layout_centerVertical="true" />
+                            fresco:placeholderImage="@drawable/personal_icon_default_avatar"
+                            fresco:placeholderImageScaleType="centerInside"/>
                         <LinearLayout
                             android:layout_alignTop="@id/user_img_view"
                             android:layout_alignBottom="@id/user_img_view"

@@ -2,6 +2,7 @@ package hy.zc.wfj.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -14,11 +15,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import hy.zc.wfj.R;
 import hy.zc.wfj.activity.MyLoginActivity;
 import hy.zc.wfj.activity.MyMessageActivity;
 import hy.zc.wfj.activity.MySettingsActivity;
 import hy.zc.wfj.activity.PersonalInfoActivity;
+import hy.zc.wfj.customview.RoundImageView;
+import hy.zc.wfj.data.UserLoginObject;
 import hy.zc.wfj.utility.SharedPrefUtility;
 
 /**
@@ -40,7 +45,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
     private ImageButton avatarImage;
     private ImageButton settingsImage;
     private ImageButton messageImage;
-    private ImageButton user_img_view;
+    private SimpleDraweeView user_img_view;
 
     private LinearLayout concern_goods_layout;
     private LinearLayout concern_shop_layout;
@@ -53,6 +58,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
     private RelativeLayout personal_for_logout_info_layout;//登出
     private RelativeLayout personal_for_login_info_layout;//登录
 
+    private UserLoginObject userLoginObject =null;
 
 //    private TextView concern_browser_tv;
 
@@ -102,7 +108,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
         avatarImage = (ImageButton) rootView.findViewById(R.id.personal_unlogin_avatar);
         settingsImage = (ImageButton) rootView.findViewById(R.id.personal_setting);
         messageImage = (ImageButton) rootView.findViewById(R.id.personal_common_message);
-        user_img_view=(ImageButton)rootView.findViewById(R.id.user_img_view);
+        user_img_view = (SimpleDraweeView) rootView.findViewById(R.id.user_img_view);
         //初始化关注
         concern_goods_layout = (LinearLayout) rootView.findViewById(R.id.personal_goods_list_title);
         concern_shop_layout = (LinearLayout) rootView.findViewById(R.id.personal_shop_list_title);
@@ -117,6 +123,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
 
 //        concern_browser_tv=(TextView)rootView.findViewById(R.id.personal_browsing_list_title);
     }
+
     /**
      * set component listener
      * 给组件添加监听
@@ -141,6 +148,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
         user_img_view.setOnClickListener(this);
 //        concern_browser_tv.setOnClickListener(this);
     }
+
     /**
      * 根据登录情况，进行切换用户信息的布局
      */
@@ -156,7 +164,6 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
     @Override
     public void onClick(View v) {
 
@@ -170,10 +177,6 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
                 startActivityForResult(goLoginIntent, LOGIN_REQUEST_CODE);
             } else {
                 switch (v.getId()) {
-                    case R.id.personal_unlogin_avatar://头像
-                        myToast("avatar");
-                        break;
-
                     case R.id.personal_common_message://信息
                         Intent intent_message = new Intent(getActivity(), MyMessageActivity.class);
                         startActivityForResult(intent_message, MESSAGE_REQUEST_CODE);
@@ -223,7 +226,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
      * 跳转到个人信息界面
      */
     private void goPersonInfo() {
-        Intent goPersonalInfo=new Intent(getActivity(), PersonalInfoActivity.class);
+        Intent goPersonalInfo = new Intent(getActivity(), PersonalInfoActivity.class);
         startActivityForResult(goPersonalInfo, PERSONAL_INFO_REQUEST_CODE);
     }
 
@@ -234,10 +237,21 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
             case SETTINGS_REQUEST_CODE:
 
                 break;
-            case LOGIN_REQUEST_CODE:
-                Log.d(TAG, getClass().getName() + "    login");
+            case LOGIN_REQUEST_CODE://登录界面返回，保存数据
+                if (resultCode== Activity.RESULT_OK) {
+                        Bundle bundle = data.getExtras();
+                    if (bundle != null) {
+                        userLoginObject =(UserLoginObject) bundle.getSerializable("receiveData");
+                    }
+                }
+//                UserLoginObject userLoginObject =(UserLoginObject) extras.getSerializable("receiveData");
+//                Log.i(TAG,userLoginObject.getData().getLoginName());
                 break;
             case MESSAGE_REQUEST_CODE:
+
+                break;
+            case PERSONAL_INFO_REQUEST_CODE:
+
 
                 break;
             default:
@@ -267,6 +281,21 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
         super.onResume();
 //       根据登录情况，判断显示哪个布局文件
         changeLoginLayout();
+//       更新界面显示
+        adapterData();
+    }
+
+    /**
+     * 通过接受过来的数据给组件赋值，头像，昵称，级别等等
+     */
+    private void adapterData() {
+        if (userLoginObject != null) {//接收到数据才进行赋值的
+            StringBuilder stringBuilder=new StringBuilder("http://192.168.10.7:8085/b2b2c/");
+            stringBuilder.append(userLoginObject.getData().getPhotoUrl());
+            user_img_view.setImageURI(Uri.parse(stringBuilder.toString()));
+        }else {//此处表示用户只是执行了返回操作，并不是登录
+            Log.i(TAG, "未登录");
+        }
     }
 
     @Override
