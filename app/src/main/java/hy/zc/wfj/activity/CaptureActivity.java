@@ -15,22 +15,26 @@
  */
 package hy.zc.wfj.activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -68,6 +72,7 @@ public final class CaptureActivity extends FrameActivity implements SurfaceHolde
 	private RelativeLayout scanCropView;
 	private ImageView scanLine;
 
+	private ImageButton common_title_back_btn;
 	private CheckBox camera_light_open;
 	private Boolean isOpenLight=false;
 	private Rect mCropRect = null;
@@ -105,6 +110,15 @@ public final class CaptureActivity extends FrameActivity implements SurfaceHolde
 		animation.setRepeatMode(Animation.RESTART);
 		scanLine.startAnimation(animation);
 
+		common_title_back_btn=(ImageButton)findViewById(R.id.common_title_back_btn);
+		common_title_back_btn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = getIntent();
+				setResult(Activity.RESULT_OK,intent);
+				finish();
+			}
+		});
 		camera_light_open=(CheckBox)findViewById(R.id.camera_light_open);
 		camera_light_open.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override

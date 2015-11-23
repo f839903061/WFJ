@@ -15,12 +15,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <ImageView
+        <LinearLayout
             android:id="@+id/capture_mask_top"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_alignParentTop="true"
-            android:background="@drawable/shadow" />
+            android:background="@drawable/shadow"
+            android:orientation="horizontal"
+            android:paddingTop="10.0dp"
+            android:paddingLeft="10.0dp">
+            <ImageButton
+                android:id="@id/common_title_back_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:src="@drawable/common_title_back_click" />
+
+            <TextView
+                android:id="@id/common_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="16"
+                android:gravity="center"
+                android:text="@string/scanner_title_text" />
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/capture_crop_view"
