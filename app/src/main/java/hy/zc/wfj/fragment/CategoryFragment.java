@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
@@ -30,6 +31,7 @@ import java.util.List;
 import hy.zc.wfj.App;
 import hy.zc.wfj.R;
 import hy.zc.wfj.activity.CaptureActivity;
+import hy.zc.wfj.activity.SearchActivity;
 import hy.zc.wfj.adapter.LeftListAdapter;
 import hy.zc.wfj.adapter.RightListAdapter;
 import hy.zc.wfj.data.CategoryListObject;
@@ -50,6 +52,7 @@ public class CategoryFragment extends Fragment {
     public static final String PARSE_ERROR = "解析出问题了";
     public static final String IS_CATEGORY = "isCategory";
     public static final int SCAN_REQUEST_CODE = 4;
+    public static final int SEARCH_REQUEST_CODE = 5;
 
     private OnFragmentInteractionListener mListener;
 
@@ -59,6 +62,7 @@ public class CategoryFragment extends Fragment {
     private ListView mLeftListView;
     private ListView mRightListView;
     private FrameLayout home_search_layout;
+    private AutoCompleteTextView homeActivity_autoComplete;
 
     private LeftListAdapter mleftListAdapter;
     private RightListAdapter mrightListAdapter;
@@ -176,6 +180,7 @@ public class CategoryFragment extends Fragment {
         mLeftListView = (ListView) rootView.findViewById(R.id.left_list);
         mRightListView = (ListView) rootView.findViewById(R.id.right_list);
         home_search_layout=(FrameLayout)rootView.findViewById(R.id.home_search_layout);
+        homeActivity_autoComplete=(AutoCompleteTextView)rootView.findViewById(R.id.homeActivity_autoComplete);
         mCategoryObjectList = new ArrayList<>();
 
         home_search_layout.setOnClickListener(new View.OnClickListener() {
@@ -183,6 +188,13 @@ public class CategoryFragment extends Fragment {
             public void onClick(View v) {
                 Intent goScan=new Intent(getActivity(), CaptureActivity.class);
                 startActivityForResult(goScan, SCAN_REQUEST_CODE);
+            }
+        });
+        homeActivity_autoComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goSearch=new Intent(getActivity(), SearchActivity.class);
+                startActivityForResult(goSearch, SEARCH_REQUEST_CODE);
             }
         });
     }

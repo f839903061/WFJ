@@ -194,4 +194,6 @@
     <item name="birthday_layout" type="id" />
     <item name="address_layout" type="id" />
     <item name="account_layout" type="id" />
+    <item name="search_btn" type="id" />
+    <item name="search_title" type="id" />
 </resources>

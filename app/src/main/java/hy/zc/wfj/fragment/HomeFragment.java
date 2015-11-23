@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -22,6 +23,7 @@ import hy.zc.wfj.R;
 import hy.zc.wfj.activity.CaptureActivity;
 import hy.zc.wfj.activity.MyLoginActivity;
 import hy.zc.wfj.activity.MyMessageActivity;
+import hy.zc.wfj.activity.SearchActivity;
 import hy.zc.wfj.utility.SharedPrefUtility;
 
 /**
@@ -44,6 +46,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public static final int LOGIN_REQUEST_CODE = 1;
     public static final int MESSAGE_REQUEST_CODE = 3;
     public static final int SCAN_REQUEST_CODE = 4;
+    public static final int SEARCH_REQUEST_CODE = 5;
 
     private static HomeFragment homeFragment = null;
     // TODO: Rename and change types of parameters
@@ -55,6 +58,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private RelativeLayout to_message_btn;
     private LinearLayout home_search_button;
     private Boolean islogin = false;
+    private AutoCompleteTextView homeActivity_autoComplete;
     private OnFragmentInteractionListener mListener;
 
     public static synchronized HomeFragment getInstance() {
@@ -122,10 +126,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void initializeComponent() {
         to_message_btn=(RelativeLayout)rootView.findViewById(R.id.to_message_btn);
+        homeActivity_autoComplete=(AutoCompleteTextView)rootView.findViewById(R.id.homeActivity_autoComplete);
+
         home_search_button=(LinearLayout)rootView.findViewById(R.id.home_search_button);
 
         to_message_btn.setOnClickListener(this);
         home_search_button.setOnClickListener(this);
+        homeActivity_autoComplete.setOnClickListener(this);
 
         mWebView = (WebView) rootView.findViewById(R.id.home_webView);
 //        mWebView.loadUrl("http://www.baidu.com");
@@ -255,6 +262,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     Intent goMsgIntent=new Intent(getActivity(), MyMessageActivity.class);
                     startActivityForResult(goMsgIntent,MESSAGE_REQUEST_CODE);
                 }
+                break;
+            case R.id.homeActivity_autoComplete:
+                Intent goSearch=new Intent(getActivity(), SearchActivity.class);
+                startActivityForResult(goSearch, SEARCH_REQUEST_CODE);
                 break;
             case R.id.home_search_button://跳转到二维码扫描界面
                 Intent goScan=new Intent(getActivity(), CaptureActivity.class);
