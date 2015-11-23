@@ -44,7 +44,7 @@ import hy.zc.wfj.utility.OkHttpStack;
  * {@link CategoryFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends FrameFragment {
 
     public static final String TAG = "fengluchun";
     public static final String RECEIVER_NULL_ERROR = " 网络联通，接收数据却为空";
@@ -119,9 +119,10 @@ public class CategoryFragment extends Fragment {
                 if (jsonObject != null) {
                     mLeftList = jsonObject.getData();
                     if (mLeftList != null) {
-                        for (int i = 0; i < mLeftList.size(); i++) {
-                            Log.i(TAG, mLeftList.get(i).getCategoryDescription());
-                        }
+                        //打印一下数据，测试用的
+//                        for (int i = 0; i < mLeftList.size(); i++) {
+//                            Log.i(TAG, mLeftList.get(i).getCategoryDescription());
+//                        }
                         //将数据传给adapter
                         setAdapter();
                     } else {

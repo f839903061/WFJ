@@ -16,7 +16,7 @@ import hy.zc.wfj.R;
  * {@link CartFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class CartFragment extends Fragment {
+public class CartFragment extends FrameFragment {
 
     private OnFragmentInteractionListener mListener;
 

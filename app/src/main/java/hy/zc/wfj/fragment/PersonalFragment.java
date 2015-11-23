@@ -32,7 +32,7 @@ import hy.zc.wfj.utility.SharedPrefUtility;
  * {@link PersonalFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class PersonalFragment extends Fragment implements View.OnClickListener {
+public class PersonalFragment extends FrameFragment implements View.OnClickListener {
 
     public static final String TAG = "fengluchun";
     public static final String IS_LOGIN = "isLogin";
