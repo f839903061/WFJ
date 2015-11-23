@@ -196,4 +196,5 @@
     <item name="account_layout" type="id" />
     <item name="search_btn" type="id" />
     <item name="search_title" type="id" />
+    <item name="img_tmp" type="id" />
 </resources>
