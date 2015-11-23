@@ -15,16 +15,11 @@
  */
 package hy.zc.wfj.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ClipData;
-import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Rect;
-import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -38,7 +33,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.google.zxing.Result;
 
@@ -47,12 +41,10 @@ import java.lang.reflect.Field;
 
 import hy.zc.wfj.R;
 import hy.zc.wfj.camera.CameraManager;
-import hy.zc.wfj.camera.open.OpenCameraInterface;
 import hy.zc.wfj.decode.DecodeThread;
 import hy.zc.wfj.utility.BeepManager;
 import hy.zc.wfj.utility.CaptureActivityHandler;
 import hy.zc.wfj.utility.InactivityTimer;
-import hy.zc.wfj.utility.SharedPrefUtility;
 
 /**
  * This activity opens the camera and does the actual scanning on a background
@@ -63,9 +55,8 @@ import hy.zc.wfj.utility.SharedPrefUtility;
  * @author dswitkin@google.com (Daniel Switkin)
  * @author Sean Owen
  */
-public final class CaptureActivity extends Activity implements SurfaceHolder.Callback {
+public final class CaptureActivity extends FrameActivity implements SurfaceHolder.Callback {
 
-	private static final String TAG = CaptureActivity.class.getSimpleName();
 
 	private CameraManager cameraManager;
 	private CaptureActivityHandler handler;

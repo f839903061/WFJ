@@ -12,10 +12,9 @@ import android.widget.ImageButton;
 import hy.zc.wfj.R;
 import hy.zc.wfj.utility.SharedPrefUtility;
 
-public class MySettingsActivity extends Activity implements View.OnClickListener{
+public class MySettingsActivity extends FrameActivity implements View.OnClickListener{
 
     public static final String IS_LOGIN = "isLogin";
-    public static final String TAG = "fengluchun";
     private ImageButton common_title_back_btn;
     private Button logout_comfirm_button;
     private Boolean isLogin=false;

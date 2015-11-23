@@ -1,6 +1,5 @@
 package hy.zc.wfj.activity;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -13,7 +12,7 @@ import hy.zc.wfj.R;
 import hy.zc.wfj.decode.DecodeThread;
 
 
-public class ResultActivity extends Activity {
+public class ResultActivity extends FrameActivity {
 
 	private ImageView mResultImage;
 	private TextView mResultText;

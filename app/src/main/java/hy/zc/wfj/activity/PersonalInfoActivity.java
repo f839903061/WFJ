@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import hy.zc.wfj.R;
 
-public class PersonalInfoActivity extends Activity implements View.OnClickListener{
+public class PersonalInfoActivity extends FrameActivity implements View.OnClickListener{
 
     private TextView common_title_txt;
     private ImageButton common_title_back_btn;
@@ -38,6 +38,7 @@ public class PersonalInfoActivity extends Activity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.common_title_back_btn:
+
                 goBack();
                 break;
             default:

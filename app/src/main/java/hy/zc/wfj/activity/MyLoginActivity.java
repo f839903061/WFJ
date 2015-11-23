@@ -20,15 +20,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import hy.zc.wfj.App;
-import hy.zc.wfj.Main2Activity;
 import hy.zc.wfj.R;
 import hy.zc.wfj.data.UserLoginErrorObject;
 import hy.zc.wfj.data.UserLoginObject;
 import hy.zc.wfj.utility.SharedPrefUtility;
 
-public class MyLoginActivity extends Activity implements View.OnClickListener {
+public class MyLoginActivity extends FrameActivity implements View.OnClickListener {
 
-    public static final String TAG = "fengluchun";
     public static final String NAME_PASS_CANNOT_NULL = "用户名或者密码不能为空";
     public static final String ENTER_ERROR = "输入有问题";
     public static final String IS_LOGIN = "isLogin";

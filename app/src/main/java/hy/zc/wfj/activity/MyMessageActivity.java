@@ -8,7 +8,7 @@ import android.widget.ImageButton;
 
 import hy.zc.wfj.R;
 
-public class MyMessageActivity extends Activity implements View.OnClickListener {
+public class MyMessageActivity extends FrameActivity implements View.OnClickListener {
 
     private ImageButton common_title_back_btn;
     private ImageButton message_setting;
