@@ -16,10 +16,10 @@ public class BaseActivity extends Activity {
         Log.i(TAG,ptext);
     }
     public void showLogd(String ptext){
-        Log.i(TAG,ptext);
+        Log.d(TAG,ptext);
     }
     public void showLoge(String ptext){
-        Log.i(TAG,ptext);
+        Log.e(TAG,ptext);
     }
     public void showLogw(String ptext){
         Log.w(TAG, ptext);

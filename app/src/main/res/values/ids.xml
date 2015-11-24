@@ -197,4 +197,7 @@
     <item name="search_btn" type="id" />
     <item name="search_title" type="id" />
     <item name="img_tmp" type="id" />
+    <item name="layout_temp" type="id" />
+    <item name="empty_View" type="id" />
+    <item name="order_web" type="id" />
 </resources>

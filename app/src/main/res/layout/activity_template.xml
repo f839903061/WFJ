@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@id/title_template"
+        layout="@layout/common_title" />
+
+    <LinearLayout
+        android:id="@id/layout_temp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <WebView
+            android:id="@id/order_web"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:textSize="20.0sp"
+            android:textColor="#ff848689"
+            android:layout_gravity="center_horizontal"
+            android:id="@id/empty_View"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="112.0dip"
+            android:text="您还没有相关订单"
+            android:drawableTop="@drawable/order_list_no_data"
+            android:drawablePadding="43.0dip" />
+    </LinearLayout>
+</LinearLayout>

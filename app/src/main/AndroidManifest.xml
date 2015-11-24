@@ -47,8 +47,9 @@
             android:name=".activity.ResultActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" />
-        <activity android:name=".activity.PersonalInfoActivity"></activity>
-        <activity android:name=".activity.SearchActivity"></activity>
+        <activity android:name=".activity.PersonalInfoActivity" />
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.TemplateActivity" />
     </application>
 
 </manifest>

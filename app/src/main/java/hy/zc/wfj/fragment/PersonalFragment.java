@@ -2,7 +2,6 @@ package hy.zc.wfj.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -22,7 +21,8 @@ import hy.zc.wfj.activity.MyLoginActivity;
 import hy.zc.wfj.activity.MyMessageActivity;
 import hy.zc.wfj.activity.MySettingsActivity;
 import hy.zc.wfj.activity.PersonalInfoActivity;
-import hy.zc.wfj.customview.RoundImageView;
+import hy.zc.wfj.activity.TemplateActivity;
+import hy.zc.wfj.data.OrderDataObject;
 import hy.zc.wfj.data.UserLoginObject;
 import hy.zc.wfj.utility.SharedPrefUtility;
 
@@ -34,7 +34,6 @@ import hy.zc.wfj.utility.SharedPrefUtility;
  */
 public class PersonalFragment extends FrameFragment implements View.OnClickListener {
 
-    public static final String TAG = "fengluchun";
     public static final String IS_LOGIN = "isLogin";
     public static final int LOGIN_REQUEST_CODE = 1;
     public static final int SETTINGS_REQUEST_CODE = 2;
@@ -58,7 +57,7 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
     private RelativeLayout personal_for_logout_info_layout;//登出
     private RelativeLayout personal_for_login_info_layout;//登录
 
-    private UserLoginObject userLoginObject =null;
+    private UserLoginObject userLoginObject = null;
 
 //    private TextView concern_browser_tv;
 
@@ -176,10 +175,10 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
                 Intent goLoginIntent = new Intent(getActivity(), MyLoginActivity.class);
                 startActivityForResult(goLoginIntent, LOGIN_REQUEST_CODE);
             } else {
+                Bundle bundle;
                 switch (v.getId()) {
                     case R.id.personal_common_message://信息
-                        Intent intent_message = new Intent(getActivity(), MyMessageActivity.class);
-                        startActivityForResult(intent_message, MESSAGE_REQUEST_CODE);
+                        goToActivityForResult(MyMessageActivity.class, MESSAGE_REQUEST_CODE, null);
                         break;
                     //concern incident
                     case R.id.personal_goods_list_title://关注商品
@@ -189,28 +188,36 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
                         myToast("shop");
                         break;
                     case R.id.order_layout://订单
+                        bundle = setOrderData(OrderDataObject.TITLE_ALL, OrderDataObject.TITLE_KEY);
+                        goToActivity(TemplateActivity.class, bundle);
+                        break;
+                    case R.id.wait_for_payment_layout://跳转到待付款，并携带数据过去
+                        bundle = setOrderData(OrderDataObject.TITLE_PAY, OrderDataObject.TITLE_KEY);
+                        goToActivity(TemplateActivity.class, bundle);
+                        break;
+                    case R.id.wait_sign_in_layout://跳转到待收货，并携带数据过去
+                        bundle = setOrderData(OrderDataObject.TITLE_SIGN, OrderDataObject.TITLE_KEY);
+                        goToActivity(TemplateActivity.class,bundle );
 
                         break;
-                    case R.id.wait_for_payment_layout://待付款
+                    case R.id.wait_comment_layout://跳转到待评价，并携带数据过去
+                        bundle = setOrderData(OrderDataObject.TITLE_COMMENT, OrderDataObject.TITLE_KEY);
+                        goToActivity(TemplateActivity.class, bundle);
 
                         break;
-                    case R.id.wait_sign_in_layout://待收货
+                    case R.id.wait_order_after_sale_layout://跳转到售后，并携带数据过去
+                        bundle = setOrderData(OrderDataObject.TITLE_AFTER_SALE, OrderDataObject.TITLE_KEY);
+                        goToActivity(TemplateActivity.class,bundle );
 
                         break;
-                    case R.id.wait_comment_layout://待评价
-
-                        break;
-                    case R.id.wait_order_after_sale_layout://售后
-
-                        break;
-                    case R.id.service_layout:
+                    case R.id.service_layout://跳转到服务界面
 
                         break;
                     case R.id.personal_for_login_info_layout://点击头像所在的layout
-                        goPersonInfo();
+                        goToActivityForResult(PersonalInfoActivity.class, PERSONAL_INFO_REQUEST_CODE, null);
                         break;
                     case R.id.user_img_view://点击头像
-                        goPersonInfo();
+                        goToActivityForResult(PersonalInfoActivity.class, PERSONAL_INFO_REQUEST_CODE, null);
                         break;
 //            case R.id.personal_browsing_list_title:
 //                myToast("browser");
@@ -223,12 +230,20 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
     }
 
     /**
-     * 跳转到个人信息界面
+     * 跳转订单时  封装传输的数据
+     *
+     * @param ptitle
+     * @param pkey
+     * @return
      */
-    private void goPersonInfo() {
-        Intent goPersonalInfo = new Intent(getActivity(), PersonalInfoActivity.class);
-        startActivityForResult(goPersonalInfo, PERSONAL_INFO_REQUEST_CODE);
+    private Bundle setOrderData(String ptitle, String pkey) {
+        OrderDataObject odo = new OrderDataObject();
+        odo.setTitle(ptitle);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(pkey, odo);
+        return bundle;
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -238,10 +253,10 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
 
                 break;
             case LOGIN_REQUEST_CODE://登录界面返回，保存数据
-                if (resultCode== Activity.RESULT_OK) {
-                        Bundle bundle = data.getExtras();
+                if (resultCode == Activity.RESULT_OK) {
+                    Bundle bundle = data.getExtras();
                     if (bundle != null) {
-                        userLoginObject =(UserLoginObject) bundle.getSerializable("receiveData");
+                        userLoginObject = (UserLoginObject) bundle.getSerializable("receiveData");
                     }
                 }
 //                UserLoginObject userLoginObject =(UserLoginObject) extras.getSerializable("receiveData");
@@ -290,11 +305,11 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
      */
     private void adapterData() {
         if (userLoginObject != null) {//接收到数据才进行赋值的
-            StringBuilder stringBuilder=new StringBuilder("http://192.168.10.7:8085/b2b2c/");
+            StringBuilder stringBuilder = new StringBuilder("http://192.168.10.7:8085/b2b2c/");
             stringBuilder.append(userLoginObject.getData().getPhotoUrl());
             user_img_view.setImageURI(Uri.parse(stringBuilder.toString()));
-        }else {//此处表示用户只是执行了返回操作，并不是登录
-            Log.i(TAG, "未登录");
+        } else {//此处表示用户只是执行了返回操作，并不是登录
+           showLogi("未登录");
         }
     }
 

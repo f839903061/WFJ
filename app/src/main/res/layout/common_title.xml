@@ -32,6 +32,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:background="@color/transparent"
+        android:src="@drawable/common_title_back_click"
+        android:visibility="invisible"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" />
 </RelativeLayout>
