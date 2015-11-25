@@ -50,6 +50,7 @@
         <activity android:name=".activity.PersonalInfoActivity" />
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.TemplateActivity" />
+        <activity android:name=".activity.ServerActivity"></activity>
     </application>
 
 </manifest>

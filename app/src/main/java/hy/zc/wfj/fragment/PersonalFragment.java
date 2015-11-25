@@ -21,6 +21,7 @@ import hy.zc.wfj.activity.MyLoginActivity;
 import hy.zc.wfj.activity.MyMessageActivity;
 import hy.zc.wfj.activity.MySettingsActivity;
 import hy.zc.wfj.activity.PersonalInfoActivity;
+import hy.zc.wfj.activity.ServerActivity;
 import hy.zc.wfj.activity.TemplateActivity;
 import hy.zc.wfj.data.OrderDataObject;
 import hy.zc.wfj.data.UserLoginObject;
@@ -198,20 +199,17 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
                     case R.id.wait_sign_in_layout://跳转到待收货，并携带数据过去
                         bundle = setOrderData(OrderDataObject.TITLE_SIGN, OrderDataObject.TITLE_KEY);
                         goToActivity(TemplateActivity.class,bundle );
-
                         break;
                     case R.id.wait_comment_layout://跳转到待评价，并携带数据过去
                         bundle = setOrderData(OrderDataObject.TITLE_COMMENT, OrderDataObject.TITLE_KEY);
                         goToActivity(TemplateActivity.class, bundle);
-
                         break;
                     case R.id.wait_order_after_sale_layout://跳转到售后，并携带数据过去
                         bundle = setOrderData(OrderDataObject.TITLE_AFTER_SALE, OrderDataObject.TITLE_KEY);
                         goToActivity(TemplateActivity.class,bundle );
-
                         break;
                     case R.id.service_layout://跳转到服务界面
-
+                        goToActivity(ServerActivity.class,null);
                         break;
                     case R.id.personal_for_login_info_layout://点击头像所在的layout
                         goToActivityForResult(PersonalInfoActivity.class, PERSONAL_INFO_REQUEST_CODE, null);

@@ -63,7 +63,12 @@ public class RightGridAdapter extends BaseAdapter {
         builder.append(mList.get(position).getCategoryImage());
         Uri uri=Uri.parse(builder.toString());
         viewHolder.simpleDraweeView.setImageURI(uri);
+        viewHolder.simpleDraweeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         return convertView;
     }
 
