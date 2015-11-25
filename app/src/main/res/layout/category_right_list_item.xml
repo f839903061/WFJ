@@ -55,7 +55,7 @@
     <hy.zc.wfj.customview.MyGridView
         android:id="@id/category_right_grid"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:horizontalSpacing="5dp"
         android:numColumns="3"
         android:listSelector="#00000000"

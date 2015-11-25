@@ -69,7 +69,7 @@ public class CategoryFragment extends FrameFragment {
     //all category object
     private ArrayList<CategoryListObject> mCategoryObjectList;
     private List<CategroyJsonObject.DataEntity> mLeftList;
-    private List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> mRightList;
+    private List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> mRightList=new ArrayList<>();
     private List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> tempRightList;
 
     public static synchronized CategoryFragment getInstance() {
@@ -148,7 +148,7 @@ public class CategoryFragment extends FrameFragment {
     private void setAdapter() {
 
         mleftListAdapter = new LeftListAdapter(getActivity().getApplication(), mLeftList);
-        mRightList=mLeftList.get(0).getChildProductType();
+        mRightList.addAll(mLeftList.get(0).getChildProductType());
         mrightListAdapter = new RightListAdapter(getActivity().getApplication(), mRightList);
         //right list add headview
         //给右边的listview添加头布局，就是一个广告位单张图片
