@@ -46,12 +46,5 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
         }
     }
 
-    /**
-     * 返回刚才的Activity
-     */
-    private void goBack() {
-        Intent goBackIntent=getIntent();
-        setResult(Activity.RESULT_OK,goBackIntent);
-        finish();
-    }
+
 }

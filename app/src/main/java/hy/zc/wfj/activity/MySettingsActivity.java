@@ -94,14 +94,6 @@ public class MySettingsActivity extends FrameActivity implements View.OnClickLis
         }
     }
 
-    /**
-     * 返回之前跳转过来的activity
-     */
-    private void goBack() {
-        Intent gobackIntent=getIntent();
-        setResult(Activity.RESULT_OK,gobackIntent);
-        finish();
-    }
 
 
 }

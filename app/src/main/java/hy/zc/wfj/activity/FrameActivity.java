@@ -1,5 +1,8 @@
 package hy.zc.wfj.activity;
 
+import android.app.Activity;
+import android.content.Intent;
+
 import hy.zc.wfj.activity.base.BaseActivity;
 
 /**
@@ -7,4 +10,11 @@ import hy.zc.wfj.activity.base.BaseActivity;
  */
 public class FrameActivity extends BaseActivity {
 
+
+
+    public void goBack(){
+        Intent goBack = getIntent();
+        setResult(Activity.RESULT_OK,goBack);
+        finish();
+    }
 }
