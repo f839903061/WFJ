@@ -11,7 +11,7 @@
         android:background="@color/white">
 
         <ImageButton
-            android:id="@+id/common_title_back_btn"
+            android:id="@id/common_title_back_btn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
