@@ -1,22 +1,17 @@
 package hy.zc.wfj.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import hy.zc.wfj.R;
 
 public class CommodityDetailsActivity extends FrameActivity implements View.OnClickListener {
 
     private LinearLayout mBack;
-    private SimpleDraweeView mBackBtn;
-
     private RadioGroup mRadioGroup;
 
     @Override
@@ -32,8 +27,9 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
     private void initializeComponent() {
         mBack = (LinearLayout) findViewById(R.id.home_search_button);
         mRadioGroup = (RadioGroup) findViewById(R.id.commodity_radiogroup);
-
         mBack.setOnClickListener(this);
+
+        mRadioGroup.check(R.id.commodity_composite);
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -52,7 +48,7 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
 
                         break;
                 }
-
+                showToast("数据暂时没有加载。。。");
             }
         });
     }
