@@ -147,9 +147,9 @@ public class CategoryFragment extends FrameFragment {
      */
     private void setAdapter() {
 
-        mleftListAdapter = new LeftListAdapter(getActivity().getApplication(), mLeftList);
+        mleftListAdapter = new LeftListAdapter(getActivity(), mLeftList);
         mRightList.addAll(mLeftList.get(0).getChildProductType());
-        mrightListAdapter = new RightListAdapter(getActivity().getApplication(), mRightList);
+        mrightListAdapter = new RightListAdapter(getActivity(), mRightList);
         //right list add headview
         //给右边的listview添加头布局，就是一个广告位单张图片
 //        mRightListView.addHeaderView(LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.category_right_list_head_view, null));
