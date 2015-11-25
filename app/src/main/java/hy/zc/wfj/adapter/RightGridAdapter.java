@@ -1,6 +1,8 @@
 package hy.zc.wfj.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +14,9 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
+import hy.zc.wfj.Main2Activity;
 import hy.zc.wfj.R;
+import hy.zc.wfj.activity.CommodityDetailsActivity;
 import hy.zc.wfj.data.CategroyJsonObject;
 
 /**
@@ -66,15 +70,23 @@ public class RightGridAdapter extends BaseAdapter {
         viewHolder.simpleDraweeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                openCommodityDetails();
+            }
 
+            private void openCommodityDetails() {
+                Intent intent=new Intent();
+                intent.setClass(mContext,CommodityDetailsActivity.class);
+                ((Activity)mContext).startActivity(intent);
             }
         });
         return convertView;
     }
 
+
     public class ViewHolder{
         SimpleDraweeView simpleDraweeView;
         TextView textView;
     }
+
 
 }

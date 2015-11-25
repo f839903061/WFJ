@@ -200,4 +200,8 @@
     <item name="layout_temp" type="id" />
     <item name="empty_View" type="id" />
     <item name="order_web" type="id" />
+    <item name="commodity_composite" type="id" />
+    <item name="commodity_sales_volume" type="id" />
+    <item name="commodity_price" type="id" />
+    <item name="commodity_radiogroup" type="id" />
 </resources>

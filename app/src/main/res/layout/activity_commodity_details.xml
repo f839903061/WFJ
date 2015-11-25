@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--头部布局-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50.0dp">
+
+        <LinearLayout
+            android:id="@id/home_search_button"
+            android:layout_width="54.0dip"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@id/common_title_back_btn"
+                android:layout_width="20.0dip"
+                android:layout_height="20.0dip"
+                android:scaleType="centerInside"
+                fresco:placeholderImage="@drawable/common_title_back_click" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@id/home_title_search"
+            android:layout_width="fill_parent"
+            android:layout_height="31.0dip"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/to_message_btn"
+            android:layout_toRightOf="@id/home_search_button"
+            android:background="@drawable/topbar_edittext_background"
+            android:gravity="center_vertical"
+            android:paddingLeft="10.0dip">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@id/iv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_search" />
+
+            <AutoCompleteTextView
+                android:id="@id/homeActivity_autoComplete"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="2.0dip"
+                android:layout_toRightOf="@id/iv_search"
+                android:background="@color/transparent"
+                android:completionThreshold="1"
+                android:dropDownWidth="fill_parent"
+                android:focusable="false"
+                android:gravity="center_vertical"
+                android:hint="@string/homeActivity_autoComplete"
+                android:paddingBottom="2.0dip"
+                android:paddingRight="20.0dip"
+                android:paddingTop="2.0dip"
+                android:singleLine="true"
+                android:textColor="@color/search_font_dark_grey"
+                android:textColorHint="@color/search_title_hint_text_color"
+                android:textSize="14.0dip" />
+
+            <!--voice picture-->
+            <!--<LinearLayout-->
+            <!--android:id="@id/homeActivity_voice"-->
+            <!--android:layout_width="32.0dip"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:paddingLeft="9.0dip"-->
+            <!--android:paddingRight="9.0dip">-->
+
+            <!--<com.facebook.drawee.view.SimpleDraweeView-->
+            <!--android:layout_width="12.0dip"-->
+            <!--android:layout_height="20.0dip"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:background="@drawable/app_icon_voice"-->
+            <!--android:scaleType="centerInside" />-->
+            <!--</LinearLayout>-->
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@id/to_message_btn"
+            android:layout_width="54.0dip"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:clickable="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@id/home_message_img"
+                    android:layout_width="20.0dip"
+                    android:layout_height="20.0dip"
+                    android:scaleType="centerInside"
+                    fresco:placeholderImage="@drawable/jshop_product_list_top_grid_selector" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50.0dp">
+        <RadioGroup
+            android:id="@id/commodity_radiogroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@id/commodity_composite"
+                android:text="综合"
+                style="@style/commodity_radiobutton_style" />
+            <RadioButton
+                android:id="@id/commodity_sales_volume"
+                android:text="销量"
+                style="@style/commodity_radiobutton_style" />
+            <RadioButton
+                android:id="@id/commodity_price"
+                android:text="价格"
+                style="@style/commodity_radiobutton_style" />
+        </RadioGroup>
+    </LinearLayout>
+
+</LinearLayout>
