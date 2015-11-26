@@ -1,8 +1,6 @@
 package hy.zc.wfj.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +17,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import hy.zc.wfj.App;
 import hy.zc.wfj.R;
 import hy.zc.wfj.data.UserLoginErrorObject;
@@ -28,7 +29,7 @@ import hy.zc.wfj.utility.SharedPrefUtility;
 public class MyLoginActivity extends FrameActivity implements View.OnClickListener {
 
     public static final String NAME_PASS_CANNOT_NULL = "用户名或者密码不能为空";
-    public static final String ENTER_ERROR = "输入有问题";
+    public static final String ENTER_ERROR = "输入格式不正确";
     public static final String IS_LOGIN = "isLogin";
     public static final String CONNECT_ERR = "http 连接失败";
 
@@ -38,6 +39,7 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
     private Button login_comfirm_button;
     private ProgressDialog pd;
     private TextView common_title_txt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +55,7 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
         login_input_name = (EditText) this.findViewById(R.id.login_input_name);
         login_input_password = (EditText) this.findViewById(R.id.login_input_password);
         login_comfirm_button = (Button) this.findViewById(R.id.login_comfirm_button);
-        common_title_txt=(TextView)this.findViewById(R.id.common_title_txt);
+        common_title_txt = (TextView) this.findViewById(R.id.common_title_txt);
         common_title_txt.setText("登录");
     }
 
@@ -73,7 +75,7 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
                 String password = login_input_password.getText().toString().trim();
                 if (name.equals("") && password.equals("")) {
                     Toast.makeText(getApplicationContext(), NAME_PASS_CANNOT_NULL, Toast.LENGTH_SHORT).show();
-                } else if (!name.equals("") && !password.equals("")) {
+                } else if (isEmail(name)||isMobileNO(name) && !password.equals("")) {
                     pd = new ProgressDialog(MyLoginActivity.this);
                     pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     pd.setMessage("请稍等。。。");
@@ -136,5 +138,24 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
     protected void onStop() {
         App.cancelAllRequests(IS_LOGIN);
         super.onStop();
+    }
+
+    public boolean isMobileNO(String mobiles) {
+        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+        Matcher m = p.matcher(mobiles);
+        return m.matches();
+    }
+
+    /**
+     * 判断输入的邮箱格式是否正确
+     *
+     * @param email
+     * @return
+     */
+    public static boolean isEmail(String email) {
+        String str = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
+        Pattern p = Pattern.compile(str);
+        Matcher m = p.matcher(email);
+        return m.matches();
     }
 }
