@@ -56,7 +56,7 @@ public class MySettingsActivity extends FrameActivity implements View.OnClickLis
      *  如果未登录，隐藏退出按钮
      */
     private void logoutBtnVisiable(){
-        isLogin=(Boolean) SharedPrefUtility.getParam(getApplicationContext(), IS_LOGIN, false);
+        isLogin=(Boolean) SharedPrefUtility.getParam(MySettingsActivity.this, SharedPrefUtility.IS_LOGIN, false);
         if (isLogin) {
             logout_comfirm_button.setVisibility(View.VISIBLE);
         }else {
@@ -77,7 +77,8 @@ public class MySettingsActivity extends FrameActivity implements View.OnClickLis
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         logout_comfirm_button.setVisibility(View.GONE);
-                        SharedPrefUtility.setParam(getApplicationContext(),IS_LOGIN,false);
+                        SharedPrefUtility.setParam(MySettingsActivity.this, SharedPrefUtility.IS_LOGIN, false);
+                        SharedPrefUtility.removeParam(MySettingsActivity.this,SharedPrefUtility.LOGIN_DATA);
                         goBack();
                     }
                 });

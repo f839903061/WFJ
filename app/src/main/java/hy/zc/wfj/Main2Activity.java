@@ -88,7 +88,7 @@ public class Main2Activity extends Activity implements
      * 这样就切换了选项卡
      */
     private void setRadioGroupCheck(){
-        Object index = SharedPrefUtility.getParam(getApplicationContext(), "index", 1);
+        Object index = SharedPrefUtility.getParam(Main2Activity.this,SharedPrefUtility.INDEX, 1);
         mRadioGroup.check((int)index);
     }
 
@@ -130,7 +130,7 @@ public class Main2Activity extends Activity implements
                 }
                /* 每次点击radiobutton之后，就更新保存一下索引，
                  为了解决从别的activity中跳转回来之后，总是radiogroup第一项被选中这个bug*/
-                SharedPrefUtility.setParam(getApplicationContext(), "index", checkedId);
+                SharedPrefUtility.setParam(Main2Activity.this,SharedPrefUtility.INDEX, checkedId);
                 /*before you commit second , you must get ft instance again otherwise you will get illegalexception
                 这里需要注意的是每次commit时你的fragmentTransaction都是重新获取的，
                 不能连续使用同一fragmentTransaction对象执行两次commit操作，否则会遇到语法异常错误*/
@@ -155,7 +155,7 @@ public class Main2Activity extends Activity implements
         /*deal with every time set up can't change fragment
         * 当我的程序是通过按BACK键正常退出的时候，此时设置
         * 下次启动之后默认radiogroup选中第一项，在onStrat中进行的调用*/
-        SharedPrefUtility.setParam(getApplicationContext(),"index",FRAGMENT_HOME);
+        SharedPrefUtility.setParam(Main2Activity.this,SharedPrefUtility.INDEX,FRAGMENT_HOME);
         //下面这个为了解决下次打开应用程序只有下面的导航栏切换，但是选项卡不切合的bug
         System.exit(0);
     }

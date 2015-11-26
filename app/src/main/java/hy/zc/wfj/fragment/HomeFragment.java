@@ -44,7 +44,6 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
     public static final String TAG = "fengluchun";
     private static final String APP_CACAHE_DIRNAME = "/webcache";
     private static final String APP_DB_DIRNAME = "/webdb";
-    public static final String IS_LOGIN = "isLogin";
     public static final int LOGIN_REQUEST_CODE = 1;
     public static final int MESSAGE_REQUEST_CODE = 3;
     public static final int SCAN_REQUEST_CODE = 4;
@@ -261,7 +260,7 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.to_message_btn://跳转到消息界面
-                islogin = (Boolean) SharedPrefUtility.getParam(getActivity(), IS_LOGIN, false);
+                islogin = (Boolean) SharedPrefUtility.getParam(getActivity(), SharedPrefUtility.IS_LOGIN, false);
                 if (!islogin) {
                     Intent goLoginIntent = new Intent(getActivity(), MyLoginActivity.class);
                     startActivityForResult(goLoginIntent, LOGIN_REQUEST_CODE);

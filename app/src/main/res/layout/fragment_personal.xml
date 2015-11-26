@@ -110,6 +110,7 @@
                             android:layout_alignTop="@id/user_img_view"
                             android:layout_alignBottom="@id/user_img_view"
                             android:layout_toRightOf="@id/user_img_view"
+                            android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                             <TextView
@@ -117,7 +118,7 @@
                                 android:textColor="@color/personal_info_text"
                                 android:ellipsize="end"
                                 android:id="@id/who_and_say_hello"
-                                android:layout_width="wrap_content"
+                                android:layout_width="200.0dp"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
                                 android:lineSpacingMultiplier="1.1" />

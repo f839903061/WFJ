@@ -10,6 +10,10 @@ public class SharedPrefUtility {
 
     private static final String FILE_NAME = "share_date";
 
+    public static final String INDEX="index";
+    public static final String LOGIN_DATA="loginData";
+    public static final String IS_LOGIN="isLogin";
+
 
     /**
      * save data into FILE_NAME ,this path is data/data/POCKET_NAME/shared_prefs
@@ -71,5 +75,17 @@ public class SharedPrefUtility {
         }
 
         return null;
+    }
+
+    /**
+     * delete key
+     * @param context
+     * @param key
+     */
+    public static void removeParam(Context context,String key){
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.remove(key);
+        editor.commit();
     }
 }

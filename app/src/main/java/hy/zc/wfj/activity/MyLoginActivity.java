@@ -30,8 +30,6 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
     public static final String NAME_PASS_CANNOT_NULL = "用户名或者密码不能为空";
     public static final String ENTER_ERROR = "输入有问题";
     public static final String IS_LOGIN = "isLogin";
-    public static final String OBJ_NULL_ERR = "获取登录对象为空";
-    public static final String STATE_ERR = "获取对象状态为false";
     public static final String CONNECT_ERR = "http 连接失败";
 
     private ImageButton mBackBtn;
@@ -68,7 +66,7 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.common_title_back_btn:
-                goBackActivity();
+                goBack();
                 break;
             case R.id.login_comfirm_button:
                 String name = login_input_name.getText().toString().trim();
@@ -90,24 +88,13 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
         }
     }
 
-    private void goBackActivity(Bundle pbundle) {
-        Intent intent = getIntent();
-        intent.putExtras(pbundle);
-        setResult(Activity.RESULT_OK, intent);
-        finish();
-    }
-    private void goBackActivity() {
-        Intent intent = getIntent();
-        setResult(Activity.RESULT_OK, intent);
-        finish();
-    }
-
     private void getDataFromUri(String pname, String ppassword) {
         StringBuilder stringBuilder = new StringBuilder("http://101.200.182.119:8080/phone/login.action?loginName=");
         stringBuilder.append(pname);
         stringBuilder.append("&cpassword=");
         stringBuilder.append(ppassword);
 
+        showLogi(stringBuilder.toString());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, stringBuilder.toString(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -119,16 +106,19 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
                 } else {//如果登录成功
                     UserLoginObject userLoginObject = JSON.parseObject(response, UserLoginObject.class);
                     //保存登录状态
-                    SharedPrefUtility.setParam(getApplicationContext(), IS_LOGIN, userLoginObject.isStatus());
+                    SharedPrefUtility.setParam(MyLoginActivity.this, SharedPrefUtility.IS_LOGIN, userLoginObject.isStatus());
                     //关闭进度条显示
                     pd.dismiss();
-                    //跳转到之前的界面
-                    Bundle bundle=new Bundle();
+                    //保存登录个人信息
+                    SharedPrefUtility.setParam(MyLoginActivity.this, SharedPrefUtility.LOGIN_DATA, response);
                     /*这个地方需要注意一下，血的教训啊，传输的对象不仅本身需要Serializable，
-                    内部同样需要这么做，
+                    内部类同样需要这么做，
                     否则回跳到之前的activity在onActivityResult中是接收不到Intent对象的，NND浪费老子大半天的时间*/
-                    bundle.putSerializable("receiveData",userLoginObject);
-                    goBackActivity(bundle);
+//                    Bundle bundle=new Bundle();
+//                    bundle.putSerializable("receiveData",userLoginObject);
+//                    goBackActivity(bundle);
+                    //跳转到之前的界面,我现在不传输对象了，仅仅是返回，因为我把保存数据的操作在这之前就存储到share_data里面了
+                    goBack();
                 }
             }
         }, new Response.ErrorListener() {

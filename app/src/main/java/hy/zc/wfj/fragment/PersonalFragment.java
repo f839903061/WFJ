@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import hy.zc.wfj.R;
@@ -35,13 +37,14 @@ import hy.zc.wfj.utility.SharedPrefUtility;
  */
 public class PersonalFragment extends FrameFragment implements View.OnClickListener {
 
-    public static final String IS_LOGIN = "isLogin";
     public static final int LOGIN_REQUEST_CODE = 1;
     public static final int SETTINGS_REQUEST_CODE = 2;
     public static final int MESSAGE_REQUEST_CODE = 3;
     public static final int PERSONAL_INFO_REQUEST_CODE = 4;
 
     private View rootView;
+    private TextView nick_name;
+    private TextView user_level;
     private ImageButton avatarImage;
     private ImageButton settingsImage;
     private ImageButton messageImage;
@@ -109,6 +112,10 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
         settingsImage = (ImageButton) rootView.findViewById(R.id.personal_setting);
         messageImage = (ImageButton) rootView.findViewById(R.id.personal_common_message);
         user_img_view = (SimpleDraweeView) rootView.findViewById(R.id.user_img_view);
+        //名称
+        nick_name = (TextView) rootView.findViewById(R.id.who_and_say_hello);
+        user_level = (TextView) rootView.findViewById(R.id.user_level);
+
         //初始化关注
         concern_goods_layout = (LinearLayout) rootView.findViewById(R.id.personal_goods_list_title);
         concern_shop_layout = (LinearLayout) rootView.findViewById(R.id.personal_shop_list_title);
@@ -153,7 +160,7 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
      * 根据登录情况，进行切换用户信息的布局
      */
     private void changeLoginLayout() {
-        isLogin = (Boolean) SharedPrefUtility.getParam(getActivity(), IS_LOGIN, false);
+        isLogin = (Boolean) SharedPrefUtility.getParam(getActivity(), SharedPrefUtility.IS_LOGIN, false);
         if (isLogin) {
             personal_for_login_info_layout.setVisibility(View.VISIBLE);
             personal_for_logout_info_layout.setVisibility(View.GONE);
@@ -198,7 +205,7 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
                         break;
                     case R.id.wait_sign_in_layout://跳转到待收货，并携带数据过去
                         bundle = setOrderData(OrderDataObject.TITLE_SIGN, OrderDataObject.TITLE_KEY);
-                        goToActivity(TemplateActivity.class,bundle );
+                        goToActivity(TemplateActivity.class, bundle);
                         break;
                     case R.id.wait_comment_layout://跳转到待评价，并携带数据过去
                         bundle = setOrderData(OrderDataObject.TITLE_COMMENT, OrderDataObject.TITLE_KEY);
@@ -206,10 +213,10 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
                         break;
                     case R.id.wait_order_after_sale_layout://跳转到售后，并携带数据过去
                         bundle = setOrderData(OrderDataObject.TITLE_AFTER_SALE, OrderDataObject.TITLE_KEY);
-                        goToActivity(TemplateActivity.class,bundle );
+                        goToActivity(TemplateActivity.class, bundle);
                         break;
                     case R.id.service_layout://跳转到服务界面
-                        goToActivity(ServerActivity.class,null);
+                        goToActivity(ServerActivity.class, null);
                         break;
                     case R.id.personal_for_login_info_layout://点击头像所在的layout
                         goToActivityForResult(PersonalInfoActivity.class, PERSONAL_INFO_REQUEST_CODE, null);
@@ -252,10 +259,11 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
                 break;
             case LOGIN_REQUEST_CODE://登录界面返回，保存数据
                 if (resultCode == Activity.RESULT_OK) {
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        userLoginObject = (UserLoginObject) bundle.getSerializable("receiveData");
-                    }
+                    adapterData();
+//                    Bundle bundle = data.getExtras();
+//                    if (bundle != null) {
+//                        userLoginObject = (UserLoginObject) bundle.getSerializable("receiveData");
+//                    }
                 }
 //                UserLoginObject userLoginObject =(UserLoginObject) extras.getSerializable("receiveData");
 //                Log.i(TAG,userLoginObject.getData().getLoginName());
@@ -302,12 +310,17 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
      * 通过接受过来的数据给组件赋值，头像，昵称，级别等等
      */
     private void adapterData() {
-        if (userLoginObject != null) {//接收到数据才进行赋值的
-            StringBuilder stringBuilder = new StringBuilder("http://101.200.182.119:8080/");
-            stringBuilder.append(userLoginObject.getData().getPhotoUrl());
+        if (isLogin) {
+            String temp = (String) SharedPrefUtility.getParam(getActivity(), SharedPrefUtility.LOGIN_DATA, "");
+            UserLoginObject object = (UserLoginObject) JSON.parseObject(temp.trim(), UserLoginObject.class);
+            StringBuilder stringBuilder = new StringBuilder("http://101.200.182.119:8080/phone");
+            stringBuilder.append(object.getData().getPhotoUrl());
+            showLogi(stringBuilder.toString());
             user_img_view.setImageURI(Uri.parse(stringBuilder.toString()));
-        } else {//此处表示用户只是执行了返回操作，并不是登录
-           showLogi("未登录");
+            nick_name.setText(object.getData().getLoginName());
+            user_level.setText(object.getData().getNickName());
+        }else {
+            showLoge("未登录");
         }
     }
 
