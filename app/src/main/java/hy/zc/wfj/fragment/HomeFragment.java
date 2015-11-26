@@ -3,6 +3,7 @@ package hy.zc.wfj.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -140,7 +142,7 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
         //set webview cache
         setWebViewCache();
 
-        mWebView.loadUrl("http://192.168.10.7:8080/wfj_front/test.jsp");
+        mWebView.loadUrl("http://101.200.182.119:8080/test.jsp");
         setWebViewListener();
     }
 
@@ -157,6 +159,11 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
 //                return super.shouldOverrideUrlLoading(view, url);
                 return false;
+            }
+
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+//                handler.proceed();//解决web加载https连接时显示的空白页
             }
         });
         mWebView.setOnKeyListener(new View.OnKeyListener() {

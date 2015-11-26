@@ -103,7 +103,7 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
     }
 
     private void getDataFromUri(String pname, String ppassword) {
-        StringBuilder stringBuilder = new StringBuilder("http://192.168.10.7:8080/wfj_front/phone/login.action?loginName=");
+        StringBuilder stringBuilder = new StringBuilder("http://101.200.182.119:8080/phone/login.action?loginName=");
         stringBuilder.append(pname);
         stringBuilder.append("&cpassword=");
         stringBuilder.append(ppassword);

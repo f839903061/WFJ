@@ -105,7 +105,7 @@ public class CategoryFragment extends FrameFragment {
         //severlet version
 //        String uri="http://192.168.10.210:8080/wfj_front/phone/phonecategory?method=initType";
         //action version
-        String uri = "http://192.168.10.210:8080/wfj_front/phone/phonecategory.action?method=initType";
+        String uri = "http://101.200.182.119:8080/phone/phonecategory.action?method=initType";
 //        String uri = "https://192.168.10.210:8443/wfj_front/phone/phonecategory.action?method=initType";
 //        String uri="http://www.baidu.com/";
 

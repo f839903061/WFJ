@@ -303,7 +303,7 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
      */
     private void adapterData() {
         if (userLoginObject != null) {//接收到数据才进行赋值的
-            StringBuilder stringBuilder = new StringBuilder("http://192.168.10.7:8085/b2b2c/");
+            StringBuilder stringBuilder = new StringBuilder("http://101.200.182.119:8080/");
             stringBuilder.append(userLoginObject.getData().getPhotoUrl());
             user_img_view.setImageURI(Uri.parse(stringBuilder.toString()));
         } else {//此处表示用户只是执行了返回操作，并不是登录
