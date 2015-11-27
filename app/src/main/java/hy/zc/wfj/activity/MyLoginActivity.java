@@ -25,6 +25,7 @@ import hy.zc.wfj.R;
 import hy.zc.wfj.data.UserLoginErrorObject;
 import hy.zc.wfj.data.UserLoginObject;
 import hy.zc.wfj.utility.SharedPrefUtility;
+import hy.zc.wfj.utility.UriManager;
 
 public class MyLoginActivity extends FrameActivity implements View.OnClickListener {
 
@@ -91,13 +92,8 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
     }
 
     private void getDataFromUri(String pname, String ppassword) {
-        StringBuilder stringBuilder = new StringBuilder("http://101.200.182.119:8080/phone/login.action?loginName=");
-        stringBuilder.append(pname);
-        stringBuilder.append("&cpassword=");
-        stringBuilder.append(ppassword);
-
-        showLogi(stringBuilder.toString());
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, stringBuilder.toString(), new Response.Listener<String>() {
+        String loginRequestUri = UriManager.getLoginRequestUri(pname, ppassword);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, loginRequestUri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //如果用户名或者密码或者格式错误，返回数据是非常短的

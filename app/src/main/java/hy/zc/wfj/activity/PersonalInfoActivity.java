@@ -1,5 +1,8 @@
 package hy.zc.wfj.activity;
 
+import android.app.AlertDialog;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -44,7 +47,6 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
     private TextView tv_content_email;
     private TextView tv_content_phone;
     private TextView tv_content_nickname;
-    private TextView tv_content_address;
     private TextView tv_content_safe;
 
     @Override
@@ -58,7 +60,8 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
     }
 
     /**
-     *对应标签 给组件填充数据
+     *对应标签填充获取到的数据，如
+     * 头像，名称，昵称，邮箱，手机
      */
     private void loadData() {
         String temp=(String)SharedPrefUtility.getParam(PersonalInfoActivity.this, SharedPrefUtility.LOGIN_DATA, "");
@@ -66,7 +69,7 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
         {
             UserLoginObject userLoginObject = JSON.parseObject(temp, UserLoginObject.class);
             UserLoginObject.DataEntity data = userLoginObject.getData();
-            Uri uri = UriManager.converStToUri(data.getPhotoUrl());
+            Uri uri = UriManager.getPicToUri(data.getPhotoUrl());
             mAvatar.setImageURI(uri);
             tv_content_username.setText(data.getLoginName());
             tv_content_email.setText(data.getEmail());
@@ -124,7 +127,6 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
         tv_content_email = (TextView) layout_email.findViewById(R.id.personel_item_content);
         tv_content_phone = (TextView) layout_phone.findViewById(R.id.personel_item_content);
         tv_content_nickname = (TextView) layout_nickname.findViewById(R.id.personel_item_content);
-        tv_content_address = (TextView) layout_address.findViewById(R.id.personel_item_content);
         tv_content_safe = (TextView) layout_safe.findViewById(R.id.personel_item_content);
 
         //下面的这些就是定死的内容，不用再关注

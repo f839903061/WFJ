@@ -27,6 +27,7 @@ import hy.zc.wfj.activity.MyLoginActivity;
 import hy.zc.wfj.activity.MyMessageActivity;
 import hy.zc.wfj.activity.SearchActivity;
 import hy.zc.wfj.utility.SharedPrefUtility;
+import hy.zc.wfj.utility.UriManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -141,7 +142,7 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
         //set webview cache
         setWebViewCache();
 
-        mWebView.loadUrl("http://101.200.182.119:8080/test.jsp");
+        mWebView.loadUrl(UriManager.getHomeUri());
         setWebViewListener();
     }
 

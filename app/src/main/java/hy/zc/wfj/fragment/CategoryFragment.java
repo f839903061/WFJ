@@ -37,6 +37,7 @@ import hy.zc.wfj.adapter.RightListAdapter;
 import hy.zc.wfj.data.CategoryListObject;
 import hy.zc.wfj.data.CategroyJsonObject;
 import hy.zc.wfj.utility.OkHttpStack;
+import hy.zc.wfj.utility.UriManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -102,14 +103,7 @@ public class CategoryFragment extends FrameFragment {
      * 从服务器端获取分类列表数据
      */
     private void getDataFromUri() {
-        //severlet version
-//        String uri="http://192.168.10.210:8080/wfj_front/phone/phonecategory?method=initType";
-        //action version
-        String uri = "http://101.200.182.119:8080/phone/phonecategory.action?method=initType";
-//        String uri = "https://192.168.10.210:8443/wfj_front/phone/phonecategory.action?method=initType";
-//        String uri="http://www.baidu.com/";
-
-
+        String uri = UriManager.getCategoryRequestUri();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

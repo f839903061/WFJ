@@ -14,10 +14,10 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
-import hy.zc.wfj.Main2Activity;
 import hy.zc.wfj.R;
 import hy.zc.wfj.activity.CommodityDetailsActivity;
 import hy.zc.wfj.data.CategroyJsonObject;
+import hy.zc.wfj.utility.UriManager;
 
 /**
  * Created by feng on 2015/11/4.
@@ -63,9 +63,7 @@ public class RightGridAdapter extends BaseAdapter {
 
         viewHolder.textView.setText(mList.get(position).getSortName());
         //拼接好图片之后，使用fresco来加载显示
-        StringBuilder builder=new StringBuilder("http://192.168.10.210:8085/b2b2c/");
-        builder.append(mList.get(position).getCategoryImage());
-        Uri uri=Uri.parse(builder.toString());
+        Uri uri = UriManager.getPicToUri(mList.get(position).getCategoryImage());
         viewHolder.simpleDraweeView.setImageURI(uri);
         viewHolder.simpleDraweeView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +27,7 @@ import hy.zc.wfj.activity.TemplateActivity;
 import hy.zc.wfj.data.OrderDataObject;
 import hy.zc.wfj.data.UserLoginObject;
 import hy.zc.wfj.utility.SharedPrefUtility;
+import hy.zc.wfj.utility.UriManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,10 +61,6 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
     private RelativeLayout personal_for_logout_info_layout;//登出
     private RelativeLayout personal_for_login_info_layout;//登录
 
-    private UserLoginObject userLoginObject = null;
-
-//    private TextView concern_browser_tv;
-
     private OnFragmentInteractionListener mListener;
 
     private static PersonalFragment personalFragment;
@@ -85,7 +81,6 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
     public PersonalFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -257,16 +252,10 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
             case SETTINGS_REQUEST_CODE:
 
                 break;
-            case LOGIN_REQUEST_CODE://登录界面返回，保存数据
+            case LOGIN_REQUEST_CODE://登录界面返回，保存数据并呈现出来
                 if (resultCode == Activity.RESULT_OK) {
                     adapterData();
-//                    Bundle bundle = data.getExtras();
-//                    if (bundle != null) {
-//                        userLoginObject = (UserLoginObject) bundle.getSerializable("receiveData");
-//                    }
                 }
-//                UserLoginObject userLoginObject =(UserLoginObject) extras.getSerializable("receiveData");
-//                Log.i(TAG,userLoginObject.getData().getLoginName());
                 break;
             case MESSAGE_REQUEST_CODE:
 
@@ -313,13 +302,14 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
         if (isLogin) {
             String temp = (String) SharedPrefUtility.getParam(getActivity(), SharedPrefUtility.LOGIN_DATA, "");
             UserLoginObject object = (UserLoginObject) JSON.parseObject(temp.trim(), UserLoginObject.class);
-            StringBuilder stringBuilder = new StringBuilder("http://101.200.182.119:8080/phone");
-            stringBuilder.append(object.getData().getPhotoUrl());
-            showLogi(stringBuilder.toString());
-            user_img_view.setImageURI(Uri.parse(stringBuilder.toString()));
+//            StringBuilder stringBuilder = new StringBuilder("http://101.200.182.119:8080/phone");
+//            stringBuilder.append(object.getData().getPhotoUrl());
+//            showLogi(stringBuilder.toString());
+            Uri uri = UriManager.getPicToUri(object.getData().getPhotoUrl());
+            user_img_view.setImageURI(uri);
             nick_name.setText(object.getData().getLoginName());
             user_level.setText(object.getData().getNickName());
-        }else {
+        } else {
             showLoge("未登录");
         }
     }
