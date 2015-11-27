@@ -188,12 +188,12 @@
     <item name="personel_item_unread_msg" type="id" />
     <item name="personel_item_tip" type="id" />
     <item name="personel_item_img" type="id" />
-    <item name="username_layout" type="id" />
-    <item name="nickname_layout" type="id" />
-    <item name="sex_layout" type="id" />
-    <item name="birthday_layout" type="id" />
-    <item name="address_layout" type="id" />
-    <item name="account_layout" type="id" />
+    <item name="layout_username" type="id" />
+    <item name="layout_nickname" type="id" />
+    <item name="layout_email" type="id" />
+    <item name="layout_phone" type="id" />
+    <item name="layout_address" type="id" />
+    <item name="layout_safe" type="id" />
     <item name="search_btn" type="id" />
     <item name="search_title" type="id" />
     <item name="img_tmp" type="id" />

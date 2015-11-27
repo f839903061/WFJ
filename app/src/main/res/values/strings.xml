@@ -86,4 +86,13 @@
     </string>
     <string name="scanner">扫啊扫</string>
     <string name="search">搜索</string>
+    <string name="tv_avatar">头像</string>
+    <string name="tv_username">用户名</string>
+    <string name="tv_email">邮箱</string>
+    <string name="tv_phone">手机号</string>
+    <string name="tv_address">地址管理</string>
+    <string name="tv_nickname">昵称</string>
+
+    <string name="tv_safe">账户安全</string>
+    <string name="tv_content_safe">可修改密码</string>
 </resources>

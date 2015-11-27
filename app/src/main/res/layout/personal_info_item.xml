@@ -35,7 +35,7 @@
         android:layout_toLeftOf="@id/personel_item_arrow"
         android:textColor="#ff9a9a9a"
         android:textSize="13.0sp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <TextView
         android:id="@id/personel_item_content2"

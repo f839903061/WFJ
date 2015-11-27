@@ -13,16 +13,16 @@ public class BaseActivity extends Activity {
     public static String TAG="fengluchun";
 
     public void showLogi(String ptext){
-        Log.i(TAG,ptext);
+        Log.i(TAG,getClass().getName()+" "+ptext);
     }
     public void showLogd(String ptext){
-        Log.d(TAG,ptext);
+        Log.d(TAG,getClass().getName()+" "+ptext);
     }
     public void showLoge(String ptext){
-        Log.e(TAG,ptext);
+        Log.e(TAG,getClass().getName()+" "+ptext);
     }
     public void showLogw(String ptext){
-        Log.w(TAG, ptext);
+        Log.w(TAG,getClass().getName()+" "+ ptext);
     }
     public void showToast(String ptext){
         Toast.makeText(getApplicationContext(),ptext,Toast.LENGTH_LONG).show();

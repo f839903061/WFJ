@@ -48,7 +48,7 @@
                     android:layout_marginRight="12.0dp"
                     android:background="@drawable/personal_icon_arrow"
                     android:contentDescription="@string/none"
-                    android:paddingRight="10.0dip" />
+                    android:paddingRight="10.0dip"/>
                 <!--<hy.zc.wfj.customview.RoundImageView-->
                 <!--android:id="@id/user_img_view"-->
                 <!--android:layout_width="@dimen/personal_user_img_view_width"-->
@@ -72,8 +72,7 @@
                     android:layout_marginTop="20.0dip"
                     android:layout_toLeftOf="@id/personel_item_arrow"
                     fresco:placeholderImage="@drawable/personal_icon_default_avatar"
-                    fresco:placeholderImageScaleType="centerInside"
-                    />
+                    fresco:placeholderImageScaleType="centerInside" />
             </RelativeLayout>
 
             <View
@@ -81,7 +80,16 @@
                 android:layout_marginLeft="10.0dip" />
 
             <include
-                android:id="@id/username_layout"
+                android:id="@id/layout_username"
+                layout="@layout/personal_info_item" />
+
+
+            <View
+                style="@style/line6"
+                android:layout_marginLeft="10.0dip" />
+
+            <include
+                android:id="@id/layout_email"
                 layout="@layout/personal_info_item" />
 
             <View
@@ -89,7 +97,7 @@
                 android:layout_marginLeft="10.0dip" />
 
             <include
-                android:id="@id/nickname_layout"
+                android:id="@id/layout_phone"
                 layout="@layout/personal_info_item" />
 
             <View
@@ -97,15 +105,7 @@
                 android:layout_marginLeft="10.0dip" />
 
             <include
-                android:id="@id/sex_layout"
-                layout="@layout/personal_info_item" />
-
-            <View
-                style="@style/line6"
-                android:layout_marginLeft="10.0dip" />
-
-            <include
-                android:id="@id/birthday_layout"
+                android:id="@id/layout_nickname"
                 layout="@layout/personal_info_item" />
 
             <View style="@style/line6" />
@@ -120,7 +120,7 @@
                 android:layout_marginLeft="10.0dip" />
 
             <include
-                android:id="@id/address_layout"
+                android:id="@id/layout_address"
                 layout="@layout/personal_info_item" />
 
             <View
@@ -128,7 +128,7 @@
                 android:layout_marginLeft="10.0dip" />
 
             <include
-                android:id="@id/account_layout"
+                android:id="@id/layout_safe"
                 layout="@layout/personal_info_item" />
         </LinearLayout>
 

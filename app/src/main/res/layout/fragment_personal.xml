@@ -111,6 +111,8 @@
                             android:layout_alignBottom="@id/user_img_view"
                             android:layout_toRightOf="@id/user_img_view"
                             android:orientation="vertical"
+                            android:paddingTop="6.0dp"
+                            android:paddingLeft="5.0dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                             <TextView
