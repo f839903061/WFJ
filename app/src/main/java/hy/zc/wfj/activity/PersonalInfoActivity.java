@@ -1,14 +1,15 @@
 package hy.zc.wfj.activity;
 
 import android.app.AlertDialog;
-import android.content.res.Resources;
-import android.graphics.Color;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -21,10 +22,13 @@ import hy.zc.wfj.utility.UriManager;
 
 public class PersonalInfoActivity extends FrameActivity implements View.OnClickListener {
 
+    public static final int CAMERA_TAG = 0;
+    public static final int LOCAT_TAG = 1;
     private TextView common_title_txt;
     private ImageButton common_title_back_btn;
     private SimpleDraweeView mAvatar;
     private SimpleDraweeView mArrow;
+    private LayoutInflater mInflater;
 
     //标签项，可点击
     private RelativeLayout layout_avatar;
@@ -100,6 +104,8 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
      * 初始化组件
      */
     private void initializeComponent() {
+        mInflater=LayoutInflater.from(PersonalInfoActivity.this);
+
         common_title_txt = (TextView) findViewById(R.id.common_title_txt);
         common_title_txt.setText("我的账户");
 
@@ -150,13 +156,30 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
                 goBack();
                 break;
             case R.id.personel_item_userpic:
-                showLogi("1");
+                final AlertDialog.Builder builder=new AlertDialog.Builder(PersonalInfoActivity.this,AlertDialog.THEME_HOLO_DARK);
+                builder.setTitle(R.string.dialog_avatar_title);
+                builder.setItems(R.array.alteritem, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case CAMERA_TAG://拍照上传
+                                showToast(getResources().getString(R.string.tv_camera));
+                                break;
+                            case LOCAT_TAG://本地上传
+                                showToast(getResources().getString(R.string.tv_locat));
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
+
+//                builder.setView(view);
+                builder.create().show();
                 break;
             case R.id.layout_username:
-                showLogi("1");
                 break;
             case R.id.layout_email:
-                showLogi("1");
                 break;
             case R.id.layout_phone:
                 showLogi("1");

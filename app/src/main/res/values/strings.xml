@@ -95,4 +95,11 @@
 
     <string name="tv_safe">账户安全</string>
     <string name="tv_content_safe">可修改密码</string>
+    <string name="tv_locat">本地上传</string>
+    <string name="tv_camera">拍照上传</string>
+    <string name="dialog_avatar_title">修改头像</string>
+    <string-array name="alteritem">
+        <item>拍照上传</item>
+        <item>本地上传</item>
+    </string-array>
 </resources>
