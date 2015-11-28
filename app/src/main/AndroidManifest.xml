@@ -51,7 +51,8 @@
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.TemplateActivity" />
         <activity android:name=".activity.ServerActivity" />
-        <activity android:name=".activity.CommodityDetailsActivity"></activity>
+        <activity android:name=".activity.CommodityDetailsActivity" />
+        <activity android:name=".activity.ModifyPhoneActivity"></activity>
     </application>
 
 </manifest>

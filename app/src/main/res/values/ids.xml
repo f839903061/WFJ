@@ -204,4 +204,8 @@
     <item name="commodity_sales_volume" type="id" />
     <item name="commodity_price" type="id" />
     <item name="commodity_radiogroup" type="id" />
+    <item name="et_modify" type="id" />
+    <item name="tv_modify_tag" type="id" />
+    <item name="tv_tmp" type="id" />
+    <item name="layout_tmp" type="id" />
 </resources>
