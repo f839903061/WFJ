@@ -305,7 +305,7 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
 //            StringBuilder stringBuilder = new StringBuilder("http://101.200.182.119:8080/phone");
 //            stringBuilder.append(object.getData().getPhotoUrl());
 //            showLogi(stringBuilder.toString());
-            Uri uri = UriManager.getPicToUri(object.getData().getPhotoUrl());
+            Uri uri = UriManager.getLoginAvatarUri(object.getData().getPhotoUrl());
             user_img_view.setImageURI(uri);
             nick_name.setText(object.getData().getLoginName());
             user_level.setText(object.getData().getNickName());

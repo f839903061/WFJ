@@ -63,7 +63,7 @@ public class RightGridAdapter extends BaseAdapter {
 
         viewHolder.textView.setText(mList.get(position).getSortName());
         //拼接好图片之后，使用fresco来加载显示
-        Uri uri = UriManager.getPicToUri(mList.get(position).getCategoryImage());
+        Uri uri = UriManager.getCategoryPicUri(mList.get(position).getCategoryImage());
         viewHolder.simpleDraweeView.setImageURI(uri);
         viewHolder.simpleDraweeView.setOnClickListener(new View.OnClickListener() {
             @Override

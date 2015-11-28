@@ -2,6 +2,7 @@ package hy.zc.wfj.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -73,7 +73,7 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
         {
             UserLoginObject userLoginObject = JSON.parseObject(temp, UserLoginObject.class);
             UserLoginObject.DataEntity data = userLoginObject.getData();
-            Uri uri = UriManager.getPicToUri(data.getPhotoUrl());
+            Uri uri = UriManager.getLoginAvatarUri(data.getPhotoUrl());
             mAvatar.setImageURI(uri);
             tv_content_username.setText(data.getLoginName());
             tv_content_email.setText(data.getEmail());
@@ -84,6 +84,13 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
             showLoge("没有或取到数据");
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //重新加载数据,防止有数据没有随时更新显示
+        loadData();
     }
 
     /**
@@ -182,7 +189,8 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
             case R.id.layout_email:
                 break;
             case R.id.layout_phone:
-                showLogi("1");
+                Intent goModifyPhone=new Intent(PersonalInfoActivity.this,ModifyPhoneActivity.class);
+                startActivity(goModifyPhone);
                 break;
             case R.id.layout_nickname:
                 showLogi("1");

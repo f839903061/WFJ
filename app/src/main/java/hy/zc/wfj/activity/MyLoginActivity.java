@@ -24,6 +24,7 @@ import hy.zc.wfj.App;
 import hy.zc.wfj.R;
 import hy.zc.wfj.data.UserLoginErrorObject;
 import hy.zc.wfj.data.UserLoginObject;
+import hy.zc.wfj.utility.CheckEmailMobile;
 import hy.zc.wfj.utility.SharedPrefUtility;
 import hy.zc.wfj.utility.UriManager;
 
@@ -76,7 +77,7 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
                 String password = login_input_password.getText().toString().trim();
                 if (name.equals("") && password.equals("")) {
                     Toast.makeText(getApplicationContext(), NAME_PASS_CANNOT_NULL, Toast.LENGTH_SHORT).show();
-                } else if (isEmail(name) || isMobileNO(name) && !password.equals("")) {
+                } else if (CheckEmailMobile.isEmail(name) || CheckEmailMobile.isMobileNO(name) && !password.equals("")) {
                     pd = new ProgressDialog(MyLoginActivity.this);
                     pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     pd.setMessage("请稍等。。。");
@@ -136,28 +137,4 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
         super.onStop();
     }
 
-    /**
-     * 判断输入的手机号是否正确
-     *
-     * @param mobiles
-     * @return
-     */
-    public boolean isMobileNO(String mobiles) {
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-        Matcher m = p.matcher(mobiles);
-        return m.matches();
-    }
-
-    /**
-     * 判断输入的邮箱格式是否正确
-     *
-     * @param email
-     * @return
-     */
-    public static boolean isEmail(String email) {
-        String str = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
-        Pattern p = Pattern.compile(str);
-        Matcher m = p.matcher(email);
-        return m.matches();
-    }
 }
