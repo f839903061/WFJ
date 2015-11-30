@@ -119,7 +119,7 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
         common_title_txt.setText("我的账户");
 
         common_title_back_btn = (ImageButton) findViewById(R.id.common_title_back_btn);
-        mAvatar = (SimpleDraweeView) findViewById(R.id.personel_item_arrow);
+        mAvatar = (SimpleDraweeView) findViewById(R.id.user_img_view);
 
         layout_avatar = (RelativeLayout) findViewById(R.id.personel_item_userpic);
         layout_username = (RelativeLayout) findViewById(R.id.layout_username);

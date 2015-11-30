@@ -105,6 +105,7 @@
                             android:layout_height="@dimen/personal_user_img_view_height"
                             android:layout_marginLeft="@dimen/personal_user_photo_marginleft"
                             fresco:placeholderImage="@drawable/personal_icon_default_avatar"
+                            fresco:roundAsCircle="true"
                             fresco:placeholderImageScaleType="centerInside"/>
                         <LinearLayout
                             android:layout_alignTop="@id/user_img_view"

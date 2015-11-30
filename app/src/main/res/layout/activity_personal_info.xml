@@ -72,6 +72,7 @@
                     android:layout_marginTop="20.0dip"
                     android:layout_toLeftOf="@id/personel_item_arrow"
                     fresco:placeholderImage="@drawable/personal_icon_default_avatar"
+                    fresco:roundAsCircle="true"
                     fresco:placeholderImageScaleType="centerInside" />
             </RelativeLayout>
 
