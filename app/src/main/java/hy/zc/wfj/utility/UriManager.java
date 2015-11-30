@@ -19,11 +19,11 @@ public class UriManager {
     private static final String login_pic_pre = "http://192.168.10.7:8085/b2b2c/";
     //登录请求的前缀
 //    private static final String login_pre = "http://101.200.182.119:8080/phone/login.action?loginName=";//全网
-    private static final String login_pre = "http://192.168.10.7:8080/phone/login.action?loginName=";//局域网
+    private static final String login_pre = "http://192.168.10.7:8080/wfj_front/phone/login.action?loginName=";//局域网
     //修改号码的前缀
-    private static final String modify_phone_pre = "http://192.168.10.7:8080/phone/editCustomer.action?phone=";
+    private static final String modify_phone_pre = "http://192.168.10.7:8080/wfj_front/phone/editCustomer.action?customerId=";
     //修改昵称
-    private static final String modify_nickname_pre = "http://192.168.10.7:8080/phone/editCustomer.action?nickname=";
+    private static final String modify_nickname_pre = "http://192.168.10.7:8080/wfj_front/phone/editCustomer.action?customerId=";
 
 
     /**
@@ -93,8 +93,10 @@ public class UriManager {
      * @param pphone
      * @return
      */
-    public static String getModifyPhoneUri(String pphone){
+    public static String getModifyPhoneUri(int pcustomId,String pphone){
         StringBuilder stringBuilder=new StringBuilder(modify_phone_pre);
+        stringBuilder.append(pcustomId);
+        stringBuilder.append("&phone=");
         stringBuilder.append(pphone);
         return stringBuilder.toString();
     }
@@ -104,8 +106,10 @@ public class UriManager {
      * @param pname
      * @return
      */
-    public static String getMOdifyNickName(String pname){
+    public static String getMOdifyNickName(int pcustomId,String pname){
         StringBuilder stringBuilder=new StringBuilder(modify_nickname_pre);
+        stringBuilder.append(pcustomId);
+        stringBuilder.append("&nickname=");
         stringBuilder.append(pname);
         return stringBuilder.toString();
     }
