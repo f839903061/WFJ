@@ -52,7 +52,7 @@
         <activity android:name=".activity.TemplateActivity" />
         <activity android:name=".activity.ServerActivity" />
         <activity android:name=".activity.CommodityDetailsActivity" />
-        <activity android:name=".activity.ModifyPhoneActivity"></activity>
+        <activity android:name=".activity.ModifyActivity"></activity>
     </application>
 
 </manifest>

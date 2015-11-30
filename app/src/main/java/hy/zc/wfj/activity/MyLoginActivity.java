@@ -82,7 +82,8 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
                     pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     pd.setMessage("请稍等。。。");
                     pd.show();
-                    getDataFromUri(name, password);
+                    String loginRequestUri = UriManager.getLoginRequestUri(name, password);
+                    getDataFromUri(loginRequestUri);
                 } else {
                     Toast.makeText(getApplicationContext(), ENTER_ERROR, Toast.LENGTH_SHORT).show();
                 }
@@ -92,8 +93,8 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
         }
     }
 
-    private void getDataFromUri(String pname, String ppassword) {
-        String loginRequestUri = UriManager.getLoginRequestUri(pname, ppassword);
+    private void getDataFromUri(String loginRequestUri) {
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, loginRequestUri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

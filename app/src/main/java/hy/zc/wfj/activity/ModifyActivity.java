@@ -1,8 +1,8 @@
 package hy.zc.wfj.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,14 +24,16 @@ import hy.zc.wfj.utility.CheckEmailMobile;
 import hy.zc.wfj.utility.SharedPrefUtility;
 import hy.zc.wfj.utility.UriManager;
 
-public class ModifyPhoneActivity extends FrameActivity implements View.OnClickListener {
+public class ModifyActivity extends FrameActivity implements View.OnClickListener {
 
     public static final String IS_MODIFY_OK="isModifyOk";
     private ImageButton imgbtn_back;
     private Button imgbtn_ok;
     private TextView tv_title;
-    private EditText et_phone;
+    private TextView tv_modify_tag;
+    private EditText et_phone_nickname;
     private ProgressDialog pd;
+    private int MODIFY_FLAG=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,30 +51,52 @@ public class ModifyPhoneActivity extends FrameActivity implements View.OnClickLi
     }
 
     private void initializeComponet() {
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        String modify_flag = extras.getString("modify");
+        if (modify_flag.equals("修改号码")) {
+            showLogi("现在打印一下"+modify_flag);
+            MODIFY_FLAG=1;
+        }else if (modify_flag.equals("修改昵称")){
+            showLogi("现在打印一下"+modify_flag);
+            MODIFY_FLAG=2;
+        }
+
+        showLogi("modify_flage"+MODIFY_FLAG);
         imgbtn_back = (ImageButton) findViewById(R.id.common_title_back_btn);
         imgbtn_ok = (Button) findViewById(R.id.img_tmp);
         imgbtn_ok.setVisibility(View.VISIBLE);
         imgbtn_ok.setText("确定");
         tv_title = (TextView) findViewById(R.id.common_title_txt);
-        tv_title.setText("修改号码");
-        et_phone = (EditText) findViewById(R.id.et_modify);
+        tv_modify_tag=(TextView)findViewById(R.id.tv_modify_tag);
+        //通过intent传过来的信息，来判断这个地方该填写“修改号码”还是“修改昵称”
+        tv_title.setText(modify_flag);
+        tv_modify_tag.setText(modify_flag);
+        et_phone_nickname = (EditText) findViewById(R.id.et_modify);
 
         loadData();
     }
 
     private void loadData(){
-        String temp =(String) SharedPrefUtility.getParam(ModifyPhoneActivity.this, SharedPrefUtility.LOGIN_DATA, "");
+        String temp =(String) SharedPrefUtility.getParam(ModifyActivity.this, SharedPrefUtility.LOGIN_DATA, "");
         UserLoginObject userLoginObject = JSON.parseObject(temp, UserLoginObject.class);
         if (!userLoginObject.equals("")){
-            et_phone.setText(userLoginObject.getData().getPhone());
+            switch (MODIFY_FLAG){
+                case 1:
+                    et_phone_nickname.setText(userLoginObject.getData().getPhone());
+                    break;
+                case 2:
+                    et_phone_nickname.setText(userLoginObject.getData().getNickName());
+                    break;
+                default:
+                    break;
+            }
+        }else {
+            showLoge("读取存储数据，没有数据");
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadData();
-    }
+
 
     @Override
     public void onClick(View v) {
@@ -80,26 +104,44 @@ public class ModifyPhoneActivity extends FrameActivity implements View.OnClickLi
             case R.id.common_title_back_btn://不做任何操作返回
                 goBack();
                 break;
-            case R.id.img_tmp:
+            case R.id.img_tmp://如果点击的是确定键
                 showToast("ok");
-//                String phone = et_phone.getText().toString();
-//                if (CheckEmailMobile.isMobileNO(phone)) {
-//                    pd = new ProgressDialog(ModifyPhoneActivity.this);
-//                    pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//                    pd.setMessage("请稍等。。。");
-//                    pd.show();
-//                    getDataFromUri(phone);
-//                    goBack();
-//
-//                }
+                String phone_or_nickname = et_phone_nickname.getText().toString();
+                String uri=null;
+                pd = new ProgressDialog(ModifyActivity.this);
+                pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pd.setMessage("请稍等。。。");
+                pd.show();
+                //读取存储的数据，将customID 取出来，这样才能知道修改的是谁的电话号码
+                String temp=(String)SharedPrefUtility.getParam(ModifyActivity.this, SharedPrefUtility.LOGIN_DATA, "");
+                UserLoginObject object = JSON.parseObject(temp, UserLoginObject.class);
+                switch (MODIFY_FLAG){//判断是修改号码的还是修改昵称的
+                    case 1:
+                        if (CheckEmailMobile.isMobileNO(phone_or_nickname)) {
+                            uri=UriManager.getModifyPhoneUri(object.getData().getCustomerId(),phone_or_nickname);
+                            showLogi(uri);
+                            getDataFromUri(uri);
+                            goBack();
+                        }
+                        break;
+                    case 2:
+                        if (!phone_or_nickname.equals("")) {
+                            uri=UriManager.getMOdifyNickName(object.getData().getCustomerId(),phone_or_nickname);
+                            getDataFromUri(uri);
+                            goBack();
+                        }
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
                 break;
         }
     }
 
-    private void getDataFromUri(String pphone) {
-        String uri = UriManager.getModifyPhoneUri(pphone);
+    private void getDataFromUri(String uri) {
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -113,7 +155,7 @@ public class ModifyPhoneActivity extends FrameActivity implements View.OnClickLi
                     //关闭进度条显示
                     pd.dismiss();
                     //保存登录个人信息
-                    SharedPrefUtility.setParam(ModifyPhoneActivity.this, SharedPrefUtility.LOGIN_DATA, response);
+                    SharedPrefUtility.setParam(ModifyActivity.this, SharedPrefUtility.LOGIN_DATA, response);
                     /*这个地方需要注意一下，血的教训啊，传输的对象不仅本身需要Serializable，
                     内部类同样需要这么做，
                     否则回跳到之前的activity在onActivityResult中是接收不到Intent对象的，NND浪费老子大半天的时间*/
