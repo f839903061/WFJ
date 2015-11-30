@@ -204,7 +204,9 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
                 showLogi("1");
                 break;
             case R.id.layout_safe:
-                showLogi("1");
+                Bundle passward_bundle=new Bundle();
+                passward_bundle.putString("modify","修改密码");
+                goModifyActivity(passward_bundle);
                 break;
             default:
                 break;

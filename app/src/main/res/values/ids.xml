@@ -208,4 +208,7 @@
     <item name="tv_modify_tag" type="id" />
     <item name="tv_tmp" type="id" />
     <item name="layout_tmp" type="id" />
+    <item name="layout_modify_password" type="id" />
+    <item name="et_new_password" type="id" />
+    <item name="et_confirm_password" type="id" />
 </resources>

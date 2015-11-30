@@ -9,6 +9,8 @@ import android.net.Uri;
 public class UriManager {
     //        String uri="http://192.168.10.210:8080/wfj_front/phone/phonecategory?method=initType";
 //        String uri = "https://192.168.10.210:8443/wfj_front/phone/phonecategory.action?method=initType";
+
+
     //分类界面的请求链接
     private static final String category_request_uri = "http://101.200.182.119:8080/phone/phonecategory.action?method=initType";
     //首页的请求链接
@@ -24,7 +26,8 @@ public class UriManager {
     private static final String modify_phone_pre = "http://192.168.10.7:8080/wfj_front/phone/editCustomer.action?customerId=";
     //修改昵称
     private static final String modify_nickname_pre = "http://192.168.10.7:8080/wfj_front/phone/editCustomer.action?customerId=";
-
+    //修改密码
+    private static final String modify_password_pre ="http://192.168.10.7:8080/wfj_front/phone/changepass.action?customerId=";
 
     /**
      * 拼接图片链接，并返回完整的uri
@@ -106,11 +109,21 @@ public class UriManager {
      * @param pname
      * @return
      */
-    public static String getMOdifyNickName(int pcustomId,String pname){
+    public static String getModifyNickName(int pcustomId, String pname){
         StringBuilder stringBuilder=new StringBuilder(modify_nickname_pre);
         stringBuilder.append(pcustomId);
         stringBuilder.append("&nickname=");
         stringBuilder.append(pname);
+        return stringBuilder.toString();
+    }
+
+    public static String getModifyPassword(int pcustomId,String oldpassword,String newpassword){
+        StringBuilder stringBuilder=new StringBuilder(modify_password_pre);
+        stringBuilder.append(pcustomId);
+        stringBuilder.append("&password=");
+        stringBuilder.append(oldpassword);
+        stringBuilder.append("&cpassword=");
+        stringBuilder.append(newpassword);
         return stringBuilder.toString();
     }
 }
