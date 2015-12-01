@@ -98,7 +98,9 @@
     <string name="tv_locat">本地上传</string>
     <string name="tv_camera">拍照上传</string>
     <string name="dialog_avatar_title">修改头像</string>
-    <string name="tv_modify_phone_number">修改号码：</string>
+    <string name="tv_modify_phone_number">修改号码</string>
+    <string name="tv_modify_nick_name">修改昵称</string>
+    <string name="tv_modify_password">修改密码</string>
     <string-array name="alteritem">
         <item>拍照上传</item>
         <item>本地上传</item>
