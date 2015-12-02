@@ -27,7 +27,9 @@ public class UriManager {
     //修改昵称
     private static final String modify_nickname_pre = "http://192.168.10.7:8080/wfj_front/phone/editCustomer.action?customerId=";
     //修改密码
-    private static final String modify_password_pre ="http://192.168.10.7:8080/wfj_front/phone/changepass.action?customerId=";
+    private static final String modify_password_pre = "http://192.168.10.7:8080/wfj_front/phone/changepass.action?customerId=";
+    //上传头像前缀
+    private static final String upload_pic_pre = "http://192.168.10.7:8080/wfj_front/phone/uploadPic.action";
 
     /**
      * 拼接图片链接，并返回完整的uri
@@ -93,11 +95,12 @@ public class UriManager {
 
     /**
      * 通过拼接，获得修改号码的完整请求连接
+     *
      * @param pphone
      * @return
      */
-    public static String getModifyPhoneUri(int pcustomId,String pphone){
-        StringBuilder stringBuilder=new StringBuilder(modify_phone_pre);
+    public static String getModifyPhoneUri(int pcustomId, String pphone) {
+        StringBuilder stringBuilder = new StringBuilder(modify_phone_pre);
         stringBuilder.append(pcustomId);
         stringBuilder.append("&phone=");
         stringBuilder.append(pphone);
@@ -106,24 +109,43 @@ public class UriManager {
 
     /**
      * 通过拼接，获得修改昵称的完整请求连接
+     *
      * @param pname
      * @return
      */
-    public static String getModifyNickName(int pcustomId, String pname){
-        StringBuilder stringBuilder=new StringBuilder(modify_nickname_pre);
+    public static String getModifyNickName(int pcustomId, String pname) {
+        StringBuilder stringBuilder = new StringBuilder(modify_nickname_pre);
         stringBuilder.append(pcustomId);
         stringBuilder.append("&nickname=");
         stringBuilder.append(pname);
         return stringBuilder.toString();
     }
 
-    public static String getModifyPassword(int pcustomId,String oldpassword,String newpassword){
-        StringBuilder stringBuilder=new StringBuilder(modify_password_pre);
+    /**
+     * 通过拼接，获得修改密码的完整请求连接
+     *
+     * @param pcustomId
+     * @param oldpassword
+     * @param newpassword
+     * @return
+     */
+    public static String getModifyPassword(int pcustomId, String oldpassword, String newpassword) {
+        StringBuilder stringBuilder = new StringBuilder(modify_password_pre);
         stringBuilder.append(pcustomId);
         stringBuilder.append("&password=");
         stringBuilder.append(oldpassword);
         stringBuilder.append("&cpassword=");
         stringBuilder.append(newpassword);
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 获取上传头像的连接
+     *
+     * @return
+     */
+    public static String getUpload() {
+        StringBuilder stringBuilder = new StringBuilder(upload_pic_pre);
         return stringBuilder.toString();
     }
 }
