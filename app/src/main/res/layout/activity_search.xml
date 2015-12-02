@@ -114,6 +114,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="5.0dip"
                 android:text="@string/search"
+                android:textSize="12sp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true" />
         </LinearLayout>
