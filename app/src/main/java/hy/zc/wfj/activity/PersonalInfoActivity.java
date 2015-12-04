@@ -2,11 +2,11 @@ package hy.zc.wfj.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -20,12 +20,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
+import hy.zc.wfj.App;
 import hy.zc.wfj.R;
+import hy.zc.wfj.data.MultipartEntity;
+import hy.zc.wfj.data.MultipartRequest;
 import hy.zc.wfj.data.UserLoginObject;
 import hy.zc.wfj.utility.FileUtil;
 import hy.zc.wfj.utility.SharedPrefUtility;
@@ -40,6 +46,8 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
     private static final int REQUESTCODE_TAKE = 1;        // 相机拍照标记
     private static final int REQUESTCODE_CUTTING = 3;    // 图片裁切标记
     private static final String IMAGE_FILE_NAME = "avatarImage.png";// 头像文件名称
+    public static final String IS_UPLOAD = "isUpload";
+    private String upPicName;
     private String urlpath;            // 图片本地路径
     private TextView common_title_txt;
     private ImageButton common_title_back_btn;
@@ -72,7 +80,6 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
     private TextView tv_content_safe;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +107,8 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
             tv_content_phone.setText(data.getPhone());
             tv_content_nickname.setText(data.getNickName());
 
+
+            upPicName = data.getCustomerId() + ".png";
         } else {
             showLoge("没有或取到数据");
         }
@@ -132,7 +141,7 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
      * 初始化组件
      */
     private void initializeComponent() {
-        mContext=PersonalInfoActivity.this;
+        mContext = PersonalInfoActivity.this;
         mInflater = LayoutInflater.from(PersonalInfoActivity.this);
 
         common_title_txt = (TextView) findViewById(R.id.common_title_txt);
@@ -233,8 +242,8 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
                 showLogi("1");
                 break;
             case R.id.layout_safe:
-                Bundle passward_bundle=new Bundle();
-                passward_bundle.putString("modify",getResources().getString(R.string.tv_modify_password));
+                Bundle passward_bundle = new Bundle();
+                passward_bundle.putString("modify", getResources().getString(R.string.tv_modify_password));
                 goModifyActivity(passward_bundle);
                 break;
             default:
@@ -318,10 +327,54 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
 //            avatarImg.setImageDrawable(drawable);
             //打印一下最终截取到的图片路径
             showLogi(urlpath);
-            // 新线程后台上传服务端
-//            pd = ProgressDialog.show(mContext, null, "正在上传图片，请稍候...");
-//            new Thread(uploadImageRunnable).start();
-
+            String uri = UriManager.getUpload();
+            uploadImage(uri);
         }
+    }
+
+
+    /**
+     * 将图片转换为byte字节流，用来给上传图片用的
+     * @param bm
+     * @return
+     */
+    public byte[] bitmapToBytes(Bitmap bm) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
+    }
+
+    /**
+     * 上传头像
+     *
+     * @param uri
+     *          请求的uri
+     */
+    private void uploadImage(String uri) {
+        MultipartRequest multipartRequest = new MultipartRequest(uri, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                showLogi("success");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                showLoge("请求失败了"+error.getMessage());
+            }
+        });
+//        multipartRequest.addHeader("Content-Type", "multipart/form-data; boundary=-_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        MultipartEntity mult = multipartRequest.getMultiPartEntity();
+        Bitmap bitmap = BitmapFactory.decodeFile(urlpath);
+        mult.addBinaryPart("txImage", upPicName, bitmapToBytes(bitmap));
+        App.addRequest(multipartRequest, IS_UPLOAD);
+
+    }
+
+
+    @Override
+    protected void onStop() {
+//        取消所有在队列中的请求
+        App.cancelAllRequests(IS_UPLOAD);
+        super.onStop();
     }
 }
