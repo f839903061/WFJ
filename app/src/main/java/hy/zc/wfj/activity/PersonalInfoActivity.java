@@ -96,6 +96,7 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
      * 头像，名称，昵称，邮箱，手机
      */
     private void loadData() {
+        showProgressDialog("正在更新。。。",2);
         String temp = (String) SharedPrefUtility.getParam(PersonalInfoActivity.this, SharedPrefUtility.LOGIN_DATA, "");
         if (!temp.equals("")) {
             UserLoginObject userLoginObject = JSON.parseObject(temp, UserLoginObject.class);
@@ -119,6 +120,7 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
     @Override
     protected void onResume() {
         super.onResume();
+
         //重新加载数据,防止有数据没有随时更新显示
         loadData();
     }
@@ -354,7 +356,7 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
         MultipartRequest multipartRequest = new MultipartRequest(uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                showLogi("success");
+                SharedPrefUtility.setParam(PersonalInfoActivity.this,SharedPrefUtility.LOGIN_DATA,response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -369,6 +371,7 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
         App.addRequest(multipartRequest, IS_UPLOAD);
 
     }
+
 
 
     @Override
