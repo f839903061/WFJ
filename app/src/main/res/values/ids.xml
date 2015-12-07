@@ -211,4 +211,5 @@
     <item name="layout_modify_password" type="id" />
     <item name="et_new_password" type="id" />
     <item name="et_confirm_password" type="id" />
+    <item name="pull_refresh_list" type="id" />
 </resources>

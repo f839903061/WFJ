@@ -134,15 +134,17 @@
                 style="@style/commodity_radiobutton_style" />
         </RadioGroup>
     </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:text="数据暂无"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="20.0dp" />
-    </LinearLayout>
+<com.handmark.pulltorefresh.library.PullToRefreshListView
+    android:id="@id/pull_refresh_list"
+    android:cacheColorHint="#00000000"
+    android:divider="#19000000"
+    android:dividerHeight="4dp"
+    android:fadingEdge="none"
+    android:fastScrollEnabled="false"
+    android:footerDividersEnabled="false"
+    android:headerDividersEnabled="false"
+    android:smoothScrollbar="true"
+    android:layout_weight="1"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"/>
 </LinearLayout>
