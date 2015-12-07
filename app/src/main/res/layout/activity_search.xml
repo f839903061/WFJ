@@ -1,151 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:id="@id/header"
-    android:layout_width="fill_parent"
-    android:layout_height="50.0dip"
-    android:clickable="true"
-    android:focusable="true"
-    android:gravity="center_vertical"
-    android:background="#88A7A7A7">
-
-    <LinearLayout
-        android:id="@id/home_search_button"
-        android:layout_width="54.0dip"
-        android:layout_height="fill_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:clickable="true"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:layout_width="20.0dip"
-            android:layout_height="20.0dip"
-            android:scaleType="centerInside"
-            fresco:placeholderImage="@drawable/common_title_back_click" />
-
-
-    </LinearLayout>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@id/home_title_search"
+        android:id="@id/header"
         android:layout_width="fill_parent"
-        android:layout_height="31.0dip"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/to_message_btn"
-        android:layout_toRightOf="@id/home_search_button"
-        android:background="@drawable/topbar_edittext_background"
-        android:gravity="center_vertical"
-        android:paddingLeft="10.0dip">
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@id/iv_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="@drawable/icon_search" />
-
-        <AutoCompleteTextView
-            android:id="@id/homeActivity_autoComplete"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10.0dip"
-            android:layout_marginRight="2.0dip"
-            android:layout_toRightOf="@id/iv_search"
-            android:background="@color/transparent"
-            android:completionThreshold="1"
-            android:dropDownWidth="fill_parent"
-            android:gravity="center_vertical"
-            android:hint="@string/homeActivity_autoComplete"
-            android:paddingBottom="2.0dip"
-            android:paddingRight="20.0dip"
-            android:paddingTop="2.0dip"
-            android:singleLine="true"
-            android:textColor="@color/search_font_dark_grey"
-            android:textColorHint="@color/search_title_hint_text_color"
-            android:textSize="14.0dip" />
-
-        <!--voice picture-->
-        <!--<LinearLayout-->
-        <!--android:id="@id/homeActivity_voice"-->
-        <!--android:layout_width="32.0dip"-->
-        <!--android:layout_height="fill_parent"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:paddingLeft="9.0dip"-->
-        <!--android:paddingRight="9.0dip">-->
-
-        <!--<com.facebook.drawee.view.SimpleDraweeView-->
-        <!--android:layout_width="12.0dip"-->
-        <!--android:layout_height="20.0dip"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--android:background="@drawable/app_icon_voice"-->
-        <!--android:scaleType="centerInside" />-->
-        <!--</LinearLayout>-->
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@id/to_message_btn"
-        android:layout_width="54.0dip"
-        android:layout_height="fill_parent"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:clickable="true">
+        android:layout_height="50.0dip"
+        android:background="#88A7A7A7"
+        android:gravity="center_vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:id="@id/home_search_button"
+            android:layout_width="54.0dip"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
             android:gravity="center"
             android:orientation="vertical">
 
-            <Button
-                android:textColor="@color/common_title_text_color"
-                android:gravity="center"
-                android:layout_gravity="center_vertical"
-                android:id="@id/search_btn"
-                android:background="@android:color/transparent"
-                android:padding="8.0dip"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginRight="5.0dip"
-                android:text="@string/search"
-                android:textSize="12sp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="20.0dip"
+                android:layout_height="20.0dip"
+                android:scaleType="centerInside"
+                fresco:placeholderImage="@drawable/common_title_back_click" />
+
+
         </LinearLayout>
 
-        <TextView
-            android:id="@id/home_message_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="8.0dip"
-            android:layout_marginTop="5.0dip"
-            android:background="@drawable/home_message_red_bg"
-            android:gravity="center"
-            android:paddingBottom="0.5dip"
-            android:paddingLeft="3.0dip"
-            android:paddingRight="3.0dip"
-            android:paddingTop="0.5dip"
-            android:text="99"
-            android:textColor="@color/white"
-            android:textSize="8.0dip"
-            android:visibility="gone" />
+        <RelativeLayout
+            android:id="@id/home_title_search"
+            android:layout_width="fill_parent"
+            android:layout_height="31.0dip"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/to_message_btn"
+            android:layout_toRightOf="@id/home_search_button"
+            android:background="@drawable/topbar_edittext_background"
+            android:gravity="center_vertical"
+            android:paddingLeft="10.0dip">
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@id/home_message_red_dot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@id/iv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_search" />
+
+            <AutoCompleteTextView
+                android:id="@id/homeActivity_autoComplete"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="2.0dip"
+                android:layout_toRightOf="@id/iv_search"
+                android:background="@color/transparent"
+                android:completionThreshold="1"
+                android:dropDownWidth="fill_parent"
+                android:gravity="center_vertical"
+                android:hint="@string/homeActivity_autoComplete"
+                android:paddingBottom="2.0dip"
+                android:paddingRight="20.0dip"
+                android:paddingTop="2.0dip"
+                android:singleLine="true"
+                android:textColor="@color/search_font_dark_grey"
+                android:textColorHint="@color/search_title_hint_text_color"
+                android:textSize="14.0dip"
+                android:imeOptions="actionSearch"/>
+
+            <!--voice picture-->
+            <!--<LinearLayout-->
+            <!--android:id="@id/homeActivity_voice"-->
+            <!--android:layout_width="32.0dip"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:paddingLeft="9.0dip"-->
+            <!--android:paddingRight="9.0dip">-->
+
+            <!--<com.facebook.drawee.view.SimpleDraweeView-->
+            <!--android:layout_width="12.0dip"-->
+            <!--android:layout_height="20.0dip"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:background="@drawable/app_icon_voice"-->
+            <!--android:scaleType="centerInside" />-->
+            <!--</LinearLayout>-->
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@id/to_message_btn"
+            android:layout_width="54.0dip"
+            android:layout_height="fill_parent"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="12.0dip"
-            android:layout_marginTop="6.0dip"
-            android:visibility="gone"
-            fresco:placeholderImage="@drawable/home_message_red_dot" />
+            android:layout_centerVertical="true"
+            android:clickable="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@id/search_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5.0dip"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:padding="8.0dip"
+                    android:text="@string/search"
+                    android:textColor="@color/common_title_text_color"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@id/home_message_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8.0dip"
+                android:layout_marginTop="5.0dip"
+                android:background="@drawable/home_message_red_bg"
+                android:gravity="center"
+                android:paddingBottom="0.5dip"
+                android:paddingLeft="3.0dip"
+                android:paddingRight="3.0dip"
+                android:paddingTop="0.5dip"
+                android:text="99"
+                android:textColor="@color/white"
+                android:textSize="8.0dip"
+                android:visibility="gone" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@id/home_message_red_dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="12.0dip"
+                android:layout_marginTop="6.0dip"
+                android:visibility="gone"
+                fresco:placeholderImage="@drawable/home_message_red_dot" />
+        </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/pull_refresh_list"
+        android:cacheColorHint="#00000000"
+        android:divider="#19000000"
+        android:dividerHeight="4dp"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:smoothScrollbar="true"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+</LinearLayout>
