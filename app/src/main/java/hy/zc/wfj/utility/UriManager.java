@@ -8,9 +8,11 @@ import android.net.Uri;
  */
 public class UriManager {
     //        String uri="http://192.168.10.210:8080/wfj_front/phone/phonecategory?method=initType";
-//        String uri = "https://192.168.10.210:8443/wfj_front/phone/phonecategory.action?method=initType";
+    public static final String H_CONNECT_PRE = "http://192.168.10.7:8080/wfj_front/phone/";
+    public static final String X_CONNECT_PRE = "http://192.168.10.210:8080/wfj_front/phone/";
 
 
+    //        String uri = "https://192.168.10.210:8443/wfj_front/phone/phonecategory.action?method=initType";
     //分类界面的请求链接
     private static final String category_request_uri = "http://101.200.182.119:8080/phone/phonecategory.action?method=initType";
     //首页的请求链接
@@ -21,15 +23,27 @@ public class UriManager {
     private static final String login_pic_pre = "http://192.168.10.7:8085/b2b2c/";
     //登录请求的前缀
 //    private static final String login_pre = "http://101.200.182.119:8080/phone/login.action?loginName=";//全网
-    private static final String login_pre = "http://192.168.10.7:8080/wfj_front/phone/login.action?loginName=";//局域网
+    private static final String login_pre = H_CONNECT_PRE + "login.action?loginName=";//局域网
     //修改号码的前缀
-    private static final String modify_phone_pre = "http://192.168.10.7:8080/wfj_front/phone/editCustomer.action?customerId=";
+    private static final String modify_phone_pre = H_CONNECT_PRE + "editCustomer.action?customerId=";
     //修改昵称
-    private static final String modify_nickname_pre = "http://192.168.10.7:8080/wfj_front/phone/editCustomer.action?customerId=";
+    private static final String modify_nickname_pre = H_CONNECT_PRE + "editCustomer.action?customerId=";
     //修改密码
-    private static final String modify_password_pre = "http://192.168.10.7:8080/wfj_front/phone/changepass.action?customerId=";
+    private static final String modify_password_pre = H_CONNECT_PRE + "changepass.action?customerId=";
     //上传头像前缀
-    private static final String upload_pic_pre = "http://192.168.10.7:8080/wfj_front/phone/uploadPic.action";
+    private static final String upload_pic_pre = H_CONNECT_PRE + "uploadPic.action";
+    //实时搜索前缀
+    private static final String search_pre = X_CONNECT_PRE + "mohuProinfo.action?keyword=";
+    //商品详情前缀
+    private static final String detial_pre = X_CONNECT_PRE + "conditionProinfo.action?productTypeId=";
+
+    public enum ORDER {
+        normal,
+        pricedown,
+        priceup,
+        totalSalesdown,
+        totalSalesup
+    }
 
     /**
      * 拼接图片链接，并返回完整的uri
@@ -146,6 +160,27 @@ public class UriManager {
      */
     public static String getUpload() {
         StringBuilder stringBuilder = new StringBuilder(upload_pic_pre);
+        return stringBuilder.toString();
+    }
+
+
+    /**
+     * 获取搜索自动补全链接
+     *
+     * @param ptext 搜索内容
+     * @return
+     */
+    public static String getSearch(String ptext) {
+        StringBuilder stringBuilder = new StringBuilder(search_pre);
+        stringBuilder.append(ptext);
+        return stringBuilder.toString();
+    }
+
+    public static String getDetial(int pid, String porder) {
+        StringBuilder stringBuilder = new StringBuilder(detial_pre);
+        stringBuilder.append("" + pid);
+        stringBuilder.append("&orderBy=");
+        stringBuilder.append(porder);
         return stringBuilder.toString();
     }
 }
