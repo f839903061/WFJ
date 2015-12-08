@@ -212,4 +212,11 @@
     <item name="et_new_password" type="id" />
     <item name="et_confirm_password" type="id" />
     <item name="pull_refresh_list" type="id" />
+    <item name="tv_price" type="id" />
+    <item name="tv_sales" type="id" />
+    <item name="tv_normal" type="id" />
+    <item name="img_arrow" type="id" />
+    <item name="tv_name" type="id" />
+    <item name="tv_people_count" type="id" />
+    <item name="img_detail" type="id" />
 </resources>
