@@ -75,7 +75,7 @@ public class SearchActivity extends FrameActivity implements View.OnClickListene
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean result = false;
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    goToListActivity(et_search.getText().toString());
+                    goToListActivity();
                 }
 
                 return result;
@@ -87,7 +87,8 @@ public class SearchActivity extends FrameActivity implements View.OnClickListene
         et_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                goToListActivity(et_search.getText().toString());
+
+                goToListActivity();
             }
         });
 
@@ -133,17 +134,19 @@ public class SearchActivity extends FrameActivity implements View.OnClickListene
         actualListView.setAdapter(mAdapter);
     }
 
-    private void goToListActivity(String ptext) {
+    private void goToListActivity() {
+        String ptext = et_search.getText().toString().trim();
+        if (ptext != null&&!ptext.equals("")) {
+            String uri = UriManager.getSearch(ptext);
+            Bundle bundle=new Bundle();
+            bundle.putString("uri",uri);
 
-        String uri = UriManager.getSearch(ptext);
-        Bundle bundle=new Bundle();
-        bundle.putString("uri",uri);
+            Intent goToList=new Intent(SearchActivity.this,CommodityDetailsActivity.class);
+            goToList.putExtras(bundle);
 
-        Intent goToList=new Intent(SearchActivity.this,CommodityDetailsActivity.class);
-        goToList.putExtras(bundle);
-
-        startActivity(goToList);
-        SearchActivity.this.finish();
+            startActivity(goToList);
+            SearchActivity.this.finish();
+        }
     }
 
     /**
@@ -223,7 +226,7 @@ public class SearchActivity extends FrameActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.search_btn:
-                goToListActivity(et_search.getText().toString());
+                goToListActivity();
                 break;
             default:
                 break;
