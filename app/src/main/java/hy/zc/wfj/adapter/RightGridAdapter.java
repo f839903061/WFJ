@@ -1,9 +1,9 @@
 package hy.zc.wfj.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +27,11 @@ public class RightGridAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
     private List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> mList;
-    public RightGridAdapter(Context pcontext ,List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> plist) {
-        mContext=pcontext;
-        mInflater=LayoutInflater.from(pcontext);
-        mList=plist;
+
+    public RightGridAdapter(Context pcontext, List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> plist) {
+        mContext = pcontext;
+        mInflater = LayoutInflater.from(pcontext);
+        mList = plist;
     }
 
     @Override
@@ -49,16 +50,16 @@ public class RightGridAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            viewHolder=new ViewHolder();
-            convertView=mInflater.inflate(R.layout.category_right_grid_item,null);
-            viewHolder.textView=(TextView)convertView.findViewById(R.id.category_item_have_picture_text_3);
-            viewHolder.simpleDraweeView=(SimpleDraweeView)convertView.findViewById(R.id.category_item_have_picture_image_3);
+            viewHolder = new ViewHolder();
+            convertView = mInflater.inflate(R.layout.category_right_grid_item, null);
+            viewHolder.textView = (TextView) convertView.findViewById(R.id.category_item_have_picture_text_3);
+            viewHolder.simpleDraweeView = (SimpleDraweeView) convertView.findViewById(R.id.category_item_have_picture_image_3);
             convertView.setTag(viewHolder);
-        }else {
-            viewHolder=(ViewHolder)convertView.getTag();
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         viewHolder.textView.setText(mList.get(position).getSortName());
@@ -72,16 +73,20 @@ public class RightGridAdapter extends BaseAdapter {
             }
 
             private void openCommodityDetails() {
-                Intent intent=new Intent();
-                intent.setClass(mContext,CommodityDetailsActivity.class);
-                ((Activity)mContext).startActivity(intent);
+                Intent intent = new Intent();
+                intent.setClass(mContext, CommodityDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                String uri = UriManager.getDetialFull(mList.get(position).getProductTypeId(), UriManager.ORDER.normal);
+                bundle.putString("uri", uri);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
             }
         });
         return convertView;
     }
 
 
-    public class ViewHolder{
+    public class ViewHolder {
         SimpleDraweeView simpleDraweeView;
         TextView textView;
     }

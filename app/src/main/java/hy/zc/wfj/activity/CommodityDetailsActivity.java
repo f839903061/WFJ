@@ -1,14 +1,14 @@
 package hy.zc.wfj.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -17,28 +17,33 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.handmark.pulltorefresh.library.extras.SoundPullEventListener;
 
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import hy.zc.wfj.App;
 import hy.zc.wfj.R;
+import hy.zc.wfj.adapter.DetialAdapter;
 import hy.zc.wfj.data.SearchObject;
 
 public class CommodityDetailsActivity extends FrameActivity implements View.OnClickListener {
 
-    public static final String IS_SEARCH_OK = "sSearchOk";
+    public static final String IS_SEARCH_OK = "isSearchOk";
+    public static final int INDEX_NORMAL = 1;
+    public static final int INDEX_SALES = 2;
+    public static final int INDEX_PRICE = 3;
     private LinearLayout mBack;
-    private RadioGroup mRadioGroup;
 
-    private LinkedList<String> mListItems;
     private PullToRefreshListView mPullRefreshListView;
-    private ArrayAdapter<String> mAdapter;
 
+    private TextView tv_normal;
+    private TextView tv_sales;
+    private TextView tv_price;
+    private SimpleDraweeView img_arrow;
+
+    private Boolean sortUp = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,33 +66,19 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
             getDataFromUri(uri);
         }
 
+        tv_normal = (TextView) findViewById(R.id.tv_normal);
+        tv_sales = (TextView) findViewById(R.id.tv_sales);
+        tv_price = (TextView) findViewById(R.id.tv_price);
+        img_arrow = (SimpleDraweeView) findViewById(R.id.img_arrow);
+
+
+        tv_normal.setOnClickListener(this);
+        tv_sales.setOnClickListener(this);
+        tv_price.setOnClickListener(this);
+        img_arrow.setOnClickListener(this);
 
         mBack = (LinearLayout) findViewById(R.id.home_search_button);
-        mRadioGroup = (RadioGroup) findViewById(R.id.commodity_radiogroup);
         mBack.setOnClickListener(this);
-
-        mRadioGroup.check(R.id.commodity_composite);
-        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-                switch (checkedId) {
-                    case R.id.commodity_composite://综合刷新listview
-//                        showToast("1");
-                        break;
-                    case R.id.commodity_sales_volume://销量刷新listview
-//                        showToast("2");
-                        break;
-                    case R.id.commodity_price://价格刷新listview
-//                        showToast("3");
-                        break;
-                    default:
-
-                        break;
-                }
-                showToast("数据暂时没有加载。。。");
-            }
-        });
 
 
         listviewLoadData();
@@ -112,7 +103,7 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 
                 // Do work to refresh the list here.
-                new GetDataTask().execute();
+//                new GetDataTask().execute();
             }
         });
 
@@ -125,20 +116,6 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
             }
         });
 
-        ListView actualListView = mPullRefreshListView.getRefreshableView();
-
-        // Need to use the Actual ListView when registering for Context Menu
-        registerForContextMenu(actualListView);
-
-        mListItems = new LinkedList<String>();
-        mListItems.addAll(Arrays.asList(mStrings));
-
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mListItems);
-
-
-        // You can also just use setListAdapter(mAdapter) or
-        // mPullRefreshListView.setAdapter(mAdapter)
-        actualListView.setAdapter(mAdapter);
     }
 
     private class GetDataTask extends AsyncTask<Void, Void, String[]> {
@@ -147,37 +124,42 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
         protected String[] doInBackground(Void... params) {
             // Simulates a background job.
             try {
-                Thread.sleep(4000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
             }
-            return mStrings;
+            return null;//这里是要返回数据的，我现在没有做处理
         }
 
         @Override
         protected void onPostExecute(String[] result) {
-            mListItems.addFirst("Added after refresh...");
+/*            mListItems.addFirst("Added after refresh...");
             mAdapter.notifyDataSetChanged();
 
             // Call onRefreshComplete when the list has been refreshed.
-            mPullRefreshListView.onRefreshComplete();
+            mPullRefreshListView.onRefreshComplete();*/
 
             super.onPostExecute(result);
         }
     }
-    private String[] mStrings = { "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam", "Abondance", "Ackawi",
-            "Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu", "Airag", "Airedale", "Aisy Cendre",
-            "Allgauer Emmentaler", "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam", "Abondance", "Ackawi",
-            "Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu", "Airag", "Airedale", "Aisy Cendre",
-            "Allgauer Emmentaler" };
+
+
+    /**
+     * 通过uri从服务器获取数据
+     *
+     * @param uri
+     */
     private void getDataFromUri(String uri) {
-        StringRequest stringRequest=new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (response.length()>50) {
+                if (response.length() > 50) {
                     SearchObject searchObject = JSON.parseObject(response, SearchObject.class);
                     List<SearchObject.DataEntity> data = searchObject.getData();
+
+                    changeTextViewColor(INDEX_NORMAL);
                     //下面的代码是将数据记载到listview中去
-                }else {
+                    setAdapter(data);
+                } else {
                     showLogw("没有搜索到对应的数据");
                 }
             }
@@ -190,6 +172,18 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
         App.addRequest(stringRequest, IS_SEARCH_OK);
     }
 
+    /**
+     * 给listview 或者 gridview填充数据
+     */
+    private void setAdapter(List<SearchObject.DataEntity> plist) {
+        ListView actualListView = mPullRefreshListView.getRefreshableView();
+        DetialAdapter adapter = new DetialAdapter(CommodityDetailsActivity.this, plist);
+        actualListView.setAdapter(adapter);
+    }
+
+    /**
+     * 取消网络请求
+     */
     @Override
     protected void onStop() {
         App.cancelAllRequests(IS_SEARCH_OK);
@@ -199,12 +193,65 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.home_search_button:
+            case R.id.home_search_button://返回之前的界面
                 goBack();
+                break;
+
+            case R.id.tv_normal://综合列表
+                changeTextViewColor(INDEX_NORMAL);
+                break;
+            case R.id.tv_sales://销量列表
+                changeTextViewColor(INDEX_SALES);
+
+                break;
+            case R.id.tv_price://价格列表
+
+            case R.id.img_arrow:
+                changeTextViewColor(INDEX_PRICE);
+                if (sortUp) {
+                    img_arrow.setImageResource(R.drawable.sort_button_price_up);
+                    //从便宜到贵加载数据
+
+                    sortUp = false;
+                } else {
+                    //从贵到便宜加载数据
+                    img_arrow.setImageResource(R.drawable.sort_button_price_down);
+                    sortUp = true;
+                }
                 break;
             default:
 
                 break;
         }
     }
+
+
+    /**
+     * 修改综合，销量，价格的颜色
+     *
+     * @param index
+     */
+    private void changeTextViewColor(int index) {
+        switch (index) {
+            case INDEX_NORMAL:
+                tv_normal.setTextColor(Color.RED);
+                tv_sales.setTextColor(Color.BLACK);
+                tv_price.setTextColor(Color.BLACK);
+                img_arrow.setImageResource(R.drawable.sort_button_price_up_grey);
+                break;
+            case INDEX_SALES:
+                tv_normal.setTextColor(Color.BLACK);
+                tv_sales.setTextColor(Color.RED);
+                tv_price.setTextColor(Color.BLACK);
+                img_arrow.setImageResource(R.drawable.sort_button_price_up_grey);
+                break;
+            case INDEX_PRICE:
+                tv_normal.setTextColor(Color.BLACK);
+                tv_sales.setTextColor(Color.BLACK);
+                tv_price.setTextColor(Color.RED);
+                break;
+        }
+    }
+
+
 }
