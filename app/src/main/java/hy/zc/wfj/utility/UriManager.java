@@ -176,11 +176,29 @@ public class UriManager {
         return stringBuilder.toString();
     }
 
-    public static String getDetial(int pid, String porder) {
+    /**
+     * 获取完整的详情列表连接
+     * @param pid
+     * @param porder
+     * @return
+     */
+    public static String getDetialFull(int pid, ORDER porder) {
         StringBuilder stringBuilder = new StringBuilder(detial_pre);
         stringBuilder.append("" + pid);
         stringBuilder.append("&orderBy=");
         stringBuilder.append(porder);
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 获取部分详情列表连接，最末端的筛选，留出来空着，以便灵活运用
+     * @param pid
+     * @return
+     */
+    public static String getDetialPart(int pid) {
+        StringBuilder stringBuilder = new StringBuilder(detial_pre);
+        stringBuilder.append("" + pid);
+        stringBuilder.append("&orderBy=");
         return stringBuilder.toString();
     }
 }
