@@ -1,11 +1,11 @@
 package hy.zc.wfj.fragment;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +17,9 @@ import android.widget.ListView;
 
 import com.alibaba.fastjson.JSON;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.squareup.okhttp.OkHttpClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +32,6 @@ import hy.zc.wfj.adapter.LeftListAdapter;
 import hy.zc.wfj.adapter.RightListAdapter;
 import hy.zc.wfj.data.CategoryListObject;
 import hy.zc.wfj.data.CategroyJsonObject;
-import hy.zc.wfj.utility.OkHttpStack;
 import hy.zc.wfj.utility.UriManager;
 
 /**
@@ -47,7 +42,6 @@ import hy.zc.wfj.utility.UriManager;
  */
 public class CategoryFragment extends FrameFragment {
 
-    public static final String TAG = "fengluchun";
     public static final String RECEIVER_NULL_ERROR = " 网络联通，接收数据却为空";
     public static final String HTTP_CONNECT_FAILED = " HTTP连接失败";
     public static final String PARSE_ERROR = "解析出问题了";
@@ -71,7 +65,6 @@ public class CategoryFragment extends FrameFragment {
     private ArrayList<CategoryListObject> mCategoryObjectList;
     private List<CategroyJsonObject.DataEntity> mLeftList;
     private List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> mRightList=new ArrayList<>();
-    private List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> tempRightList;
 
     public static synchronized CategoryFragment getInstance() {
         if (categoryFragment == null) {

@@ -4,27 +4,37 @@ import android.app.Activity;
 import android.util.Log;
 import android.widget.Toast;
 
+import hy.zc.wfj.utility.LogUtil;
+
 /**
  * 这个类的里面封装了一些通用的功能
  * Created by feng on 2015/11/23.
  */
-public class BaseActivity extends Activity {
+public class BaseActivity extends Activity implements LogUtil{
 
-    public static String TAG="fengluchun";
 
-    public void showLogi(String ptext){
+    @Override
+    public void showLogi(String ptext) {
         Log.i(TAG,getClass().getName()+" "+ptext);
     }
-    public void showLogd(String ptext){
+
+    @Override
+    public void showLogd(String ptext) {
         Log.d(TAG,getClass().getName()+" "+ptext);
     }
-    public void showLoge(String ptext){
+
+    @Override
+    public void showLoge(String ptext) {
         Log.e(TAG,getClass().getName()+" "+ptext);
     }
-    public void showLogw(String ptext){
+
+    @Override
+    public void showLogw(String ptext) {
         Log.w(TAG,getClass().getName()+" "+ ptext);
     }
-    public void showToast(String ptext){
+
+    public void showToast(String ptext) {
         Toast.makeText(getApplicationContext(),ptext,Toast.LENGTH_LONG).show();
     }
+
 }

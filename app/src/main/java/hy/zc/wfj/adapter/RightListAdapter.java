@@ -1,15 +1,14 @@
 package hy.zc.wfj.adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.List;
 
 import hy.zc.wfj.R;
+import hy.zc.wfj.adapter.base.BBaseAdapter;
 import hy.zc.wfj.customview.MyGridView;
 import hy.zc.wfj.data.CategroyJsonObject;
 
@@ -17,30 +16,14 @@ import hy.zc.wfj.data.CategroyJsonObject;
  * 分类界面的右边的listview的适配器
  * Created by feng on 2015/10/27.
  */
-public class RightListAdapter extends BaseAdapter {
+public class RightListAdapter extends BBaseAdapter {
     private List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> mList = null;
-    private LayoutInflater mInflater = null;
     private Context mContext;
 
-    public RightListAdapter(Context pcontext, List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> plist) {
-        mContext = pcontext;
+    public RightListAdapter(Context pcontext, List plist) {
+        super(pcontext, plist);
         mList = plist;
-        mInflater = LayoutInflater.from(pcontext);
-    }
-
-    @Override
-    public int getCount() {
-        return mList.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return mList.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
+        mContext = pcontext;
     }
 
     @Override
@@ -48,7 +31,7 @@ public class RightListAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.category_right_list_item, null);
+            convertView = getInflater().inflate(R.layout.category_right_list_item, null);
             viewHolder.textView = (TextView) convertView.findViewById(R.id.right_item_title);
             viewHolder.myGridView = (MyGridView) convertView.findViewById(R.id.category_right_grid);
 
@@ -57,9 +40,10 @@ public class RightListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.textView.setText(mList.get(position).getSortName());
-        List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> rrList = mList.get(position).getChildProductType();
-        RightGridAdapter rightGridAdapter = new RightGridAdapter(mContext,rrList);
+        CategroyJsonObject.DataEntity.ChildProductTypeEntity entity = mList.get(position);
+        viewHolder.textView.setText(entity.getSortName());
+        List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> rrList = entity.getChildProductType();
+        RightGridAdapter rightGridAdapter = new RightGridAdapter(mContext, rrList);
         viewHolder.myGridView.setAdapter(rightGridAdapter);
         return convertView;
     }

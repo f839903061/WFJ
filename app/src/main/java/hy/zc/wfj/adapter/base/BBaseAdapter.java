@@ -8,12 +8,14 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import hy.zc.wfj.utility.LogUtil;
+
 /**
  * Created by feng on 2015/11/25.
  */
-public abstract class BBaseAdapter extends BaseAdapter{
+public abstract class BBaseAdapter extends BaseAdapter implements LogUtil{
 
-    public static final String TAG = "fengluchun";
+
     private Context mContex;
     private LayoutInflater mInflater;
     private List mList=new ArrayList();
@@ -24,7 +26,7 @@ public abstract class BBaseAdapter extends BaseAdapter{
         mList.addAll(plist);
     }
 
-    public LayoutInflater getmInflater() {
+    public LayoutInflater getInflater() {
         return mInflater;
     }
     @Override
@@ -42,17 +44,23 @@ public abstract class BBaseAdapter extends BaseAdapter{
         return position;
     }
 
-    public  void showLogi(String ptext){
+    @Override
+    public void showLogi(String ptext) {
         Log.i(TAG, getClass().getName() + " " + ptext);
     }
-    public  void showLogd(String ptext){
+
+    @Override
+    public void showLogd(String ptext) {
         Log.d(TAG, getClass().getName() + " " + ptext);
     }
-    public  void showLogw(String ptext){
-        Log.w(TAG, getClass().getName() + " " + ptext);
-    }
-    public  void showLoge(String ptext){
+
+    @Override
+    public void showLoge(String ptext) {
         Log.e(TAG, getClass().getName() + " " + ptext);
     }
 
+    @Override
+    public void showLogw(String ptext) {
+        Log.w(TAG, getClass().getName() + " " + ptext);
+    }
 }

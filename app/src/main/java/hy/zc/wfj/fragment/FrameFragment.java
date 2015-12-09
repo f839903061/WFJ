@@ -1,10 +1,8 @@
 package hy.zc.wfj.fragment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import hy.zc.wfj.data.OrderDataObject;
 import hy.zc.wfj.fragment.base.BaseFragment;
 
 /**

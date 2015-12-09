@@ -2,7 +2,6 @@ package hy.zc.wfj.adapter;
 
 import android.content.Context;
 import android.net.Uri;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -23,13 +22,9 @@ import hy.zc.wfj.utility.UriManager;
 public class DetialAdapter extends BBaseAdapter {
 
     private List<SearchObject.DataEntity> mList =new ArrayList<>();
-    private Context mContext;
-    private LayoutInflater mInflater;
     public DetialAdapter(Context pcontext, List plist) {
         super(pcontext, plist);
         mList=plist;
-        mContext=pcontext;
-        mInflater=LayoutInflater.from(mContext);
     }
 
     @Override
@@ -37,7 +32,7 @@ public class DetialAdapter extends BBaseAdapter {
         ViewHolder viewHolder;
         if (convertView==null){
             viewHolder=new ViewHolder();
-            convertView=mInflater.inflate(R.layout.activity_commodity_listview_item,null);
+            convertView= getInflater().inflate(R.layout.activity_commodity_listview_item, null);
             viewHolder.img=(SimpleDraweeView)convertView.findViewById(R.id.img_detail);
             viewHolder.tv_name=(TextView)convertView.findViewById(R.id.tv_name);
             viewHolder.tv_price=(TextView)convertView.findViewById(R.id.tv_price);

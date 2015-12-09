@@ -11,22 +11,23 @@ import android.widget.TextView;
 import java.util.List;
 
 import hy.zc.wfj.R;
+import hy.zc.wfj.adapter.base.BBaseAdapter;
 import hy.zc.wfj.data.CategroyJsonObject;
 
 /**
  * 适配分类界面的左边的listview
  * Created by feng on 2015/10/27.
  */
-public class LeftListAdapter extends BaseAdapter {
+public class LeftListAdapter extends BBaseAdapter {
 //    private ArrayList<CategoryListObject> mList =null;
     private List<CategroyJsonObject.DataEntity> mList=null;
-    private LayoutInflater mInflater=null;
     private int select=-1;
 
-    public LeftListAdapter(Context pcontext,List<CategroyJsonObject.DataEntity> plist) {
-        mList =plist;
-        mInflater=LayoutInflater.from(pcontext);
+    public LeftListAdapter(Context pcontext, List plist) {
+        super(pcontext, plist);
+        mList=plist;
     }
+
 
     /**
      * 用来判断当前点击项，可以解决模板复用导致的textview文字背景色紊乱
@@ -56,7 +57,7 @@ public class LeftListAdapter extends BaseAdapter {
         final ViewHolder viewHolder ;
         if (convertView==null){
             viewHolder=new ViewHolder();
-            convertView = mInflater.inflate(R.layout.category_left_list_item, null);
+            convertView = getInflater().inflate(R.layout.category_left_list_item, null);
             viewHolder.textView=(TextView)convertView.findViewById(R.id.category_left_list_text);
             convertView.setTag(viewHolder);
         }else {

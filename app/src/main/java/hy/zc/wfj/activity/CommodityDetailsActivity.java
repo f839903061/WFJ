@@ -2,9 +2,7 @@ package hy.zc.wfj.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;

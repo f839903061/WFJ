@@ -3,7 +3,6 @@ package hy.zc.wfj.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -22,13 +21,11 @@ import hy.zc.wfj.utility.UriManager;
  */
 public class RecommendAdapter extends BBaseAdapter {
     private Context mContext;
-    private LayoutInflater mInflater;
     private List<SearchObject.DataEntity> mList=new ArrayList();
     public RecommendAdapter(Context pcontext, List plist) {
         super(pcontext, plist);
         mList= plist;
         mContext=pcontext;
-        mInflater=LayoutInflater.from(mContext);
     }
 
     public class ViewHolder{
@@ -39,7 +36,7 @@ public class RecommendAdapter extends BBaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder=new ViewHolder();
-            convertView=mInflater.inflate(R.layout.activity_search_listview_item,null);
+            convertView=getInflater().inflate(R.layout.activity_search_listview_item, null);
             viewHolder.tv_name=(TextView)convertView.findViewById(R.id.tv_name);
             convertView.setTag(viewHolder);
         }else {

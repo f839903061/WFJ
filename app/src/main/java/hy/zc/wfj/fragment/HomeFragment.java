@@ -1,11 +1,11 @@
 package hy.zc.wfj.fragment;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -42,7 +42,6 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    public static final String TAG = "fengluchun";
     private static final String APP_CACAHE_DIRNAME = "/webcache";
     private static final String APP_DB_DIRNAME = "/webdb";
     public static final int LOGIN_REQUEST_CODE = 1;
