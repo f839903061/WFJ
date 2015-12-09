@@ -1,5 +1,6 @@
 package hy.zc.wfj.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -58,6 +59,7 @@ public class RecommendAdapter extends BBaseAdapter {
 
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
+                ((Activity)mContext).finish();
             }
         });
 
