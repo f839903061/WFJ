@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,12 +22,14 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import hy.zc.wfj.App;
 import hy.zc.wfj.R;
 import hy.zc.wfj.adapter.DetialAdapter;
 import hy.zc.wfj.data.SearchObject;
+import hy.zc.wfj.utility.UriManager;
 
 public class CommodityDetailsActivity extends FrameActivity implements View.OnClickListener {
 
@@ -34,6 +37,12 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
     public static final int INDEX_NORMAL = 1;
     public static final int INDEX_SALES = 2;
     public static final int INDEX_PRICE = 3;
+    public static final String COME_FROM = "come_from";
+    public static final String CATEGORY_UI = "categoryUI";
+    public static final String SEARCH_UI = "searchUI";
+    public static final String PRODUCT_TYPE_ID = "ProductTypeId";
+    public static final String URI = "uri";
+    public static final String KEYWORD = "keyword";
     private LinearLayout mBack;
 
     private PullToRefreshListView mPullRefreshListView;
@@ -42,8 +51,14 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
     private TextView tv_sales;
     private TextView tv_price;
     private SimpleDraweeView img_arrow;
+    private AutoCompleteTextView actv_search;
 
     private Boolean sortUp = true;
+    private int product_type_id;
+    private String keyword;
+    private String come_from;
+    private List<SearchObject.DataEntity> mList = new ArrayList<>();
+    private String current_uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,22 +71,30 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
     }
 
     private void initializeComponent() {
-
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        if (bundle != null) {
-
-            String uri = bundle.getString("uri");
-
-            getDataFromUri(uri);
-        }
-
+        //初始化
         tv_normal = (TextView) findViewById(R.id.tv_normal);
         tv_sales = (TextView) findViewById(R.id.tv_sales);
         tv_price = (TextView) findViewById(R.id.tv_price);
         img_arrow = (SimpleDraweeView) findViewById(R.id.img_arrow);
+        actv_search = (AutoCompleteTextView) findViewById(R.id.homeActivity_autoComplete);
 
+        //接受跳转过来的数据
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            come_from = bundle.getString(COME_FROM);
+            current_uri = bundle.getString(URI);
+            //判断是从什么地方跳转过来的
+            if (come_from.equals(CATEGORY_UI)) {//从分类界面跳转过来的
+                product_type_id = bundle.getInt(PRODUCT_TYPE_ID);
+            } else if (come_from.equals(SEARCH_UI)) {//从搜索界面跳转过来的
+                keyword = bundle.getString(KEYWORD);
+                actv_search.setText(keyword);
+            }
+            getDataFromUri(current_uri);
+        }
 
+        //设置监听
         tv_normal.setOnClickListener(this);
         tv_sales.setOnClickListener(this);
         tv_price.setOnClickListener(this);
@@ -80,9 +103,8 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
         mBack = (LinearLayout) findViewById(R.id.home_search_button);
         mBack.setOnClickListener(this);
 
-
+        changeTextViewColor(INDEX_NORMAL);
         listviewLoadData();
-
 
     }
 
@@ -96,14 +118,7 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
         mPullRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-                String label = DateUtils.formatDateTime(getApplicationContext(), System.currentTimeMillis(),
-                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
 
-                // Update the LastUpdatedLabel
-                refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-
-                // Do work to refresh the list here.
-//                new GetDataTask().execute();
             }
         });
 
@@ -118,29 +133,6 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
 
     }
 
-    private class GetDataTask extends AsyncTask<Void, Void, String[]> {
-
-        @Override
-        protected String[] doInBackground(Void... params) {
-            // Simulates a background job.
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-            }
-            return null;//这里是要返回数据的，我现在没有做处理
-        }
-
-        @Override
-        protected void onPostExecute(String[] result) {
-/*            mListItems.addFirst("Added after refresh...");
-            mAdapter.notifyDataSetChanged();
-
-            // Call onRefreshComplete when the list has been refreshed.
-            mPullRefreshListView.onRefreshComplete();*/
-
-            super.onPostExecute(result);
-        }
-    }
 
 
     /**
@@ -156,7 +148,7 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
                     SearchObject searchObject = JSON.parseObject(response, SearchObject.class);
                     List<SearchObject.DataEntity> data = searchObject.getData();
 
-                    changeTextViewColor(INDEX_NORMAL);
+//                    changeTextViewColor(INDEX_NORMAL);
                     //下面的代码是将数据记载到listview中去
                     setAdapter(data);
                 } else {
@@ -177,8 +169,12 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
      */
     private void setAdapter(List<SearchObject.DataEntity> plist) {
         ListView actualListView = mPullRefreshListView.getRefreshableView();
-        DetialAdapter adapter = new DetialAdapter(CommodityDetailsActivity.this, plist);
-        actualListView.setAdapter(adapter);
+        mList.clear();
+        mList.addAll(plist);
+        if (mList != null) {
+            DetialAdapter adapter = new DetialAdapter(CommodityDetailsActivity.this, mList);
+            actualListView.setAdapter(adapter);
+        }
     }
 
     /**
@@ -199,25 +195,54 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
 
             case R.id.tv_normal://综合列表
                 changeTextViewColor(INDEX_NORMAL);
+                if (come_from.equals(CATEGORY_UI)) {
+                    current_uri=UriManager.getCategorySortUri(product_type_id, UriManager.ORDER.normal);
+                }else if (come_from.equals(SEARCH_UI)){
+                    current_uri=UriManager.getSearch(keyword, UriManager.ORDER.normal);
+                }
+                getDataFromUri(current_uri);
                 break;
             case R.id.tv_sales://销量列表
                 changeTextViewColor(INDEX_SALES);
-
+                if (come_from.equals(CATEGORY_UI)) {
+                    current_uri = UriManager.getCategorySortUri(product_type_id, UriManager.ORDER.totalSalesdown);
+                } else if (come_from.equals(SEARCH_UI)) {
+                    current_uri = UriManager.getSearch(keyword, UriManager.ORDER.totalSalesdown);
+                }
+                getDataFromUri(current_uri);
                 break;
             case R.id.tv_price://价格列表
-
             case R.id.img_arrow:
                 changeTextViewColor(INDEX_PRICE);
-                if (sortUp) {
-                    img_arrow.setImageResource(R.drawable.sort_button_price_up);
-                    //从便宜到贵加载数据
+                if (come_from.equals(CATEGORY_UI)) {
+                    if (sortUp) {
+                        img_arrow.setImageResource(R.drawable.sort_button_price_up);
+                        //从便宜到贵加载数据
+                        current_uri=UriManager.getCategorySortUri(product_type_id, UriManager.ORDER.priceup);
 
-                    sortUp = false;
-                } else {
-                    //从贵到便宜加载数据
-                    img_arrow.setImageResource(R.drawable.sort_button_price_down);
-                    sortUp = true;
+                        sortUp = false;
+                    } else {
+                        //从贵到便宜加载数据
+                        img_arrow.setImageResource(R.drawable.sort_button_price_down);
+                        current_uri=UriManager.getCategorySortUri(product_type_id, UriManager.ORDER.pricedown);
+
+                        sortUp = true;
+                    }
+
+                } else if (come_from.equals(SEARCH_UI)) {
+                    if (sortUp) {
+                        img_arrow.setImageResource(R.drawable.sort_button_price_up);
+                        //从便宜到贵加载数据
+                        current_uri=UriManager.getSearch(keyword, UriManager.ORDER.priceup);
+                        sortUp = false;
+                    } else {
+                        //从贵到便宜加载数据
+                        img_arrow.setImageResource(R.drawable.sort_button_price_down);
+                        current_uri=UriManager.getSearch(keyword, UriManager.ORDER.pricedown);
+                        sortUp = true;
+                    }
                 }
+                getDataFromUri(current_uri);
                 break;
             default:
 
@@ -230,6 +255,9 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
      * 修改综合，销量，价格的颜色
      *
      * @param index
+     *           INDEX_NORMAL 综合
+     *           INDEX_SALES 销量
+     *           INDEX_PRICE 价格
      */
     private void changeTextViewColor(int index) {
         switch (index) {

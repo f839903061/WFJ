@@ -53,7 +53,7 @@ public class SearchObject implements Serializable{
         private int productId;
         private String productName;
         private int productTypeId;
-        private int salesPrice;
+        private float salesPrice;
         private String shopName;
         private int totalSales;
 
@@ -77,7 +77,7 @@ public class SearchObject implements Serializable{
             this.productTypeId = productTypeId;
         }
 
-        public void setSalesPrice(int salesPrice) {
+        public void setSalesPrice(float salesPrice) {
             this.salesPrice = salesPrice;
         }
 
@@ -109,7 +109,7 @@ public class SearchObject implements Serializable{
             return productTypeId;
         }
 
-        public int getSalesPrice() {
+        public float getSalesPrice() {
             return salesPrice;
         }
 

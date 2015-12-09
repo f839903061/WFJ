@@ -2,12 +2,10 @@ package hy.zc.wfj.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.text.format.DateUtils;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
@@ -24,30 +22,30 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 import hy.zc.wfj.App;
 import hy.zc.wfj.R;
+import hy.zc.wfj.adapter.LeftListAdapter;
+import hy.zc.wfj.adapter.RecommendAdapter;
 import hy.zc.wfj.data.SearchObject;
 import hy.zc.wfj.utility.UriManager;
 
 public class SearchActivity extends FrameActivity implements View.OnClickListener {
 
     public static final String IS_SEARCH = "isSearch";
+    public static final int INDEX_AUTOCOMPLETE = 1;
+    public static final int INDEX_RECOMMEND = 2;
     private LinearLayout lay_back_btn;
     private AutoCompleteTextView et_search;
     private LinkedList<String> mListItems;
-    private PullToRefreshListView mPullRefreshListView;
-    private ArrayAdapter<String> mAdapter;
     private Button btn_search;
     private ArrayList<String> mList = new ArrayList<>();
     private ArrayAdapter<String> adapter;
+    private ListView actualListView;
 
 
     @Override
@@ -62,7 +60,8 @@ public class SearchActivity extends FrameActivity implements View.OnClickListene
     private void initializeComponent() {
         //首先获取全部的关键字，用来服务autocompletetextview
         String uri = UriManager.getSearch("");
-        getDataFromUri(uri);
+        getDataFromUri(uri, INDEX_AUTOCOMPLETE);
+
         lay_back_btn = (LinearLayout) findViewById(R.id.home_search_button);
         btn_search = (Button) findViewById(R.id.search_btn);
         et_search = (AutoCompleteTextView) findViewById(R.id.homeActivity_autoComplete);
@@ -75,7 +74,7 @@ public class SearchActivity extends FrameActivity implements View.OnClickListene
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean result = false;
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    goToListActivity();
+                    goToActivity();
                 }
 
                 return result;
@@ -88,60 +87,54 @@ public class SearchActivity extends FrameActivity implements View.OnClickListene
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                goToListActivity();
+                goToActivity();
             }
         });
 
-        mPullRefreshListView = (PullToRefreshListView) findViewById(R.id.pull_refresh_list);
-
-        // Set a listener to be invoked when the list should be refreshed.
-        mPullRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
-            @Override
-            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-                String label = DateUtils.formatDateTime(getApplicationContext(), System.currentTimeMillis(),
-                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
-
-                // Update the LastUpdatedLabel
-                refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-
-                // Do work to refresh the list here.
-                new GetDataTask().execute();
-            }
-        });
-
-        // Add an end-of-list listener
-        mPullRefreshListView.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
-
-            @Override
-            public void onLastItemVisible() {
-                showToast("End of List!");
-            }
-        });
-
-        ListView actualListView = mPullRefreshListView.getRefreshableView();
-
-        // Need to use the Actual ListView when registering for Context Menu
-        registerForContextMenu(actualListView);
-
-        mListItems = new LinkedList<String>();
-        mListItems.addAll(Arrays.asList(mStrings));
-
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mListItems);
-
-
-        // You can also just use setListAdapter(mAdapter) or
-        // mPullRefreshListView.setAdapter(mAdapter)
-        actualListView.setAdapter(mAdapter);
+        listviewLoadData();
     }
 
-    private void goToListActivity() {
-        String ptext = et_search.getText().toString().trim();
-        if (ptext != null&&!ptext.equals("")) {
-            String uri = UriManager.getSearch(ptext);
-            Bundle bundle=new Bundle();
-            bundle.putString("uri",uri);
+    /**
+     * 商品推荐，此处使用的控件是pulltorefrashlistview
+     */
+    private void listviewLoadData() {
+        actualListView = (ListView) findViewById(R.id.pull_refresh_list);
+        String uri = UriManager.getRecommendUri();
+        getDataFromUri(uri, INDEX_RECOMMEND);
 
-            Intent goToList=new Intent(SearchActivity.this,CommodityDetailsActivity.class);
+        actualListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+    }
+
+    /**
+     * 给精品推荐列表填充数据
+     */
+    public void setAdapter(List<SearchObject.DataEntity> data) {
+        View view = LayoutInflater.from(SearchActivity.this).inflate(R.layout.activity_search_listview_item, null);
+        TextView tv_tmp = (TextView) view.findViewById(R.id.tv_name);
+        tv_tmp.setTextSize(16);
+        tv_tmp.setTextColor(Color.BLACK);
+        tv_tmp.setText("精品推荐");
+        actualListView.addHeaderView(view);
+        RecommendAdapter recommendAdapter = new RecommendAdapter(SearchActivity.this, data);
+        actualListView.setAdapter(recommendAdapter);
+    }
+
+    private void goToActivity() {
+        String ptext = et_search.getText().toString().trim();
+        if (ptext != null && !ptext.equals("")) {
+            String uri = UriManager.getSearch(ptext);
+
+            Bundle bundle = new Bundle();
+            bundle.putString(CommodityDetailsActivity.URI, uri);
+            bundle.putString(CommodityDetailsActivity.KEYWORD, ptext);
+            bundle.putString(CommodityDetailsActivity.COME_FROM, CommodityDetailsActivity.SEARCH_UI);
+
+            Intent goToList = new Intent(SearchActivity.this, CommodityDetailsActivity.class);
             goToList.putExtras(bundle);
 
             startActivity(goToList);
@@ -152,29 +145,59 @@ public class SearchActivity extends FrameActivity implements View.OnClickListene
     /**
      * 通过请求连接获取数据
      *
-     * @param uri
+     * @param uri   通过uri来区分获取的数据
+     * @param index INDEX_AUTOCOMPLETE 自动补全文本框
+     *              INDEX_RECOMMEND 精品推荐
      */
-    private void getDataFromUri(String uri) {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if (response.length() > 50) {
-                    SearchObject searchObject = JSON.parseObject(response, SearchObject.class);
-                    List<SearchObject.DataEntity> data = searchObject.getData();
-                    for (int i = 0; i < data.size(); i++) {
-                        mList.add(data.get(i).getProductName());
+    private void getDataFromUri(String uri, int index) {
+        if (index == INDEX_AUTOCOMPLETE) {//此处获取的是全部关键字，方便查找是的自动补全
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    if (response.length() > 50) {
+                        SearchObject searchObject = JSON.parseObject(response, SearchObject.class);
+                        List<SearchObject.DataEntity> data = searchObject.getData();
+                        mList.clear();
+                        for (int i = 0; i < data.size(); i++) {
+                            mList.add(data.get(i).getProductName());
+                        }
+                    } else {
+                        showLoge("没有搜索相关字眼就不做处理");
                     }
-                } else {
-                    showLoge("没有搜索相关字眼就不做处理");
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
-            }
-        });
-        App.addRequest(stringRequest, IS_SEARCH);
+                }
+            });
+            App.addRequest(stringRequest, IS_SEARCH);
+        } else if (index == INDEX_RECOMMEND) {//此处是获取精品推荐的数据，其实和上面的区别就是多了一行setAdapter的调用而已
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    if (response.length() > 50) {
+                        SearchObject searchObject = JSON.parseObject(response, SearchObject.class);
+                        List<SearchObject.DataEntity> data = searchObject.getData();
+                        mList.clear();
+                        for (int i = 0; i < data.size(); i++) {
+                            mList.add(data.get(i).getProductName());
+                        }
+                        setAdapter(data);
+                    } else {
+                        showLoge("没有搜索相关字眼就不做处理");
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+            App.addRequest(stringRequest, IS_SEARCH);
+        }
+
+
     }
 
     /**
@@ -186,36 +209,6 @@ public class SearchActivity extends FrameActivity implements View.OnClickListene
         super.onStop();
     }
 
-    private class GetDataTask extends AsyncTask<Void, Void, String[]> {
-
-        @Override
-        protected String[] doInBackground(Void... params) {
-            // Simulates a background job.
-            try {
-                Thread.sleep(1000);//刷新时间为1秒
-            } catch (InterruptedException e) {
-            }
-            return mStrings;
-        }
-
-        @Override
-        protected void onPostExecute(String[] result) {
-            mListItems.addFirst("Added after refresh...");
-            mAdapter.notifyDataSetChanged();
-
-            // Call onRefreshComplete when the list has been refreshed.
-            mPullRefreshListView.onRefreshComplete();
-
-            super.onPostExecute(result);
-        }
-    }
-
-
-    private String[] mStrings = {"Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam", "Abondance", "Ackawi",
-            "Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu", "Airag", "Airedale", "Aisy Cendre",
-            "Allgauer Emmentaler", "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam", "Abondance", "Ackawi",
-            "Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu", "Airag", "Airedale", "Aisy Cendre",
-            "Allgauer Emmentaler"};
 
     @Override
     public void onClick(View v) {
@@ -226,7 +219,7 @@ public class SearchActivity extends FrameActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.search_btn:
-                goToListActivity();
+                goToActivity();
                 break;
             default:
                 break;

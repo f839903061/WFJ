@@ -8,7 +8,7 @@ import android.os.Parcelable;
  */
 public class CategoryListObject {
     private String name;
-    private int price;
+    private float price;
     private String image_path;
 
     /**
@@ -34,7 +34,7 @@ public class CategoryListObject {
      *
      * @return the price
      */
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
@@ -43,7 +43,7 @@ public class CategoryListObject {
      *
      * @param price the price
      */
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

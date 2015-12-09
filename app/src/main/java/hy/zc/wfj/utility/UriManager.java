@@ -36,6 +36,9 @@ public class UriManager {
     private static final String search_pre = X_CONNECT_PRE + "mohuProinfo.action?keyword=";
     //商品详情前缀
     private static final String detial_pre = X_CONNECT_PRE + "conditionProinfo.action?productTypeId=";
+    //商品推荐前缀
+    private static final String recommend_pre = X_CONNECT_PRE + "recommandProinfo.action";
+
 
     public enum ORDER {
         normal,
@@ -175,6 +178,18 @@ public class UriManager {
         stringBuilder.append(ptext);
         return stringBuilder.toString();
     }
+    /**
+     * 获取搜索自动补全链接
+     *
+     * @param ptext 搜索内容
+     * @return
+     */
+    public static String getSearch(String ptext,ORDER porder) {
+        StringBuilder stringBuilder = new StringBuilder(search_pre);
+        stringBuilder.append(ptext);
+        return stringBuilder.toString();
+    }
+
 
     /**
      * 获取完整的详情列表连接
@@ -182,7 +197,7 @@ public class UriManager {
      * @param porder
      * @return
      */
-    public static String getDetialFull(int pid, ORDER porder) {
+    public static String getCategorySortUri(int pid, ORDER porder) {
         StringBuilder stringBuilder = new StringBuilder(detial_pre);
         stringBuilder.append("" + pid);
         stringBuilder.append("&orderBy=");
@@ -191,14 +206,11 @@ public class UriManager {
     }
 
     /**
-     * 获取部分详情列表连接，最末端的筛选，留出来空着，以便灵活运用
-     * @param pid
+     * 获取商品推荐的连接，在search界面有需要
      * @return
      */
-    public static String getDetialPart(int pid) {
-        StringBuilder stringBuilder = new StringBuilder(detial_pre);
-        stringBuilder.append("" + pid);
-        stringBuilder.append("&orderBy=");
+    public static String getRecommendUri(){
+        StringBuilder stringBuilder=new StringBuilder(recommend_pre);
         return stringBuilder.toString();
     }
 }

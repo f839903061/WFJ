@@ -153,14 +153,14 @@
                 fresco:placeholderImage="@drawable/home_message_red_dot" />
         </RelativeLayout>
     </RelativeLayout>
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
+    <ListView
         android:id="@id/pull_refresh_list"
         android:cacheColorHint="#00000000"
         android:divider="#19000000"
-        android:dividerHeight="4dp"
+        android:dividerHeight="1dp"
         android:fadingEdge="none"
         android:fastScrollEnabled="false"
-        android:footerDividersEnabled="false"
+        android:footerDividersEnabled="true"
         android:headerDividersEnabled="false"
         android:smoothScrollbar="true"
         android:layout_weight="1"

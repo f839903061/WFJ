@@ -62,9 +62,11 @@ public class RightGridAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.textView.setText(mList.get(position).getSortName());
+        final CategroyJsonObject.DataEntity.ChildProductTypeEntity entity = mList.get(position);
+
+        viewHolder.textView.setText(entity.getSortName());
         //拼接好图片之后，使用fresco来加载显示
-        Uri uri = UriManager.getCategoryPicUri(mList.get(position).getCategoryImage());
+        Uri uri = UriManager.getCategoryPicUri(entity.getCategoryImage());
         viewHolder.simpleDraweeView.setImageURI(uri);
         viewHolder.simpleDraweeView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,9 +77,13 @@ public class RightGridAdapter extends BaseAdapter {
             private void openCommodityDetails() {
                 Intent intent = new Intent();
                 intent.setClass(mContext, CommodityDetailsActivity.class);
+                String uri = UriManager.getCategorySortUri(entity.getProductTypeId(), UriManager.ORDER.normal);
+
                 Bundle bundle = new Bundle();
-                String uri = UriManager.getDetialFull(mList.get(position).getProductTypeId(), UriManager.ORDER.normal);
-                bundle.putString("uri", uri);
+                bundle.putString(CommodityDetailsActivity.COME_FROM,CommodityDetailsActivity.CATEGORY_UI);
+                bundle.putString(CommodityDetailsActivity.URI, uri);
+                bundle.putInt(CommodityDetailsActivity.PRODUCT_TYPE_ID, entity.getProductTypeId());
+
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
