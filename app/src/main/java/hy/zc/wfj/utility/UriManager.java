@@ -8,8 +8,8 @@ import android.net.Uri;
  */
 public class UriManager {
     //        String uri="http://192.168.10.210:8080/wfj_front/phone/phonecategory?method=initType";
-    public static final String H_CONNECT_PRE = "http://192.168.10.7:8080/wfj_front/phone/";
-    public static final String X_CONNECT_PRE = "http://192.168.10.210:8080/wfj_front/phone/";
+    public static final String X_CONNECT_PRE = "http://192.168.10.7:8080/wfj_front/phone/";
+    public static final String H_CONNECT_PRE = "http://192.168.10.210:8080/wfj_front/phone/";
 
 
     //        String uri = "https://192.168.10.210:8443/wfj_front/phone/phonecategory.action?method=initType";
@@ -32,12 +32,20 @@ public class UriManager {
     private static final String modify_password_pre = H_CONNECT_PRE + "changepass.action?customerId=";
     //上传头像前缀
     private static final String upload_pic_pre = H_CONNECT_PRE + "uploadPic.action";
+    //反馈信息前缀
+    private static final String feedback_pre = H_CONNECT_PRE + "feedback.action?customerId=";
     //实时搜索前缀
     private static final String search_pre = X_CONNECT_PRE + "mohuProinfo.action?keyword=";
-    //商品详情前缀
-    private static final String detial_pre = X_CONNECT_PRE + "conditionProinfo.action?productTypeId=";
+    //分类界面商品列表前缀
+    private static final String category_pre = X_CONNECT_PRE + "conditionProinfo.action?productTypeId=";
     //商品推荐前缀
     private static final String recommend_pre = X_CONNECT_PRE + "recommandProinfo.action";
+    //关注个类
+    private static final String concern_commodity_pre = X_CONNECT_PRE + "getCustomerCollectPro.action?customerId=";
+    //关注商铺
+    private static final String concern_shop_pre = X_CONNECT_PRE + "getCustomerCollectShop.action?customerId=";
+    //商品详情界面
+    private static final String commodity_detial_pre = X_CONNECT_PRE + "phoneProductInfoById.action?productId=";
 
 
     public enum ORDER {
@@ -178,13 +186,14 @@ public class UriManager {
         stringBuilder.append(ptext);
         return stringBuilder.toString();
     }
+
     /**
      * 获取搜索自动补全链接
      *
      * @param ptext 搜索内容
      * @return
      */
-    public static String getSearch(String ptext,ORDER porder) {
+    public static String getSearch(String ptext, ORDER porder) {
         StringBuilder stringBuilder = new StringBuilder(search_pre);
         stringBuilder.append(ptext);
         return stringBuilder.toString();
@@ -192,13 +201,14 @@ public class UriManager {
 
 
     /**
-     * 获取完整的详情列表连接
+     * 获取完整的分类列表连接
+     *
      * @param pid
      * @param porder
      * @return
      */
     public static String getCategorySortUri(int pid, ORDER porder) {
-        StringBuilder stringBuilder = new StringBuilder(detial_pre);
+        StringBuilder stringBuilder = new StringBuilder(category_pre);
         stringBuilder.append("" + pid);
         stringBuilder.append("&orderBy=");
         stringBuilder.append(porder);
@@ -207,10 +217,79 @@ public class UriManager {
 
     /**
      * 获取商品推荐的连接，在search界面有需要
+     *
      * @return
      */
-    public static String getRecommendUri(){
-        StringBuilder stringBuilder=new StringBuilder(recommend_pre);
+    public static String getRecommendUri() {
+        StringBuilder stringBuilder = new StringBuilder(recommend_pre);
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 获取关注商品链接
+     *
+     * @return
+     */
+    public static String getConcernCommodityUri(int pcustomerId) {
+        StringBuilder stringBuilder = new StringBuilder(concern_commodity_pre);
+        stringBuilder.append("" + pcustomerId);
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 获取关注商铺链接
+     *
+     * @return
+     */
+    public static String getConcernShopUri(int pcustomerId) {
+        StringBuilder stringBuilder = new StringBuilder(concern_shop_pre);
+        stringBuilder.append("" + pcustomerId);
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 商品详情界面链接
+     *
+     * @param pproductId
+     * @param pcustomerId
+     * @return
+     */
+    public static String getCommodityDetialUri(int pproductId, int pcustomerId) {
+        StringBuilder stringBuilder = new StringBuilder(commodity_detial_pre);
+        stringBuilder.append("" + pproductId);
+        stringBuilder.append("&customerId=");
+        stringBuilder.append("" + pcustomerId);
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 获取反馈信息列表
+     * @param pcustomerID
+     *          用户Id
+     * @param pemail
+     *          用户邮箱
+     * @param pphonenumber
+     *          用户手机号码
+     * @param ptype
+     *          反馈类型(1~6)
+     * @param ptext
+     *          反馈内容
+     * @return
+     */
+    public static String getFeedback(int pcustomerID, String pemail, String pphonenumber, int ptype, String ptext) {
+        StringBuilder stringBuilder = new StringBuilder(feedback_pre);
+        stringBuilder.append(pcustomerID);
+        if (pemail != null) {
+            stringBuilder.append("&customerEmail=");
+            stringBuilder.append(pemail);
+        }
+        if (pphonenumber != null) {
+            stringBuilder.append("&customerPhone=");
+        }
+        stringBuilder.append("&fbtype=");
+        stringBuilder.append(""+ptype);
+        stringBuilder.append("&fbcontent=");
+        stringBuilder.append(ptext);
         return stringBuilder.toString();
     }
 }
