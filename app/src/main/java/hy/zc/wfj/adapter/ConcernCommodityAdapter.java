@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -18,8 +17,6 @@ import hy.zc.wfj.R;
 import hy.zc.wfj.activity.DetailActivity;
 import hy.zc.wfj.adapter.base.BBaseAdapter;
 import hy.zc.wfj.data.ConcernCommodityObject;
-import hy.zc.wfj.data.UserLoginObject;
-import hy.zc.wfj.utility.SharedPrefUtility;
 import hy.zc.wfj.utility.UriManager;
 
 /**

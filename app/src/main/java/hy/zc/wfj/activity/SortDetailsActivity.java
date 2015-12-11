@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -57,6 +58,8 @@ public class SortDetailsActivity extends FrameActivity implements View.OnClickLi
     private String come_from;
     private List<SearchObject.DataEntity> mList = new ArrayList<>();
     private String current_uri;
+    private ListView actualListView;
+    private DetailAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +131,13 @@ public class SortDetailsActivity extends FrameActivity implements View.OnClickLi
                 Toast.makeText(SortDetailsActivity.this, "End of List!", Toast.LENGTH_SHORT).show();
             }
         });
-
+        actualListView = mPullRefreshListView.getRefreshableView();
+        actualListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                adapter.gotoDetial(position);
+            }
+        });
     }
 
 
@@ -166,11 +175,11 @@ public class SortDetailsActivity extends FrameActivity implements View.OnClickLi
      * 给listview 或者 gridview填充数据
      */
     private void setAdapter(List<SearchObject.DataEntity> plist) {
-        ListView actualListView = mPullRefreshListView.getRefreshableView();
+
         mList.clear();
         mList.addAll(plist);
         if (mList != null) {
-            DetailAdapter adapter = new DetailAdapter(SortDetailsActivity.this, mList);
+            adapter = new DetailAdapter(SortDetailsActivity.this, mList);
             actualListView.setAdapter(adapter);
         }
     }

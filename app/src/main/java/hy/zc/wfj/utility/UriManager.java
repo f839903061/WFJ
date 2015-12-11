@@ -23,17 +23,17 @@ public class UriManager {
     private static final String login_pic_pre = "http://192.168.10.7:8085/b2b2c/";
     //登录请求的前缀
 //    private static final String login_pre = "http://101.200.182.119:8080/phone/login.action?loginName=";//全网
-    private static final String login_pre = H_CONNECT_PRE + "login.action?loginName=";//局域网
+    private static final String login_pre = X_CONNECT_PRE + "login.action?loginName=";//局域网
     //修改号码的前缀
-    private static final String modify_phone_pre = H_CONNECT_PRE + "editCustomer.action?customerId=";
+    private static final String modify_phone_pre = X_CONNECT_PRE + "editCustomer.action?customerId=";
     //修改昵称
-    private static final String modify_nickname_pre = H_CONNECT_PRE + "editCustomer.action?customerId=";
+    private static final String modify_nickname_pre = X_CONNECT_PRE + "editCustomer.action?customerId=";
     //修改密码
-    private static final String modify_password_pre = H_CONNECT_PRE + "changepass.action?customerId=";
+    private static final String modify_password_pre = X_CONNECT_PRE + "changepass.action?customerId=";
     //上传头像前缀
-    private static final String upload_pic_pre = H_CONNECT_PRE + "uploadPic.action";
+    private static final String upload_pic_pre = X_CONNECT_PRE + "uploadPic.action";
     //反馈信息前缀
-    private static final String feedback_pre = H_CONNECT_PRE + "feedback.action?customerId=";
+    private static final String feedback_pre = X_CONNECT_PRE + "feedback.action?customerId=";
     //实时搜索前缀
     private static final String search_pre = X_CONNECT_PRE + "mohuProinfo.action?keyword=";
     //分类界面商品列表前缀

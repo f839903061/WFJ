@@ -1,8 +1,6 @@
 package hy.zc.wfj.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -12,9 +10,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 import hy.zc.wfj.R;
-import hy.zc.wfj.activity.DetailActivity;
 import hy.zc.wfj.adapter.base.BBaseAdapter;
-import hy.zc.wfj.data.ConcernCommodityObject;
 import hy.zc.wfj.data.ConcernShopObject;
 import hy.zc.wfj.utility.UriManager;
 
