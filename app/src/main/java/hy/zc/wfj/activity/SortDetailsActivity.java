@@ -29,7 +29,7 @@ import hy.zc.wfj.adapter.DetailAdapter;
 import hy.zc.wfj.data.SearchObject;
 import hy.zc.wfj.utility.UriManager;
 
-public class CommodityDetailsActivity extends FrameActivity implements View.OnClickListener {
+public class SortDetailsActivity extends FrameActivity implements View.OnClickListener {
 
     public static final String IS_SEARCH_OK = "isSearchOk";
     public static final int INDEX_NORMAL = 1;
@@ -61,7 +61,7 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fresco.initialize(CommodityDetailsActivity.this);
+        Fresco.initialize(SortDetailsActivity.this);
         setContentView(R.layout.activity_commodity_details);
 
         initializeComponent();
@@ -125,7 +125,7 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
 
             @Override
             public void onLastItemVisible() {
-                Toast.makeText(CommodityDetailsActivity.this, "End of List!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SortDetailsActivity.this, "End of List!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -170,7 +170,7 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
         mList.clear();
         mList.addAll(plist);
         if (mList != null) {
-            DetailAdapter adapter = new DetailAdapter(CommodityDetailsActivity.this, mList);
+            DetailAdapter adapter = new DetailAdapter(SortDetailsActivity.this, mList);
             actualListView.setAdapter(adapter);
         }
     }

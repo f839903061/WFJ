@@ -29,7 +29,6 @@ import java.util.List;
 
 import hy.zc.wfj.App;
 import hy.zc.wfj.R;
-import hy.zc.wfj.adapter.LeftListAdapter;
 import hy.zc.wfj.adapter.RecommendAdapter;
 import hy.zc.wfj.data.SearchObject;
 import hy.zc.wfj.utility.UriManager;
@@ -130,11 +129,11 @@ public class SearchActivity extends FrameActivity implements View.OnClickListene
             String uri = UriManager.getSearch(ptext);
 
             Bundle bundle = new Bundle();
-            bundle.putString(CommodityDetailsActivity.URI, uri);
-            bundle.putString(CommodityDetailsActivity.KEYWORD, ptext);
-            bundle.putString(CommodityDetailsActivity.COME_FROM, CommodityDetailsActivity.SEARCH_UI);
+            bundle.putString(SortDetailsActivity.URI, uri);
+            bundle.putString(SortDetailsActivity.KEYWORD, ptext);
+            bundle.putString(SortDetailsActivity.COME_FROM, SortDetailsActivity.SEARCH_UI);
 
-            Intent goToList = new Intent(SearchActivity.this, CommodityDetailsActivity.class);
+            Intent goToList = new Intent(SearchActivity.this, SortDetailsActivity.class);
             goToList.putExtras(bundle);
 
             startActivity(goToList);

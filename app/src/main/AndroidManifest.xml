@@ -53,7 +53,7 @@
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.TemplateActivity" />
         <activity android:name=".activity.ServerActivity" />
-        <activity android:name=".activity.CommodityDetailsActivity" />
+        <activity android:name=".activity.SortDetailsActivity" />
         <activity android:name=".activity.ModifyActivity" />
         <activity android:name=".activity.FeedBackActivity" />
         <activity android:name=".activity.ConcernActivity" />

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hy.zc.wfj.R;
-import hy.zc.wfj.activity.CommodityDetailsActivity;
+import hy.zc.wfj.activity.SortDetailsActivity;
 import hy.zc.wfj.adapter.base.BBaseAdapter;
 import hy.zc.wfj.data.SearchObject;
 import hy.zc.wfj.utility.UriManager;
@@ -49,13 +49,13 @@ public class RecommendAdapter extends BBaseAdapter {
         viewHolder.tv_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mContext, CommodityDetailsActivity.class);
+                Intent intent=new Intent(mContext, SortDetailsActivity.class);
                 Bundle bundle=new Bundle();
                 String uri = UriManager.getCategorySortUri(entity.getProductTypeId(), UriManager.ORDER.normal);
 
-                bundle.putString(CommodityDetailsActivity.COME_FROM, CommodityDetailsActivity.CATEGORY_UI);
-                bundle.putInt(CommodityDetailsActivity.PRODUCT_TYPE_ID, entity.getProductTypeId());
-                bundle.putString(CommodityDetailsActivity.URI, uri);
+                bundle.putString(SortDetailsActivity.COME_FROM, SortDetailsActivity.CATEGORY_UI);
+                bundle.putInt(SortDetailsActivity.PRODUCT_TYPE_ID, entity.getProductTypeId());
+                bundle.putString(SortDetailsActivity.URI, uri);
 
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);

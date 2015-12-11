@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hy.zc.wfj.R;
-import hy.zc.wfj.activity.CommodityDetailsActivity;
+import hy.zc.wfj.activity.SortDetailsActivity;
 import hy.zc.wfj.adapter.base.BBaseAdapter;
 import hy.zc.wfj.data.CategroyJsonObject;
 import hy.zc.wfj.utility.UriManager;
@@ -60,13 +60,13 @@ public class RightGridAdapter extends BBaseAdapter {
 
             private void openCommodityDetails() {
                 Intent intent = new Intent();
-                intent.setClass(mContext, CommodityDetailsActivity.class);
+                intent.setClass(mContext, SortDetailsActivity.class);
                 String uri = UriManager.getCategorySortUri(entity.getProductTypeId(), UriManager.ORDER.normal);
 
                 Bundle bundle = new Bundle();
-                bundle.putString(CommodityDetailsActivity.COME_FROM,CommodityDetailsActivity.CATEGORY_UI);
-                bundle.putString(CommodityDetailsActivity.URI, uri);
-                bundle.putInt(CommodityDetailsActivity.PRODUCT_TYPE_ID, entity.getProductTypeId());
+                bundle.putString(SortDetailsActivity.COME_FROM, SortDetailsActivity.CATEGORY_UI);
+                bundle.putString(SortDetailsActivity.URI, uri);
+                bundle.putInt(SortDetailsActivity.PRODUCT_TYPE_ID, entity.getProductTypeId());
 
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
