@@ -196,7 +196,7 @@
     <item name="layout_safe" type="id" />
     <item name="search_btn" type="id" />
     <item name="search_title" type="id" />
-    <item name="img_tmp" type="id" />
+    <item name="btn_tmp" type="id" />
     <item name="layout_temp" type="id" />
     <item name="empty_View" type="id" />
     <item name="order_web" type="id" />
@@ -219,4 +219,14 @@
     <item name="tv_name" type="id" />
     <item name="tv_people_count" type="id" />
     <item name="img_detail" type="id" />
+    <item name="tv_hint" type="id" />
+    <item name="layout_title" type="id" />
+    <item name="include_feedback" type="id" />
+    <item name="include_choice" type="id" />
+    <item name="include_title" type="id" />
+    <item name="imgv_tmp" type="id" />
+    <item name="imgv_icon" type="id" />
+    <item name="et_feedback" type="id" />
+    <item name="tv_feedback_count" type="id" />
+    <item name="et_feedback_contact" type="id" />
 </resources>

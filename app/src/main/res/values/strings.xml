@@ -109,4 +109,12 @@
         <item>拍照上传</item>
         <item>本地上传</item>
     </string-array>
+    <string-array name="feedtype">
+        <item>功能意见</item>
+        <item>页面意见</item>
+        <item>您的需求</item>
+        <item>操作意见</item>
+        <item>流量问题</item>
+        <item>其他</item>
+    </string-array>
 </resources>

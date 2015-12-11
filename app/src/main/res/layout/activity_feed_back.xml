@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include android:id="@id/include_title" layout="@layout/common_title"/>
+
+    <include android:id="@id/include_choice" layout="@layout/servier_repetitive_item"/>
+
+    <View style="@style/line6" />
+    <View style="@style/gap_transparent_style" />
+    <View style="@style/line6" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <EditText
+            android:id="@id/et_feedback"
+            style="@style/feedback_et_style"
+            android:hint="请输入产品意见，我们将不断优化体验"
+            android:gravity="left"
+            android:maxLength="100"
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+        <TextView
+            android:id="@id/tv_feedback_count"
+            android:paddingRight="4dp"
+            android:gravity="right|center_vertical"
+            android:layout_weight="1"
+            android:hint="1/100"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+    </LinearLayout>
+    <View style="@style/line6" />
+    <View style="@style/gap_transparent_style" />
+    <View style="@style/line6" />
+    <EditText
+        android:id="@id/et_feedback_contact"
+        android:singleLine="true"
+        android:hint="请输入您的手机号/邮箱等(选填)"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        style="@style/feedback_et_style" />
+    <View style="@style/line6" />
+</LinearLayout>

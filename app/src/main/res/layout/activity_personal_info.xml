@@ -111,17 +111,14 @@
 
             <View style="@style/line6" />
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="15.0dip"
-                android:background="@color/my_personal_bg" />
+            <View style="@style/gap_style" />
 
             <View
                 style="@style/line6"
                 android:layout_marginLeft="10.0dip" />
 
             <include
-                android:id="@id/layout_address"
+                android:id="@+id/layout_address"
                 layout="@layout/personal_info_item" />
 
             <View

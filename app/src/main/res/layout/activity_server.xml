@@ -3,6 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/common_title"/>
+    <include android:id="@id/layout_title" layout="@layout/common_title"/>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_below="@id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include android:id="@id/include_feedback" layout="@layout/servier_repetitive_item" />
+    </LinearLayout>
 </RelativeLayout>

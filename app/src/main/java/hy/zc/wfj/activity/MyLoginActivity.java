@@ -17,14 +17,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import hy.zc.wfj.App;
 import hy.zc.wfj.R;
 import hy.zc.wfj.data.UserLoginErrorObject;
 import hy.zc.wfj.data.UserLoginObject;
-import hy.zc.wfj.utility.CheckEmailMobile;
+import hy.zc.wfj.utility.CheckEmailPhone;
 import hy.zc.wfj.utility.SharedPrefUtility;
 import hy.zc.wfj.utility.UriManager;
 
@@ -77,7 +74,7 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
                 String password = login_input_password.getText().toString().trim();
                 if (name.equals("") && password.equals("")) {
                     Toast.makeText(getApplicationContext(), NAME_PASS_CANNOT_NULL, Toast.LENGTH_SHORT).show();
-                } else if (CheckEmailMobile.isEmail(name) || CheckEmailMobile.isMobileNO(name) && !password.equals("")) {
+                } else if (CheckEmailPhone.isEmail(name) || CheckEmailPhone.isPhoneNum(name) && !password.equals("")) {
                     pd = new ProgressDialog(MyLoginActivity.this);
                     pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     pd.setMessage("请稍等。。。");

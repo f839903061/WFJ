@@ -74,7 +74,6 @@ public final class CaptureActivity extends FrameActivity implements SurfaceHolde
 
 	private ImageButton common_title_back_btn;
 	private CheckBox camera_light_open;
-	private Boolean isOpenLight=false;
 	private Rect mCropRect = null;
 
 	public Handler getHandler() {

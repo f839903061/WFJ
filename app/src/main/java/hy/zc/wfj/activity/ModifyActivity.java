@@ -23,15 +23,15 @@ import hy.zc.wfj.R;
 import hy.zc.wfj.data.ChangePasswordObject;
 import hy.zc.wfj.data.UserLoginErrorObject;
 import hy.zc.wfj.data.UserLoginObject;
-import hy.zc.wfj.utility.CheckEmailMobile;
+import hy.zc.wfj.utility.CheckEmailPhone;
 import hy.zc.wfj.utility.SharedPrefUtility;
 import hy.zc.wfj.utility.UriManager;
 
 public class ModifyActivity extends FrameActivity implements View.OnClickListener {
 
     public static final String IS_MODIFY_OK = "isModifyOk";
-    private ImageButton imgbtn_back;
-    private Button imgbtn_ok;
+    private ImageButton imgb_back;
+    private Button btn_ok;
     private TextView tv_title;
     private TextView tv_modify_tag;
     private EditText et_phone_nickname_password;
@@ -51,8 +51,8 @@ public class ModifyActivity extends FrameActivity implements View.OnClickListene
     }
 
     private void setListener() {
-        imgbtn_back.setOnClickListener(this);
-        imgbtn_ok.setOnClickListener(this);
+        imgb_back.setOnClickListener(this);
+        btn_ok.setOnClickListener(this);
 
     }
 
@@ -63,8 +63,8 @@ public class ModifyActivity extends FrameActivity implements View.OnClickListene
         et_new_passward = (EditText) findViewById(R.id.et_new_password);
         et_confirm_password = (EditText) findViewById(R.id.et_confirm_password);
         et_phone_nickname_password = (EditText) findViewById(R.id.et_modify);
-        imgbtn_back = (ImageButton) findViewById(R.id.common_title_back_btn);
-        imgbtn_ok = (Button) findViewById(R.id.img_tmp);
+        imgb_back = (ImageButton) findViewById(R.id.common_title_back_btn);
+        btn_ok = (Button) findViewById(R.id.btn_tmp);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -85,8 +85,8 @@ public class ModifyActivity extends FrameActivity implements View.OnClickListene
             et_confirm_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         }
 
-        imgbtn_ok.setVisibility(View.VISIBLE);
-        imgbtn_ok.setText("确定");
+        btn_ok.setVisibility(View.VISIBLE);
+        btn_ok.setText("确定");
         //通过intent传过来的信息，来判断这个地方该填写“修改号码”还是“修改昵称”还是修改密码
         tv_title.setText(modify_flag);
 
@@ -119,7 +119,7 @@ public class ModifyActivity extends FrameActivity implements View.OnClickListene
             case R.id.common_title_back_btn://不做任何操作返回
                 goBack();
                 break;
-            case R.id.img_tmp://如果点击的是确定键
+            case R.id.btn_tmp://如果点击的是确定键
                 String phone_or_nickname = et_phone_nickname_password.getText().toString();
                 String uri = null;
                 pd = new ProgressDialog(ModifyActivity.this);
@@ -131,7 +131,7 @@ public class ModifyActivity extends FrameActivity implements View.OnClickListene
                 UserLoginObject object = JSON.parseObject(temp, UserLoginObject.class);
                 switch (MODIFY_FLAG) {//判断是修改号码的还是修改昵称的
                     case 1://修改电话号码界面
-                        if (CheckEmailMobile.isMobileNO(phone_or_nickname)) {
+                        if (CheckEmailPhone.isPhoneNum(phone_or_nickname)) {
                             uri = UriManager.getModifyPhoneUri(object.getData().getCustomerId(), phone_or_nickname);
                             showLogi(uri);
                             getDataFromUri(uri);
