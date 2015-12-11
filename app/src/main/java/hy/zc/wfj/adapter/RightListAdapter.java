@@ -48,7 +48,7 @@ public class RightListAdapter extends BBaseAdapter {
         return convertView;
     }
 
-    public class ViewHolder {
+    private class ViewHolder {
         TextView textView;
         MyGridView myGridView;
     }

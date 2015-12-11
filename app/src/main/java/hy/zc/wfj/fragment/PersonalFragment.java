@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSON;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import hy.zc.wfj.R;
+import hy.zc.wfj.activity.ConcernActivity;
 import hy.zc.wfj.activity.MyLoginActivity;
 import hy.zc.wfj.activity.MyMessageActivity;
 import hy.zc.wfj.activity.MySettingsActivity;
@@ -178,17 +179,19 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
                 Intent goLoginIntent = new Intent(getActivity(), MyLoginActivity.class);
                 startActivityForResult(goLoginIntent, LOGIN_REQUEST_CODE);
             } else {
-                Bundle bundle;
+                Bundle bundle = new Bundle();
                 switch (v.getId()) {
                     case R.id.personal_common_message://信息
                         goToActivityForResult(MyMessageActivity.class, MESSAGE_REQUEST_CODE, null);
                         break;
                     //concern incident
                     case R.id.personal_goods_list_title://关注商品
-                        myToast("goods");
+                        bundle.putInt(ConcernActivity.TYPE,ConcernActivity.COMMODITY);
+                        goToActivity(ConcernActivity.class, bundle);
                         break;
                     case R.id.personal_shop_list_title://关注商铺
-                        myToast("shop");
+                        bundle.putInt(ConcernActivity.TYPE,ConcernActivity.SHOP);
+                        goToActivity(ConcernActivity.class, bundle);
                         break;
                     case R.id.order_layout://订单
                         bundle = setOrderData(OrderDataObject.TITLE_ALL, OrderDataObject.TITLE_KEY);
@@ -211,13 +214,13 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
                         goToActivity(TemplateActivity.class, bundle);
                         break;
                     case R.id.service_layout://跳转到服务界面
-                        goToActivity(ServerActivity.class, null);
+                        goToActivity(ServerActivity.class, bundle);
                         break;
                     case R.id.personal_for_login_info_layout://点击头像所在的layout
-                        goToActivityForResult(PersonalInfoActivity.class, PERSONAL_INFO_REQUEST_CODE, null);
+                        goToActivityForResult(PersonalInfoActivity.class, PERSONAL_INFO_REQUEST_CODE, bundle);
                         break;
                     case R.id.user_img_view://点击头像
-                        goToActivityForResult(PersonalInfoActivity.class, PERSONAL_INFO_REQUEST_CODE, null);
+                        goToActivityForResult(PersonalInfoActivity.class, PERSONAL_INFO_REQUEST_CODE, bundle);
                         break;
 //            case R.id.personal_browsing_list_title:
 //                myToast("browser");

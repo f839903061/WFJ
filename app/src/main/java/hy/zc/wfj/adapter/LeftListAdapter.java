@@ -61,7 +61,7 @@ public class LeftListAdapter extends BBaseAdapter {
         return convertView;
     }
 
-    public final class ViewHolder{
+    private class ViewHolder{
         public TextView textView;
     }
 }

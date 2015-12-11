@@ -76,7 +76,7 @@ public class RightGridAdapter extends BBaseAdapter {
     }
 
 
-    public class ViewHolder {
+    private class ViewHolder {
         SimpleDraweeView simpleDraweeView;
         TextView textView;
     }

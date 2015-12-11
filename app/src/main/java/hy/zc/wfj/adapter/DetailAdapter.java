@@ -19,10 +19,10 @@ import hy.zc.wfj.utility.UriManager;
 /**
  * Created by feng on 2015/12/8.
  */
-public class DetialAdapter extends BBaseAdapter {
+public class DetailAdapter extends BBaseAdapter {
 
     private List<SearchObject.DataEntity> mList =new ArrayList<>();
-    public DetialAdapter(Context pcontext, List plist) {
+    public DetailAdapter(Context pcontext, List plist) {
         super(pcontext, plist);
         mList=plist;
     }
@@ -50,7 +50,7 @@ public class DetialAdapter extends BBaseAdapter {
 
         return convertView;
     }
-    public class ViewHolder{
+    private class ViewHolder{
         SimpleDraweeView img;
         TextView tv_name;
         TextView tv_price;

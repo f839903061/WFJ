@@ -29,7 +29,7 @@ public class RecommendAdapter extends BBaseAdapter {
         mContext=pcontext;
     }
 
-    public class ViewHolder{
+    private class ViewHolder{
         TextView tv_name;
     }
     @Override

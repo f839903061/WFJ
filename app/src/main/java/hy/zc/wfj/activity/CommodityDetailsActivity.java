@@ -25,7 +25,7 @@ import java.util.List;
 
 import hy.zc.wfj.App;
 import hy.zc.wfj.R;
-import hy.zc.wfj.adapter.DetialAdapter;
+import hy.zc.wfj.adapter.DetailAdapter;
 import hy.zc.wfj.data.SearchObject;
 import hy.zc.wfj.utility.UriManager;
 
@@ -170,7 +170,7 @@ public class CommodityDetailsActivity extends FrameActivity implements View.OnCl
         mList.clear();
         mList.addAll(plist);
         if (mList != null) {
-            DetialAdapter adapter = new DetialAdapter(CommodityDetailsActivity.this, mList);
+            DetailAdapter adapter = new DetailAdapter(CommodityDetailsActivity.this, mList);
             actualListView.setAdapter(adapter);
         }
     }
