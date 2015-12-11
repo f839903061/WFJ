@@ -7,14 +7,14 @@ import java.util.regex.Pattern;
  * 这个类功能就是检查邮箱或者电话号码是否正确
  * Created by feng on 2015/11/27.
  */
-public class CheckEmailMobile {
+public class CheckEmailPhone {
     /**
      * 判断输入的手机号是否正确
      *
      * @param mobiles
      * @return
      */
-    public static boolean isMobileNO(String mobiles) {
+    public static boolean isPhoneNum(String mobiles) {
         Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
         Matcher m = p.matcher(mobiles);
         return m.matches();
