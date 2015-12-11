@@ -196,4 +196,13 @@
         <item name="android:paddingLeft">3dp</item>
         <item name="android:textSize">13sp</item>
     </style>
+
+    <style name="concern_title_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

@@ -229,4 +229,9 @@
     <item name="et_feedback" type="id" />
     <item name="tv_feedback_count" type="id" />
     <item name="et_feedback_contact" type="id" />
+    <item name="rg_choice" type="id" />
+    <item name="rb_commodity" type="id" />
+    <item name="rb_shop" type="id" />
+    <item name="lv_concern" type="id" />
+    <item name="web_detial" type="id" />
 </resources>

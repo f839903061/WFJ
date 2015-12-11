@@ -105,6 +105,8 @@
     <string name="sales">销量</string>
     <string name="price">价格</string>
     <string name="pay_number">购买人数:</string>
+    <string name="commodity">商品</string>
+    <string name="shop">商铺</string>
     <string-array name="alteritem">
         <item>拍照上传</item>
         <item>本地上传</item>
