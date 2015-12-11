@@ -6,7 +6,7 @@
 
     <include
         android:id="@id/title_template"
-        layout="@layout/common_title" />
+        layout="@layout/common_title2" />
 
     <LinearLayout
         android:id="@id/layout_temp"
