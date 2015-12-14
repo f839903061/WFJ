@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:hint="new Text"
             android:ellipsize="end"
-            android:id="@id/tv_name"
+            android:id="@id/tv_commodity_name"
             android:maxLines="2"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />

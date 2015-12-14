@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,5 +63,9 @@ public abstract class BBaseAdapter extends BaseAdapter implements LogUtil{
     @Override
     public void showLogw(String ptext) {
         Log.w(TAG, getClass().getName() + " " + ptext);
+    }
+
+    public void showToast(String ptext){
+        Toast.makeText(mContex,ptext,Toast.LENGTH_SHORT).show();
     }
 }

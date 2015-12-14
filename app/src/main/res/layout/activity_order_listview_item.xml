@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="3dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:paddingTop="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:background="@drawable/shop_icon_pop"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="3dp"/>
+
+        <TextView
+            android:id="@id/tv_shop_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:text="智慧王府井" />
+
+        <ImageButton
+            android:id="@id/imgb_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:src="@drawable/order_list_delete_button"/>
+    </LinearLayout>
+
+    <View style="@style/line6" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@id/sdv_pic"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="15dp"/>
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@id/sdv_pic2"
+            style="@style/order_item_sdv_style" />
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@id/sdv_pic3"
+            style="@style/order_item_sdv_style" />
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@id/sdv_pic1"
+            style="@style/order_item_sdv_style" />
+
+        <TextView
+            android:id="@id/tv_commodity_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="New Text"
+            android:layout_marginLeft="10dp"
+            android:maxLength="30"
+            android:ellipsize="end"/>
+    </LinearLayout>
+
+    <View style="@style/line6" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="实付款:￥" />
+
+        <TextView
+            android:id="@id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

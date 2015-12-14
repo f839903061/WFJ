@@ -34,7 +34,7 @@ public class BaseActivity extends Activity implements LogUtil{
     }
 
     public void showToast(String ptext) {
-        Toast.makeText(getApplicationContext(),ptext,Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),ptext,Toast.LENGTH_SHORT).show();
     }
 
 }

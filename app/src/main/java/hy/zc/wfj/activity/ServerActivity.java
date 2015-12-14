@@ -41,7 +41,7 @@ public class ServerActivity extends FrameActivity {
 
         layout_feedback=(LinearLayout)findViewById(R.id.include_feedback);
         img_icon=(ImageView)layout_feedback.findViewById(R.id.imgv_icon);
-        tv_name=(TextView)layout_feedback.findViewById(R.id.tv_name);
+        tv_name=(TextView)layout_feedback.findViewById(R.id.tv_commodity_name);
         tv_hint=(TextView)layout_feedback.findViewById(R.id.tv_hint);
 
         img_icon.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.personal_icon_feedback));

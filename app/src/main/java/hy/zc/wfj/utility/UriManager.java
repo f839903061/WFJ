@@ -45,7 +45,9 @@ public class UriManager {
     //关注商铺
     private static final String concern_shop_pre = X_CONNECT_PRE + "getCustomerCollectShop.action?customerId=";
     //商品详情界面
-    private static final String commodity_detial_pre = X_CONNECT_PRE + "phoneProductInfoById.action?productId=";
+    private static final String commodity_detail_pre = X_CONNECT_PRE + "phoneProductInfoById.action?productId=";
+    //订单列表前缀
+    private static final String order_detail_pre = H_CONNECT_PRE + "searchAllOrders.action?customerId=";
 
 
     public enum ORDER {
@@ -255,7 +257,7 @@ public class UriManager {
      * @return
      */
     public static String getCommodityDetialUri(int pproductId, int pcustomerId) {
-        StringBuilder stringBuilder = new StringBuilder(commodity_detial_pre);
+        StringBuilder stringBuilder = new StringBuilder(commodity_detail_pre);
         stringBuilder.append("" + pproductId);
         stringBuilder.append("&customerId=");
         stringBuilder.append("" + pcustomerId);
@@ -264,16 +266,12 @@ public class UriManager {
 
     /**
      * 获取反馈信息列表
-     * @param pcustomerID
-     *          用户Id
-     * @param pemail
-     *          用户邮箱
-     * @param pphonenumber
-     *          用户手机号码
-     * @param ptype
-     *          反馈类型(1~6)
-     * @param ptext
-     *          反馈内容
+     *
+     * @param pcustomerID  用户Id
+     * @param pemail       用户邮箱
+     * @param pphonenumber 用户手机号码
+     * @param ptype        反馈类型(1~6)
+     * @param ptext        反馈内容
      * @return
      */
     public static String getFeedback(int pcustomerID, String pemail, String pphonenumber, int ptype, String ptext) {
@@ -287,9 +285,21 @@ public class UriManager {
             stringBuilder.append("&customerPhone=");
         }
         stringBuilder.append("&fbtype=");
-        stringBuilder.append(""+ptype);
+        stringBuilder.append("" + ptype);
         stringBuilder.append("&fbcontent=");
         stringBuilder.append(ptext);
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 获取订单列表
+     *
+     * @param pcustomerId
+     * @return
+     */
+    public static String getOrderDetail(int pcustomerId) {
+        StringBuilder stringBuilder = new StringBuilder(order_detail_pre);
+        stringBuilder.append("" + pcustomerId);
         return stringBuilder.toString();
     }
 }

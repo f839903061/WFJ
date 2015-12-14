@@ -38,7 +38,7 @@ public class RecommendAdapter extends BBaseAdapter {
         if (convertView == null) {
             viewHolder=new ViewHolder();
             convertView=getInflater().inflate(R.layout.activity_search_listview_item, null);
-            viewHolder.tv_name=(TextView)convertView.findViewById(R.id.tv_name);
+            viewHolder.tv_name=(TextView)convertView.findViewById(R.id.tv_commodity_name);
             convertView.setTag(viewHolder);
         }else {
             viewHolder= (ViewHolder) convertView.getTag();

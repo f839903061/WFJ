@@ -35,7 +35,7 @@ public class ConcernShopAdapter extends BBaseAdapter {
             viewHolder=new ViewHolder();
             convertView=getInflater().inflate(R.layout.activity_concern_listview_item,null);
             viewHolder.sdv_pic=(SimpleDraweeView)convertView.findViewById(R.id.img_detail);
-            viewHolder.tv_name=(TextView)convertView.findViewById(R.id.tv_name);
+            viewHolder.tv_name=(TextView)convertView.findViewById(R.id.tv_commodity_name);
             viewHolder.tv_address=(TextView)convertView.findViewById(R.id.tv_price);
             convertView.setTag(viewHolder);
         }else {

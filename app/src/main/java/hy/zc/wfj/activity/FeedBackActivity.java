@@ -22,7 +22,6 @@ import com.android.volley.toolbox.StringRequest;
 
 import hy.zc.wfj.App;
 import hy.zc.wfj.R;
-import hy.zc.wfj.data.UserLoginErrorObject;
 import hy.zc.wfj.data.UserLoginObject;
 import hy.zc.wfj.utility.CheckEmailPhone;
 import hy.zc.wfj.utility.SharedPrefUtility;
@@ -71,7 +70,7 @@ public class FeedBackActivity extends FrameActivity implements View.OnClickListe
         btn_commit.setText("提交");
 
         //----------------choice-------
-        tv_name = (TextView) layout_choice.findViewById(R.id.tv_name);
+        tv_name = (TextView) layout_choice.findViewById(R.id.tv_commodity_name);
         tv_hint = (TextView) layout_choice.findViewById(R.id.tv_hint);
         imgv_icon = (ImageView) layout_choice.findViewById(R.id.imgv_icon);
 

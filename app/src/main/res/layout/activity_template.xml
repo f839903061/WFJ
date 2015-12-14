@@ -13,8 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <WebView
-            android:id="@id/order_web"
+        <ListView
+            android:id="@id/lv_order"
+            android:divider="@drawable/divider_order_line"
+            android:footerDividersEnabled="false"
+            android:descendantFocusability="beforeDescendants"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
         <TextView
@@ -30,4 +33,5 @@
             android:drawableTop="@drawable/order_list_no_data"
             android:drawablePadding="43.0dip" />
     </LinearLayout>
+
 </LinearLayout>

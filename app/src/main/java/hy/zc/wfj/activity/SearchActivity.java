@@ -114,7 +114,7 @@ public class SearchActivity extends FrameActivity implements View.OnClickListene
      */
     public void setAdapter(List<SearchObject.DataEntity> data) {
         View view = LayoutInflater.from(SearchActivity.this).inflate(R.layout.activity_search_listview_item, null);
-        TextView tv_tmp = (TextView) view.findViewById(R.id.tv_name);
+        TextView tv_tmp = (TextView) view.findViewById(R.id.tv_commodity_name);
         tv_tmp.setTextSize(16);
         tv_tmp.setTextColor(Color.BLACK);
         tv_tmp.setText("精品推荐");
