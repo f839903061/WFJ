@@ -96,7 +96,9 @@ public class OrderListObject implements Serializable{
             return list;
         }
 
-        public static class ListEntity {
+        public static class ListEntity implements Serializable{
+
+            private static final long serialVersionUID = 6929273136804112746L;
             private int count;
             /**
              * date : 11
@@ -228,7 +230,9 @@ public class OrderListObject implements Serializable{
                 return shopName;
             }
 
-            public static class CreateTimeEntity {
+            public static class CreateTimeEntity implements Serializable{
+
+                private static final long serialVersionUID = -6116124636717285037L;
                 private int date;
                 private int day;
                 private int hours;
