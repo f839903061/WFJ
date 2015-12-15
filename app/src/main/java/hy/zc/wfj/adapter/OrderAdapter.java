@@ -95,7 +95,8 @@ public class OrderAdapter extends BBaseAdapter {
         viewHolder.imgb_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("delete");
+                mList.remove(position);
+                notifyDataSetChanged();
             }
         });
 
