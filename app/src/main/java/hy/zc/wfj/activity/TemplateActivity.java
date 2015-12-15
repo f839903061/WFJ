@@ -1,45 +1,41 @@
 package hy.zc.wfj.activity;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
-import java.util.List;
-
-import hy.zc.wfj.App;
 import hy.zc.wfj.R;
-import hy.zc.wfj.adapter.OrderAdapter;
 import hy.zc.wfj.data.OrderDataObject;
-import hy.zc.wfj.data.OrderListObject;
+import hy.zc.wfj.fragment.AfterSaleFragment;
+import hy.zc.wfj.fragment.CommentFragment;
+import hy.zc.wfj.fragment.OrderCompleteFragment;
+import hy.zc.wfj.fragment.OrderFragment;
+import hy.zc.wfj.fragment.PayFragment;
+import hy.zc.wfj.fragment.SignFragment;
 
 public class TemplateActivity extends FrameActivity {
 
-    public static final String IS_ORDER_OK = "isOrderOk";
+    private OrderDataObject orderDataObject;
+
     private ImageButton common_title_back_btn;
     private TextView tv_title;
     private TextView empty_view;
-    private OrderDataObject orderDataObject;
-    private String uriString;
 
-    private ListView lv_order;
+    private String uriString;
+    private FragmentTransaction fragmentTransaction;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_template);
         initializeComponent();
-        setTitleAndData();
+//        setTitleAndData();
     }
 
     private void initializeComponent() {
+
         common_title_back_btn = (ImageButton) findViewById(R.id.common_title_back_btn);
         tv_title = (TextView) findViewById(R.id.common_title_txt);
 
@@ -52,20 +48,13 @@ public class TemplateActivity extends FrameActivity {
             }
         });
 
-        lv_order=(ListView)findViewById(R.id.lv_order);
 
-        lv_order.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showLogi("hhhhhhhhhhhhhhhhhhhhhhaaaaaaaaaaaaaaaaaaaaaa");
-            }
-        });
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
         setTitleAndData();
+        super.onResume();
     }
 
     private void setTitleAndData() {
@@ -73,43 +62,40 @@ public class TemplateActivity extends FrameActivity {
         if (bundle != null) {
             orderDataObject = (OrderDataObject) bundle.getSerializable(OrderDataObject.TITLE_KEY);
             if (orderDataObject != null) {
-                tv_title.setText(orderDataObject.getTitle());
-                uriString = orderDataObject.getUriString();
+                String title = orderDataObject.getTitle();
+                tv_title.setText(title);
+                /*uriString = orderDataObject.getUriString();
                 if (uriString == null) {
-                    lv_order.setVisibility(View.GONE);
                     empty_view.setVisibility(View.VISIBLE);
                 } else {
-                    lv_order.setVisibility(View.VISIBLE);
                     empty_view.setVisibility(View.GONE);
-                    getDataFromUri(uriString);
+                }*/
+                if (title.equals(OrderDataObject.TITLE_ALL) ) {
+                    fragmentTransaction=getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.layout_container, new OrderFragment());
+                }else if (title.equals(OrderDataObject.TITLE_PAY)){
+                    fragmentTransaction=getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.layout_container, new PayFragment());
+
+                }else if (title.equals(OrderDataObject.TITLE_SIGN)){
+                    fragmentTransaction=getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.layout_container, new SignFragment());
+
+                }else if (title.equals(OrderDataObject.TITLE_COMMENT)){
+                    fragmentTransaction=getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.layout_container, new CommentFragment());
+
+                }else if (title.equals(OrderDataObject.TITLE_AFTER_SALE)){
+                    fragmentTransaction=getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.layout_container, new AfterSaleFragment());
+                }else if (title.equals(OrderDataObject.TITLE_COMPLETE)){
+                    fragmentTransaction=getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.layout_container, new OrderCompleteFragment());
                 }
+                fragmentTransaction.commit();
             }
         }
     }
 
-    private void getDataFromUri(String uri) {
-        StringRequest stringRequest=new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if (response.contains("true")) {
-                    OrderListObject object = JSON.parseObject(response, OrderListObject.class);
-                    List<OrderListObject.DataEntity> list = object.getData();
-                    OrderAdapter orderAdapter=new OrderAdapter(TemplateActivity.this,list);
-                    lv_order.setAdapter(orderAdapter);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                showLoge(error.getMessage());
-            }
-        });
-        App.addRequest(stringRequest,IS_ORDER_OK);
-    }
 
-    @Override
-    protected void onStop() {
-        App.cancelAllRequests(IS_ORDER_OK);
-        super.onStop();
-    }
 }

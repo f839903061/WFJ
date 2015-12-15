@@ -242,7 +242,6 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
     private Bundle setOrderData(String ptitle, String pkey) {
         OrderDataObject odo = new OrderDataObject();
         odo.setTitle(ptitle);
-        odo.setUriString(UriManager.getOrderDetail(459));
         Bundle bundle = new Bundle();
         bundle.putSerializable(pkey, odo);
         return bundle;
