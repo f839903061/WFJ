@@ -241,4 +241,5 @@
     <item name="sdv_pic2" type="id" />
     <item name="sdv_pic3" type="id" />
     <item name="sdv_pic1" type="id" />
+    <item name="layout_container" type="id" />
 </resources>
