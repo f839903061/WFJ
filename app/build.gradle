@@ -30,11 +30,11 @@ subprojects {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
+    compile project(':library')
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:support-v4:22.2.1'
     compile 'com.android.support:design:22.2.1'
-    compile 'com.facebook.fresco:fresco:0.6.0+'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
-    compile project(':library')
+    compile 'com.facebook.fresco:fresco:0.8.1'
 }
