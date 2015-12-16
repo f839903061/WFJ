@@ -22,16 +22,17 @@ import hy.zc.wfj.utility.UriManager;
 public class OrderAdapter extends BBaseAdapter {
     private Context mContext;
     private List<OrderListObject.DataEntity> mList;
+    private DelCallBack mDelCallBack;
 
-    public OrderAdapter(Context pcontext, List plist) {
+    public OrderAdapter(Context pcontext, List plist,DelCallBack pdelCallBack) {
         super(pcontext, plist);
         mList = plist;
         mContext = pcontext;
-
+        mDelCallBack=pdelCallBack;
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
@@ -95,8 +96,7 @@ public class OrderAdapter extends BBaseAdapter {
         viewHolder.imgb_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mList.remove(position);
-                notifyDataSetChanged();
+                mDelCallBack.del(position);
             }
         });
 
@@ -110,5 +110,8 @@ public class OrderAdapter extends BBaseAdapter {
         TextView tv_commodity_name;
         TextView tv_shop_name;
         TextView tv_price;
+    }
+    public interface DelCallBack{
+        public void del(int position);
     }
 }

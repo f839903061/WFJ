@@ -24,7 +24,7 @@ public abstract class BBaseAdapter extends BaseAdapter implements LogUtil{
     public BBaseAdapter(Context pcontext,List plist) {
         mContex=pcontext;
         mInflater=LayoutInflater.from(mContex);
-        mList.addAll(plist);
+        mList=plist;
     }
 
     public LayoutInflater getInflater() {

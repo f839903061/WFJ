@@ -13,7 +13,6 @@
             android:id="@id/lv_order"
             android:divider="@drawable/divider_order_line"
             android:footerDividersEnabled="false"
-            android:descendantFocusability="beforeDescendants"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>

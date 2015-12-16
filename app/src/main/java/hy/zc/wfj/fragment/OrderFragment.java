@@ -30,7 +30,7 @@ import hy.zc.wfj.utility.UriManager;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OrderFragment extends FrameFragment {
+public class OrderFragment extends FrameFragment implements OrderAdapter.DelCallBack{
 
     private ListView lv_order;
     public static final String IS_ORDER_OK = "isOrderOk";
@@ -42,6 +42,8 @@ public class OrderFragment extends FrameFragment {
     public final int Type_Comment = 4;
     public final int Type_After_Sale = 5;
     private int mCurrentType = 0;
+    private List<OrderListObject.DataEntity> mList;
+    private OrderAdapter mOrderAdapter;
 
     public OrderFragment() {
 
@@ -105,18 +107,21 @@ public class OrderFragment extends FrameFragment {
             int customerId = object.getData().getCustomerId();
             String uri = UriManager.getOrderDetail(customerId);
             getDataFromUri(uri);
+
+
         }
     }
 
     private void getDataFromUri(String uri) {
+        showLogi(uri);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response.contains("true")) {
                     OrderListObject object = JSON.parseObject(response, OrderListObject.class);
-                    List<OrderListObject.DataEntity> list = object.getData();
-                    OrderAdapter orderAdapter = new OrderAdapter(getActivity(), list);
-                    lv_order.setAdapter(orderAdapter);
+                    mList = object.getData();
+                    mOrderAdapter = new OrderAdapter(getActivity(), mList, (OrderAdapter.DelCallBack) OrderFragment.this);
+                    lv_order.setAdapter(mOrderAdapter);
                 }
             }
         }, new Response.ErrorListener() {
@@ -132,5 +137,11 @@ public class OrderFragment extends FrameFragment {
     public void onStop() {
         App.cancelAllRequests(IS_ORDER_OK);
         super.onStop();
+    }
+
+    @Override
+    public void del(int position) {
+        mList.remove(position);
+        mOrderAdapter.notifyDataSetChanged();
     }
 }
