@@ -119,4 +119,7 @@
         <item>流量问题</item>
         <item>其他</item>
     </string-array>
+    <string name="text_next">注册</string>
+    <string name="text_agree">同意</string>
+    <string name="text_protocol">用户注册协议</string>
 </resources>

@@ -17,6 +17,8 @@ public class OrderDataObject implements Serializable {
     public static String TITLE_AFTER_SALE = "返修/退换";
 
     public static String TITLE_COMPLETE="完成";
+    public static String TITLE_REGISTER="手机快速注册";
+
 
     public static String TITLE_KEY= "title";
 

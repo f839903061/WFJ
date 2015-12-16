@@ -13,6 +13,7 @@ import hy.zc.wfj.fragment.CommentFragment;
 import hy.zc.wfj.fragment.OrderCompleteFragment;
 import hy.zc.wfj.fragment.OrderFragment;
 import hy.zc.wfj.fragment.PayFragment;
+import hy.zc.wfj.fragment.RegisterFragment;
 import hy.zc.wfj.fragment.SignFragment;
 
 public class TemplateActivity extends FrameActivity {
@@ -91,6 +92,9 @@ public class TemplateActivity extends FrameActivity {
                 }else if (title.equals(OrderDataObject.TITLE_COMPLETE)){
                     fragmentTransaction=getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.layout_container, new OrderCompleteFragment());
+                }else if (title.equals(OrderDataObject.TITLE_REGISTER)){
+                    fragmentTransaction=getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.layout_container, new RegisterFragment());
                 }
                 fragmentTransaction.commit();
             }

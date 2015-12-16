@@ -1,6 +1,7 @@
 package hy.zc.wfj.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 
 import hy.zc.wfj.App;
 import hy.zc.wfj.R;
+import hy.zc.wfj.data.OrderDataObject;
 import hy.zc.wfj.data.UserLoginErrorObject;
 import hy.zc.wfj.data.UserLoginObject;
 import hy.zc.wfj.utility.CheckEmailPhone;
@@ -39,6 +41,8 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
     private ProgressDialog pd;
     private TextView common_title_txt;
 
+    private TextView tv_register;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +59,15 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
         login_input_password = (EditText) this.findViewById(R.id.login_input_password);
         login_comfirm_button = (Button) this.findViewById(R.id.login_comfirm_button);
         common_title_txt = (TextView) this.findViewById(R.id.common_title_txt);
+        tv_register=(TextView)this.findViewById(R.id.register_link);
+
         common_title_txt.setText("登录");
     }
 
     private void setListener() {
         mBackBtn.setOnClickListener(this);
         login_comfirm_button.setOnClickListener(this);
+        tv_register.setOnClickListener(this);
     }
 
     @Override
@@ -84,6 +91,16 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
                 } else {
                     Toast.makeText(getApplicationContext(), ENTER_ERROR, Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.register_link:
+                Intent intent=new Intent(MyLoginActivity.this,TemplateActivity.class);
+                Bundle bundle=new Bundle();
+                OrderDataObject orderDataObject=new OrderDataObject();
+                orderDataObject.setTitle(OrderDataObject.TITLE_REGISTER);
+                bundle.putSerializable(OrderDataObject.TITLE_KEY, orderDataObject);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                MyLoginActivity.this.finish();
                 break;
             default:
                 break;

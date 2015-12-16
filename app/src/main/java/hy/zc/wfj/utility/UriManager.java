@@ -48,6 +48,8 @@ public class UriManager {
     private static final String commodity_detail_pre = X_CONNECT_PRE + "phoneProductInfoById.action?productId=";
     //订单列表前缀
     private static final String order_detail_pre = H_CONNECT_PRE + "searchAllOrders.action?customerId=";
+    //注册列表前缀
+    private static final String register_pre = H_CONNECT_PRE + "register.action?email=";
 
 
     public enum ORDER {
@@ -302,4 +304,23 @@ public class UriManager {
         stringBuilder.append("" + pcustomerId);
         return stringBuilder.toString();
     }
+
+    /**
+     * 获取注册链接
+     *
+     * @param pemail
+     * @param pphoneNumber
+     * @param ppassword
+     * @return
+     */
+    public static String getRegister(String pemail, String pphoneNumber, String ppassword) {
+        StringBuilder stringBuilder = new StringBuilder(register_pre);
+        stringBuilder.append(pemail);
+        stringBuilder.append("&phone=");
+        stringBuilder.append(pphoneNumber);
+        stringBuilder.append("&password=");
+        stringBuilder.append(ppassword);
+        return stringBuilder.toString();
+    }
+
 }

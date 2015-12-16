@@ -242,4 +242,9 @@
     <item name="sdv_pic3" type="id" />
     <item name="sdv_pic1" type="id" />
     <item name="layout_container" type="id" />
+    <item name="btn_next" type="id" />
+    <item name="tv_protocol" type="id" />
+    <item name="et_phone" type="id" />
+    <item name="checkbox_agree" type="id" />
+    <item name="et_email" type="id" />
 </resources>
