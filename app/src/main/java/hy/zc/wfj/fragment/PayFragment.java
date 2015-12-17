@@ -6,11 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import hy.zc.wfj.data.OrderDataObject;
+
 public class PayFragment extends OrderFragment {
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.setType(Type_Pay);
+        this.setType(OrderDataObject.TITLE_PAY_FLAG);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

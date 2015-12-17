@@ -24,11 +24,11 @@ public class OrderAdapter extends BBaseAdapter {
     private List<OrderListObject.DataEntity> mList;
     private DelCallBack mDelCallBack;
 
-    public OrderAdapter(Context pcontext, List plist,DelCallBack pdelCallBack) {
+    public OrderAdapter(Context pcontext, List plist, DelCallBack pdelCallBack) {
         super(pcontext, plist);
         mList = plist;
         mContext = pcontext;
-        mDelCallBack=pdelCallBack;
+        mDelCallBack = pdelCallBack;
     }
 
     @Override
@@ -40,8 +40,9 @@ public class OrderAdapter extends BBaseAdapter {
             viewHolder.imgb_delete = (ImageButton) convertView.findViewById(R.id.imgb_delete);
             viewHolder.sdv_pic0 = (SimpleDraweeView) convertView.findViewById(R.id.sdv_pic);
             viewHolder.sdv_pic1 = (SimpleDraweeView) convertView.findViewById(R.id.sdv_pic1);
-            viewHolder.sdv_pic2= (SimpleDraweeView) convertView.findViewById(R.id.sdv_pic2);
+            viewHolder.sdv_pic2 = (SimpleDraweeView) convertView.findViewById(R.id.sdv_pic2);
             viewHolder.sdv_pic3 = (SimpleDraweeView) convertView.findViewById(R.id.sdv_pic3);
+            viewHolder.sdv_finish = (SimpleDraweeView) convertView.findViewById(R.id.sdv_finsih);
             viewHolder.tv_commodity_name = (TextView) convertView.findViewById(R.id.tv_commodity_name);
             viewHolder.tv_shop_name = (TextView) convertView.findViewById(R.id.tv_shop_name);
             viewHolder.tv_price = (TextView) convertView.findViewById(R.id.tv_price);
@@ -51,6 +52,13 @@ public class OrderAdapter extends BBaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         OrderListObject.DataEntity entity = mList.get(position);
+//         查看订单是否完成
+        int ordersState = entity.getOrdersState();
+        if (ordersState == 9) {
+            viewHolder.sdv_finish.setVisibility(View.VISIBLE);
+        }else {
+            viewHolder.sdv_finish.setVisibility(View.INVISIBLE);
+        }
         List<OrderListObject.DataEntity.ListEntity> list = entity.getList();
 
 //        每个订单中的图片布局，区分一个或者多个
@@ -65,7 +73,7 @@ public class OrderAdapter extends BBaseAdapter {
             float price = 0;
             for (int i = 0; i < list.size(); i++) {//次循环里还要处理多张图片，目前还没做
                 Uri uri = UriManager.getCategoryPicUri(list.get(0).getLogoImage());
-                switch (i){
+                switch (i) {
                     case 0:
                         viewHolder.sdv_pic0.setImageURI(uri);
                         viewHolder.sdv_pic0.setVisibility(View.VISIBLE);
@@ -106,12 +114,17 @@ public class OrderAdapter extends BBaseAdapter {
 
     private class ViewHolder {
         ImageButton imgb_delete;
-        SimpleDraweeView sdv_pic0,sdv_pic1,sdv_pic2,sdv_pic3;
+        SimpleDraweeView sdv_pic0, sdv_pic1, sdv_pic2, sdv_pic3, sdv_finish;
         TextView tv_commodity_name;
         TextView tv_shop_name;
         TextView tv_price;
     }
-    public interface DelCallBack{
+
+    /**
+     * 毁掉函数，在fragment中执行删除操作
+     */
+    public interface DelCallBack {
         public void del(int position);
     }
+
 }

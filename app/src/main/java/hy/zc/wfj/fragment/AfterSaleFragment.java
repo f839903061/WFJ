@@ -5,13 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import hy.zc.wfj.data.OrderDataObject;
+
 /**
  * Created by feng on 2015/12/15.
  */
 public class AfterSaleFragment extends OrderFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.setType(Type_After_Sale);
+        this.setType(OrderDataObject.TITLE_AFTER_SALE_FLAG);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

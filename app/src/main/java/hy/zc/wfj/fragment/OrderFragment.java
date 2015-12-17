@@ -36,11 +36,6 @@ public class OrderFragment extends FrameFragment implements OrderAdapter.DelCall
     public static final String IS_ORDER_OK = "isOrderOk";
 
     private static OrderFragment orderFragment;
-    public final int Type_All = 1;
-    public final int Type_Pay = 2;
-    public final int Type_Sign = 3;
-    public final int Type_Comment = 4;
-    public final int Type_After_Sale = 5;
     private int mCurrentType = 0;
     private List<OrderListObject.DataEntity> mList;
     private OrderAdapter mOrderAdapter;
@@ -66,16 +61,16 @@ public class OrderFragment extends FrameFragment implements OrderAdapter.DelCall
         // Inflate the layout for this fragment
         View rootView = null;
         switch (mCurrentType) {
-            case Type_Pay:
+            case OrderDataObject.TITLE_PAY_FLAG:
 //                showLogi("当前跳转过来的是"+Type_Pay+" fragment");
                 break;
-            case Type_Sign:
+            case OrderDataObject.TITLE_SIGN_FLAG:
 //                showLogi("当前跳转过来的是"+Type_Sign+" fragment");
                 break;
-            case Type_Comment:
+            case OrderDataObject.TITLE_COMMENT_FLAG:
 //                showLogi("当前跳转过来的是"+Type_Comment+" fragment");
                 break;
-            case Type_After_Sale:
+            case OrderDataObject.TITLE_AFTER_SALE_FLAG:
 //                showLogi("当前跳转过来的是"+Type_After_Sale+" fragment");
                 break;
             default://全部订单
@@ -105,15 +100,22 @@ public class OrderFragment extends FrameFragment implements OrderAdapter.DelCall
         if (!temp.equals("")) {
             UserLoginObject object = JSON.parseObject(temp, UserLoginObject.class);
             int customerId = object.getData().getCustomerId();
-            String uri = UriManager.getOrderDetail(customerId);
+            String uri = UriManager.getOrderDetail(customerId,mCurrentType);
             getDataFromUri(uri);
-
-
+            lv_order.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    showLogi(""+position);
+                }
+            });
         }
     }
 
+    /**
+     * 获取数据
+     * @param uri
+     */
     private void getDataFromUri(String uri) {
-        showLogi(uri);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

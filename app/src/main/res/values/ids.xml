@@ -247,4 +247,8 @@
     <item name="et_phone" type="id" />
     <item name="checkbox_agree" type="id" />
     <item name="et_email" type="id" />
+    <item name="layout_top" type="id" />
+    <item name="line_temp" type="id" />
+    <item name="layout_middle" type="id" />
+    <item name="sdv_finsih" type="id" />
 </resources>

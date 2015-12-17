@@ -297,11 +297,21 @@ public class UriManager {
      * 获取订单列表
      *
      * @param pcustomerId
+     * @param orderType   OrderDataObject(
+     *                    TITLE_PAY_FLAG=1,
+     *                    TITLE_SEND_OUT_FLAG=2,
+     *                    TITLE_SIGN_FLAG=4,
+     *                    TITLE_COMMENT_FLAG=5,
+     *                    TITLE_AFTER_SALE_FLAG=7,)
      * @return
      */
-    public static String getOrderDetail(int pcustomerId) {
+    public static String getOrderDetail(int pcustomerId, int orderType) {
         StringBuilder stringBuilder = new StringBuilder(order_detail_pre);
         stringBuilder.append("" + pcustomerId);
+        if (orderType != 0) {//如果不是0的话，就是下面四个小分类
+            stringBuilder.append("&ordType=");
+            stringBuilder.append("" + orderType);
+        }
         return stringBuilder.toString();
     }
 
