@@ -251,4 +251,23 @@
     <item name="line_temp" type="id" />
     <item name="layout_middle" type="id" />
     <item name="sdv_finsih" type="id" />
+    <item name="tv_orderNum" type="id" />
+    <item name="line_1" type="id" />
+    <item name="tv_tmp2" type="id" />
+    <item name="line_gap" type="id" />
+    <item name="tv_name" type="id" />
+    <item name="img_name" type="id" />
+    <item name="img_phone" type="id" />
+    <item name="tv_phone" type="id" />
+    <item name="tv_address" type="id" />
+    <item name="tv_sendType" type="id" />
+    <item name="tv_payType" type="id" />
+    <item name="tv_bill_start" type="id" />
+    <item name="tv_bill_context" type="id" />
+    <item name="tv_total_price" type="id" />
+    <item name="tv_cashback" type="id" />
+    <item name="tv_freight" type="id" />
+    <item name="tv_really_pay" type="id" />
+    <item name="tv_order_time" type="id" />
+    <item name="tv_count" type="id" />
 </resources>

@@ -1,12 +1,317 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="hy.zc.wfj.fragment.OrderCompleteFragment">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="订单完成" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                style="@style/padding_LR_10_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@id/layout_tmp"
+                    style="@style/order_complete_layout_style">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="订单号：" />
+
+                    <TextView
+                        android:id="@id/tv_orderNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <View
+                    android:id="@id/line_1"
+                    style="@style/line6"
+                    android:layout_below="@id/layout_tmp" />
+
+                <LinearLayout
+                    style="@style/order_complete_layout_style"
+                    android:layout_below="@id/line_1">
+
+                    <TextView
+                        android:id="@id/tv_tmp2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="感谢您在王府井购物，欢迎您再次光临!" />
+
+                    <ImageView
+                        android:id="@id/service_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/personal_icon_arrow" />
+                </LinearLayout>
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@id/sdv_finsih"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="20dp"
+                    android:visibility="invisible"
+                    fresco:placeholderImage="@drawable/order_finish"
+                    fresco:placeholderImageScaleType="fitXY" />
+            </RelativeLayout>
+
+            <View
+                android:id="@id/line_gap"
+                style="@style/gap_style" />
+            <!--地址-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/address_bg">
+
+                <ImageView
+                    android:id="@id/img_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:src="@drawable/address_name_icon" />
+
+                <TextView
+                    android:id="@id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/img_name"
+                    android:layout_toRightOf="@id/img_name"
+                    android:hint="name" />
+
+                <ImageView
+                    android:id="@id/img_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_toRightOf="@id/tv_name"
+                    android:src="@drawable/address_mobile_icon" />
+
+                <TextView
+                    android:id="@id/tv_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/img_name"
+                    android:layout_toRightOf="@id/img_phone"
+                    android:hint="phone" />
+
+                <TextView
+                    android:id="@id/tv_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_name"
+                    android:ellipsize="end"
+                    android:hint="address"
+                    android:maxLength="50"
+                    android:padding="10dp" />
+
+            </RelativeLayout>
+
+            <View
+                android:id="@id/line_gap"
+                style="@style/gap_style" />
+
+            <hy.zc.wfj.customview.MyListView
+                android:id="@id/lv_order"
+                style="@style/padding_LR_10_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:id="@id/line_gap"
+                style="@style/gap_style" />
+            <!--支付方式-->
+            <LinearLayout
+                style="@style/padding_LR_10_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout style="@style/padding_TB_10_style">
+
+                    <TextView
+                        style="@style/send_tv_style"
+                        android:text="支付方式" />
+
+                    <TextView
+                        android:id="@id/tv_payType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right" />
+                </LinearLayout>
+
+                <View style="@style/line6" />
+
+                <LinearLayout style="@style/padding_TB_10_style">
+
+                    <TextView
+                        style="@style/send_tv_style"
+                        android:hint="配送方式" />
+
+                    <TextView
+                        android:id="@id/tv_sendType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right" />
+                </LinearLayout>
+
+                <View style="@style/line6" />
+
+                <LinearLayout style="@style/padding_TB_10_style">
+
+                    <TextView
+                        style="@style/send_tv_style"
+                        android:hint="发票信息" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/send_tv_style"
+                        android:hint="发票抬头："
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@id/tv_bill_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/send_tv_style"
+                        android:hint="发票内容："
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@id/tv_bill_context"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@id/line_gap"
+                    style="@style/gap_style" />
+
+                <LinearLayout style="@style/padding_TB_10_style">
+
+                    <TextView
+                        style="@style/send_tv_style"
+                        android:hint="商品总额" />
+
+                    <TextView
+                        android:id="@id/tv_total_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/send_tv_style"
+                        android:hint="-返现："
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@id/tv_cashback"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/send_tv_style"
+                        android:hint="+运费："
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@id/tv_freight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <!--实付款-->
+            <LinearLayout
+                style="@style/padding_LR_10_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="实付款：" />
+
+                    <TextView
+                        android:id="@id/tv_really_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/red" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="下单时间："
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@id/tv_order_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="2015-12-17"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </FrameLayout>

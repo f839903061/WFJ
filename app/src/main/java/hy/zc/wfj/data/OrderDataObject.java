@@ -28,6 +28,7 @@ public class OrderDataObject implements Serializable {
 
 
     public static String TITLE_KEY= "title";
+    public static String SINGLE_ORDER_KEY="single_order";
 
     private String title;
 

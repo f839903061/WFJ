@@ -8,28 +8,31 @@ import java.util.List;
  */
 public class OrderListObject implements Serializable{
 
+
+    private static final long serialVersionUID = -710891667491152880L;
     /**
      * Status : true
-     * Data : [{"address":"北京市东城区内环到三环里,银河sohoC座30601","consignee":"天山童姥","createTime":{"date":11,"day":5,"hours":16,"minutes":26,"month":11,"nanos":0,"seconds":11,"time":1449822371000,"timezoneOffset":-480,"year":115},"customerId":459,"finalAmount":150,"freight":0,"invoiceInfo":"","invoiceType":1,"list":[{"count":0,"logoImage":"shop/image/product/20150416/2015041617500000796233.png","orderDetailId":1492,"ordersId":1180,"ordersNo":"2015121116261111","productFullName":"耐克 运动T恤 [黑色]","productId":1559,"salesPrice":150,"shopInfoId":275,"shopName":"金利来专卖店"}],"mobilePhone":"15629773794","ordersId":459,"ordersNo":"2015121116261111","ordersState":5,"payMode":0,"sendType":0,"shopInfoId":0},{"address":"北京市东城区内环到三环里,银河sohoC座30601","consignee":"天山童姥","createTime":{"date":11,"day":5,"hours":16,"minutes":25,"month":11,"nanos":0,"seconds":40,"time":1449822340000,"timezoneOffset":-480,"year":115},"customerId":459,"finalAmount":6826,"freight":0,"invoiceInfo":"","invoiceType":1,"list":[{"count":0,"logoImage":"shop/image/product/20150402/2015040216370000821078.jpg","orderDetailId":1489,"ordersId":1179,"ordersNo":"2015121116254055","productFullName":"麦包包 手提包 [其它]","productId":845,"salesPrice":298,"shopInfoId":272,"shopName":"OPPO专卖店"},{"count":0,"logoImage":"shop/image/product/20150406/2015040609510001522610.png","orderDetailId":1490,"ordersId":1179,"ordersNo":"2015121116254055","productFullName":"微星 笔记本 [黑]","productId":998,"salesPrice":5999,"shopInfoId":272,"shopName":"OPPO专卖店"},{"count":0,"logoImage":"shop/image/product/20150403/2015040308410001199700.jpg","orderDetailId":1491,"ordersId":1179,"ordersNo":"2015121116254055","productFullName":"Story Of Shanghai/上海故事 丝巾","productId":877,"salesPrice":529,"shopInfoId":272,"shopName":"OPPO专卖店"}],"mobilePhone":"15629773794","ordersId":459,"ordersNo":"2015121116254055","ordersState":5,"payMode":0,"sendType":0,"shopInfoId":0}]
+     * Data : [{"address":"北京海淀区","consignee":"wh","creatTime":"2014-11-28 18:33:58.0","createTime":null,"customerId":324,"finalAmount":10,"freight":0,"invoiceInfo":"","invoiceType":1,"list":[{"count":1,"logoImage":"shop/image/product/20141128/2014112813010005572024.jpg","orderDetailId":1103,"ordersId":850,"ordersNo":"20141128183358493866","productFullName":"晨光 环保铅笔 [红色,大]","productId":648,"salesPrice":10,"shopInfoId":170,"shopName":"宛寺旗舰店"}],"mobilePhone":"13121358968","ordersId":324,"ordersNo":"20141128183358493866","ordersState":6,"payMode":1,"sendType":2,"shopInfoId":0},{"address":"北京海淀区","consignee":"wh","creatTime":"2014-11-28 18:35:23.0","createTime":null,"customerId":324,"finalAmount":20,"freight":10,"invoiceInfo":"","invoiceType":1,"list":[{"count":1,"logoImage":"shop/image/product/20141128/2014112813010005572024.jpg","orderDetailId":1104,"ordersId":851,"ordersNo":"2014112818352315","productFullName":"晨光 环保铅笔 [红色,大]","productId":648,"salesPrice":10,"shopInfoId":170,"shopName":"宛寺旗舰店"}],"mobilePhone":"13121358968","ordersId":324,"ordersNo":"2014112818352315","ordersState":9,"payMode":1,"sendType":2,"shopInfoId":0}]
      */
 
     private boolean Status;
     /**
-     * address : 北京市东城区内环到三环里,银河sohoC座30601
-     * consignee : 天山童姥
-     * createTime : {"date":11,"day":5,"hours":16,"minutes":26,"month":11,"nanos":0,"seconds":11,"time":1449822371000,"timezoneOffset":-480,"year":115}
-     * customerId : 459
-     * finalAmount : 150
+     * address : 北京海淀区
+     * consignee : wh
+     * creatTime : 2014-11-28 18:33:58.0
+     * createTime : null
+     * customerId : 324
+     * finalAmount : 10
      * freight : 0
      * invoiceInfo :
      * invoiceType : 1
-     * list : [{"count":0,"logoImage":"shop/image/product/20150416/2015041617500000796233.png","orderDetailId":1492,"ordersId":1180,"ordersNo":"2015121116261111","productFullName":"耐克 运动T恤 [黑色]","productId":1559,"salesPrice":150,"shopInfoId":275,"shopName":"金利来专卖店"}]
-     * mobilePhone : 15629773794
-     * ordersId : 459
-     * ordersNo : 2015121116261111
-     * ordersState : 5
-     * payMode : 0
-     * sendType : 0
+     * list : [{"count":1,"logoImage":"shop/image/product/20141128/2014112813010005572024.jpg","orderDetailId":1103,"ordersId":850,"ordersNo":"20141128183358493866","productFullName":"晨光 环保铅笔 [红色,大]","productId":648,"salesPrice":10,"shopInfoId":170,"shopName":"宛寺旗舰店"}]
+     * mobilePhone : 13121358968
+     * ordersId : 324
+     * ordersNo : 20141128183358493866
+     * ordersState : 6
+     * payMode : 1
+     * sendType : 2
      * shopInfoId : 0
      */
 
@@ -51,26 +54,16 @@ public class OrderListObject implements Serializable{
         return Data;
     }
 
-    public static class DataEntity {
+    public static class DataEntity implements Serializable{
+
+        private static final long serialVersionUID = -7555173734611129886L;
         private String address;
         private String consignee;
-        /**
-         * date : 11
-         * day : 5
-         * hours : 16
-         * minutes : 26
-         * month : 11
-         * nanos : 0
-         * seconds : 11
-         * time : 1449822371000
-         * timezoneOffset : -480
-         * year : 115
-         */
-
-        private CreateTimeEntity createTime;
+        private String creatTime;
+        private Object createTime;
         private int customerId;
-        private int finalAmount;
-        private int freight;
+        private float finalAmount;
+        private float freight;
         private String invoiceInfo;
         private int invoiceType;
         private String mobilePhone;
@@ -81,16 +74,16 @@ public class OrderListObject implements Serializable{
         private int sendType;
         private int shopInfoId;
         /**
-         * count : 0
-         * logoImage : shop/image/product/20150416/2015041617500000796233.png
-         * orderDetailId : 1492
-         * ordersId : 1180
-         * ordersNo : 2015121116261111
-         * productFullName : 耐克 运动T恤 [黑色]
-         * productId : 1559
-         * salesPrice : 150
-         * shopInfoId : 275
-         * shopName : 金利来专卖店
+         * count : 1
+         * logoImage : shop/image/product/20141128/2014112813010005572024.jpg
+         * orderDetailId : 1103
+         * ordersId : 850
+         * ordersNo : 20141128183358493866
+         * productFullName : 晨光 环保铅笔 [红色,大]
+         * productId : 648
+         * salesPrice : 10
+         * shopInfoId : 170
+         * shopName : 宛寺旗舰店
          */
 
         private List<ListEntity> list;
@@ -103,7 +96,11 @@ public class OrderListObject implements Serializable{
             this.consignee = consignee;
         }
 
-        public void setCreateTime(CreateTimeEntity createTime) {
+        public void setCreatTime(String creatTime) {
+            this.creatTime = creatTime;
+        }
+
+        public void setCreateTime(Object createTime) {
             this.createTime = createTime;
         }
 
@@ -111,11 +108,11 @@ public class OrderListObject implements Serializable{
             this.customerId = customerId;
         }
 
-        public void setFinalAmount(int finalAmount) {
+        public void setFinalAmount(float finalAmount) {
             this.finalAmount = finalAmount;
         }
 
-        public void setFreight(int freight) {
+        public void setFreight(float freight) {
             this.freight = freight;
         }
 
@@ -167,7 +164,11 @@ public class OrderListObject implements Serializable{
             return consignee;
         }
 
-        public CreateTimeEntity getCreateTime() {
+        public String getCreatTime() {
+            return creatTime;
+        }
+
+        public Object getCreateTime() {
             return createTime;
         }
 
@@ -175,11 +176,11 @@ public class OrderListObject implements Serializable{
             return customerId;
         }
 
-        public int getFinalAmount() {
+        public float getFinalAmount() {
             return finalAmount;
         }
 
-        public int getFreight() {
+        public float getFreight() {
             return freight;
         }
 
@@ -195,7 +196,7 @@ public class OrderListObject implements Serializable{
             return mobilePhone;
         }
 
-        public int getOrdersId() {
+        public float getOrdersId() {
             return ordersId;
         }
 
@@ -203,9 +204,6 @@ public class OrderListObject implements Serializable{
             return ordersNo;
         }
 
-        /**
-         * @return 1、未处理(生成订单)；2、已付款；3、正在配货；4、已发货；5、已收货；6、订单取消；7、异常订单(退换货等、问题订单)；9、已评价；
-         */
         public int getOrdersState() {
             return ordersState;
         }
@@ -226,100 +224,9 @@ public class OrderListObject implements Serializable{
             return list;
         }
 
-        public static class CreateTimeEntity {
-            private int date;
-            private int day;
-            private int hours;
-            private int minutes;
-            private int month;
-            private int nanos;
-            private int seconds;
-            private long time;
-            private int timezoneOffset;
-            private int year;
+        public static class ListEntity implements Serializable {
 
-            public void setDate(int date) {
-                this.date = date;
-            }
-
-            public void setDay(int day) {
-                this.day = day;
-            }
-
-            public void setHours(int hours) {
-                this.hours = hours;
-            }
-
-            public void setMinutes(int minutes) {
-                this.minutes = minutes;
-            }
-
-            public void setMonth(int month) {
-                this.month = month;
-            }
-
-            public void setNanos(int nanos) {
-                this.nanos = nanos;
-            }
-
-            public void setSeconds(int seconds) {
-                this.seconds = seconds;
-            }
-
-            public void setTime(long time) {
-                this.time = time;
-            }
-
-            public void setTimezoneOffset(int timezoneOffset) {
-                this.timezoneOffset = timezoneOffset;
-            }
-
-            public void setYear(int year) {
-                this.year = year;
-            }
-
-            public int getDate() {
-                return date;
-            }
-
-            public int getDay() {
-                return day;
-            }
-
-            public int getHours() {
-                return hours;
-            }
-
-            public int getMinutes() {
-                return minutes;
-            }
-
-            public int getMonth() {
-                return month;
-            }
-
-            public int getNanos() {
-                return nanos;
-            }
-
-            public int getSeconds() {
-                return seconds;
-            }
-
-            public long getTime() {
-                return time;
-            }
-
-            public int getTimezoneOffset() {
-                return timezoneOffset;
-            }
-
-            public int getYear() {
-                return year;
-            }
-        }
-
-        public static class ListEntity {
+            private static final long serialVersionUID = -4898199389151834737L;
             private int count;
             private String logoImage;
             private int orderDetailId;

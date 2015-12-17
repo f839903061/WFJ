@@ -1,7 +1,9 @@
 package hy.zc.wfj.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -12,7 +14,9 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 import hy.zc.wfj.R;
+import hy.zc.wfj.activity.TemplateActivity;
 import hy.zc.wfj.adapter.base.BBaseAdapter;
+import hy.zc.wfj.data.OrderDataObject;
 import hy.zc.wfj.data.OrderListObject;
 import hy.zc.wfj.utility.UriManager;
 
@@ -121,10 +125,29 @@ public class OrderAdapter extends BBaseAdapter {
     }
 
     /**
-     * 毁掉函数，在fragment中执行删除操作
+     * 回调函数，在fragment中执行删除操作
      */
     public interface DelCallBack {
         public void del(int position);
+    }
+
+    /**
+     * 跳转到对应的单独的订单说明界面
+     * @param position
+     */
+    public void gotoOrderDetailUI(int position){
+        Intent intent=new Intent(mContext, TemplateActivity.class);
+        Bundle bundle = new Bundle();
+
+        OrderDataObject dataObject = new OrderDataObject();
+        OrderListObject.DataEntity entity = mList.get(position);
+
+        dataObject.setTitle(OrderDataObject.TITLE_COMPLETE);
+        bundle.putSerializable(OrderDataObject.TITLE_KEY, dataObject);
+        bundle.putSerializable(OrderDataObject.SINGLE_ORDER_KEY,entity);
+
+        intent.putExtras(bundle);
+        mContext.startActivity(intent);
     }
 
 }

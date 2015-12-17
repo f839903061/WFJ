@@ -59,26 +59,7 @@ public class OrderFragment extends FrameFragment implements OrderAdapter.DelCall
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = null;
-        switch (mCurrentType) {
-            case OrderDataObject.TITLE_PAY_FLAG:
-//                showLogi("当前跳转过来的是"+Type_Pay+" fragment");
-                break;
-            case OrderDataObject.TITLE_SIGN_FLAG:
-//                showLogi("当前跳转过来的是"+Type_Sign+" fragment");
-                break;
-            case OrderDataObject.TITLE_COMMENT_FLAG:
-//                showLogi("当前跳转过来的是"+Type_Comment+" fragment");
-                break;
-            case OrderDataObject.TITLE_AFTER_SALE_FLAG:
-//                showLogi("当前跳转过来的是"+Type_After_Sale+" fragment");
-                break;
-            default://全部订单
-//                showLogi("当前跳转过来的是"+Type_After_Sale+" fragment");
-                break;
-
-        }
-        rootView = inflater.inflate(R.layout.fragment_blank, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
         initializeComponent(rootView);
         return rootView;
     }
@@ -102,10 +83,11 @@ public class OrderFragment extends FrameFragment implements OrderAdapter.DelCall
             int customerId = object.getData().getCustomerId();
             String uri = UriManager.getOrderDetail(customerId,mCurrentType);
             getDataFromUri(uri);
+//            跳转到订单完成界面，查看具体订单
             lv_order.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    showLogi(""+position);
+                    mOrderAdapter.gotoOrderDetailUI(position);
                 }
             });
         }

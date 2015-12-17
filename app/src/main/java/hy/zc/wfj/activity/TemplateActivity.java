@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import hy.zc.wfj.R;
 import hy.zc.wfj.data.OrderDataObject;
+import hy.zc.wfj.data.OrderListObject;
 import hy.zc.wfj.fragment.AfterSaleFragment;
 import hy.zc.wfj.fragment.CommentFragment;
 import hy.zc.wfj.fragment.OrderCompleteFragment;
@@ -71,28 +72,31 @@ public class TemplateActivity extends FrameActivity {
                 } else {
                     empty_view.setVisibility(View.GONE);
                 }*/
-                if (title.equals(OrderDataObject.TITLE_ALL) ) {
+                if (title.equals(OrderDataObject.TITLE_ALL) ) {//全部订单
                     fragmentTransaction=getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.layout_container, new OrderFragment());
-                }else if (title.equals(OrderDataObject.TITLE_PAY)){
+                }else if (title.equals(OrderDataObject.TITLE_PAY)){//待支付
                     fragmentTransaction=getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.layout_container, new PayFragment());
 
-                }else if (title.equals(OrderDataObject.TITLE_SIGN)){
+                }else if (title.equals(OrderDataObject.TITLE_SIGN)){//待签收
                     fragmentTransaction=getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.layout_container, new SignFragment());
 
-                }else if (title.equals(OrderDataObject.TITLE_COMMENT)){
+                }else if (title.equals(OrderDataObject.TITLE_COMMENT)){//待评价
                     fragmentTransaction=getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.layout_container, new CommentFragment());
 
-                }else if (title.equals(OrderDataObject.TITLE_AFTER_SALE)){
+                }else if (title.equals(OrderDataObject.TITLE_AFTER_SALE)){//返修
                     fragmentTransaction=getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.layout_container, new AfterSaleFragment());
-                }else if (title.equals(OrderDataObject.TITLE_COMPLETE)){
-                    fragmentTransaction=getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.layout_container, new OrderCompleteFragment());
-                }else if (title.equals(OrderDataObject.TITLE_REGISTER)){
+                }else if (title.equals(OrderDataObject.TITLE_COMPLETE)){//完成订单，查看订单具体内容
+                    OrderListObject.DataEntity entity= (OrderListObject.DataEntity) bundle.getSerializable(OrderDataObject.SINGLE_ORDER_KEY);
+                    if (entity != null) {
+                        fragmentTransaction=getFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.layout_container, new OrderCompleteFragment(entity));
+                    }
+                }else if (title.equals(OrderDataObject.TITLE_REGISTER)){//注册界面
                     fragmentTransaction=getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.layout_container, new RegisterFragment());
                 }
