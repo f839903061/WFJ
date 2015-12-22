@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import java.util.List;
 
 import hy.zc.wfj.R;
@@ -35,6 +37,7 @@ public class OrderCompleteFragment extends Fragment {
     private TextView tv_really_pay;
     private TextView tv_order_time;
     private MyListView lv_order;
+    private SimpleDraweeView sdv_finsih;
 
     private String payType[] = {"未知", "货到付款", "支付宝", "银行汇款", "网银支付"};
     private String sendType[] = {"未知", "快递公司", "同城快递", "线下自提"};
@@ -63,6 +66,7 @@ public class OrderCompleteFragment extends Fragment {
 
     /**
      * 初始化数据
+     *
      * @param rootView
      */
     private void initializeComponent(View rootView) {
@@ -81,6 +85,7 @@ public class OrderCompleteFragment extends Fragment {
         tv_really_pay = (TextView) rootView.findViewById(R.id.tv_really_pay);
         tv_order_time = (TextView) rootView.findViewById(R.id.tv_order_time);
         lv_order = (MyListView) rootView.findViewById(R.id.lv_order);
+        sdv_finsih = (SimpleDraweeView) rootView.findViewById(R.id.sdv_finsih);
     }
 
     /**
@@ -101,6 +106,10 @@ public class OrderCompleteFragment extends Fragment {
         tv_freight.setText("￥" + mEntity.getFreight());
         tv_really_pay.setText("￥" + mEntity.getFinalAmount());
         tv_order_time.setText(mEntity.getCreatTime());
+        int ordersState = mEntity.getOrdersState();
+        if (ordersState == 5 || ordersState == 9) {
+            sdv_finsih.setVisibility(View.VISIBLE);
+        }
         List<OrderListObject.DataEntity.ListEntity> list = mEntity.getList();
 
         OrderCompleteAdapter adapter = new OrderCompleteAdapter(getActivity(), list);

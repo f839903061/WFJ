@@ -11,8 +11,9 @@
         android:orientation="vertical">
         <ListView
             android:id="@id/lv_order"
-            android:divider="@drawable/divider_order_line"
+            android:divider="#10E4E4E4"
             android:footerDividersEnabled="false"
+            android:dividerHeight="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>

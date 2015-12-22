@@ -50,6 +50,8 @@ public class UriManager {
     private static final String order_detail_pre = H_CONNECT_PRE + "searchAllOrders.action?customerId=";
     //注册列表前缀
     private static final String register_pre = H_CONNECT_PRE + "register.action?email=";
+    //找回密码
+    private static final String forget_pre = H_CONNECT_PRE + "phoneForGotValidate.action?email=";
 
 
     public enum ORDER {
@@ -330,6 +332,17 @@ public class UriManager {
         stringBuilder.append(pphoneNumber);
         stringBuilder.append("&password=");
         stringBuilder.append(ppassword);
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 忘记密码，向服务器发送邮箱验证消息
+     * @param pemail
+     * @return
+     */
+    public static String getForgetPasswrod(String pemail){
+        StringBuilder stringBuilder = new StringBuilder(forget_pre);
+        stringBuilder.append(pemail);
         return stringBuilder.toString();
     }
 

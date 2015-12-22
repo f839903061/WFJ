@@ -2,6 +2,7 @@ package hy.zc.wfj.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -119,7 +120,7 @@ public class SortDetailsActivity extends FrameActivity implements View.OnClickLi
         mPullRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-
+                new GetDataTask().execute();
             }
         });
 
@@ -140,7 +141,24 @@ public class SortDetailsActivity extends FrameActivity implements View.OnClickLi
         });
     }
 
+ private class GetDataTask extends AsyncTask<Void,Void,Void>{
 
+     @Override
+     protected Void doInBackground(Void... params) {
+         try {
+             Thread.sleep(1000);
+         } catch (InterruptedException e) {
+             e.printStackTrace();
+         }
+         return null;
+     }
+
+     @Override
+     protected void onPostExecute(Void aVoid) {
+         mPullRefreshListView.onRefreshComplete();
+         super.onPostExecute(aVoid);
+     }
+ }
 
     /**
      * 通过uri从服务器获取数据

@@ -3,55 +3,58 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="3dp"
+    android:background="@color/white"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical"
     android:paddingLeft="8dp"
     android:paddingRight="10dp"
-    android:descendantFocusability="blocksDescendants"
-    android:orientation="vertical">
+    android:paddingTop="3dp">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:id="@id/layout_top"
-            android:paddingTop="3dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="3dp">
 
             <ImageView
-                android:background="@drawable/shop_icon_pop"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginRight="3dp"/>
+                android:layout_marginRight="3dp"
+                android:background="@drawable/shop_icon_pop" />
 
             <TextView
                 android:id="@id/tv_shop_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center_vertical"
+                android:layout_weight="1"
                 android:text="智慧王府井" />
 
             <ImageButton
                 android:id="@id/imgb_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:focusable="false"
                 android:background="@color/transparent"
-                android:src="@drawable/order_list_delete_button"/>
+                android:focusable="false"
+                android:src="@drawable/order_list_delete_button" />
         </LinearLayout>
 
-        <View android:id="@id/line_temp"
-            android:layout_below="@id/layout_top"
-            style="@style/line6" />
+        <View
+            android:id="@id/line_temp"
+            style="@style/line6"
+            android:layout_below="@id/layout_top" />
 
         <LinearLayout
             android:id="@id/layout_middle"
-            android:layout_below="@id/line_temp"
             android:layout_width="match_parent"
             android:layout_height="75dp"
+            android:layout_below="@id/line_temp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -59,13 +62,16 @@
                 android:id="@id/sdv_pic"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_marginLeft="15dp"/>
+                android:layout_marginLeft="15dp" />
+
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@id/sdv_pic2"
                 style="@style/order_item_sdv_style" />
+
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@id/sdv_pic3"
                 style="@style/order_item_sdv_style" />
+
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@id/sdv_pic1"
                 style="@style/order_item_sdv_style" />
@@ -74,23 +80,24 @@
                 android:id="@id/tv_commodity_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="New Text"
                 android:layout_marginLeft="10dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
                 android:maxLength="30"
-                android:ellipsize="end"/>
+                android:text="New Text" />
         </LinearLayout>
+
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@id/sdv_finsih"
-            android:visibility="invisible"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            fresco:placeholderImage="@drawable/order_finish"
-            fresco:placeholderImageScaleType="fitXY"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="40dp"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"/>
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="25dp"
+            android:visibility="invisible"
+            fresco:placeholderImage="@drawable/order_finish"
+            fresco:placeholderImageScaleType="fitXY" />
 
     </RelativeLayout>
 
@@ -99,19 +106,30 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:text="实付款:￥" />
 
         <TextView
             android:id="@id/tv_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@id/btn_first"
+            style="@style/comment_btn_style" />
+
+        <Button
+            android:id="@id/btn_second"
+            style="@style/comment_btn_style" />
+
     </LinearLayout>
 
 </LinearLayout>

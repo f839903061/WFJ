@@ -62,7 +62,7 @@ public class RegisterFragment extends FrameFragment {
 
 
         checkBox_agree = (CheckBox) view.findViewById(R.id.checkbox_agree);
-        btn_next = (Button) view.findViewById(R.id.btn_next);
+        btn_next = (Button) view.findViewById(R.id.btn_second);
         tv_protocol = (TextView) view.findViewById(R.id.tv_protocol);
 
 //        监听是否同意协议

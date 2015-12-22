@@ -104,7 +104,7 @@ public class OrderFragment extends FrameFragment implements OrderAdapter.DelCall
                 if (response.contains("true")) {
                     OrderListObject object = JSON.parseObject(response, OrderListObject.class);
                     mList = object.getData();
-                    mOrderAdapter = new OrderAdapter(getActivity(), mList, (OrderAdapter.DelCallBack) OrderFragment.this);
+                    mOrderAdapter = new OrderAdapter(getActivity(), mList, (OrderAdapter.DelCallBack) OrderFragment.this,mCurrentType);
                     lv_order.setAdapter(mOrderAdapter);
                 }
             }

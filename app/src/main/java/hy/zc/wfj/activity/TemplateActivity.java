@@ -11,6 +11,8 @@ import hy.zc.wfj.data.OrderDataObject;
 import hy.zc.wfj.data.OrderListObject;
 import hy.zc.wfj.fragment.AfterSaleFragment;
 import hy.zc.wfj.fragment.CommentFragment;
+import hy.zc.wfj.fragment.CommentPicFragment;
+import hy.zc.wfj.fragment.ForgetFragment;
 import hy.zc.wfj.fragment.OrderCompleteFragment;
 import hy.zc.wfj.fragment.OrderFragment;
 import hy.zc.wfj.fragment.PayFragment;
@@ -66,12 +68,6 @@ public class TemplateActivity extends FrameActivity {
             if (orderDataObject != null) {
                 String title = orderDataObject.getTitle();
                 tv_title.setText(title);
-                /*uriString = orderDataObject.getUriString();
-                if (uriString == null) {
-                    empty_view.setVisibility(View.VISIBLE);
-                } else {
-                    empty_view.setVisibility(View.GONE);
-                }*/
                 if (title.equals(OrderDataObject.TITLE_ALL) ) {//全部订单
                     fragmentTransaction=getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.layout_container, new OrderFragment());
@@ -99,6 +95,15 @@ public class TemplateActivity extends FrameActivity {
                 }else if (title.equals(OrderDataObject.TITLE_REGISTER)){//注册界面
                     fragmentTransaction=getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.layout_container, new RegisterFragment());
+                }else if (title.equals(OrderDataObject.TITLE_COMMENT_PIC)){
+                    OrderListObject.DataEntity entity= (OrderListObject.DataEntity) bundle.getSerializable(OrderDataObject.SINGLE_ORDER_KEY);
+                    if (entity != null) {
+                        fragmentTransaction = getFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.layout_container, new CommentPicFragment(entity));
+                    }
+                }else if (title.equals(OrderDataObject.TITLE_FIND_PASSWORD)){
+                    fragmentTransaction=getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.layout_container, new ForgetFragment());
                 }
                 fragmentTransaction.commit();
             }

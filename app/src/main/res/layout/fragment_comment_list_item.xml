@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="@dimen/fill_order_layout_10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@id/sdv_pic"
+            android:layout_width="65.0dp"
+            android:layout_height="65.0dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/fill_order_layout_10dp"
+            android:paddingRight="@dimen/fill_order_layout_10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@id/tv_name"
+                android:layout_weight="1"
+                android:text="xxxx"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp" />
+            <RatingBar
+                android:id="@id/ratingBar_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:stepSize="1"
+                android:numStars="5"
+                style="?android:attr/ratingBarStyleSmall"
+                android:isIndicator="false"
+                android:layout_gravity="right|bottom"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <EditText
+        android:id="@id/et_comment"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="5dp"
+        android:maxLength="500"
+        android:gravity="left"
+        android:hint="请输入评价"
+        style="@style/feedback_et_style"/>
+
+</LinearLayout>

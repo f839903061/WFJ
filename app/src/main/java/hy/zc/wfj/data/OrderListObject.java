@@ -204,6 +204,9 @@ public class OrderListObject implements Serializable{
             return ordersNo;
         }
 
+        /**
+         * @return 1、未处理(生成订单)；2、已付款；3、正在配货；4、已发货；5、已收货；6、订单取消；7、异常订单(退换货等、问题订单)；9、已评价
+         */
         public int getOrdersState() {
             return ordersState;
         }
