@@ -42,6 +42,7 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
     private TextView common_title_txt;
 
     private TextView tv_register;
+    private TextView tv_find_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
         login_comfirm_button = (Button) this.findViewById(R.id.login_comfirm_button);
         common_title_txt = (TextView) this.findViewById(R.id.common_title_txt);
         tv_register=(TextView)this.findViewById(R.id.register_link);
+        tv_find_password=(TextView)this.findViewById(R.id.login_page_find_password);
 
         common_title_txt.setText("登录");
     }
@@ -68,6 +70,7 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
         mBackBtn.setOnClickListener(this);
         login_comfirm_button.setOnClickListener(this);
         tv_register.setOnClickListener(this);
+        tv_find_password.setOnClickListener(this);
     }
 
     @Override
@@ -93,18 +96,27 @@ public class MyLoginActivity extends FrameActivity implements View.OnClickListen
                 }
                 break;
             case R.id.register_link:
-                Intent intent=new Intent(MyLoginActivity.this,TemplateActivity.class);
-                Bundle bundle=new Bundle();
-                OrderDataObject orderDataObject=new OrderDataObject();
-                orderDataObject.setTitle(OrderDataObject.TITLE_REGISTER);
-                bundle.putSerializable(OrderDataObject.TITLE_KEY, orderDataObject);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                MyLoginActivity.this.finish();
+                goToActivity(OrderDataObject.TITLE_REGISTER);
                 break;
+            case R.id.login_page_find_password:
+                goToActivity(OrderDataObject.TITLE_FIND_PASSWORD);
             default:
                 break;
         }
+    }
+
+    /**
+     * 跳转到指定的界面
+     * @param pTitle
+     */
+    private void goToActivity(String pTitle) {
+        Intent intent=new Intent(MyLoginActivity.this,TemplateActivity.class);
+        Bundle bundle=new Bundle();
+        OrderDataObject orderDataObject=new OrderDataObject();
+        orderDataObject.setTitle(pTitle);
+        bundle.putSerializable(OrderDataObject.TITLE_KEY, orderDataObject);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     private void getDataFromUri(String loginRequestUri) {
