@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:background="@color/white">
+
     <ImageButton
         android:id="@id/common_title_back_btn"
         android:layout_width="wrap_content"
@@ -27,9 +28,12 @@
     <Button
         android:id="@id/btn_tmp"
         android:layout_width="50.0dp"
-        android:textSize="12sp"
         android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
         android:background="@color/transparent"
-        android:visibility="gone"
-        android:layout_alignParentRight="true"/>
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <View style="@style/line6_grey"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

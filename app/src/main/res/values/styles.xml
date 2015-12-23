@@ -162,6 +162,12 @@
         <item name="android:layout_height">1.0px</item>
     </style>
 
+    <style name="line6_grey">
+        <item name="android:background">@color/gray</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1.0px</item>
+    </style>
+
     <style name="my_personal_list_height">
         <item name="android:layout_height">49.0dip</item>
     </style>

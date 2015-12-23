@@ -139,6 +139,11 @@ public class OrderAdapter extends BBaseAdapter {
             viewHolder.sdv_pic0.setImageURI(uri);
             viewHolder.tv_commodity_name.setText(listEntity.getProductFullName());
             viewHolder.tv_price.setText(listEntity.getSalesPrice() + "");
+
+            viewHolder.tv_commodity_name.setVisibility(View.VISIBLE);
+            viewHolder.sdv_pic1.setVisibility(View.GONE);
+            viewHolder.sdv_pic2.setVisibility(View.GONE);
+            viewHolder.sdv_pic3.setVisibility(View.GONE);
         } else if (list.size() > 1) {//如果有多个内容的布局
             float price = 0;
             for (int i = 0; i < list.size(); i++) {//次循环里还要处理多张图片，目前还没做
@@ -146,7 +151,7 @@ public class OrderAdapter extends BBaseAdapter {
                 switch (i) {
                     case 0:
                         viewHolder.sdv_pic0.setImageURI(uri);
-                        viewHolder.sdv_pic0.setVisibility(View.VISIBLE);
+//                        viewHolder.sdv_pic0.setVisibility(View.VISIBLE);
                         break;
                     case 1:
                         viewHolder.sdv_pic1.setImageURI(uri);
