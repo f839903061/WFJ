@@ -73,6 +73,15 @@ public class OrderListObject implements Serializable{
         private int payMode;
         private int sendType;
         private int shopInfoId;
+        private String shopPhone;
+
+        public String getShopPhone() {
+            return shopPhone;
+        }
+
+        public void setShopPhone(String shopPhone) {
+            this.shopPhone = shopPhone;
+        }
         /**
          * count : 1
          * logoImage : shop/image/product/20141128/2014112813010005572024.jpg

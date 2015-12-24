@@ -19,6 +19,7 @@ import hy.zc.wfj.activity.TemplateActivity;
 import hy.zc.wfj.adapter.base.BBaseAdapter;
 import hy.zc.wfj.data.OrderDataObject;
 import hy.zc.wfj.data.OrderListObject;
+import hy.zc.wfj.pay.PayDemoActivity;
 import hy.zc.wfj.utility.UriManager;
 
 /**
@@ -65,7 +66,7 @@ public class OrderAdapter extends BBaseAdapter {
         int ordersState = entity.getOrdersState();
         if (ordersState == 9) {
             viewHolder.sdv_finish.setVisibility(View.VISIBLE);
-        } else if (ordersState == 3 || ordersState == 4) {
+        } else if (ordersState == 2 ||ordersState == 3 || ordersState == 4) {
             viewHolder.btn_first.setVisibility(View.VISIBLE);
             viewHolder.btn_first.setText("确认收货");
 
@@ -100,6 +101,8 @@ public class OrderAdapter extends BBaseAdapter {
                 showToast(button.getText() + "");
                 switch (mType) {
                     case OrderDataObject.TITLE_PAY_FLAG:
+                        Intent intent=new Intent(mContext, PayDemoActivity.class);
+                        mContext.startActivity(intent);
                         break;
                     case OrderDataObject.TITLE_SIGN_FLAG:
                         break;
@@ -220,6 +223,9 @@ public class OrderAdapter extends BBaseAdapter {
                 break;
             case OrderDataObject.TITLE_COMMENT_FLAG:
                 dataObject.setTitle(OrderDataObject.TITLE_COMMENT_PIC);
+                break;
+            default://上面的只是目前逻辑处理的两项，还有几项没有完成，为了防止出现bug，这里暂时以随便写了一个titile,后续还要修改的
+                dataObject.setTitle(OrderDataObject.TITLE_COMPLETE);
                 break;
         }
         bundle.putSerializable(OrderDataObject.TITLE_KEY, dataObject);
