@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 
+import hy.zc.wfj.R;
+
 
 public class PayDemoActivity extends FragmentActivity {
 
