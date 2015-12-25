@@ -23,7 +23,7 @@ public class UriManager {
     private static final String login_pic_pre = "http://192.168.10.7:8085/b2b2c/";
     //登录请求的前缀
 //    private static final String login_pre = "http://101.200.182.119:8080/phone/login.action?loginName=";//全网
-    private static final String login_pre = X_CONNECT_PRE + "login.action?loginName=";//局域网
+    private static final String login_pre = H_CONNECT_PRE + "login.action?loginName=";//局域网
     //修改号码的前缀
     private static final String modify_phone_pre = X_CONNECT_PRE + "editCustomer.action?customerId=";
     //修改昵称
@@ -52,6 +52,10 @@ public class UriManager {
     private static final String register_pre = H_CONNECT_PRE + "register.action?email=";
     //找回密码
     private static final String forget_pre = H_CONNECT_PRE + "phoneForGotValidate.action?email=";
+    //支付成功与否状态查询
+    private static final String pay_state_pre = H_CONNECT_PRE + "payOrder.action?ordersNo=";
+    //确认收货请求
+    private static final String sign_state_pre = H_CONNECT_PRE + "confirmGoods.action?ordersId=";
 
 
     public enum ORDER {
@@ -300,7 +304,7 @@ public class UriManager {
      *
      * @param pcustomerId
      * @param orderType   OrderDataObject(
-     *                    TITLE_PAY_FLAG=1,
+     *                    TITLE_WAIT_PAY_FLAG=1,
      *                    TITLE_SEND_OUT_FLAG=2,
      *                    TITLE_SIGN_FLAG=4,
      *                    TITLE_COMMENT_FLAG=5,
@@ -346,4 +350,23 @@ public class UriManager {
         return stringBuilder.toString();
     }
 
+    /**
+     * 获取支付成功与否的状态请求链接
+     * @return
+     */
+    public static String getPayState(String pordersNo){
+        StringBuilder stringBuilder = new StringBuilder(pay_state_pre);
+        stringBuilder.append(pordersNo);
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 确认收货请求链接
+     * @return
+     */
+    public static String getSignState(String pordersNo){
+        StringBuilder stringBuilder = new StringBuilder(sign_state_pre);
+        stringBuilder.append(pordersNo);
+        return stringBuilder.toString();
+    }
 }

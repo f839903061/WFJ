@@ -205,7 +205,7 @@ public class OrderListObject implements Serializable{
             return mobilePhone;
         }
 
-        public float getOrdersId() {
+        public int getOrdersId() {
             return ordersId;
         }
 

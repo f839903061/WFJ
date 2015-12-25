@@ -15,7 +15,7 @@ import hy.zc.wfj.fragment.CommentPicFragment;
 import hy.zc.wfj.fragment.ForgetFragment;
 import hy.zc.wfj.fragment.OrderCompleteFragment;
 import hy.zc.wfj.fragment.OrderFragment;
-import hy.zc.wfj.fragment.PayFragment;
+import hy.zc.wfj.fragment.WaitPayFragment;
 import hy.zc.wfj.fragment.RegisterFragment;
 import hy.zc.wfj.fragment.SignFragment;
 
@@ -71,9 +71,9 @@ public class TemplateActivity extends FrameActivity {
                 if (title.equals(OrderDataObject.TITLE_ALL) ) {//全部订单
                     fragmentTransaction=getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.layout_container, new OrderFragment());
-                }else if (title.equals(OrderDataObject.TITLE_PAY)){//待支付
+                }else if (title.equals(OrderDataObject.TITLE_WAIT_PAY)){//待支付
                     fragmentTransaction=getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.layout_container, new PayFragment());
+                    fragmentTransaction.replace(R.id.layout_container, new WaitPayFragment());
 
                 }else if (title.equals(OrderDataObject.TITLE_SIGN)){//待签收
                     fragmentTransaction=getFragmentManager().beginTransaction();

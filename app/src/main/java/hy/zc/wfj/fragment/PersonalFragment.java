@@ -198,7 +198,7 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
                         goToActivity(TemplateActivity.class, bundle);
                         break;
                     case R.id.wait_for_payment_layout://跳转到待付款，并携带数据过去
-                        bundle = setOrderData(OrderDataObject.TITLE_PAY, OrderDataObject.TITLE_KEY);
+                        bundle = setOrderData(OrderDataObject.TITLE_WAIT_PAY, OrderDataObject.TITLE_KEY);
                         goToActivity(TemplateActivity.class, bundle);
                         break;
                     case R.id.wait_sign_in_layout://跳转到待收货，并携带数据过去

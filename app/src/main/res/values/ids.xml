@@ -270,6 +270,7 @@
     <item name="tv_really_pay" type="id" />
     <item name="tv_order_time" type="id" />
     <item name="tv_count" type="id" />
+    <item name="tv_result" type="id" />
     <item name="btn_first" type="id" />
     <item name="ratingBar_package" type="id" />
     <item name="ratingBar_speed" type="id" />

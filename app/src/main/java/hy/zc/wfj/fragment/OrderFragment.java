@@ -1,6 +1,7 @@
 package hy.zc.wfj.fragment;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import java.net.URI;
 import java.util.List;
 
 import hy.zc.wfj.App;
@@ -23,6 +25,7 @@ import hy.zc.wfj.activity.TemplateActivity;
 import hy.zc.wfj.adapter.OrderAdapter;
 import hy.zc.wfj.data.OrderDataObject;
 import hy.zc.wfj.data.OrderListObject;
+import hy.zc.wfj.data.UserLoginErrorObject;
 import hy.zc.wfj.data.UserLoginObject;
 import hy.zc.wfj.utility.SharedPrefUtility;
 import hy.zc.wfj.utility.UriManager;
@@ -32,6 +35,7 @@ import hy.zc.wfj.utility.UriManager;
  */
 public class OrderFragment extends FrameFragment implements OrderAdapter.DelCallBack{
 
+    public static final String PAY_OK = "payOk";
     private ListView lv_order;
     public static final String IS_ORDER_OK = "isOrderOk";
 
@@ -77,6 +81,12 @@ public class OrderFragment extends FrameFragment implements OrderAdapter.DelCall
                 goToActivity(TemplateActivity.class, pbundle);
             }
         });
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         String temp = (String) SharedPrefUtility.getParam(getActivity(), SharedPrefUtility.LOGIN_DATA, "");
         if (!temp.equals("")) {
             UserLoginObject object = JSON.parseObject(temp, UserLoginObject.class);
@@ -121,6 +131,7 @@ public class OrderFragment extends FrameFragment implements OrderAdapter.DelCall
     @Override
     public void onStop() {
         App.cancelAllRequests(IS_ORDER_OK);
+        App.cancelAllRequests(PAY_OK);
         super.onStop();
     }
 
@@ -128,5 +139,36 @@ public class OrderFragment extends FrameFragment implements OrderAdapter.DelCall
     public void del(int position) {
         mList.remove(position);
         mOrderAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void modifyPayState(String uri) {
+        getState(uri);
+    }
+
+    @Override
+    public void modifySignState(String uri) {
+
+        getState(uri);
+    }
+
+    private void getState(String uri){
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                UserLoginErrorObject userLoginErrorObject = JSON.parseObject(response, UserLoginErrorObject.class);
+                String message = userLoginErrorObject.getData();
+//                mOrderAdapter.notifyDataSetChanged();
+//                showToast(message);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                showLoge(error.getMessage());
+            }
+        });
+
+        App.addRequest(stringRequest, PAY_OK);
     }
 }

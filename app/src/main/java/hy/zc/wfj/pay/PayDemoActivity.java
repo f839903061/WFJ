@@ -84,6 +84,7 @@ public class PayDemoActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_main);
+        pay();
     }
 
     /**
@@ -141,7 +142,61 @@ public class PayDemoActivity extends FragmentActivity {
         Thread payThread = new Thread(payRunnable);
         payThread.start();
     }
+    /**
+     * call alipay sdk pay. 调用SDK支付
+     */
+    public void pay() {
+        if (TextUtils.isEmpty(PARTNER) || TextUtils.isEmpty(RSA_PRIVATE)
+                || TextUtils.isEmpty(SELLER)) {
+            new AlertDialog.Builder(this)
+                    .setTitle("警告")
+                    .setMessage("需要配置PARTNER | RSA_PRIVATE| SELLER")
+                    .setPositiveButton("确定",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(
+                                        DialogInterface dialoginterface, int i) {
+                                    //
+                                    finish();
+                                }
+                            }).show();
+            return;
+        }
+        // 订单
+        String orderInfo = getOrderInfo("测试的商品", "该测试商品的详细描述", "0.01");
 
+        // 对订单做RSA 签名
+        String sign = sign(orderInfo);
+        try {
+            // 仅需对sign 做URL编码
+            sign = URLEncoder.encode(sign, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        // 完整的符合支付宝参数规范的订单信息
+        final String payInfo = orderInfo + "&sign=\"" + sign + "\"&"
+                + getSignType();
+
+        Runnable payRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+                // 构造PayTask 对象
+                PayTask alipay = new PayTask(PayDemoActivity.this);
+                // 调用支付接口，获取支付结果
+                String result = alipay.pay(payInfo);
+
+                Message msg = new Message();
+                msg.what = SDK_PAY_FLAG;
+                msg.obj = result;
+                mHandler.sendMessage(msg);
+            }
+        };
+
+        // 必须异步调用
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
     /**
      * check whether the device has authentication alipay account.
      * 查询终端设备是否存在支付宝认证账户

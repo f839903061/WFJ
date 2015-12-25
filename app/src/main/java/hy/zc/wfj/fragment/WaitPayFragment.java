@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 
 import hy.zc.wfj.data.OrderDataObject;
 
-public class PayFragment extends OrderFragment {
+public class WaitPayFragment extends OrderFragment {
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.setType(OrderDataObject.TITLE_PAY_FLAG);
+        this.setType(OrderDataObject.TITLE_WAIT_PAY_FLAG);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

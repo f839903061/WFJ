@@ -13,7 +13,7 @@ public class BaseFragment extends Fragment implements LogUtil{
 
 
     public void showToast(String ptext) {
-        Toast.makeText(getActivity(), ptext, Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity().getApplicationContext(), ptext, Toast.LENGTH_LONG).show();
     }
 
     @Override
