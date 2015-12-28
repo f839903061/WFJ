@@ -8,9 +8,11 @@ import android.net.Uri;
  */
 public class UriManager {
     //        String uri="http://192.168.10.210:8080/wfj_front/phone/phonecategory?method=initType";
-    public static final String X_CONNECT_PRE = "http://192.168.10.7:8080/wfj_front/phone/";
-    public static final String H_CONNECT_PRE = "http://192.168.10.210:8080/wfj_front/phone/";
+//    public static final String X_CONNECT_PRE = "http://192.168.10.7:8080/wfj_front/phone/";
+//    public static final String H_CONNECT_PRE = "http://192.168.10.210:8080/wfj_front/phone/";
 
+    public static final String X_CONNECT_PRE = "https://192.168.10.7:8443/wfj_front/phone/";
+    public static final String H_CONNECT_PRE = "https://192.168.10.210:8443/wfj_front/phone/";
 
     //        String uri = "https://192.168.10.210:8443/wfj_front/phone/phonecategory.action?method=initType";
     //分类界面的请求链接
