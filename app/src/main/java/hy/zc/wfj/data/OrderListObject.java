@@ -249,6 +249,15 @@ public class OrderListObject implements Serializable{
             private float salesPrice;
             private int shopInfoId;
             private String shopName;
+            private int ordersState;
+
+            public int getOrdersState() {
+                return ordersState;
+            }
+
+            public void setOrdersState(int ordersState) {
+                this.ordersState = ordersState;
+            }
 
             public void setCount(int count) {
                 this.count = count;
