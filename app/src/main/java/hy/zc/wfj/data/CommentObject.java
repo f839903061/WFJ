@@ -8,27 +8,61 @@ import java.util.List;
  */
 public class CommentObject implements Serializable {
 
-    private static final long serialVersionUID = -5310403520527922965L;
 
+    private static final long serialVersionUID = -476183777153667375L;
     /**
-     * orderDetailId : 1234
-     * level : 123
-     * content : 评价
+     * customerId : 459
+     * date : 1451355455.919347
+     * ordersId : 1192
+     * evaluateGoods : [{"orderDetailId":123,"level":3,"content":"content"},{"orderDetailId":125,"level":2,"content":"content"}]
      */
 
-    private List<OrdersIdEntity> ordersId;
+    private int customerId;
+    private String date;
+    private int ordersId;
+    /**
+     * orderDetailId : 123
+     * level : 3
+     * content : content
+     */
 
-    public void setOrdersId(List<OrdersIdEntity> ordersId) {
+    private List<EvaluateGoodsEntity> evaluateGoods;
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setOrdersId(int ordersId) {
         this.ordersId = ordersId;
     }
 
-    public List<OrdersIdEntity> getOrdersId() {
+    public void setEvaluateGoods(List<EvaluateGoodsEntity> evaluateGoods) {
+        this.evaluateGoods = evaluateGoods;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public int getOrdersId() {
         return ordersId;
     }
 
-    public static class OrdersIdEntity implements Serializable{
+    public List<EvaluateGoodsEntity> getEvaluateGoods() {
+        return evaluateGoods;
+    }
 
-        private static final long serialVersionUID = -3217802492039391886L;
+    public static class EvaluateGoodsEntity implements Serializable{
+
+        private static final long serialVersionUID = -3931707761345852306L;
 
         private int orderDetailId;
         private int level;
@@ -59,3 +93,4 @@ public class CommentObject implements Serializable {
         }
     }
 }
+

@@ -58,6 +58,8 @@ public class UriManager {
     private static final String pay_state_pre = H_CONNECT_PRE + "payOrder.action?ordersNo=";
     //确认收货请求
     private static final String sign_state_pre = H_CONNECT_PRE + "confirmGoods.action?ordersId=";
+    //评价发送
+    private static final String comment_pre = X_CONNECT_PRE + "evaluateGood.action";
 
 
     public enum ORDER {
@@ -343,10 +345,11 @@ public class UriManager {
 
     /**
      * 忘记密码，向服务器发送邮箱验证消息
+     *
      * @param pemail
      * @return
      */
-    public static String getForgetPasswrod(String pemail){
+    public static String getForgetPasswrod(String pemail) {
         StringBuilder stringBuilder = new StringBuilder(forget_pre);
         stringBuilder.append(pemail);
         return stringBuilder.toString();
@@ -354,9 +357,10 @@ public class UriManager {
 
     /**
      * 获取支付成功与否的状态请求链接
+     *
      * @return
      */
-    public static String getPayState(String pordersNo){
+    public static String getPayState(String pordersNo) {
         StringBuilder stringBuilder = new StringBuilder(pay_state_pre);
         stringBuilder.append(pordersNo);
         return stringBuilder.toString();
@@ -364,11 +368,22 @@ public class UriManager {
 
     /**
      * 确认收货请求链接
+     *
      * @return
      */
-    public static String getSignState(String pordersNo){
+    public static String getSignState(String pordersNo) {
         StringBuilder stringBuilder = new StringBuilder(sign_state_pre);
         stringBuilder.append(pordersNo);
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 向服务器端发送评价信息
+     *
+     * @return
+     */
+    public static String getComment() {
+        StringBuilder stringBuilder = new StringBuilder(comment_pre);
         return stringBuilder.toString();
     }
 }
