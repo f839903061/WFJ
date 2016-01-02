@@ -60,6 +60,8 @@ public class UriManager {
     private static final String sign_state_pre = H_CONNECT_PRE + "confirmGoods.action?ordersId=";
     //评价发送
     private static final String comment_pre = X_CONNECT_PRE + "evaluateGood.action";
+    //删除订单
+    private static final String del_order_pre = H_CONNECT_PRE + "deleteOrders.action?ordersId=";
 
 
     public enum ORDER {
@@ -384,6 +386,17 @@ public class UriManager {
      */
     public static String getComment() {
         StringBuilder stringBuilder = new StringBuilder(comment_pre);
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 删除订单请求链接
+     *
+     * @return
+     */
+    public static String getDelOrder(int pordersId) {
+        StringBuilder stringBuilder = new StringBuilder(del_order_pre);
+        stringBuilder.append(pordersId);
         return stringBuilder.toString();
     }
 }

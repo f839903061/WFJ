@@ -39,6 +39,10 @@ public class OrderFragment extends FrameFragment implements OrderAdapter.DelCall
     private ListView lv_order;
     public static final String IS_ORDER_OK = "isOrderOk";
 
+    public static final int FLAG_PAY = 1;
+    public static final int FLAG_SIGN = 2;
+    public static final int FLAG_DEL = 3;
+
     private static OrderFragment orderFragment;
     private int mCurrentType = 0;
     private List<OrderListObject.DataEntity> mList;
@@ -135,29 +139,51 @@ public class OrderFragment extends FrameFragment implements OrderAdapter.DelCall
         super.onStop();
     }
 
+    /**
+     * 删除订单信息
+     * @param position 订单的索引值
+     */
     @Override
     public void del(int position) {
-        mList.remove(position);
-        mOrderAdapter.notifyDataSetChanged();
+        OrderListObject.DataEntity dataEntity = mList.get(position);
+        int ordersId = dataEntity.getOrdersId();
+        String uri = UriManager.getDelOrder(ordersId);
+        getState(uri, FLAG_DEL, position);//向服务器端发送删除请求,并删除本地列表项
+
     }
 
     @Override
     public void modifyPayState(String uri) {
-        getState(uri);
+        getState(uri,FLAG_PAY,0);
     }
 
     @Override
     public void modifySignState(String uri) {
 
-        getState(uri);
+        getState(uri,FLAG_SIGN,0);
     }
 
-    private void getState(String uri){
+    /**
+     * 获取请求状态
+     * @param uri
+     * @param pflag 表示那个功能的调用（付款，签收，删除订单）
+     * @param index 这个值只是在删除订单的时候才会用到
+     */
+    private void getState(String uri, final int pflag, final int index){
         StringRequest stringRequest=new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 UserLoginErrorObject userLoginErrorObject = JSON.parseObject(response, UserLoginErrorObject.class);
+                boolean status = userLoginErrorObject.isStatus();
                 String message = userLoginErrorObject.getData();
+                if (status) {
+                    if (pflag==FLAG_DEL) {
+                        mList.remove(index);//删除本地
+                        mOrderAdapter.notifyDataSetChanged();
+                    }
+                }else {
+                    showToast(message);
+                }
 //                mOrderAdapter.notifyDataSetChanged();
 //                showToast(message);
 
