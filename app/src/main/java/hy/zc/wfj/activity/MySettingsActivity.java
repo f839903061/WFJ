@@ -1,6 +1,5 @@
 package hy.zc.wfj.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,8 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import hy.zc.wfj.R;
+import hy.zc.wfj.data.OrderDataObject;
 import hy.zc.wfj.utility.SharedPrefUtility;
 
 public class MySettingsActivity extends FrameActivity implements View.OnClickListener{
@@ -18,13 +19,14 @@ public class MySettingsActivity extends FrameActivity implements View.OnClickLis
     private ImageButton common_title_back_btn;
     private Button logout_comfirm_button;
     private Boolean isLogin=false;
+    private RelativeLayout layout_about;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_settings);
 
         initializeComponent();
-        setListener();
+
     }
 
     @Override
@@ -40,7 +42,11 @@ public class MySettingsActivity extends FrameActivity implements View.OnClickLis
 
         common_title_back_btn=(ImageButton)findViewById(R.id.common_title_back_btn);
         logout_comfirm_button=(Button)findViewById(R.id.logout_comfirm_button);
+        layout_about=(RelativeLayout)findViewById(R.id.layout_upgrade_client);
 
+
+
+        setListener();
     }
     /**
      * set component click listener
@@ -48,6 +54,7 @@ public class MySettingsActivity extends FrameActivity implements View.OnClickLis
     private void setListener() {
         common_title_back_btn.setOnClickListener(this);
         logout_comfirm_button.setOnClickListener(this);
+        layout_about.setOnClickListener(this);
     }
 
     /**
@@ -69,7 +76,7 @@ public class MySettingsActivity extends FrameActivity implements View.OnClickLis
             case R.id.common_title_back_btn:
                 goBack();
                 break;
-            case R.id.logout_comfirm_button:
+            case R.id.logout_comfirm_button://退出按钮
                 //弹出确认退出对话框
                 final AlertDialog.Builder builder=new AlertDialog.Builder(MySettingsActivity.this);
                 builder.setTitle("确认退出?");
@@ -89,6 +96,17 @@ public class MySettingsActivity extends FrameActivity implements View.OnClickLis
                     }
                 });
                 builder.create().show();
+                break;
+            case R.id.layout_upgrade_client://跳转到关于界面
+                Intent intent=new Intent(MySettingsActivity.this,TemplateActivity.class);
+                Bundle bundle=new Bundle();
+                OrderDataObject odo=new OrderDataObject();
+
+                odo.setTitle(OrderDataObject.TITLE_ABOUT);
+                bundle.putSerializable(OrderDataObject.TITLE_KEY,odo);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
                 break;
             default:
                 break;

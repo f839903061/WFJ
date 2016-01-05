@@ -9,6 +9,7 @@ import android.widget.TextView;
 import hy.zc.wfj.R;
 import hy.zc.wfj.data.OrderDataObject;
 import hy.zc.wfj.data.OrderListObject;
+import hy.zc.wfj.fragment.AboutFragment;
 import hy.zc.wfj.fragment.AfterSaleFragment;
 import hy.zc.wfj.fragment.CommentFragment;
 import hy.zc.wfj.fragment.CommentPicFragment;
@@ -111,6 +112,9 @@ public class TemplateActivity extends FrameActivity {
                         fragmentTransaction=getFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.layout_container,new ReturnSalesFragment(entity));
                     }
+                }else if (title.equals(OrderDataObject.TITLE_ABOUT)){
+                    fragmentTransaction=getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.layout_container, new AboutFragment());
                 }
                 fragmentTransaction.commit();
             }

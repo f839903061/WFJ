@@ -146,5 +146,7 @@
     <string name="et_phone_email_option">请输入您的手机号/邮箱等(选填)</string>
     <string name="tv_returnsales_pic">只能上传一张图片</string>
     <string name="tv_returnsales_text">退货</string>
+    <string name="tv_about_qr">扫描二维码，您的朋友也可以安装智慧王府井</string>
+    <string name="tv_about_logo">for Android v1.0 build</string>
 
 </resources>
