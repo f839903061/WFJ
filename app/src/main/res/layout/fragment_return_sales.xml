@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:background="@color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="13dp"
+        android:paddingRight="13dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:fadeScrollbars="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/returnsales_style2"
+                android:text="@string/tv_return_type" />
+            <RadioGroup
+                android:id="@id/rg_choice"
+                android:background="@color/white"
+                android:paddingLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    style="@style/returnsales_radiobtn_style"
+                    android:text="@string/tv_radiobtn_money"/>
+                <RadioButton
+                    style="@style/returnsales_radiobtn_style"
+                    android:text="@string/tv_radiobtn_commodity"/>
+
+            </RadioGroup>
+            <TextView
+                style="@style/returnsales_style2"
+                android:text="@string/tv_return_reason" />
+
+            <RelativeLayout
+                android:id="@id/layout_choice"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@id/tv_choice"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="10dp"
+                    android:gravity="center_vertical|left"
+                    android:layout_height="wrap_content"
+                    android:hint="请选择退款原因"/>
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    fresco:placeholderImage="@drawable/arrow_down"/>
+            </RelativeLayout>
+            <TextView
+                style="@style/returnsales_style2"
+                android:text="@string/tv_return_money" />
+            <TextView
+                android:id="@id/tv_price"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+            <TextView
+                style="@style/returnsales_style"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:text="@string/tv_return_description" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <EditText
+                    android:paddingLeft="10dp"
+                    android:id="@id/et_feedback"
+                    style="@style/feedback_et_style"
+                    android:hint="@string/et_feedback"
+                    android:gravity="left"
+                    android:maxLength="200"
+                    android:layout_weight="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+                <TextView
+                    android:id="@id/tv_feedback_count"
+                    android:paddingRight="4dp"
+                    android:gravity="right|center_vertical"
+                    android:layout_weight="1"
+                    android:hint="1/200"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" />
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <ImageView
+                    android:id="@id/sdv_pic"
+                    android:visibility="gone"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp" />
+                <RelativeLayout
+                    android:id="@id/layout_upload"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/dash_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/coo_camera_d"/>
+                    <TextView
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_vertical"
+                        android:hint="@string/tv_returnsales_pic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@id/btn_commit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF5059"
+        android:text="提交申请"
+        android:textColor="@color/white" />
+</LinearLayout>

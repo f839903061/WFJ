@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:descendantFocusability="blocksDescendants">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@id/sdv_pic"
@@ -28,9 +29,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <TextView
-        android:id="@id/tv_price"
-        android:gravity="center"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="70dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@id/tv_price"
+            android:layout_gravity="right"
+            android:gravity="top|right"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@id/btn_tmp"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:textSize="12sp"
+            android:text="@string/tv_returnsales_text"
+            android:layout_gravity="bottom|right"
+            android:focusable="false"
+            android:background="@drawable/button_comment_disable"/>
+    </LinearLayout>
 </LinearLayout>

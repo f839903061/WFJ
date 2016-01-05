@@ -279,4 +279,7 @@
     <item name="et_comment" type="id" />
     <item name="btn_send" type="id" />
     <item name="btn_commit" type="id" />
+    <item name="layout_choice" type="id" />
+    <item name="tv_choice" type="id" />
+    <item name="layout_upload" type="id" />
 </resources>

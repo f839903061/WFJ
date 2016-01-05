@@ -91,13 +91,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_agree" />
+            android:text="@string/tv_agree" />
 
         <TextView
             android:id="@id/tv_protocol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_protocol"
+            android:text="@string/tv_protocol"
             />
     </LinearLayout>
 

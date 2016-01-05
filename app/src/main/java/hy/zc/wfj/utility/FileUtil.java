@@ -41,8 +41,7 @@ public class FileUtil {
 	public static String saveFile(Context c, String filePath, String fileName, byte[] bytes) {
 		String fileFullName = "";
 		FileOutputStream fos = null;
-		String dateFolder = new SimpleDateFormat("yyyyMMdd", Locale.CHINA)
-				.format(new Date());
+		String dateFolder = new SimpleDateFormat("yyyyMMdd", Locale.CHINA).format(new Date());
 		try {
 			String suffix = "";
 			if (filePath == null || filePath.trim().length() == 0) {

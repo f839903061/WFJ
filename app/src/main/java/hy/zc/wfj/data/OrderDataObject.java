@@ -20,6 +20,7 @@ public class OrderDataObject implements Serializable {
     public static String TITLE_FIND_PASSWORD="找回密码";
     public static String TITLE_COMMENT_PIC="评价晒单";
     public static String TITLE_PAY = "付款";
+    public static String TITLE_RETURN_SALES = "退款";
 
 
     public static final int TITLE_ALL_FLAG = 0;

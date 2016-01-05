@@ -14,7 +14,7 @@
         android:singleLine="true"
         android:background="@color/white"
         android:inputType="textEmailAddress"
-        android:hint="@string/text_email_hint"/>
+        android:hint="@string/tv_email_hint"/>
 
     <View style="@style/gap_style" />
 

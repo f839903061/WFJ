@@ -45,7 +45,7 @@ public class FeedBackActivity extends FrameActivity implements View.OnClickListe
     private EditText et_feedback_contact;
     private TextView tv_feedback_count;
 
-    private static int feedType = 1;
+    private static int mfeedType = 1;
 
 
     @Override
@@ -139,13 +139,13 @@ public class FeedBackActivity extends FrameActivity implements View.OnClickListe
                     String uri = null;
 
                     if (contact_text.equals("")) {//判断联系框  是否有数据
-                        uri = UriManager.getFeedback(customerId, null, null, feedType, fb_text);
+                        uri = UriManager.getFeedback(customerId, null, null, mfeedType, fb_text);
                     } else {
                         if (CheckEmailPhone.isPhoneNum(contact_text)) {
-                            uri = UriManager.getFeedback(customerId, null, contact_text, feedType, fb_text);
+                            uri = UriManager.getFeedback(customerId, null, contact_text, mfeedType, fb_text);
                         }
                         if (CheckEmailPhone.isEmail(contact_text)) {
-                            uri = UriManager.getFeedback(customerId, contact_text, null, feedType, fb_text);
+                            uri = UriManager.getFeedback(customerId, contact_text, null, mfeedType, fb_text);
                         }
                     }
                     getDataFromUri(uri);
@@ -159,7 +159,7 @@ public class FeedBackActivity extends FrameActivity implements View.OnClickListe
                 builder.setItems(R.array.feedtype, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        feedType = which + 1;
+                        mfeedType = which + 1;
                         tv_hint.setText(stringArray[which]);
                         dialog.dismiss();
                     }

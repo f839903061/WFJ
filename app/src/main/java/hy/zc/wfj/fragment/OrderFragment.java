@@ -101,7 +101,6 @@ public class OrderFragment extends FrameFragment implements OrderAdapter.DelCall
             lv_order.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    showToast("当前点击的是第"+position+"项");
                     mOrderAdapter.gotoOrderDetailUI(position);
                 }
             });
