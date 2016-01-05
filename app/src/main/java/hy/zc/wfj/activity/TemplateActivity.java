@@ -16,6 +16,7 @@ import hy.zc.wfj.fragment.CommentPicFragment;
 import hy.zc.wfj.fragment.ForgetFragment;
 import hy.zc.wfj.fragment.OrderCompleteFragment;
 import hy.zc.wfj.fragment.OrderFragment;
+import hy.zc.wfj.fragment.ProtocolFragment;
 import hy.zc.wfj.fragment.RegisterFragment;
 import hy.zc.wfj.fragment.ReturnSalesFragment;
 import hy.zc.wfj.fragment.SignFragment;
@@ -115,6 +116,9 @@ public class TemplateActivity extends FrameActivity {
                 }else if (title.equals(OrderDataObject.TITLE_ABOUT)){
                     fragmentTransaction=getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.layout_container, new AboutFragment());
+                }else if (title.equals(OrderDataObject.TITLE_PROTOCOL)){
+                    fragmentTransaction=getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.layout_container, new ProtocolFragment());
                 }
                 fragmentTransaction.commit();
             }

@@ -22,6 +22,8 @@ public class OrderDataObject implements Serializable {
     public static String TITLE_PAY = "付款";
     public static String TITLE_RETURN_SALES = "退款";
     public static String TITLE_ABOUT = "关于";
+    public static String TITLE_PROTOCOL = "智慧王府井会员注册协议";
+
 
 
     public static final int TITLE_ALL_FLAG = 0;

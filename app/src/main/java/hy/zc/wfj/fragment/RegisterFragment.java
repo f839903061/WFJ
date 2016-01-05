@@ -2,6 +2,7 @@ package hy.zc.wfj.fragment;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,8 @@ import com.android.volley.toolbox.StringRequest;
 import hy.zc.wfj.App;
 import hy.zc.wfj.R;
 import hy.zc.wfj.activity.MyLoginActivity;
+import hy.zc.wfj.activity.TemplateActivity;
+import hy.zc.wfj.data.OrderDataObject;
 import hy.zc.wfj.data.UserLoginErrorObject;
 import hy.zc.wfj.utility.CheckEmailPhone;
 import hy.zc.wfj.utility.UriManager;
@@ -83,7 +86,15 @@ public class RegisterFragment extends FrameFragment {
         tv_protocol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("跳转到协议，还没做");
+//                showToast("跳转到协议，还没做");
+                Intent intent=new Intent(getActivity(), TemplateActivity.class);
+                Bundle bundle=new Bundle();
+                OrderDataObject odo=new OrderDataObject();
+
+                odo.setTitle(OrderDataObject.TITLE_PROTOCOL);
+                bundle.putSerializable(OrderDataObject.TITLE_KEY,odo);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 //      监听下一步按钮
