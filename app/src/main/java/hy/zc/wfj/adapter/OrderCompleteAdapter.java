@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hy.zc.wfj.R;
+import hy.zc.wfj.activity.ReturnSalesActivity;
 import hy.zc.wfj.activity.TemplateActivity;
 import hy.zc.wfj.adapter.base.BBaseAdapter;
 import hy.zc.wfj.data.OrderDataObject;
@@ -57,7 +58,7 @@ public class OrderCompleteAdapter extends BBaseAdapter {
         viewHolder.btn_returnSales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mContext,TemplateActivity.class);
+                Intent intent=new Intent(mContext,ReturnSalesActivity.class);
                 Bundle bundle=new Bundle();
                 OrderDataObject odo=new OrderDataObject();
 

@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <include
+        android:id="@id/title_template"
+        layout="@layout/common_title2" />
     <ScrollView
         android:background="@color/transparent"
         android:layout_width="match_parent"
@@ -31,9 +33,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <RadioButton
+                    android:id="@id/rb_money"
                     style="@style/returnsales_radiobtn_style"
                     android:text="@string/tv_radiobtn_money"/>
                 <RadioButton
+                    android:id="@id/rb_commodity"
                     style="@style/returnsales_radiobtn_style"
                     android:text="@string/tv_radiobtn_commodity"/>
 
@@ -103,18 +107,18 @@
             </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="wrap_content">
                 <ImageView
                     android:id="@id/sdv_pic"
                     android:visibility="gone"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp" />
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" />
                 <RelativeLayout
                     android:id="@id/layout_upload"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/dash_bg"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="60dp">
 
                     <ImageView
                         android:layout_width="60dp"

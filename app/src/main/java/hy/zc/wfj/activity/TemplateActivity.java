@@ -18,7 +18,6 @@ import hy.zc.wfj.fragment.OrderCompleteFragment;
 import hy.zc.wfj.fragment.OrderFragment;
 import hy.zc.wfj.fragment.ProtocolFragment;
 import hy.zc.wfj.fragment.RegisterFragment;
-import hy.zc.wfj.fragment.ReturnSalesFragment;
 import hy.zc.wfj.fragment.SignFragment;
 import hy.zc.wfj.fragment.WaitPayFragment;
 
@@ -107,12 +106,6 @@ public class TemplateActivity extends FrameActivity {
                 }else if (title.equals(OrderDataObject.TITLE_FIND_PASSWORD)){
                     fragmentTransaction=getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.layout_container, new ForgetFragment());
-                }else if (title.equals(OrderDataObject.TITLE_RETURN_SALES)){
-                    OrderListObject.DataEntity.ListEntity entity = (OrderListObject.DataEntity.ListEntity) bundle.getSerializable(OrderDataObject.SINGLE_ORDER_KEY);
-                    if (entity != null) {
-                        fragmentTransaction=getFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.layout_container,new ReturnSalesFragment(entity));
-                    }
                 }else if (title.equals(OrderDataObject.TITLE_ABOUT)){
                     fragmentTransaction=getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.layout_container, new AboutFragment());

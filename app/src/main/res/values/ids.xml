@@ -282,4 +282,5 @@
     <item name="layout_choice" type="id" />
     <item name="tv_choice" type="id" />
     <item name="layout_upload" type="id" />
+    <item name="rb_money" type="id" />
 </resources>

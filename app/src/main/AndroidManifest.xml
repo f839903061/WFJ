@@ -19,7 +19,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
@@ -60,10 +59,9 @@
         <activity android:name=".activity.ModifyActivity" />
         <activity android:name=".activity.FeedBackActivity" />
         <activity android:name=".activity.ConcernActivity" />
-        <activity android:name=".activity.DetailActivity"/>
-
-
-        <activity android:name=".pay.PayDemoActivity"
+        <activity android:name=".activity.DetailActivity" />
+        <activity
+            android:name=".pay.PayDemoActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind" />
@@ -77,6 +75,7 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind" />
+        <activity android:name=".activity.ReturnSalesActivity"></activity>
     </application>
 
 </manifest>

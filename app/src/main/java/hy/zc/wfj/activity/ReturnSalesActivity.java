@@ -1,4 +1,4 @@
-package hy.zc.wfj.fragment;
+package hy.zc.wfj.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,21 +10,19 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
@@ -35,16 +33,14 @@ import hy.zc.wfj.App;
 import hy.zc.wfj.R;
 import hy.zc.wfj.data.MultipartEntity;
 import hy.zc.wfj.data.MultipartRequest;
+import hy.zc.wfj.data.OrderDataObject;
 import hy.zc.wfj.data.OrderListObject;
+import hy.zc.wfj.data.UserLoginErrorObject;
+import hy.zc.wfj.utility.FileUtil;
 import hy.zc.wfj.utility.UriManager;
 
-/**
- * Created by feng on 2016/1/2.
- */
-public class ReturnSalesFragment extends FrameFragment implements View.OnClickListener {
+public class ReturnSalesActivity extends FrameActivity implements View.OnClickListener {
 
-    public static final int RB_COMMODITY_FLAG = 5;
-    public static final int RB_MONEY_FLAG = 6;
     public static final int RT_M = 1;
     public static final int RT_C = 2;
 
@@ -57,17 +53,11 @@ public class ReturnSalesFragment extends FrameFragment implements View.OnClickLi
     public static final String IS_UPLOAD = "isUpload";
     public static final String IS_COMMIT_OK = "CommitOk";
     private String urlpath = "";            // 图片本地路径
-//    private String urlpath="/storage/emulated/0/SmartWFJ/20160102/temphead.png";            // 图片本地路径
 
-    private int pordersNo;
-    private int productId;
-    private int pcount;
     private int returnType = -1;//RT_C  or RT_M
 
     private int returnReasonType = -1;
     private String returnReasonDescription;
-    private String txImage;
-    private String txImageFileName;
     private OrderListObject.DataEntity.ListEntity mEntity;
 
     private RadioGroup rg_choice;
@@ -75,35 +65,43 @@ public class ReturnSalesFragment extends FrameFragment implements View.OnClickLi
     private RelativeLayout layout_upload;
     private TextView tv_choice;
     private TextView tv_price;
-    private EditText et_feedback;
     private TextView tv_feedback_count;
+    private EditText et_feedback;
     private Button btn_commit;
     private ImageView sdv_pic;
-
-    public ReturnSalesFragment() {
-    }
-
-    public ReturnSalesFragment(OrderListObject.DataEntity.ListEntity pEntity) {
-        mEntity = pEntity;
-    }
+    private ImageButton common_title_back_btn;
+    private TextView tv_title;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_return_sales, container, false);
-        initializeComponent(rootView);
-        return rootView;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_return_sales);
+
     }
 
-    private void initializeComponent(View rootView) {
-        rg_choice = (RadioGroup) rootView.findViewById(R.id.rg_choice);
-        layout_choice = (RelativeLayout) rootView.findViewById(R.id.layout_choice);
-        tv_choice = (TextView) rootView.findViewById(R.id.tv_choice);
-        tv_price = (TextView) rootView.findViewById(R.id.tv_price);
-        et_feedback = (EditText) rootView.findViewById(R.id.et_feedback);
-        tv_feedback_count = (TextView) rootView.findViewById(R.id.tv_feedback_count);
-        layout_upload = (RelativeLayout) rootView.findViewById(R.id.layout_upload);
-        btn_commit = (Button) rootView.findViewById(R.id.btn_commit);
-        sdv_pic = (ImageView) rootView.findViewById(R.id.sdv_pic);
+    private void initializeComponent() {
+        common_title_back_btn = (ImageButton) findViewById(R.id.common_title_back_btn);
+        tv_title = (TextView) findViewById(R.id.common_title_txt);
+
+        common_title_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goBack();
+            }
+        });
+
+
+
+
+        rg_choice = (RadioGroup) findViewById(R.id.rg_choice);
+        layout_choice = (RelativeLayout) findViewById(R.id.layout_choice);
+        tv_choice = (TextView) findViewById(R.id.tv_choice);
+        tv_price = (TextView) findViewById(R.id.tv_price);
+        et_feedback = (EditText) findViewById(R.id.et_feedback);
+        tv_feedback_count = (TextView) findViewById(R.id.tv_feedback_count);
+        layout_upload = (RelativeLayout) findViewById(R.id.layout_upload);
+        btn_commit = (Button) findViewById(R.id.btn_commit);
+        sdv_pic = (ImageView) findViewById(R.id.sdv_pic);
 
         rg_choice.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -114,10 +112,10 @@ public class ReturnSalesFragment extends FrameFragment implements View.OnClickLi
                 我目前的猜测是该监听器读取的是整个应用程序的radiobutton，
                 因为在主界面下方有四个radiobutton了，那么这里就是顺延index*/
                 switch (checkedId) {
-                    case RB_MONEY_FLAG:
+                    case R.id.rb_money:
                         returnType = RT_M;
                         break;
-                    case RB_COMMODITY_FLAG:
+                    case R.id.rb_commodity:
                         returnType = RT_C;
                         break;
                     default:
@@ -149,11 +147,27 @@ public class ReturnSalesFragment extends FrameFragment implements View.OnClickLi
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            OrderDataObject orderDataObject = (OrderDataObject) extras.getSerializable(OrderDataObject.TITLE_KEY);
+            if (orderDataObject != null) {
+                String title = orderDataObject.getTitle();
+                mEntity = (OrderListObject.DataEntity.ListEntity) extras.getSerializable(OrderDataObject.SINGLE_ORDER_KEY);
+                //初始化所有组件，凡是和组件相关的操作，都要在此之后执行
+                initializeComponent();
+                tv_title.setText(title);
+            }
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.layout_choice:
                 final String[] stringArray = getResources().getStringArray(R.array.returnreason);
-                AlertDialog.Builder builder_choice = new AlertDialog.Builder(getActivity());
+                AlertDialog.Builder builder_choice = new AlertDialog.Builder(ReturnSalesActivity.this);
                 builder_choice.setTitle("请选择退货原因");
                 builder_choice.setItems(R.array.returnreason, new DialogInterface.OnClickListener() {
                     @Override
@@ -166,7 +180,7 @@ public class ReturnSalesFragment extends FrameFragment implements View.OnClickLi
                 builder_choice.create().show();
                 break;
             case R.id.layout_upload:
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_DARK);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(ReturnSalesActivity.this, AlertDialog.THEME_HOLO_DARK);
                 builder.setTitle(R.string.dialog_pic_title);
                 builder.setItems(R.array.alteritem, new DialogInterface.OnClickListener() {
                     @Override
@@ -202,12 +216,14 @@ public class ReturnSalesFragment extends FrameFragment implements View.OnClickLi
                     MultipartRequest multipartRequest = new MultipartRequest(uri, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-
+                            UserLoginErrorObject userLoginErrorObject = JSON.parseObject(response, UserLoginErrorObject.class);
+                            showToast(userLoginErrorObject.getData());
+                            ReturnSalesActivity.this.finish();
                         }
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-
+                            showToast("提交失败，请重新提交");
                         }
                     });
                     MultipartEntity multiPartEntity = multipartRequest.getMultiPartEntity();
@@ -253,6 +269,7 @@ public class ReturnSalesFragment extends FrameFragment implements View.OnClickLi
     @Override
     public void onStop() {
         App.cancelAllRequests(IS_COMMIT_OK);
+        showLogi(rg_choice.getCheckedRadioButtonId() + "");
         super.onStop();
     }
 
@@ -312,48 +329,14 @@ public class ReturnSalesFragment extends FrameFragment implements View.OnClickLi
             // 取得SDCard图片路径做显示
             Bitmap photo = extras.getParcelable("data");
             Drawable drawable = new BitmapDrawable(null, photo);
-//            urlpath = FileUtil.saveFile(getActivity(), "temphead.png", photo);
-//            avatarImg.setImageDrawable(drawable);
+            urlpath = FileUtil.saveFile(ReturnSalesActivity.this, "temphead.png", photo);
             //打印一下最终截取到的图片路径
 
-//            sdv_pic.setImageURI();
-//            sdv_pic.setImageBitmap(BitmapFactory.decodeFile(urlpath));
-
-            urlpath="/data/data/com.test.myapplication/files/f1.png";
-            Message msg = Message.obtain();
-            msg.arg1 = 1;
-            Bundle data = new Bundle();
-            data.putString("path", urlpath);
-            msg.setData(data);
-            handler.sendMessage(msg);
+            showLogi(urlpath);
+            layout_upload.setVisibility(View.GONE);
+            showLogi("visibility is --> " + layout_upload.getVisibility());
+            sdv_pic.setVisibility(View.VISIBLE);
+            sdv_pic.setImageBitmap(BitmapFactory.decodeFile(urlpath));
         }
-    }
-
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.arg1 == 1) {
-                showLogi(urlpath);
-                layout_upload.setVisibility(View.GONE);
-//                sdv_pic.setVisibility(View.VISIBLE);
-//                Bundle data = msg.getData();
-//                String path = data.getString("path");
-//                sdv_pic.setImageBitmap(BitmapFactory.decodeFile(path));
-            }
-        }
-    };
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("returnType", returnType);
-        outState.putInt("returnReasonType", returnReasonType);
     }
 }
