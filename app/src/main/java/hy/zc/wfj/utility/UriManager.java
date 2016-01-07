@@ -35,7 +35,7 @@ public class UriManager {
     //修改密码
     private static final String modify_password_pre = X_CONNECT_PRE + "changepass.action?customerId=";
     //上传头像前缀
-    private static final String upload_pic_pre = X_CONNECT_PRE + "uploadPic.action";
+    private static final String upload_pic_pre = H_CONNECT_PRE + "uploadPic.action";
     //反馈信息前缀
     private static final String feedback_pre = X_CONNECT_PRE + "feedback.action?customerId=";
     //实时搜索前缀

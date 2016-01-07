@@ -32,6 +32,7 @@ import hy.zc.wfj.adapter.LeftListAdapter;
 import hy.zc.wfj.adapter.RightListAdapter;
 import hy.zc.wfj.data.CategoryListObject;
 import hy.zc.wfj.data.CategroyJsonObject;
+import hy.zc.wfj.utility.ProgressUtil;
 import hy.zc.wfj.utility.UriManager;
 
 /**
@@ -65,6 +66,7 @@ public class CategoryFragment extends FrameFragment {
     private ArrayList<CategoryListObject> mCategoryObjectList;
     private List<CategroyJsonObject.DataEntity> mLeftList;
     private List<CategroyJsonObject.DataEntity.ChildProductTypeEntity> mRightList=new ArrayList<>();
+    private ProgressUtil progressUtil;
 
     public static synchronized CategoryFragment getInstance() {
         if (categoryFragment == null) {
@@ -88,6 +90,7 @@ public class CategoryFragment extends FrameFragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_category, container, false);
         initializeCompoment();
+        progressUtil.show();
         getDataFromUri();
         return rootView;
     }
@@ -100,6 +103,7 @@ public class CategoryFragment extends FrameFragment {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                progressUtil.close();
                 //通过Json工具类将接收到的response 数据从json反序列为实体对象
                 CategroyJsonObject jsonObject = JSON.parseObject(response, CategroyJsonObject.class);
                 if (jsonObject != null) {
@@ -121,6 +125,7 @@ public class CategoryFragment extends FrameFragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressUtil.close();
                 Log.e(TAG, HTTP_CONNECT_FAILED);
             }
         });
@@ -166,6 +171,7 @@ public class CategoryFragment extends FrameFragment {
      * initialize component
      */
     private void initializeCompoment() {
+        progressUtil = ProgressUtil.getInstance(getActivity());
         mLeftListView = (ListView) rootView.findViewById(R.id.left_list);
         mRightListView = (ListView) rootView.findViewById(R.id.right_list);
         home_search_layout=(FrameLayout)rootView.findViewById(R.id.home_search_layout);

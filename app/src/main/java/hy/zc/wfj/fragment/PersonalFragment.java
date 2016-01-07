@@ -33,6 +33,7 @@ import hy.zc.wfj.activity.TemplateActivity;
 import hy.zc.wfj.data.FlushObject;
 import hy.zc.wfj.data.OrderDataObject;
 import hy.zc.wfj.data.UserLoginObject;
+import hy.zc.wfj.utility.ProgressUtil;
 import hy.zc.wfj.utility.SharedPrefUtility;
 import hy.zc.wfj.utility.UriManager;
 
@@ -79,6 +80,7 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
 
     private static PersonalFragment personalFragment;
     public static Boolean isLogin = false;
+    private ProgressUtil progressUtil;
 
     public static synchronized PersonalFragment getInstance() {
         if (personalFragment == null) {
@@ -311,6 +313,7 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
+        progressUtil = ProgressUtil.getInstance(getActivity());
 //       根据登录情况，判断显示哪个布局文件
         changeLoginLayout();
 //       更新界面显示
@@ -329,6 +332,7 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
                 @Override
                 public void onResponse(String response) {
 
+                    progressUtil.close();
                     FlushObject flushObject = JSON.parseObject(response, FlushObject.class);
                     if (flushObject.isStatus()) {
 
@@ -338,7 +342,7 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
 //                    nick_name.setText(flushObject.getData().getLoginName());
                         user_level.setText(flushObject.getData().getNickName());
 
-
+                        //下面是设置个人信息界面，中四类订单的订单个数
                         int obligation = flushObject.getObligation();
                         int unreceived = flushObject.getUnreceived();
                         int unevaluated = flushObject.getUnevaluated();
@@ -369,6 +373,7 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    progressUtil.close();
                     showLoge(error.getMessage());
                 }
             });
@@ -390,11 +395,6 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
         super.onDetach();
         mListener = null;
     }
-
-    private void myToast(String text) {
-        Toast.makeText(getActivity().getApplicationContext(), "->" + text + "<-", Toast.LENGTH_SHORT).show();
-    }
-
 
     /**
      * This interface must be implemented by activities that contain this

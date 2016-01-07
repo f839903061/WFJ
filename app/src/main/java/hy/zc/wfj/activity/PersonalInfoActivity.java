@@ -34,6 +34,7 @@ import hy.zc.wfj.data.MultipartEntity;
 import hy.zc.wfj.data.MultipartRequest;
 import hy.zc.wfj.data.UserLoginObject;
 import hy.zc.wfj.utility.FileUtil;
+import hy.zc.wfj.utility.ProgressUtil;
 import hy.zc.wfj.utility.SharedPrefUtility;
 import hy.zc.wfj.utility.UriManager;
 
@@ -78,6 +79,7 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
     private TextView tv_content_phone;
     private TextView tv_content_nickname;
     private TextView tv_content_safe;
+    private ProgressUtil progressUtil;
 
 
     @Override
@@ -96,7 +98,7 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
      * 头像，名称，昵称，邮箱，手机
      */
     private void loadData() {
-        showProgressDialog("正在更新。。。",2);
+        showProgressDialog("正在更新。。。", 2);
         String temp = (String) SharedPrefUtility.getParam(PersonalInfoActivity.this, SharedPrefUtility.LOGIN_DATA, "");
         if (!temp.equals("")) {
             UserLoginObject userLoginObject = JSON.parseObject(temp, UserLoginObject.class);
@@ -143,6 +145,7 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
      * 初始化组件
      */
     private void initializeComponent() {
+        progressUtil = ProgressUtil.getInstance(PersonalInfoActivity.this);
         mContext = PersonalInfoActivity.this;
         mInflater = LayoutInflater.from(PersonalInfoActivity.this);
 
@@ -353,14 +356,17 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
      *          请求的uri
      */
     private void uploadImage(String uri) {
+        progressUtil.show();
         MultipartRequest multipartRequest = new MultipartRequest(uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                progressUtil.close();
                 SharedPrefUtility.setParam(PersonalInfoActivity.this,SharedPrefUtility.LOGIN_DATA,response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressUtil.close();
                 showLoge("请求失败了"+error.getMessage());
             }
         });
