@@ -133,6 +133,7 @@
     </string-array>
     <string name="text_register">注册</string>
     <string name="text_next">下一步</string>
+    <string name="text_wait">请稍等。。。</string>
     <string name="tv_agree">同意</string>
     <string name="tv_protocol">用户注册协议</string>
     <string name="tv_email_hint">请输入验证邮箱</string>

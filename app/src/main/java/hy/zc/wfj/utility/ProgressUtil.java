@@ -3,6 +3,8 @@ package hy.zc.wfj.utility;
 import android.app.ProgressDialog;
 import android.content.Context;
 
+import hy.zc.wfj.R;
+
 /**
  * Created by feng on 2016/1/7.
  */
@@ -31,27 +33,27 @@ public class ProgressUtil {
     public void show() {
         if (progressDialog == null || (progressDialog != null && !progressDialog.isShowing())) {
             progressDialog = new ProgressDialog(context);
-            progressDialog.setCancelable(true);//设置ProgressDialog 是否可以按返回键取消
+            progressDialog.setCancelable(false);//设置ProgressDialog 是否可以按返回键取消
             progressDialog.setIndeterminate(true);//设置ProgressDialog 的进度条是否不明确
-            progressDialog.setTitle("Validating...");
-            progressDialog.setMessage("Please wait");
+//            progressDialog.setTitle("Validating...");
+            progressDialog.setMessage(context.getResources().getString(R.string.text_wait));
             progressDialog.show();
         }
     }
 
     public void forceShow() {
         progressDialog = new ProgressDialog(context);
-        progressDialog.setCancelable(true);
+        progressDialog.setCancelable(false);
         progressDialog.setIndeterminate(true);
-        progressDialog.setTitle("Validating...");
-        progressDialog.setMessage("Please wait");
+//        progressDialog.setTitle("Validating...");
+        progressDialog.setMessage(context.getResources().getString(R.string.text_wait));
         progressDialog.show();
     }
 
     public void show(String msg) {
         if (progressDialog == null || (progressDialog != null && !progressDialog.isShowing())) {
             progressDialog = new ProgressDialog(context);
-            progressDialog.setCancelable(true);
+            progressDialog.setCancelable(false);
             progressDialog.setIndeterminate(true);
             progressDialog.setMessage(msg);
             progressDialog.show();
@@ -60,7 +62,7 @@ public class ProgressUtil {
 
     public void forceShow(String msg) {
         progressDialog = new ProgressDialog(context);
-        progressDialog.setCancelable(true);
+        progressDialog.setCancelable(false);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(msg);
         progressDialog.show();
