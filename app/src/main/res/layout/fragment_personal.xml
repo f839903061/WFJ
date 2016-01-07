@@ -335,7 +335,7 @@
                             android:src="@drawable/personal_icon_waiting_comment" />
 
                         <TextView
-                            android:id="@id/wait_sign_in_text_notify"
+                            android:id="@id/wait_comment_text_notify"
                             style="@style/personal_notify_value_style"
                             android:layout_alignTop="@id/wait_comment_image"
                             android:layout_toRightOf="@id/wait_comment_image"
@@ -359,7 +359,7 @@
                             android:src="@drawable/personal_icon_order_after_sale" />
 
                         <TextView
-                            android:id="@id/wait_sign_in_text_notify"
+                            android:id="@id/wait_order_after_sale_text_notify"
                             style="@style/personal_notify_value_style"
                             android:layout_alignTop="@id/wait_order_after_sale_image"
                             android:layout_toRightOf="@id/wait_order_after_sale_image"

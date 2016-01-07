@@ -15,8 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import hy.zc.wfj.App;
 import hy.zc.wfj.R;
 import hy.zc.wfj.activity.ConcernActivity;
 import hy.zc.wfj.activity.MyLoginActivity;
@@ -25,6 +30,7 @@ import hy.zc.wfj.activity.MySettingsActivity;
 import hy.zc.wfj.activity.PersonalInfoActivity;
 import hy.zc.wfj.activity.ServerActivity;
 import hy.zc.wfj.activity.TemplateActivity;
+import hy.zc.wfj.data.FlushObject;
 import hy.zc.wfj.data.OrderDataObject;
 import hy.zc.wfj.data.UserLoginObject;
 import hy.zc.wfj.utility.SharedPrefUtility;
@@ -42,10 +48,17 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
     public static final int SETTINGS_REQUEST_CODE = 2;
     public static final int MESSAGE_REQUEST_CODE = 3;
     public static final int PERSONAL_INFO_REQUEST_CODE = 4;
+    public static final String FLUSH = "flush";
 
     private View rootView;
     private TextView nick_name;
     private TextView user_level;
+    private TextView wait_for_payment_count;
+    private TextView wait_sign_in_count;
+    private TextView wait_comment_count;
+    private TextView wait_order_after_sale_count;
+
+
     private ImageButton avatarImage;
     private ImageButton settingsImage;
     private ImageButton messageImage;
@@ -111,6 +124,12 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
         //名称
         nick_name = (TextView) rootView.findViewById(R.id.who_and_say_hello);
         user_level = (TextView) rootView.findViewById(R.id.user_level);
+
+        wait_for_payment_count = (TextView) rootView.findViewById(R.id.wait_for_payment_text_notify);
+        wait_sign_in_count = (TextView) rootView.findViewById(R.id.wait_sign_in_text_notify);
+        wait_comment_count = (TextView) rootView.findViewById(R.id.wait_comment_text_notify);
+        wait_order_after_sale_count = (TextView) rootView.findViewById(R.id.wait_order_after_sale_text_notify);
+
 
         //初始化关注
         concern_goods_layout = (LinearLayout) rootView.findViewById(R.id.personal_goods_list_title);
@@ -186,11 +205,11 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
                         break;
                     //concern incident
                     case R.id.personal_goods_list_title://关注商品
-                        bundle.putInt(ConcernActivity.TYPE,ConcernActivity.COMMODITY);
+                        bundle.putInt(ConcernActivity.TYPE, ConcernActivity.COMMODITY);
                         goToActivity(ConcernActivity.class, bundle);
                         break;
                     case R.id.personal_shop_list_title://关注商铺
-                        bundle.putInt(ConcernActivity.TYPE,ConcernActivity.SHOP);
+                        bundle.putInt(ConcernActivity.TYPE, ConcernActivity.SHOP);
                         goToActivity(ConcernActivity.class, bundle);
                         break;
                     case R.id.order_layout://订单
@@ -299,22 +318,71 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
     }
 
     /**
-     * 通过接受过来的数据给组件赋值，头像，昵称，级别等等
+     * 通过接受过来的每次都刷新数据给组件赋值，头像，昵称，级别等等
      */
     private void adapterData() {
         if (isLogin) {
             String temp = (String) SharedPrefUtility.getParam(getActivity(), SharedPrefUtility.LOGIN_DATA, "");
-            UserLoginObject object = (UserLoginObject) JSON.parseObject(temp.trim(), UserLoginObject.class);
-//            StringBuilder stringBuilder = new StringBuilder("http://101.200.182.119:8080/phone");
-//            stringBuilder.append(object.getData().getPhotoUrl());
-//            showLogi(stringBuilder.toString());
-            Uri uri = UriManager.getLoginAvatarUri(object.getData().getPhotoUrl());
-            user_img_view.setImageURI(uri);
-            nick_name.setText(object.getData().getLoginName());
-            user_level.setText(object.getData().getNickName());
+            UserLoginObject object = JSON.parseObject(temp.trim(), UserLoginObject.class);
+            String flushUri = UriManager.getFlush(object.getData().getCustomerId());
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, flushUri, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+
+                    FlushObject flushObject = JSON.parseObject(response, FlushObject.class);
+                    if (flushObject.isStatus()) {
+
+                        Uri uri = UriManager.getLoginAvatarUri(flushObject.getData().getPhotoUrl());
+                        user_img_view.setImageURI(uri);
+                        nick_name.setText(flushObject.getData().getEmail());
+//                    nick_name.setText(flushObject.getData().getLoginName());
+                        user_level.setText(flushObject.getData().getNickName());
+
+
+                        int obligation = flushObject.getObligation();
+                        int unreceived = flushObject.getUnreceived();
+                        int unevaluated = flushObject.getUnevaluated();
+                        int returned = flushObject.getReturned();
+
+                        if (obligation > 0) {
+                            wait_for_payment_count.setVisibility(View.VISIBLE);
+                        }
+                        if (unreceived > 0) {
+                            wait_sign_in_count.setVisibility(View.VISIBLE);
+                        }
+                        if (unevaluated > 0) {
+                            wait_comment_count.setVisibility(View.VISIBLE);
+                        }
+                        if (returned > 0) {
+                            wait_order_after_sale_count.setVisibility(View.VISIBLE);
+                        }
+
+                        wait_for_payment_count.setText("" + obligation);
+                        wait_sign_in_count.setText("" + unreceived);
+                        wait_comment_count.setText("" + unevaluated);
+                        wait_order_after_sale_count.setText("" + returned);
+                    } else {
+                        showToast("登录成功，但刷新数据失败");
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    showLoge(error.getMessage());
+                }
+            });
+            App.addRequest(stringRequest, FLUSH);
+
         } else {
             showLoge("未登录");
         }
+    }
+
+    @Override
+    public void onStop() {
+        App.cancelAllRequests(FLUSH);
+        super.onStop();
     }
 
     @Override
@@ -333,7 +401,7 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p/>
+     * <p>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.

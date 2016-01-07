@@ -26,6 +26,8 @@ public class UriManager {
     //登录请求的前缀
 //    private static final String login_pre = "http://101.200.182.119:8080/phone/login.action?loginName=";//全网
     private static final String login_pre = H_CONNECT_PRE + "login.action?loginName=";//局域网
+    //刷新用户信息
+    private static final String flush_pre = H_CONNECT_PRE + "flushUser.action?customerId=";
     //修改号码的前缀
     private static final String modify_phone_pre = X_CONNECT_PRE + "editCustomer.action?customerId=";
     //修改昵称
@@ -62,8 +64,9 @@ public class UriManager {
     private static final String comment_pre = X_CONNECT_PRE + "evaluateGood.action";
     //删除订单
     private static final String del_order_pre = H_CONNECT_PRE + "deleteOrders.action?ordersId=";
-    //退货请求
+    //退货请求get
     private static final String return_sales_pre = H_CONNECT_PRE + "returnSales.action?ordersNo=";
+    //退货请求，post请求
     private static final String return_sales_pre2 = H_CONNECT_PRE + "returnSales.action";
 
 
@@ -406,14 +409,14 @@ public class UriManager {
     /**
      * 退货请求连接
      *
-     * @param pordersNo 订单编号
-     * @param productId 退的商品id
-     * @param pcount 退的商品数量
-     * @param returnType 退货类型：1仅退款2退款且退货
-     * @param returnReasonType 退款原因类型：1收到商品破损,2商品错发/漏发,3商品需要维修,4发票问题,5收到商品不符,6商品质量问题,7未收到货,8未按约定时间发货,9其他
+     * @param pordersNo               订单编号
+     * @param productId               退的商品id
+     * @param pcount                  退的商品数量
+     * @param returnType              退货类型：1仅退款2退款且退货
+     * @param returnReasonType        退款原因类型：1收到商品破损,2商品错发/漏发,3商品需要维修,4发票问题,5收到商品不符,6商品质量问题,7未收到货,8未按约定时间发货,9其他
      * @param returnReasonDescription 退款说明
-     * @param txImage 传入文件路径
-     * @param txImageFileName 文件名称
+     * @param txImage                 传入文件路径
+     * @param txImageFileName         文件名称
      * @return
      */
     public static String getReturnSales(int pordersNo, int productId, int pcount, int returnType, int returnReasonType, String returnReasonDescription, String txImage, String txImageFileName) {
@@ -423,33 +426,46 @@ public class UriManager {
         stringBuilder.append("" + productId);
 
         stringBuilder.append("&count=");
-        stringBuilder.append(""+pcount);
+        stringBuilder.append("" + pcount);
 
         stringBuilder.append("&returnType=");
-        stringBuilder.append(""+returnType);
+        stringBuilder.append("" + returnType);
 
         stringBuilder.append("&returnReasonType=");
-        stringBuilder.append(""+returnReasonType);
+        stringBuilder.append("" + returnReasonType);
 
         stringBuilder.append("&returnReasonDescription=");
-        stringBuilder.append(""+returnReasonDescription);
+        stringBuilder.append("" + returnReasonDescription);
 
         stringBuilder.append("&txImage=");
-        stringBuilder.append(""+txImage);
+        stringBuilder.append("" + txImage);
 
         stringBuilder.append("&txImageFileName=");
-        stringBuilder.append(""+txImageFileName);
+        stringBuilder.append("" + txImageFileName);
 
         return stringBuilder.toString();
     }
 
     /**
      * 重载上面的退货，在post请求中使用
+     *
      * @return
      */
     public static String getReturnSales() {
         StringBuilder stringBuilder = new StringBuilder(return_sales_pre2);
 
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 刷新用户信息
+     *
+     * @param pcustomerId
+     * @return
+     */
+    public static String getFlush(int pcustomerId) {
+        StringBuilder stringBuilder = new StringBuilder(flush_pre);
+        stringBuilder.append(pcustomerId);
         return stringBuilder.toString();
     }
 }
