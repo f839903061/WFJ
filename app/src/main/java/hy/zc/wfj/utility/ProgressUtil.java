@@ -31,8 +31,8 @@ public class ProgressUtil {
     public void show() {
         if (progressDialog == null || (progressDialog != null && !progressDialog.isShowing())) {
             progressDialog = new ProgressDialog(context);
-            progressDialog.setCancelable(true);
-            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(true);//设置ProgressDialog 是否可以按返回键取消
+            progressDialog.setIndeterminate(true);//设置ProgressDialog 的进度条是否不明确
             progressDialog.setTitle("Validating...");
             progressDialog.setMessage("Please wait");
             progressDialog.show();
