@@ -39,6 +39,8 @@
             android:paddingLeft="3.0dip">
 
             <com.facebook.drawee.view.SimpleDraweeView
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:id="@id/iv_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
