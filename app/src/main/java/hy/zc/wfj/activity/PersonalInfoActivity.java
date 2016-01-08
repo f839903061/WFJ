@@ -98,7 +98,7 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
      * 头像，名称，昵称，邮箱，手机
      */
     private void loadData() {
-        showProgressDialog("正在更新。。。", 2);
+        progressUtil.autoCloseShow(1);
         String temp = (String) SharedPrefUtility.getParam(PersonalInfoActivity.this, SharedPrefUtility.LOGIN_DATA, "");
         if (!temp.equals("")) {
             UserLoginObject userLoginObject = JSON.parseObject(temp, UserLoginObject.class);
@@ -367,7 +367,7 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressUtil.close();
-                showLoge("请求失败了"+error.getMessage());
+                showLoge("请求失败了" + error.getMessage());
             }
         });
 //        multipartRequest.addHeader("Content-Type", "multipart/form-data; boundary=-_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
