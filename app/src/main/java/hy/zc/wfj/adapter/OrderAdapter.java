@@ -188,7 +188,7 @@ public class OrderAdapter extends BBaseAdapter {
         } else if (list.size() > 1) {//如果有多个内容的布局
             float price = 0;
             for (int i = 0; i < list.size(); i++) {//次循环里还要处理多张图片，目前还没做
-                Uri uri = UriManager.getCategoryPicUri(list.get(0).getLogoImage());
+                Uri uri = UriManager.getCategoryPicUri(list.get(i).getLogoImage());
                 switch (i) {
                     case 0:
                         viewHolder.sdv_pic0.setImageURI(uri);
