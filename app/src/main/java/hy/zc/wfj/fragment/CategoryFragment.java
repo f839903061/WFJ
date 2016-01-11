@@ -35,12 +35,7 @@ import hy.zc.wfj.data.CategroyJsonObject;
 import hy.zc.wfj.utility.ProgressUtil;
 import hy.zc.wfj.utility.UriManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CategoryFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- */
+
 public class CategoryFragment extends FrameFragment {
 
     public static final String RECEIVER_NULL_ERROR = " 网络联通，接收数据却为空";
@@ -50,7 +45,7 @@ public class CategoryFragment extends FrameFragment {
     public static final int SCAN_REQUEST_CODE = 4;
     public static final int SEARCH_REQUEST_CODE = 5;
 
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractiveListener mListener;
 
     private static CategoryFragment categoryFragment = null;
 
@@ -194,18 +189,12 @@ public class CategoryFragment extends FrameFragment {
         });
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (OnFragmentInteractiveListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -224,19 +213,6 @@ public class CategoryFragment extends FrameFragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
-    }
+
 
 }

@@ -1,8 +1,6 @@
 package hy.zc.wfj.fragment;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -15,17 +13,11 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import hy.zc.wfj.R;
-import hy.zc.wfj.utility.UriManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CartFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- */
+
 public class CartFragment extends FrameFragment {
 
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractiveListener mListener;
     private WebView web_cart;
 
     private static final String APP_CACAHE_DIRNAME = "/webcache";
@@ -113,17 +105,12 @@ public class CartFragment extends FrameFragment {
         });
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (OnFragmentInteractiveListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -136,19 +123,6 @@ public class CartFragment extends FrameFragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        //
-        public void onFragmentInteraction(Uri uri);
-    }
+
 
 }

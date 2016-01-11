@@ -1,7 +1,6 @@
 package hy.zc.wfj.fragment;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.android.volley.Request;
@@ -37,12 +35,7 @@ import hy.zc.wfj.utility.ProgressUtil;
 import hy.zc.wfj.utility.SharedPrefUtility;
 import hy.zc.wfj.utility.UriManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link PersonalFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- */
+
 public class PersonalFragment extends FrameFragment implements View.OnClickListener {
 
     public static final int LOGIN_REQUEST_CODE = 1;
@@ -76,7 +69,7 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
     private RelativeLayout personal_for_logout_info_layout;//登出
     private RelativeLayout personal_for_login_info_layout;//登录
 
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractiveListener mListener;
 
     private static PersonalFragment personalFragment;
     public static Boolean isLogin = false;
@@ -293,17 +286,12 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
         }
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (OnFragmentInteractiveListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -396,19 +384,6 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
-    }
+
 
 }

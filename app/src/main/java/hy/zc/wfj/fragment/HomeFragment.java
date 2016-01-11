@@ -16,8 +16,11 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.io.File;
 
@@ -29,17 +32,7 @@ import hy.zc.wfj.activity.SearchActivity;
 import hy.zc.wfj.utility.SharedPrefUtility;
 import hy.zc.wfj.utility.UriManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link HomeFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HomeFragment extends FrameFragment implements View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String APP_CACAHE_DIRNAME = "/webcache";
@@ -50,17 +43,19 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
     public static final int SEARCH_REQUEST_CODE = 5;
 
     private static HomeFragment homeFragment = null;
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private View rootView;
     private WebView mWebView;
     private RelativeLayout to_message_btn;
     private LinearLayout home_search_button;
+    private RelativeLayout layout_title_back;
+    private ImageButton btn_back;
+    private TextView tv_title;
+    private RelativeLayout layout_title_search;
     private Boolean islogin = false;
     private AutoCompleteTextView homeActivity_autoComplete;
-    private OnFragmentInteractionListener mListener;
+//    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractiveListener mListener;
 
     public static synchronized HomeFragment getInstance() {
         if (homeFragment == null) {
@@ -99,10 +94,6 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -126,6 +117,14 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
     }
 
     private void initializeComponent() {
+        layout_title_back=(RelativeLayout)rootView.findViewById(R.id.layout_title_back);
+        layout_title_search=(RelativeLayout)rootView.findViewById(R.id.layout_title_search);
+
+        btn_back=(ImageButton)layout_title_back.findViewById(R.id.common_title_back_btn);
+        tv_title=(TextView)layout_title_back.findViewById(R.id.common_title_txt);
+        btn_back.setOnClickListener(this);
+        tv_title.setVisibility(View.GONE);
+
         to_message_btn=(RelativeLayout)rootView.findViewById(R.id.to_message_btn);
         homeActivity_autoComplete=(AutoCompleteTextView)rootView.findViewById(R.id.homeActivity_autoComplete);
 
@@ -141,8 +140,8 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
         //set webview cache
         setWebViewCache();
 
-        mWebView.loadUrl(UriManager.getHomeUri());
         setWebViewListener();
+        mWebView.loadUrl(UriManager.getHomeUri(-1));
     }
 
     /**
@@ -157,12 +156,17 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
 //                return super.shouldOverrideUrlLoading(view, url);
+                if (!url.contains("gotoPhoneHomePage")) {
+                    layout_title_search.setVisibility(View.GONE);
+                    layout_title_back.setVisibility(View.VISIBLE);
+                    mListener.homeDo(true);
+                }
                 return false;
             }
 
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-//                handler.proceed();//解决web加载https连接时显示的空白页
+                handler.proceed();//把这个注释打开就能解决web加载https连接时显示的空白页
             }
         });
         mWebView.setOnKeyListener(new View.OnKeyListener() {
@@ -186,6 +190,12 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
         WebSettings webSettings = mWebView.getSettings();
         //support js
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setSupportZoom(false);
+        webSettings.setBuiltInZoomControls(false);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+        webSettings.setDefaultFontSize(16);
         //support webview cached
         //有网络的情况下走网络，没网的情况下走缓存 参考：http://my.oschina.net/mycbb/blog/330422
         webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
@@ -226,19 +236,13 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
         }
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Activity activity) {
 //        Fresco.initialize(getActivity().getApplicationContext());
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (OnFragmentInteractiveListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -277,25 +281,18 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
                 Intent goScan=new Intent(getActivity(), CaptureActivity.class);
                 startActivityForResult(goScan, SCAN_REQUEST_CODE);
                 break;
+            case R.id.common_title_back_btn:
+                layout_title_search.setVisibility(View.VISIBLE);
+                layout_title_back.setVisibility(View.GONE);
+                mListener.homeDo(false);
+                if (mWebView.canGoBack()) {
+                    mWebView.goBack();
+                }
+                break;
             default:
                 break;
         }
 
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
     }
 
 }

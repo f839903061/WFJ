@@ -8,68 +8,69 @@ import android.net.Uri;
  */
 public class UriManager {
     //        String uri="http://192.168.10.210:8080/wfj_front/phone/phonecategory?method=initType";
-//    public static final String X_CONNECT_PRE = "http://192.168.10.7:8080/wfj_front/phone/";
-//    public static final String H_CONNECT_PRE = "http://192.168.10.210:8080/wfj_front/phone/";
+    public static final String X_CONNECT_PRE_HTTP = "http://192.168.10.7:8080/wfj_front/phone/";
+    public static final String H_CONNECT_PRE_HTTP = "http://192.168.10.210:8080/wfj_front/phone/";
 
-    public static final String X_CONNECT_PRE = "https://192.168.10.7:8443/wfj_front/phone/";
-    public static final String H_CONNECT_PRE = "https://192.168.10.210:8443/wfj_front/phone/";
+    public static final String X_CONNECT_PRE_HTTPS = "https://192.168.10.7:8443/wfj_front/phone/";
+    public static final String H_CONNECT_PRE_HTTPS = "https://192.168.10.210:8443/wfj_front/phone/";
 
     //        String uri = "https://192.168.10.210:8443/wfj_front/phone/phonecategory.action?method=initType";
     //分类界面的请求链接
     private static final String category_request_uri = "http://101.200.182.119:8080/phone/phonecategory.action?method=initType";
     //首页的请求链接
-    private static final String home_uri = "http://101.200.182.119:8080/test.jsp";
+//    private static final String home_uri = "http://101.200.182.119:8080/test.jsp";
+    private static final String home_uri = X_CONNECT_PRE_HTTPS +"gotoPhoneHomePage.action";
     //加载分类图片的前缀
     private static final String category_pic_pre = "http://192.168.10.210:8085/b2b2c/";
     //加载登录头像的前缀
     private static final String login_pic_pre = "http://192.168.10.7:8085/b2b2c/";
     //登录请求的前缀
 //    private static final String login_pre = "http://101.200.182.119:8080/phone/login.action?loginName=";//全网
-    private static final String login_pre = H_CONNECT_PRE + "login.action?loginName=";//局域网
+    private static final String login_pre = H_CONNECT_PRE_HTTPS + "login.action?loginName=";//局域网
     //刷新用户信息
-    private static final String flush_pre = H_CONNECT_PRE + "flushUser.action?customerId=";
+    private static final String flush_pre = H_CONNECT_PRE_HTTPS + "flushUser.action?customerId=";
     //修改号码的前缀
-    private static final String modify_phone_pre = X_CONNECT_PRE + "editCustomer.action?customerId=";
+    private static final String modify_phone_pre = X_CONNECT_PRE_HTTPS + "editCustomer.action?customerId=";
     //修改昵称
-    private static final String modify_nickname_pre = X_CONNECT_PRE + "editCustomer.action?customerId=";
+    private static final String modify_nickname_pre = X_CONNECT_PRE_HTTPS + "editCustomer.action?customerId=";
     //修改密码
-    private static final String modify_password_pre = X_CONNECT_PRE + "changepass.action?customerId=";
+    private static final String modify_password_pre = X_CONNECT_PRE_HTTPS + "changepass.action?customerId=";
     //上传头像前缀
-    private static final String upload_pic_pre = H_CONNECT_PRE + "uploadPic.action";
+    private static final String upload_pic_pre = H_CONNECT_PRE_HTTPS + "uploadPic.action";
     //反馈信息前缀
-    private static final String feedback_pre = X_CONNECT_PRE + "feedback.action?customerId=";
+    private static final String feedback_pre = X_CONNECT_PRE_HTTPS + "feedback.action?customerId=";
     //实时搜索前缀
-    private static final String search_pre = X_CONNECT_PRE + "mohuProinfo.action?keyword=";
+    private static final String search_pre = X_CONNECT_PRE_HTTPS + "mohuProinfo.action?keyword=";
     //分类界面商品列表前缀
-    private static final String category_pre = X_CONNECT_PRE + "conditionProinfo.action?productTypeId=";
+    private static final String category_pre = X_CONNECT_PRE_HTTPS + "conditionProinfo.action?productTypeId=";
     //商品推荐前缀
-    private static final String recommend_pre = X_CONNECT_PRE + "recommandProinfo.action";
+    private static final String recommend_pre = X_CONNECT_PRE_HTTPS + "recommandProinfo.action";
     //关注个类
-    private static final String concern_commodity_pre = X_CONNECT_PRE + "getCustomerCollectPro.action?customerId=";
+    private static final String concern_commodity_pre = X_CONNECT_PRE_HTTPS + "getCustomerCollectPro.action?customerId=";
     //关注商铺
-    private static final String concern_shop_pre = X_CONNECT_PRE + "getCustomerCollectShop.action?customerId=";
+    private static final String concern_shop_pre = X_CONNECT_PRE_HTTPS + "getCustomerCollectShop.action?customerId=";
     //商品详情界面
-    private static final String commodity_detail_pre = X_CONNECT_PRE + "phoneProductInfoById.action?productId=";
+    private static final String commodity_detail_pre = X_CONNECT_PRE_HTTPS + "phoneProductInfoById.action?productId=";
     //订单列表前缀
-    private static final String order_detail_pre = H_CONNECT_PRE + "searchAllOrders.action?customerId=";
+    private static final String order_detail_pre = H_CONNECT_PRE_HTTPS + "searchAllOrders.action?customerId=";
     //注册列表前缀
-    private static final String register_pre = H_CONNECT_PRE + "register.action?email=";
+    private static final String register_pre = H_CONNECT_PRE_HTTPS + "register.action?email=";
     //找回密码
-    private static final String forget_pre = H_CONNECT_PRE + "phoneForGotValidate.action?email=";
+    private static final String forget_pre = H_CONNECT_PRE_HTTPS + "phoneForGotValidate.action?email=";
     //支付成功与否状态查询
-    private static final String pay_state_pre = H_CONNECT_PRE + "payOrder.action?ordersNo=";
+    private static final String pay_state_pre = H_CONNECT_PRE_HTTPS + "payOrder.action?ordersNo=";
     //确认收货请求
-    private static final String sign_state_pre = H_CONNECT_PRE + "confirmGoods.action?ordersId=";
+    private static final String sign_state_pre = H_CONNECT_PRE_HTTPS + "confirmGoods.action?ordersId=";
     //评价发送
-    private static final String comment_pre = X_CONNECT_PRE + "evaluateGood.action";
+    private static final String comment_pre = X_CONNECT_PRE_HTTPS + "evaluateGood.action";
     //删除订单
-    private static final String del_order_pre = H_CONNECT_PRE + "deleteOrders.action?ordersId=";
+    private static final String del_order_pre = H_CONNECT_PRE_HTTPS + "deleteOrders.action?ordersId=";
     //退货请求get
-    private static final String return_sales_pre = H_CONNECT_PRE + "returnSales.action?ordersNo=";
+    private static final String return_sales_pre = H_CONNECT_PRE_HTTPS + "returnSales.action?ordersNo=";
     //退货请求，post请求
-    private static final String return_sales_pre2 = H_CONNECT_PRE + "returnSales.action";
+    private static final String return_sales_pre2 = H_CONNECT_PRE_HTTPS + "returnSales.action";
     //购物车页面
-    private static final String cart_pre = H_CONNECT_PRE + "returnSales.action?customerId=";
+    private static final String cart_pre = H_CONNECT_PRE_HTTPS + "returnSales.action?customerId=";
 
 
     public enum ORDER {
@@ -111,11 +112,15 @@ public class UriManager {
     /**
      * 获取首页访问的链接
      *
+     * @param pcustomId    -1 mean unlogin otherwise mean login
      * @return
      */
-    public static String getHomeUri() {
-
-        return home_uri;
+    public static String getHomeUri(int pcustomId) {
+        StringBuilder stringBuilder=new StringBuilder(home_uri);
+        if (pcustomId!=-1) {
+            stringBuilder.append("?customerId="+pcustomId);
+        }
+        return stringBuilder.toString();
     }
 
     /**

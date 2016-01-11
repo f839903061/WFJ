@@ -195,7 +195,7 @@
     <item name="layout_address" type="id" />
     <item name="layout_safe" type="id" />
     <item name="search_btn" type="id" />
-    <item name="search_title" type="id" />
+    <item name="layout_title_search" type="id" />
     <item name="btn_tmp" type="id" />
     <item name="layout_temp" type="id" />
     <item name="empty_View" type="id" />
@@ -284,4 +284,5 @@
     <item name="layout_upload" type="id" />
     <item name="rb_money" type="id" />
     <item name="web_cart" type="id" />
+    <item name="layout_title_back" type="id" />
 </resources>

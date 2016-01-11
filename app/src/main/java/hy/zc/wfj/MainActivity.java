@@ -3,6 +3,7 @@ package hy.zc.wfj;
 import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RadioGroup;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -10,15 +11,12 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import hy.zc.wfj.activity.FrameActivity;
 import hy.zc.wfj.fragment.CartFragment;
 import hy.zc.wfj.fragment.CategoryFragment;
+import hy.zc.wfj.fragment.FrameFragment;
 import hy.zc.wfj.fragment.HomeFragment;
 import hy.zc.wfj.fragment.PersonalFragment;
 import hy.zc.wfj.utility.SharedPrefUtility;
 
-public class MainActivity extends FrameActivity implements
-        HomeFragment.OnFragmentInteractionListener,
-        CategoryFragment.OnFragmentInteractionListener,
-        CartFragment.OnFragmentInteractionListener,
-        PersonalFragment.OnFragmentInteractionListener {
+public class MainActivity extends FrameActivity implements FrameFragment.OnFragmentInteractiveListener{
 
     public static final int FRAGMENT_HOME = 1;
     public static final int FRAGMENT_CATEGORY = 2;
@@ -87,7 +85,7 @@ public class MainActivity extends FrameActivity implements
      */
     private void setRadioGroupCheck(){
         Object index = SharedPrefUtility.getParam(MainActivity.this,SharedPrefUtility.INDEX, 1);
-        mRadioGroup.check((int)index);
+        mRadioGroup.check((int) index);
     }
 
     /**
@@ -128,7 +126,7 @@ public class MainActivity extends FrameActivity implements
                 }
                /* 每次点击radiobutton之后，就更新保存一下索引，
                  为了解决从别的activity中跳转回来之后，总是radiogroup第一项被选中这个bug*/
-                SharedPrefUtility.setParam(MainActivity.this,SharedPrefUtility.INDEX, checkedId);
+                SharedPrefUtility.setParam(MainActivity.this, SharedPrefUtility.INDEX, checkedId);
                 /*before you commit second , you must get ft instance again otherwise you will get illegalexception
                 这里需要注意的是每次commit时你的fragmentTransaction都是重新获取的，
                 不能连续使用同一fragmentTransaction对象执行两次commit操作，否则会遇到语法异常错误*/
@@ -137,15 +135,6 @@ public class MainActivity extends FrameActivity implements
         });
     }
 
-        /**
-     * interaction with fragment implement interface function
-     *
-     * @param uri form fragment transfer date to here
-     */
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 
     @Override
     protected void onDestroy() {
@@ -156,5 +145,30 @@ public class MainActivity extends FrameActivity implements
         SharedPrefUtility.setParam(MainActivity.this,SharedPrefUtility.INDEX,FRAGMENT_HOME);
         //下面这个为了解决下次打开应用程序只有下面的导航栏切换，但是选项卡不切合的bug
         System.exit(0);
+    }
+
+
+    @Override
+    public void homeDo(Boolean action) {
+        if (action) {
+            mRadioGroup.setVisibility(View.GONE);
+        }else {
+            mRadioGroup.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void categoryDo() {
+
+    }
+
+    @Override
+    public void cartDo() {
+
+    }
+
+    @Override
+    public void personalDo() {
+
     }
 }

@@ -12,6 +12,7 @@ public class FrameFragment extends BaseFragment {
 
     /**
      * 需要返回结果的跳转
+     *
      * @param pclass
      * @param ptag
      * @param pbundle
@@ -27,14 +28,26 @@ public class FrameFragment extends BaseFragment {
 
     /**
      * 直接跳转
+     *
      * @param pclass
      * @param pbundle
      */
-    public void goToActivity(Class pclass,Bundle pbundle){
-        Intent goIntent = new Intent(getActivity(),pclass);
+    public void goToActivity(Class pclass, Bundle pbundle) {
+        Intent goIntent = new Intent(getActivity(), pclass);
         if (pbundle != null) {
             goIntent.putExtras(pbundle);
         }
         startActivity(goIntent);
     }
+
+    /**
+     * 此处是导航栏下面的四个主要fragment的调用接口，区分看名称即可
+     */
+    public interface OnFragmentInteractiveListener {
+        public void homeDo(Boolean action);
+        public void categoryDo();
+        public void cartDo();
+        public void personalDo();
+    }
+
 }
