@@ -283,4 +283,5 @@
     <item name="tv_choice" type="id" />
     <item name="layout_upload" type="id" />
     <item name="rb_money" type="id" />
+    <item name="web_cart" type="id" />
 </resources>

@@ -59,7 +59,13 @@
 
         </LinearLayout>
     </FrameLayout>
+    <WebView
+        android:id="@id/web_cart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </WebView>
     <RelativeLayout
+        android:visibility="gone"
         android:orientation="vertical"
         android:paddingTop="50.0dip"
         android:layout_width="fill_parent"

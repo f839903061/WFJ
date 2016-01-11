@@ -68,6 +68,8 @@ public class UriManager {
     private static final String return_sales_pre = H_CONNECT_PRE + "returnSales.action?ordersNo=";
     //退货请求，post请求
     private static final String return_sales_pre2 = H_CONNECT_PRE + "returnSales.action";
+    //购物车页面
+    private static final String cart_pre = H_CONNECT_PRE + "returnSales.action?customerId=";
 
 
     public enum ORDER {
@@ -465,6 +467,12 @@ public class UriManager {
      */
     public static String getFlush(int pcustomerId) {
         StringBuilder stringBuilder = new StringBuilder(flush_pre);
+        stringBuilder.append(pcustomerId);
+        return stringBuilder.toString();
+    }
+
+    public static String getCart(int pcustomerId){
+        StringBuilder stringBuilder = new StringBuilder(cart_pre);
         stringBuilder.append(pcustomerId);
         return stringBuilder.toString();
     }
