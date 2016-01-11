@@ -51,15 +51,18 @@ public class DetailActivity extends FrameActivity {
         productid = extras.getInt(PRODUCTID);
 
         String temp = (String) SharedPrefUtility.getParam(DetailActivity.this, SharedPrefUtility.LOGIN_DATA, "");
+        String uri=null;
         if (!temp.equals("")) {
             UserLoginObject object = JSON.parseObject(temp, UserLoginObject.class);
             int customerId = object.getData().getCustomerId();
-            String uri = UriManager.getCommodityDetialUri(productid, customerId);
-            setWebViewCache();
-            web_detial.loadUrl(uri);
-            setWebViewCache();
-        }
+             uri= UriManager.getCommodityDetialUri(productid, customerId);
 
+        }else {
+            uri = UriManager.getCommodityDetialUri(productid,-1);
+        }
+        setWebViewCache();
+        setWebViewListener();
+        web_detial.loadUrl(uri);
     }
 
     /**
@@ -116,12 +119,13 @@ public class DetailActivity extends FrameActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
 //                return super.shouldOverrideUrlLoading(view, url);
+                showLogi(url);
                 return false;
             }
 
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-//                handler.proceed();//解决web加载https连接时显示的空白页
+                handler.proceed();//解决web加载https连接时显示的空白页
             }
         });
         web_detial.setOnKeyListener(new View.OnKeyListener() {

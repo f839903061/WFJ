@@ -280,14 +280,16 @@ public class UriManager {
      * 商品详情界面链接
      *
      * @param pproductId
-     * @param pcustomerId
+     * @param pcustomerId  -1表示此时用户未登录，我这里就不做处理，请求依然能够打开网页
      * @return
      */
     public static String getCommodityDetialUri(int pproductId, int pcustomerId) {
         StringBuilder stringBuilder = new StringBuilder(commodity_detail_pre);
         stringBuilder.append("" + pproductId);
-        stringBuilder.append("&customerId=");
-        stringBuilder.append("" + pcustomerId);
+        if (pcustomerId==-1) {
+            stringBuilder.append("&customerId=");
+            stringBuilder.append("" + pcustomerId);
+        }
         return stringBuilder.toString();
     }
 
