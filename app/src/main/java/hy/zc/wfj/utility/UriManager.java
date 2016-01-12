@@ -23,7 +23,7 @@ public class UriManager {
     //加载分类图片的前缀
     private static final String category_pic_pre = "http://192.168.10.210:8085/b2b2c/";
     //加载登录头像的前缀
-    private static final String login_pic_pre = "http://192.168.10.7:8085/b2b2c/";
+    private static final String login_pic_pre = "http://192.168.10.210:8085/b2b2c/";
     //登录请求的前缀
 //    private static final String login_pre = "http://101.200.182.119:8080/phone/login.action?loginName=";//全网
     private static final String login_pre = H_CONNECT_PRE_HTTPS + "login.action?loginName=";//局域网
