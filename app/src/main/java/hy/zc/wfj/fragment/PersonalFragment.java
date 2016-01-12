@@ -51,6 +51,8 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
     private TextView wait_sign_in_count;
     private TextView wait_comment_count;
     private TextView wait_order_after_sale_count;
+    private TextView tv_commodity_count;
+    private TextView tv_shop_count;
 
 
     private ImageButton avatarImage;
@@ -128,7 +130,9 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
 
         //初始化关注
         concern_goods_layout = (LinearLayout) rootView.findViewById(R.id.personal_goods_list_title);
+        tv_commodity_count = (TextView) rootView.findViewById(R.id.personal_goods_list);
         concern_shop_layout = (LinearLayout) rootView.findViewById(R.id.personal_shop_list_title);
+        tv_shop_count = (TextView) rootView.findViewById(R.id.personal_shop_list);
         //初始化订单
         order_layout = (RelativeLayout) rootView.findViewById(R.id.order_layout);
         wait_for_payment_layout = (RelativeLayout) rootView.findViewById(R.id.wait_for_payment_layout);
@@ -348,11 +352,14 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
                         if (returned > 0) {
                             wait_order_after_sale_count.setVisibility(View.VISIBLE);
                         }
-
+                        //不同订单的个数
                         wait_for_payment_count.setText("" + obligation);
                         wait_sign_in_count.setText("" + unreceived);
                         wait_comment_count.setText("" + unevaluated);
                         wait_order_after_sale_count.setText("" + returned);
+                        //关注的个数
+                        tv_commodity_count.setText(""+flushObject.getProCount());
+                        tv_shop_count.setText(""+flushObject.getShopCount());
                     } else {
                         showToast("登录成功，但刷新数据失败");
                     }
@@ -383,7 +390,6 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
         super.onDetach();
         mListener = null;
     }
-
 
 
 }
