@@ -18,8 +18,8 @@ public class UriManager {
     //分类界面的请求链接
     private static final String category_request_uri = "http://101.200.182.119:8080/phone/phonecategory.action?method=initType";
     //首页的请求链接
-//    private static final String home_uri = "http://101.200.182.119:8080/test.jsp";
-    private static final String home_uri = X_CONNECT_PRE_HTTPS +"gotoPhoneHomePage.action";
+//    private static final String home_uri = "http://101.200.182.119:8080/test.jsp";//服务器端的
+    private static final String home_uri ="http://192.168.10.7:8080/wfj_front/gotoPhoneHomePage.action";//徐小康端的
     //加载分类图片的前缀
     private static final String category_pic_pre = "http://192.168.10.210:8085/b2b2c/";
     //加载登录头像的前缀

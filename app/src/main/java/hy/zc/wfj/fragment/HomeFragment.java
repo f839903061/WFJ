@@ -190,6 +190,7 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
         WebSettings webSettings = mWebView.getSettings();
         //support js
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setBlockNetworkImage(false);//
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(false);
         webSettings.setUseWideViewPort(true);
