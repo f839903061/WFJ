@@ -44,7 +44,7 @@ public class FrameFragment extends BaseFragment {
      * 此处是导航栏下面的四个主要fragment的调用接口，区分看名称即可
      */
     public interface OnFragmentInteractiveListener {
-        public void homeDo(Boolean action);
+        public void homeDo(int action);
         public void categoryDo();
         public void cartDo();
         public void personalDo();

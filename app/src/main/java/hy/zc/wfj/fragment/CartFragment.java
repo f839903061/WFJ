@@ -68,6 +68,12 @@ public class CartFragment extends FrameFragment {
 //        settings.setAppCacheEnabled(true);
 
 
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         setWebViewListener();
         web_cart.loadUrl("https://192.168.10.7:8443/wfj_front/phone//gotoPhoneCart.action?customerId=459");
     }

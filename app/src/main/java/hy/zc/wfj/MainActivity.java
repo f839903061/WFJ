@@ -4,6 +4,7 @@ import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.RadioGroup;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -38,6 +39,8 @@ public class MainActivity extends FrameActivity implements FrameFragment.OnFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fresco.initialize(getApplicationContext());
+        getWindow().requestFeature(Window.FEATURE_PROGRESS);
+        getWindow().requestFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(hy.zc.wfj.R.layout.activity_main2);
         initializeComponent();
         //set listener for radiogroup
@@ -149,11 +152,21 @@ public class MainActivity extends FrameActivity implements FrameFragment.OnFragm
 
 
     @Override
-    public void homeDo(Boolean action) {
-        if (action) {
-            mRadioGroup.setVisibility(View.GONE);
-        }else {
-            mRadioGroup.setVisibility(View.VISIBLE);
+    public void homeDo(int action) {
+        switch (action){
+            case HomeFragment.ACTION_GONE:
+                mRadioGroup.setVisibility(View.GONE);
+                break;
+            case HomeFragment.ACTION_VISIBILITY:
+                mRadioGroup.setVisibility(View.VISIBLE);
+                break;
+            case HomeFragment.ACTION_GO_CART://因为点击了网页的购物车，我将那个行为屏蔽了之后，本地应用需要跳转到购物车界面，同时要将下面的导航栏显示出来
+                mRadioGroup.setVisibility(View.VISIBLE);
+                int index=FRAGMENT_CART;
+                mRadioGroup.check(index);
+                break;
+            default:
+                break;
         }
     }
 
