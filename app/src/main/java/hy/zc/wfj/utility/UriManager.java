@@ -286,7 +286,7 @@ public class UriManager {
     public static String getCommodityDetialUri(int pproductId, int pcustomerId) {
         StringBuilder stringBuilder = new StringBuilder(commodity_detail_pre);
         stringBuilder.append("" + pproductId);
-        if (pcustomerId==-1) {
+        if (pcustomerId!=-1) {
             stringBuilder.append("&customerId=");
             stringBuilder.append("" + pcustomerId);
         }
