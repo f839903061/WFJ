@@ -88,7 +88,25 @@ public class MainActivity extends FrameActivity implements FrameFragment.OnFragm
      */
     private void setRadioGroupCheck(){
         Object index = SharedPrefUtility.getParam(MainActivity.this,SharedPrefUtility.INDEX, 1);
-        mRadioGroup.check((int) index);
+
+        int index1 = (int) index;
+        switch (index1){
+
+            case FRAGMENT_HOME:
+                 mRadioGroup.check(R.id.rb_home);
+                break;
+            case FRAGMENT_CATEGORY:
+                 mRadioGroup.check(R.id.rb_category);
+                break;
+            case FRAGMENT_CART:
+                 mRadioGroup.check(R.id.rb_cart);
+                break;
+            case FRAGMENT_PERSONAL:
+                 mRadioGroup.check(R.id.rb_personal);
+                break;
+
+        }
+
     }
 
     /**
@@ -110,20 +128,21 @@ public class MainActivity extends FrameActivity implements FrameFragment.OnFragm
              */
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                showLogi("你点击 了："+checkedId);
                 //get fragmentTransaction again to deal with second commit result in IllegalStateException: commit already called
                 fragmentTransaction = getFragmentManager().beginTransaction();
 
                 switch (checkedId) {
-                    case FRAGMENT_HOME:
+                    case R.id.rb_home:
                         fragmentTransaction.replace(hy.zc.wfj.R.id.main_framelayout, HomeFragment.newInstance(), HOME_FRAGMENT_TAG);
                         break;
-                    case FRAGMENT_CATEGORY:
+                    case R.id.rb_category:
                         fragmentTransaction.replace(hy.zc.wfj.R.id.main_framelayout, CategoryFragment.getInstance(), CATEGORY_FRAGMENT_TAG);
                         break;
-                    case FRAGMENT_CART:
+                    case R.id.rb_cart:
                         fragmentTransaction.replace(hy.zc.wfj.R.id.main_framelayout, CartFragment.getInstance(), CART_FRAGMENT_TAG);
                         break;
-                    case FRAGMENT_PERSONAL:
+                    case R.id.rb_personal:
                         fragmentTransaction.replace(hy.zc.wfj.R.id.main_framelayout, PersonalFragment.getInstance(), PERSONAL_FRAGMENT_TAG);
                         break;
                 }

@@ -285,4 +285,8 @@
     <item name="rb_money" type="id" />
     <item name="web_cart" type="id" />
     <item name="layout_title_back" type="id" />
+    <item name="rb_home" type="id" />
+    <item name="rb_category" type="id" />
+    <item name="rb_cart" type="id" />
+    <item name="rb_personal" type="id" />
 </resources>
