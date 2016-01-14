@@ -5,7 +5,9 @@ import android.net.http.SslError;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.webkit.SslErrorHandler;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 
+import hy.zc.wfj.MainActivity;
 import hy.zc.wfj.R;
 import hy.zc.wfj.data.UserLoginObject;
 import hy.zc.wfj.utility.SharedPrefUtility;
@@ -36,6 +39,8 @@ public class DetailActivity extends FrameActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_PROGRESS);
+        getWindow().requestFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_detail);
         initializeComponent();
     }
@@ -46,6 +51,10 @@ public class DetailActivity extends FrameActivity {
 
         web_detial=(WebView)findViewById(R.id.web_detial);
 
+
+    }
+
+    private void getData() {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         productid = extras.getInt(PRODUCTID);
@@ -55,14 +64,19 @@ public class DetailActivity extends FrameActivity {
         if (!temp.equals("")) {
             UserLoginObject object = JSON.parseObject(temp, UserLoginObject.class);
             int customerId = object.getData().getCustomerId();
-             uri= UriManager.getCommodityDetialUri(productid, customerId);
-
+            uri= UriManager.getCommodityDetialUri(productid, customerId);
         }else {
             uri = UriManager.getCommodityDetialUri(productid,-1);
         }
         setWebViewCache();
         setWebViewListener();
         web_detial.loadUrl(uri);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
     }
 
     /**
@@ -111,6 +125,13 @@ public class DetailActivity extends FrameActivity {
      * webview上的操作监听，包含了跳转链接监听，返回键监听
      */
     private void setWebViewListener() {
+        web_detial.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                DetailActivity.this.setProgress(newProgress*100);
+            }
+        });
         web_detial.setWebViewClient(new WebViewClient() {
             /**
              * if reture false will use application webview ,otherwise use android device browser
@@ -119,7 +140,14 @@ public class DetailActivity extends FrameActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
 //                return super.shouldOverrideUrlLoading(view, url);
-                showLogi(url);
+                if (!url.contains("gotoPhoneHomePage")) {
+                    if (url.contains("gotoPhoneCart")){//如果是在网页里面添加的去往购物车
+                        SharedPrefUtility.setParam(DetailActivity.this, SharedPrefUtility.INDEX, 3);
+                        Intent intent=new Intent(DetailActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        return true;
+                    }
+                }
                 return false;
             }
 

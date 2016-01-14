@@ -306,6 +306,7 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
     public void onResume() {
         super.onResume();
         progressUtil = ProgressUtil.getInstance(getActivity());
+        progressUtil.show();
 //       根据登录情况，判断显示哪个布局文件
         changeLoginLayout();
 //       更新界面显示
