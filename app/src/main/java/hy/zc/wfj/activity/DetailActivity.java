@@ -142,7 +142,7 @@ public class DetailActivity extends FrameActivity {
 //                return super.shouldOverrideUrlLoading(view, url);
                 if (!url.contains("gotoPhoneHomePage")) {
                     if (url.contains("gotoPhoneCart")){//如果是在网页里面添加的去往购物车
-                        SharedPrefUtility.setParam(DetailActivity.this, SharedPrefUtility.INDEX, 3);
+                        SharedPrefUtility.setParam(DetailActivity.this, SharedPrefUtility.INDEX, MainActivity.FRAGMENT_CART);
                         Intent intent=new Intent(DetailActivity.this, MainActivity.class);
                         startActivity(intent);
                         return true;

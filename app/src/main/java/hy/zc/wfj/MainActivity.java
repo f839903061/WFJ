@@ -30,6 +30,7 @@ public class MainActivity extends FrameActivity implements FrameFragment.OnFragm
     public static final String PERSONAL_FRAGMENT_TAG = "personal_fragment";
     public static final String TAG = "fengluchun";
 
+    private int currentIndex=-1;
     private RadioGroup mRadioGroup;
 
     private FragmentTransaction fragmentTransaction;
@@ -43,8 +44,6 @@ public class MainActivity extends FrameActivity implements FrameFragment.OnFragm
         getWindow().requestFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(hy.zc.wfj.R.layout.activity_main2);
         initializeComponent();
-        //set listener for radiogroup
-        setListener();
     }
 
 
@@ -62,8 +61,6 @@ public class MainActivity extends FrameActivity implements FrameFragment.OnFragm
     protected void onStart() {
         super.onStart();
         //when application setup ,set default display HomeFragment
-        setRadioGroupCheck();
-
     }
 
     @Override
@@ -78,6 +75,11 @@ public class MainActivity extends FrameActivity implements FrameFragment.OnFragm
      */
     private void initializeComponent() {
         mRadioGroup = (RadioGroup) findViewById(hy.zc.wfj.R.id.main_radiogroup);
+
+
+        //set listener for radiogroup
+        setListener();
+        setRadioGroupCheck();
     }
 
     /**
@@ -128,27 +130,31 @@ public class MainActivity extends FrameActivity implements FrameFragment.OnFragm
              */
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                showLogi("你点击 了："+checkedId);
+
                 //get fragmentTransaction again to deal with second commit result in IllegalStateException: commit already called
                 fragmentTransaction = getFragmentManager().beginTransaction();
 
                 switch (checkedId) {
                     case R.id.rb_home:
+                        currentIndex=FRAGMENT_HOME;
                         fragmentTransaction.replace(hy.zc.wfj.R.id.main_framelayout, HomeFragment.newInstance(), HOME_FRAGMENT_TAG);
                         break;
                     case R.id.rb_category:
+                        currentIndex=FRAGMENT_CATEGORY;
                         fragmentTransaction.replace(hy.zc.wfj.R.id.main_framelayout, CategoryFragment.getInstance(), CATEGORY_FRAGMENT_TAG);
                         break;
                     case R.id.rb_cart:
+                        currentIndex=FRAGMENT_CART;
                         fragmentTransaction.replace(hy.zc.wfj.R.id.main_framelayout, CartFragment.getInstance(), CART_FRAGMENT_TAG);
                         break;
                     case R.id.rb_personal:
+                        currentIndex=FRAGMENT_PERSONAL;
                         fragmentTransaction.replace(hy.zc.wfj.R.id.main_framelayout, PersonalFragment.getInstance(), PERSONAL_FRAGMENT_TAG);
                         break;
                 }
                /* 每次点击radiobutton之后，就更新保存一下索引，
                  为了解决从别的activity中跳转回来之后，总是radiogroup第一项被选中这个bug*/
-                SharedPrefUtility.setParam(MainActivity.this, SharedPrefUtility.INDEX, checkedId);
+                SharedPrefUtility.setParam(MainActivity.this, SharedPrefUtility.INDEX, currentIndex);
                 /*before you commit second , you must get ft instance again otherwise you will get illegalexception
                 这里需要注意的是每次commit时你的fragmentTransaction都是重新获取的，
                 不能连续使用同一fragmentTransaction对象执行两次commit操作，否则会遇到语法异常错误*/
