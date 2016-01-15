@@ -178,6 +178,9 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
         if (isLogin) {
             personal_for_login_info_layout.setVisibility(View.VISIBLE);
             personal_for_logout_info_layout.setVisibility(View.GONE);
+            //只有在已登录状态才回去获取数据，才会用到进度条
+            progressUtil = ProgressUtil.getInstance(getActivity());
+            progressUtil.show();
         } else {
             personal_for_login_info_layout.setVisibility(View.GONE);
             personal_for_logout_info_layout.setVisibility(View.VISIBLE);
@@ -305,8 +308,6 @@ public class PersonalFragment extends FrameFragment implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
-        progressUtil = ProgressUtil.getInstance(getActivity());
-        progressUtil.show();
 //       根据登录情况，判断显示哪个布局文件
         changeLoginLayout();
 //       更新界面显示
