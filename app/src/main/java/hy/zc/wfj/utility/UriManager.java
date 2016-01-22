@@ -8,22 +8,28 @@ import android.net.Uri;
  */
 public class UriManager {
     //        String uri="http://192.168.10.210:8080/wfj_front/phone/phonecategory?method=initType";
-    public static final String X_CONNECT_PRE_HTTP = "http://192.168.10.7:8080/wfj_front/phone/";
-    public static final String H_CONNECT_PRE_HTTP = "http://192.168.10.210:8080/wfj_front/phone/";
 
-    public static final String X_CONNECT_PRE_HTTPS = "https://192.168.10.7:8443/wfj_front/phone/";
-    public static final String H_CONNECT_PRE_HTTPS = "https://192.168.10.210:8443/wfj_front/phone/";
+    private static final String H_IP = "192.168.10.210";
+    private static final String X_IP = "192.168.10.7";
+
+
+    private static final String X_CONNECT_PRE_HTTP = "http://" + X_IP + ":8080/wfj_front/phone/";
+    private static final String H_CONNECT_PRE_HTTP = "http://" + H_IP + ":8080/wfj_front/phone/";
+
+    private static final String X_CONNECT_PRE_HTTPS = "https://" + X_IP + ":8443/wfj_front/phone/";
+    private static final String H_CONNECT_PRE_HTTPS = "https://" + H_IP + ":8443/wfj_front/phone/";
 
     //        String uri = "https://192.168.10.210:8443/wfj_front/phone/phonecategory.action?method=initType";
     //分类界面的请求链接
-    private static final String category_request_uri = "http://101.200.182.119:8080/phone/phonecategory.action?method=initType";
+//    private static final String category_request_uri = "http://101.200.182.119:8080/phone/phonecategory.action?method=initType";
+    private static final String category_request_uri = H_CONNECT_PRE_HTTPS+"phonecategory.action?method=initType";
     //首页的请求链接
 //    private static final String home_uri = "http://101.200.182.119:8080/test.jsp";//服务器端的
-    private static final String home_uri ="http://192.168.10.7:8080/wfj_front/gotoPhoneHomePage.action";//徐小康端的
+    private static final String home_uri = "http://" + X_IP + ":8080/wfj_front/gotoPhoneHomePage.action";//徐小康端的
     //加载分类图片的前缀
-    private static final String category_pic_pre = "http://192.168.10.210:8085/b2b2c/";
+    private static final String category_pic_pre = "http://" + H_IP + ":8085/b2b2c/";
     //加载登录头像的前缀
-    private static final String login_pic_pre = "http://192.168.10.210:8085/b2b2c/";
+    private static final String login_pic_pre = "http://" + H_IP + ":8085/b2b2c/";
     //登录请求的前缀
 //    private static final String login_pre = "http://101.200.182.119:8080/phone/login.action?loginName=";//全网
     private static final String login_pre = H_CONNECT_PRE_HTTPS + "login.action?loginName=";//局域网
@@ -112,13 +118,13 @@ public class UriManager {
     /**
      * 获取首页访问的链接
      *
-     * @param pcustomId    -1 mean unlogin otherwise mean login
+     * @param pcustomId -1 mean unlogin otherwise mean login
      * @return
      */
     public static String getHomeUri(int pcustomId) {
-        StringBuilder stringBuilder=new StringBuilder(home_uri);
-        if (pcustomId!=-1) {
-            stringBuilder.append("?customerId="+pcustomId);
+        StringBuilder stringBuilder = new StringBuilder(home_uri);
+        if (pcustomId != -1) {
+            stringBuilder.append("?customerId=" + pcustomId);
         }
         return stringBuilder.toString();
     }
@@ -280,13 +286,13 @@ public class UriManager {
      * 商品详情界面链接
      *
      * @param pproductId
-     * @param pcustomerId  -1表示此时用户未登录，我这里就不做处理，请求依然能够打开网页
+     * @param pcustomerId -1表示此时用户未登录，我这里就不做处理，请求依然能够打开网页
      * @return
      */
     public static String getCommodityDetialUri(int pproductId, int pcustomerId) {
         StringBuilder stringBuilder = new StringBuilder(commodity_detail_pre);
         stringBuilder.append("" + pproductId);
-        if (pcustomerId!=-1) {
+        if (pcustomerId != -1) {
             stringBuilder.append("&customerId=");
             stringBuilder.append("" + pcustomerId);
         }
@@ -478,7 +484,7 @@ public class UriManager {
         return stringBuilder.toString();
     }
 
-    public static String getCart(int pcustomerId){
+    public static String getCart(int pcustomerId) {
         StringBuilder stringBuilder = new StringBuilder(cart_pre);
         stringBuilder.append(pcustomerId);
         return stringBuilder.toString();
