@@ -8,9 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import java.io.File;
 
 import hy.zc.wfj.R;
 import hy.zc.wfj.data.OrderDataObject;
+import hy.zc.wfj.utility.FileUtil;
 import hy.zc.wfj.utility.SharedPrefUtility;
 
 public class MySettingsActivity extends FrameActivity implements View.OnClickListener{
@@ -20,6 +24,8 @@ public class MySettingsActivity extends FrameActivity implements View.OnClickLis
     private Button logout_comfirm_button;
     private Boolean isLogin=false;
     private RelativeLayout layout_about;
+    private RelativeLayout layout_clean_cache;
+    private TextView tv_loc_cache_pic_size;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +38,14 @@ public class MySettingsActivity extends FrameActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
+        refreshCurrentCacheSize();
+
         logoutBtnVisiable();
+    }
+
+    private void refreshCurrentCacheSize() {
+        long dirSize = FileUtil.getDirSize(this.getCacheDir());
+        tv_loc_cache_pic_size.setText(dirSize/1024/1024+"M");
     }
 
     /**
@@ -43,11 +56,13 @@ public class MySettingsActivity extends FrameActivity implements View.OnClickLis
         common_title_back_btn=(ImageButton)findViewById(R.id.common_title_back_btn);
         logout_comfirm_button=(Button)findViewById(R.id.logout_comfirm_button);
         layout_about=(RelativeLayout)findViewById(R.id.layout_upgrade_client);
-
+        layout_clean_cache = (RelativeLayout) findViewById(R.id.layout_clean_loc_cache_pic);
+        tv_loc_cache_pic_size = (TextView) findViewById(R.id.tv_loc_cache_pic_size);
 
 
         setListener();
     }
+
     /**
      * set component click listener
      */
@@ -55,6 +70,7 @@ public class MySettingsActivity extends FrameActivity implements View.OnClickLis
         common_title_back_btn.setOnClickListener(this);
         logout_comfirm_button.setOnClickListener(this);
         layout_about.setOnClickListener(this);
+        layout_clean_cache.setOnClickListener(this);
     }
 
     /**
@@ -70,6 +86,7 @@ public class MySettingsActivity extends FrameActivity implements View.OnClickLis
             logout_comfirm_button.setVisibility(View.GONE);
         }
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -103,10 +120,14 @@ public class MySettingsActivity extends FrameActivity implements View.OnClickLis
                 OrderDataObject odo=new OrderDataObject();
 
                 odo.setTitle(OrderDataObject.TITLE_ABOUT);
-                bundle.putSerializable(OrderDataObject.TITLE_KEY,odo);
+                bundle.putSerializable(OrderDataObject.TITLE_KEY, odo);
                 intent.putExtras(bundle);
                 startActivity(intent);
 
+                break;
+            case R.id.layout_clean_loc_cache_pic:
+                FileUtil.deleteCache(this);
+                refreshCurrentCacheSize();
                 break;
             default:
                 break;

@@ -11,7 +11,6 @@ import java.util.Locale;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
-import android.os.Environment;
 
 public class FileUtil {
 
@@ -45,7 +44,8 @@ public class FileUtil {
 		try {
 			String suffix = "";
 			if (filePath == null || filePath.trim().length() == 0) {
-				filePath = Environment.getExternalStorageDirectory() + "/SmartWFJ/" + dateFolder + "/";
+//				filePath = Environment.getExternalStorageDirectory() + "/SmartWFJ/" + dateFolder + "/";
+				filePath = c.getCacheDir() + "/SmartWFJ/" + dateFolder + "/";
 			}
 			File file = new File(filePath);
 			if (!file.exists()) {
@@ -67,5 +67,63 @@ public class FileUtil {
 			}
 		}
 		return fileFullName;
+	}
+
+	/**
+	 * 删除缓存
+	 * @param pContext
+	 */
+	public static void deleteCache(Context pContext){
+		try {
+			File dir = pContext.getCacheDir();
+			if (dir!=null&&dir.isDirectory()) {
+				deleteDir(dir);
+			}
+		}catch (Exception e ) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 删除文件夹
+	 * @param pDir
+	 * @return
+	 */
+	public static boolean deleteDir(File pDir){
+
+		if (pDir != null && pDir.isDirectory()) {
+			String[] children = pDir.list();
+			for (int i = 0; i < children.length; i++) {
+				boolean success = deleteDir(new File(pDir, children[i]));
+				if (!success) {
+					return false;
+				}
+			}
+		}
+		return pDir.delete();
+	}
+
+	/**
+	 * 返回文件夹大小
+	 * @param dir
+	 * @return
+	 */
+	public static long getDirSize(File dir) {
+
+		if (dir.exists()) {
+			long result = 0;
+			File[] fileList = dir.listFiles();
+			for(int i = 0; i < fileList.length; i++) {
+				// Recursive call if it's a directory
+				if(fileList[i].isDirectory()) {
+					result += getDirSize(fileList[i]);
+				} else {
+					// Sum the file size in bytes
+					result += fileList[i].length();
+				}
+			}
+			return result; // return the file size
+		}
+		return 0;
 	}
 }
