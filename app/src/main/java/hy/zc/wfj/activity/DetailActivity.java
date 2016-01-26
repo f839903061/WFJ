@@ -125,13 +125,7 @@ public class DetailActivity extends FrameActivity {
      * webview上的操作监听，包含了跳转链接监听，返回键监听
      */
     private void setWebViewListener() {
-        web_detial.setWebChromeClient(new WebChromeClient(){
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-                DetailActivity.this.setProgress(newProgress*100);
-            }
-        });
+        web_detial.setWebChromeClient(new WebChromeClient());
         web_detial.setWebViewClient(new WebViewClient() {
             /**
              * if reture false will use application webview ,otherwise use android device browser
