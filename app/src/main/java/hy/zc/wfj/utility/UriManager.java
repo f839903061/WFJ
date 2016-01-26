@@ -22,7 +22,7 @@ public class UriManager {
     //        String uri = "https://192.168.10.210:8443/wfj_front/phone/phonecategory.action?method=initType";
     //分类界面的请求链接
 //    private static final String category_request_uri = "http://101.200.182.119:8080/phone/phonecategory.action?method=initType";
-    private static final String category_request_uri = H_CONNECT_PRE_HTTPS+"phonecategory.action?method=initType";
+    private static final String category_request_uri = H_CONNECT_PRE_HTTPS + "phonecategory.action?method=initType";
     //首页的请求链接
 //    private static final String home_uri = "http://101.200.182.119:8080/test.jsp";//服务器端的
     private static final String home_uri = "http://" + X_IP + ":8080/wfj_front/gotoPhoneHomePage.action";//徐小康端的
@@ -76,7 +76,7 @@ public class UriManager {
     //退货请求，post请求
     private static final String return_sales_pre2 = H_CONNECT_PRE_HTTPS + "returnSales.action";
     //购物车页面
-    private static final String cart_pre = H_CONNECT_PRE_HTTPS + "returnSales.action?customerId=";
+    private static final String cart_pre = H_CONNECT_PRE_HTTPS + "gotoPhoneCart.action?customerId=";
 
 
     public enum ORDER {
@@ -484,9 +484,17 @@ public class UriManager {
         return stringBuilder.toString();
     }
 
+    /**
+     * 前往购物车
+     * @param pcustomerId 表示用户ID
+     *      -1表示未登录状态，不添加到连接请求上了
+     * @return
+     */
     public static String getCart(int pcustomerId) {
         StringBuilder stringBuilder = new StringBuilder(cart_pre);
-        stringBuilder.append(pcustomerId);
+        if (pcustomerId!=-1) {
+            stringBuilder.append(pcustomerId);
+        }
         return stringBuilder.toString();
     }
 }
