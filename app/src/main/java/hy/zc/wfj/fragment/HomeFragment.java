@@ -2,8 +2,12 @@ package hy.zc.wfj.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.http.SslError;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -59,6 +63,7 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
     private RelativeLayout layout_title_search;
     private Boolean islogin = false;
     private AutoCompleteTextView homeActivity_autoComplete;
+    private SwipeRefreshLayout swipeRefreshLayout;
     //    private OnFragmentInteractionListener mListener;
     private OnFragmentInteractiveListener mListener;
     private Activity mActivity;
@@ -123,6 +128,7 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
     }
 
     private void initializeComponent() {
+        swipeRefreshLayout = (SwipeRefreshLayout)rootView.findViewById(R.id.layout_swiperefresh);
         layout_title_back = (RelativeLayout) rootView.findViewById(R.id.layout_title_back);
         layout_title_search = (RelativeLayout) rootView.findViewById(R.id.layout_title_search);
 
@@ -156,7 +162,30 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
             homeUri = UriManager.getHomeUri(-1);
         }
         mWebView.loadUrl(homeUri);
+        swipeRefreshLayout.setColorSchemeColors(Color.RED,Color.BLUE,Color.GREEN,Color.YELLOW);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                mWebView.reload();
+//                Message msg = Message.obtain();
+//                msg.arg1=1;
+//                handler.sendMessage(msg);
+            }
+        });
     }
+
+//    Handler handler = new Handler(){
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            if (msg.arg1 == 1){
+//                showLogi("refresh........");
+//                mWebView.reload();
+//                swipeRefreshLayout.setRefreshing(false);
+//            }
+//        }
+//    };
 
     /**
      * webview上的操作监听，包含了跳转链接监听，返回键监听
@@ -202,6 +231,12 @@ public class HomeFragment extends FrameFragment implements View.OnClickListener 
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
                 showLogi(description);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
         mWebView.setOnKeyListener(new View.OnKeyListener() {

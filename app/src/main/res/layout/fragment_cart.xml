@@ -59,11 +59,17 @@
 
         </LinearLayout>
     </FrameLayout>
-    <WebView
-        android:id="@id/web_cart"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@id/layout_swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </WebView>
+
+        <WebView
+            android:id="@id/web_cart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </WebView>
+    </android.support.v4.widget.SwipeRefreshLayout>
     <RelativeLayout
         android:visibility="gone"
         android:orientation="vertical"

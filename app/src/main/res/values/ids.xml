@@ -134,7 +134,7 @@
     <item name="home_message_img" type="id" />
     <item name="home_message_number" type="id" />
     <item name="home_message_red_dot" type="id" />
-    <item name="home_webView_framelayout" type="id" />
+    <item name="layout_swiperefresh" type="id" />
     <item name="layout_search" type="id" />
     <item name="title_back" type="id" />
     <item name="home_search_layout" type="id" />

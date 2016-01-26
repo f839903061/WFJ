@@ -1,8 +1,10 @@
 package hy.zc.wfj.fragment;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.net.http.SslError;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +15,17 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import hy.zc.wfj.R;
+import hy.zc.wfj.data.UserLoginObject;
+import hy.zc.wfj.utility.CustomObjectUtil;
+import hy.zc.wfj.utility.UriManager;
 
 
 public class CartFragment extends FrameFragment {
 
+    public static final int UNLOGIN_CUSTOM_ID = -1;
     private OnFragmentInteractiveListener mListener;
     private WebView web_cart;
+    private SwipeRefreshLayout layout_swiperefresh;
 
     private static final String APP_CACAHE_DIRNAME = "/webcache";
     private static final String APP_DB_DIRNAME = "/webdb";
@@ -53,11 +60,25 @@ public class CartFragment extends FrameFragment {
     }
 
     private void initializeComponent(View rootView) {
+        layout_swiperefresh = (SwipeRefreshLayout) rootView.findViewById(R.id.layout_swiperefresh);
         web_cart = (WebView) rootView.findViewById(R.id.web_cart);
+
 
         WebSettings settings = web_cart.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+
+
+
+        layout_swiperefresh.setColorSchemeColors(Color.RED, Color.GREEN, Color.YELLOW, Color.BLUE);
+        layout_swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                layout_swiperefresh.setRefreshing(true);
+                web_cart.reload();
+            }
+        });
+
 //        settings.setDomStorageEnabled(true);
 //        settings.setDatabaseEnabled(true);
 //        String cacheDirPath = getActivity().getFilesDir().getAbsolutePath() + APP_CACAHE_DIRNAME;
@@ -68,14 +89,21 @@ public class CartFragment extends FrameFragment {
 //        settings.setAppCacheEnabled(true);
 
 
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
         setWebViewListener();
-        web_cart.loadUrl("https://192.168.10.7:8443/wfj_front/phone//gotoPhoneCart.action?customerId=459");
+        UserLoginObject userLoginObject = CustomObjectUtil.getDataFromLocalSharedPre(getActivity());
+        String uri = null;
+        if (userLoginObject != null) {
+            int customerId = userLoginObject.getData().getCustomerId();
+            uri = UriManager.getCart(customerId);
+        }else {
+            uri = UriManager.getCart(UNLOGIN_CUSTOM_ID);
+        }
+        web_cart.loadUrl(uri);
     }
 
     /**
@@ -96,6 +124,12 @@ public class CartFragment extends FrameFragment {
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
                 handler.proceed();//解决web加载https连接时显示的空白页
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                layout_swiperefresh.setRefreshing(false);
             }
         });
         web_cart.setOnKeyListener(new View.OnKeyListener() {
@@ -128,7 +162,6 @@ public class CartFragment extends FrameFragment {
         super.onDetach();
         mListener = null;
     }
-
 
 
 }
