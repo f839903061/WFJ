@@ -21,7 +21,7 @@
             style="@style/feedback_et_style"
             android:hint="@string/et_feedback"
             android:gravity="left"
-            android:maxLength="100"
+            android:maxLength="200"
             android:layout_weight="3"
             android:layout_width="match_parent"
             android:layout_height="0dp" />
@@ -30,7 +30,7 @@
             android:paddingRight="4dp"
             android:gravity="right|center_vertical"
             android:layout_weight="1"
-            android:hint="1/100"
+            android:hint="1/200"
             android:layout_width="match_parent"
             android:layout_height="0dp" />
     </LinearLayout>

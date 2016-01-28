@@ -100,7 +100,7 @@ public class FeedBackActivity extends FrameActivity implements View.OnClickListe
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            tv_feedback_count.setText(s.toString().length() + "/100");
+            tv_feedback_count.setText(s.toString().length() + "/200");
         }
 
         @Override
