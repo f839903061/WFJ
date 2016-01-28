@@ -16,8 +16,8 @@ public class UriManager {
     private static final String X_CONNECT_PRE_HTTP = "http://" + X_IP + ":8080/wfj_front/phone/";
     private static final String H_CONNECT_PRE_HTTP = "http://" + H_IP + ":8080/wfj_front/phone/";
 
-    private static final String X_CONNECT_PRE_HTTPS = "https://" + X_IP + ":8443/wfj_front/phone/";
-    private static final String H_CONNECT_PRE_HTTPS = "https://" + H_IP + ":8443/wfj_front/phone/";
+    private static final String X_CONNECT_PRE_HTTPS = "https://" + X_IP + ":443/wfj_front/phone/";
+    private static final String H_CONNECT_PRE_HTTPS = "https://" + H_IP + ":443/wfj_front/phone/";
 
     //        String uri = "https://192.168.10.210:8443/wfj_front/phone/phonecategory.action?method=initType";
     //分类界面的请求链接
@@ -77,6 +77,9 @@ public class UriManager {
     private static final String return_sales_pre2 = H_CONNECT_PRE_HTTPS + "returnSales.action";
     //购物车页面
     private static final String cart_pre = H_CONNECT_PRE_HTTPS + "gotoPhoneCart.action?customerId=";
+    //地址管理
+    private static final String address_pre = H_CONNECT_PRE_HTTPS + "getReceiveAddress.action?customerId=";
+
 
 
     public enum ORDER {
@@ -495,6 +498,12 @@ public class UriManager {
         if (pcustomerId!=-1) {
             stringBuilder.append(pcustomerId);
         }
+        return stringBuilder.toString();
+    }
+
+    public static String getAddress(int pcustomerId){
+        StringBuilder stringBuilder = new StringBuilder(address_pre);
+        stringBuilder.append(pcustomerId);
         return stringBuilder.toString();
     }
 }
