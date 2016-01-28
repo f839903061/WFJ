@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.alibaba.fastjson.JSON;
@@ -47,6 +48,7 @@ public class OrderFragment extends FrameFragment implements OrderAdapter.DelCall
     private int mCurrentType = 0;
     private List<OrderListObject.DataEntity> mList;
     private OrderAdapter mOrderAdapter;
+    private ImageView iv_empty;
 
     public OrderFragment() {
 
@@ -73,6 +75,7 @@ public class OrderFragment extends FrameFragment implements OrderAdapter.DelCall
     }
 
     private void initializeComponent(View rootView) {
+        iv_empty = (ImageView) rootView.findViewById(R.id.imgv_tmp);
         lv_order = (ListView) rootView.findViewById(R.id.lv_order);
 
         lv_order.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -118,8 +121,15 @@ public class OrderFragment extends FrameFragment implements OrderAdapter.DelCall
                 if (response.contains("true")) {
                     OrderListObject object = JSON.parseObject(response, OrderListObject.class);
                     mList = object.getData();
-                    mOrderAdapter = new OrderAdapter(getActivity(), mList, (OrderAdapter.DelCallBack) OrderFragment.this,mCurrentType);
-                    lv_order.setAdapter(mOrderAdapter);
+                    if (mList.size()>0) {
+                        lv_order.setVisibility(View.VISIBLE);
+                        iv_empty.setVisibility(View.GONE);
+                        mOrderAdapter = new OrderAdapter(getActivity(), mList, (OrderAdapter.DelCallBack) OrderFragment.this,mCurrentType);
+                        lv_order.setAdapter(mOrderAdapter);
+                    }else {
+                        lv_order.setVisibility(View.GONE);
+                        iv_empty.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         }, new Response.ErrorListener() {
