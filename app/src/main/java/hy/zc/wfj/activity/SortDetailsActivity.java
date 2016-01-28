@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class SortDetailsActivity extends FrameActivity implements View.OnClickLi
     public static final String KEYWORD = "keyword";
     private LinearLayout mBack;
 
+
     private PullToRefreshListView mPullRefreshListView;
 
     private TextView tv_normal;
@@ -80,6 +82,24 @@ public class SortDetailsActivity extends FrameActivity implements View.OnClickLi
         img_arrow = (SimpleDraweeView) findViewById(R.id.img_arrow);
         actv_search = (AutoCompleteTextView) findViewById(R.id.homeActivity_autoComplete);
 
+
+        //设置监听
+        tv_normal.setOnClickListener(this);
+        tv_sales.setOnClickListener(this);
+        tv_price.setOnClickListener(this);
+        img_arrow.setOnClickListener(this);
+
+        mBack = (LinearLayout) findViewById(R.id.home_search_button);
+        mBack.setOnClickListener(this);
+        actv_search.setOnClickListener(this);
+
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         //接受跳转过来的数据
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -95,19 +115,8 @@ public class SortDetailsActivity extends FrameActivity implements View.OnClickLi
             }
             getDataFromUri(current_uri);
         }
-
-        //设置监听
-        tv_normal.setOnClickListener(this);
-        tv_sales.setOnClickListener(this);
-        tv_price.setOnClickListener(this);
-        img_arrow.setOnClickListener(this);
-
-        mBack = (LinearLayout) findViewById(R.id.home_search_button);
-        mBack.setOnClickListener(this);
-
         changeTextViewColor(INDEX_NORMAL);
         listviewLoadData();
-
     }
 
     /**
@@ -269,6 +278,13 @@ public class SortDetailsActivity extends FrameActivity implements View.OnClickLi
                 }
                 getDataFromUri(current_uri);
                 break;
+            case R.id.homeActivity_autoComplete:
+                showToast("xxxxxxxxxxxxxxxxxxxxx");
+                Intent intent = new Intent(SortDetailsActivity.this,SearchActivity.class);
+                startActivity(intent);
+                this.finish();
+                break;
+
             default:
 
                 break;
