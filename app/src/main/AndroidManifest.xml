@@ -31,9 +31,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
+            android:launchMode="singleTask"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -76,7 +76,8 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind" />
-        <activity android:name=".activity.ReturnSalesActivity"></activity>
+        <activity android:name=".activity.ReturnSalesActivity" />
+        <activity android:name=".activity.AddressActivity"></activity>
     </application>
 
 </manifest>

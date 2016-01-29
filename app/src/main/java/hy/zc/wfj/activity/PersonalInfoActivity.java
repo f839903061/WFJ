@@ -243,8 +243,9 @@ public class PersonalInfoActivity extends FrameActivity implements View.OnClickL
                 nickname_bundle.putString("modify", getResources().getString(R.string.tv_modify_nick_name));
                 goModifyActivity(nickname_bundle);
                 break;
-            case R.id.layout_address:
-                showLogi("1");
+            case R.id.layout_address://地址管理
+                Intent intent = new Intent(PersonalInfoActivity.this,AddressActivity.class);
+                startActivity(intent);
                 break;
             case R.id.layout_safe:
                 Bundle passward_bundle = new Bundle();
