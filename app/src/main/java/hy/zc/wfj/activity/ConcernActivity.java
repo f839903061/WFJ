@@ -1,7 +1,9 @@
 package hy.zc.wfj.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -43,6 +45,8 @@ public class ConcernActivity extends FrameActivity {
     private ListView lv_concern;
     private ConcernCommodityAdapter commodityAdapter;
     private ConcernShopAdapter shopAdapter;
+    private SwipeRefreshLayout layout_swiperefresh;
+
     private List mList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,9 @@ public class ConcernActivity extends FrameActivity {
         rb_commodity = (RadioButton) findViewById(R.id.rb_commodity);
         rb_shop = (RadioButton) findViewById(R.id.rb_shop);
         lv_concern = (ListView) findViewById(R.id.lv_concern);
+        layout_swiperefresh = (SwipeRefreshLayout) findViewById(R.id.layout_swiperefresh);
+        layout_swiperefresh.setColorSchemeColors(Color.RED,Color.YELLOW,Color.GREEN,Color.BLUE);
+
 
         imgb_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,11 +99,18 @@ public class ConcernActivity extends FrameActivity {
         lv_concern.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (showtype==COMMODITY) {
+                if (showtype == COMMODITY) {
                     commodityAdapter.gotoDetial(position);
-                }else if (showtype==SHOP){//这个还在处理中，无法测试
+                } else if (showtype == SHOP) {//这个还在处理中，无法测试
 //                    shopAdapter.gotoDetial(position);
                 }
+            }
+        });
+        layout_swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                layout_swiperefresh.setRefreshing(true);
+                ChangeData(false);
             }
         });
     }
@@ -151,12 +165,14 @@ public class ConcernActivity extends FrameActivity {
                         mList = shopObject.getData();
                     }
                     setAdapter(mList,showtype);
+                    layout_swiperefresh.setRefreshing(false);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 showLoge(error.getMessage());
+                layout_swiperefresh.setRefreshing(false);
             }
         });
 
