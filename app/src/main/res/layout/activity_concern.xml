@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white"
         android:gravity="center_vertical">
+
         <ImageButton
             android:id="@id/common_title_back_btn"
             android:layout_width="wrap_content"
@@ -27,18 +28,21 @@
 
             <RadioButton
                 android:id="@id/rb_commodity"
-                android:text="@string/commodity"
+                style="@style/concern_title_style"
                 android:background="@drawable/button_p_left"
-                style="@style/concern_title_style" />
+                android:text="@string/commodity" />
 
             <RadioButton
                 android:id="@id/rb_shop"
-                android:text="@string/shop"
+                style="@style/concern_title_style"
                 android:background="@drawable/button_p_right"
-                style="@style/concern_title_style" />
+                android:text="@string/shop" />
         </RadioGroup>
 
     </RelativeLayout>
+
+    <View style="@style/line6_grey" />
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@id/layout_swiperefresh"
         android:layout_width="match_parent"

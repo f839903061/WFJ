@@ -12,8 +12,6 @@
         android:id="@id/personal_title_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_navigation_bottom_height"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:background="@color/personal_title_background">
 
 
@@ -62,7 +60,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/personal_message_layout_dimen"
-                android:layout_below="@id/personal_title_layout"
                 android:background="@drawable/personal_info_bg_unlogin_pm">
 
 
