@@ -29,7 +29,7 @@
             android:paddingTop="10dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="服务评价"
@@ -50,7 +50,7 @@
                 android:text="商品包装满意度"
                 android:textSize="11sp"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content" />
 
             <RatingBar
@@ -70,7 +70,7 @@
                 android:text="送货速度满意度"
                 android:textSize="11sp"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content" />
 
             <RatingBar
@@ -90,7 +90,7 @@
                 android:text="配送人员的服务满意度"
                 android:textSize="11sp"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content" />
 
             <RatingBar
