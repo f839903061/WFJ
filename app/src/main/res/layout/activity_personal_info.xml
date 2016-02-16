@@ -49,18 +49,6 @@
                     android:background="@drawable/personal_icon_arrow"
                     android:contentDescription="@string/none"
                     android:paddingRight="10.0dip"/>
-                <!--<hy.zc.wfj.customview.RoundImageView-->
-                <!--android:id="@id/user_img_view"-->
-                <!--android:layout_width="@dimen/personal_user_img_view_width"-->
-                <!--android:layout_height="@dimen/personal_user_img_view_height"-->
-                <!--android:layout_marginLeft="@dimen/personal_user_photo_marginleft"-->
-                <!--android:layout_marginTop="20.0dip"-->
-                <!--android:layout_marginRight="2.0dip"-->
-                <!--android:layout_marginBottom="20.0dip"-->
-                <!--android:src="@drawable/personal_icon_default_avatar"-->
-                <!--android:scaleType="centerCrop"-->
-                <!--android:layout_toLeftOf="@id/personel_item_arrow"-->
-                <!--android:layout_centerVertical="true" />-->
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@id/user_img_view"
                     android:layout_width="@dimen/personal_user_img_view_width"
