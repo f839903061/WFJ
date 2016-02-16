@@ -43,7 +43,7 @@ public class LeftListAdapter extends BBaseAdapter {
         final ViewHolder viewHolder ;
         if (convertView==null){
             viewHolder=new ViewHolder();
-            convertView = getInflater().inflate(R.layout.category_left_list_item, null);
+            convertView = getInflater().inflate(R.layout.category_left_list_item, parent,false);
             viewHolder.textView=(TextView)convertView.findViewById(R.id.category_left_list_text);
             convertView.setTag(viewHolder);
         }else {

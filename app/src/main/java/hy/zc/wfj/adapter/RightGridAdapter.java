@@ -38,7 +38,7 @@ public class RightGridAdapter extends BBaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = getInflater().inflate(R.layout.category_right_grid_item, null);
+            convertView = getInflater().inflate(R.layout.category_right_grid_item, parent,false);
             viewHolder.textView = (TextView) convertView.findViewById(R.id.category_item_have_picture_text_3);
             viewHolder.simpleDraweeView = (SimpleDraweeView) convertView.findViewById(R.id.category_item_have_picture_image_3);
             convertView.setTag(viewHolder);

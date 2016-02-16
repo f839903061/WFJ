@@ -31,7 +31,7 @@ public class RightListAdapter extends BBaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = getInflater().inflate(R.layout.category_right_list_item, null);
+            convertView = getInflater().inflate(R.layout.category_right_list_item, parent,false);
             viewHolder.textView = (TextView) convertView.findViewById(R.id.right_item_title);
             viewHolder.myGridView = (MyGridView) convertView.findViewById(R.id.category_right_grid);
 

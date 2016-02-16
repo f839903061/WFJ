@@ -38,7 +38,7 @@ public class ConcernCommodityAdapter extends BBaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = getInflater().inflate(R.layout.activity_concern_listview_item, null);
+            convertView = getInflater().inflate(R.layout.activity_concern_listview_item, parent,false);
             viewHolder.sdv_pic = (SimpleDraweeView) convertView.findViewById(R.id.img_detail);
             viewHolder.tv_name = (TextView) convertView.findViewById(R.id.tv_commodity_name);
             viewHolder.tv_price = (TextView) convertView.findViewById(R.id.tv_price);

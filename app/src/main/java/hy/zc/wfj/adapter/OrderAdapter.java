@@ -59,7 +59,7 @@ public class OrderAdapter extends BBaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = getInflater().inflate(R.layout.activity_order_listview_item, null);
+            convertView = getInflater().inflate(R.layout.activity_order_listview_item, parent,false);
             viewHolder.imgb_delete = (ImageButton) convertView.findViewById(R.id.imgb_delete);
             viewHolder.sdv_pic0 = (SimpleDraweeView) convertView.findViewById(R.id.sdv_pic);
             viewHolder.sdv_pic1 = (SimpleDraweeView) convertView.findViewById(R.id.sdv_pic1);

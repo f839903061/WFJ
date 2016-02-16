@@ -37,7 +37,7 @@ public class DetailAdapter extends BBaseAdapter {
         ViewHolder viewHolder;
         if (convertView==null){
             viewHolder=new ViewHolder();
-            convertView= getInflater().inflate(R.layout.activity_commodity_listview_item, null);
+            convertView= getInflater().inflate(R.layout.activity_commodity_listview_item, parent,false);
             viewHolder.img=(SimpleDraweeView)convertView.findViewById(R.id.img_detail);
             viewHolder.tv_name=(TextView)convertView.findViewById(R.id.tv_commodity_name);
             viewHolder.tv_price=(TextView)convertView.findViewById(R.id.tv_price);
