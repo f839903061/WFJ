@@ -43,7 +43,7 @@ public class SharedPrefUtility {
             editor.putLong(key, (Long)object);
         }
 
-        editor.commit();
+        editor.apply();
     }
 
 
@@ -86,6 +86,6 @@ public class SharedPrefUtility {
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.remove(key);
-        editor.commit();
+        editor.apply();
     }
 }
