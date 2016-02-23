@@ -1,6 +1,7 @@
 package hy.zc.wfj.utility;
 
 import android.net.Uri;
+import android.util.Log;
 
 /**
  * 这个类的功能是同一管理项目的网址
@@ -25,7 +26,8 @@ public class UriManager {
     private static final String category_request_uri = H_CONNECT_PRE_HTTPS + "phonecategory.action?method=initType";
     //首页的请求链接
 //    private static final String home_uri = "http://101.200.182.119:8080/test.jsp";//服务器端的
-    private static final String home_uri = "http://" + X_IP + ":8080/wfj_front/gotoPhoneHomePage.action";//徐小康端的
+    private static final String home_uri = "https://192.168.10.210/wfj_front/test.jsp";//胡克玲端的
+//    private static final String home_uri = "http://" + X_IP + ":8080/wfj_front/gotoPhoneHomePage.action";//徐小康端的
     //加载分类图片的前缀
     private static final String category_pic_pre = "http://" + H_IP + ":8085/b2b2c/";
     //加载登录头像的前缀
